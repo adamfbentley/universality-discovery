@@ -1,0 +1,24 @@
+# Core
+numpy>=1.21.0
+scipy>=1.7.0
+matplotlib>=3.5.0
+scikit-learn>=1.0.0
+
+# Deep Learning
+torch>=2.0.0
+
+# Clustering
+hdbscan>=0.8.29
+
+# Dimensionality Reduction
+umap-learn>=0.5.0
+
+# Simulation (shared with ml-universality-classification)
+numba>=0.56.0
+
+# Development
+jupyter>=1.0.0
+tqdm>=4.60.0
+
+# Optional: GPU acceleration
+# Install PyTorch with CUDA: pip install torch --index-url https://download.pytorch.org/whl/cu118
