@@ -1,0 +1,23 @@
+EXPERIMENT 27: INITIAL CONDITION CONTROL TEST
+================================================================================
+
+Parameters: L=128, T=1000, n_samples=30
+
+
+FLAT IC:
+  PC1 correlation: r = -0.0602
+  PC1 loadings: [ 0.24539903  0.40277972 -0.47462831  0.59611104 -0.36576945 -0.25127698]
+
+DROPLET IC:
+  PC1 correlation: r = -0.9817
+  PC1 loadings: [ 0.57224471 -0.09337818 -0.55786273 -0.12359091  0.09352373  0.57322271]
+
+STATIONARY IC:
+  PC1 correlation: r = -0.2415
+  PC1 loadings: [ 0.58352967  0.35046307 -0.30597139  0.32101946 -0.3215416   0.48642345]
+
+
+PC1 Loading Similarity:
+  flat vs droplet: 0.1157
+  flat vs stationary: 0.6163
+  droplet vs stationary: 0.6810

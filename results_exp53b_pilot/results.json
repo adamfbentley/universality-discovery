@@ -1,0 +1,10 @@
+{
+  "experiment": "53b",
+  "description": "Vicsek WITHOUT order-parameter features",
+  "results": {
+    "r_PC1_eta": 0.9258653202992526,
+    "r_PC1_phi": -0.9496540053712713,
+    "comparison_with_53": "Does NOT use local_\u03c6_mean, local_\u03c6_var",
+    "success": true
+  }
+}

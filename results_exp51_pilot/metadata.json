@@ -1,0 +1,48 @@
+{
+  "timestamp": "2026-02-07T04:41:40.806728",
+  "mode": "pilot",
+  "parameters": {
+    "L": 256,
+    "T": 200,
+    "scale_b": 2,
+    "N_train": 200,
+    "N_test": 50,
+    "latent_dim": 8,
+    "epochs": 50,
+    "lambda_rg": 1.0
+  },
+  "training": {
+    "final_loss": 0.1544280286346163,
+    "final_recon": 0.13513442767517908,
+    "final_rg": 0.0006298433706563498,
+    "train_time_seconds": 27.01297402381897
+  },
+  "eigenvalues": {
+    "magnitudes": [
+      0.7621685266494751,
+      0.5966213941574097,
+      0.5629749298095703,
+      0.4885917603969574,
+      0.40577852725982666,
+      0.30166468024253845,
+      0.24366073310375214,
+      0.12538358569145203
+    ],
+    "n_universal": 0,
+    "n_irrelevant": 8
+  },
+  "semigroup": {
+    "error": 2.8172507882118225e-08,
+    "passed": true
+  },
+  "transfer": {
+    "kpz_a_error": 0.0015178691508481279,
+    "kpz_b_error": 0.0005864646918780636,
+    "ks_error": 0.00017220973677467555,
+    "kpz_b_ratio": 0.3863736815194968,
+    "ks_ratio": 0.11345492902234112,
+    "same_class_transfers": true,
+    "diff_class_fails": false
+  },
+  "success": false
+}

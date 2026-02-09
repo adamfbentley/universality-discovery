@@ -1,0 +1,5 @@
+Exp35: Correct Observable Test
+L=4096, T=500, n_samples=500
+
+FLAT IC: KPZ skew = 0.2232, EW skew = -0.0380
+DROPLET IC: KPZ skew = 0.2819, EW skew = 0.0208

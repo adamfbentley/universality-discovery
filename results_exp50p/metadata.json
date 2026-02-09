@@ -1,0 +1,33 @@
+{
+  "experiment": "50p",
+  "description": "KPZ-only gate test to verify observables are scale-invariant",
+  "note": "Isolation test: gradient noise, RG rescaling, skewness+kurtosis only",
+  "parameters": {
+    "L": 256,
+    "T": 200,
+    "N": 500,
+    "kpz": {
+      "nu": 1.0,
+      "lambda": 1.0,
+      "D": 0.1
+    },
+    "scales": [
+      1,
+      2,
+      4,
+      8
+    ]
+  },
+  "diagnostic_gate": {
+    "passed": false,
+    "slope": 0.012727016725884974,
+    "threshold": 0.005,
+    "distances": [
+      0.0672732382864336,
+      0.03570025180058173,
+      0.0798073240842798,
+      0.08197653339348902
+    ]
+  },
+  "sigma": 0.35453322841066576
+}

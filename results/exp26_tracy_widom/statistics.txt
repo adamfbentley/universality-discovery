@@ -1,0 +1,43 @@
+======================================================================
+EXPERIMENT 26: Tracy-Widom Statistics
+======================================================================
+
+
+EW Model:
+  Mean: -0.1185
+  Std: 0.9660
+  Skewness: -0.2988
+  Kurtosis: -0.5171
+  KS test: D=0.0858, p=4.2915e-01
+
+KPZ Model:
+  Mean: 0.1043
+  Std: 1.0340
+  Skewness: -0.2966
+  Kurtosis: -0.3523
+  KS test: D=0.0710, p=6.6740e-01
+
+======================================================================
+Theoretical Expectations:
+======================================================================
+EW (Gaussian):
+  Skewness ≈ 0
+  Kurtosis ≈ 0
+
+KPZ (Tracy-Widom GUE):
+  Skewness ≈ -0.29
+  Kurtosis ≈ 0.16
+
+======================================================================
+Interpretation:
+======================================================================
+
+EW skewness: -0.2988
+  ⚠ Deviates from Gaussian expectation
+
+KPZ skewness: -0.2966
+  ✓ Consistent with Tracy-Widom (expected: ~-0.29)
+
+
+PC1 vs Gradient Skewness correlation: r = 0.0748
+  ⚠ Weak correlation

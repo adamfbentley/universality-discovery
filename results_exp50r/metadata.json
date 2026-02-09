@@ -1,0 +1,86 @@
+{
+  "experiment": "50r",
+  "description": "KPZ exponent-only positive control (alpha-only)",
+  "note": "Truly universal observable: roughness exponent alpha from S2 scaling",
+  "pilot_mode": false,
+  "parameters": {
+    "L": 256,
+    "T": 600,
+    "N": 500,
+    "scales": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "workers": 6,
+    "KPZ_A": {
+      "nu": 1.0,
+      "lambda": 1.0,
+      "D": 0.1
+    },
+    "KPZ_B": {
+      "nu": 1.0,
+      "lambda": 0.5,
+      "D": 0.05
+    },
+    "KS": {
+      "nu": 1.0
+    }
+  },
+  "alpha_statistics": {
+    "KPZ_A": {
+      "mean": 0.3498227558151998,
+      "std": 0.12279493847724568,
+      "n": 500
+    },
+    "KPZ_B": {
+      "mean": 0.3368810722335143,
+      "std": 0.12137563848598126,
+      "n": 500
+    },
+    "KS": {
+      "mean": 0.8952378584589438,
+      "std": 0.06302531819327474,
+      "n": 500
+    }
+  },
+  "diagnostic_gate": {
+    "all_passed": true,
+    "KPZ_A": {
+      "passed": true,
+      "slope": -0.0014472512351831127
+    },
+    "KPZ_B": {
+      "passed": true,
+      "slope": -0.0013588427627549242
+    },
+    "KS": {
+      "passed": true,
+      "slope": 1.3815337762679291e-15
+    }
+  },
+  "cross_distances": {
+    "KPZ_A_vs_KPZ_B": {
+      "distances": [
+        0.053604727950378586,
+        0.05393769276567672,
+        0.053804292882830736,
+        0.052438165489353164
+      ],
+      "slope": -0.000363308726592225,
+      "relative_change": -2.176230540905456
+    },
+    "KS_vs_KPZ_A": {
+      "distances": [
+        1.1539741939836514,
+        1.1522515729678726,
+        1.1486671293925619,
+        1.1383893676673669
+      ],
+      "slope": -0.005033892252416438,
+      "relative_change": 0.0
+    }
+  },
+  "sigma": 0.11597760728288167
+}

@@ -1,0 +1,55 @@
+{
+  "experiment": "50n",
+  "description": "Scale-free structure functions for KS generalization",
+  "parameters": {
+    "L": 256,
+    "T": 50,
+    "N": 500,
+    "ks": {
+      "nu": 1.0,
+      "kappa": 1.0,
+      "lambda": 1.0,
+      "noise": 0.1
+    },
+    "kpz": {
+      "nu": 1.0,
+      "lambda": 0.5,
+      "D": 0.1
+    },
+    "scales": [
+      1,
+      2,
+      4
+    ]
+  },
+  "diagnostic_gate": {
+    "passed": true,
+    "ks_invariance_pass": true,
+    "kpz_invariance_pass": true,
+    "ks_slope": 0.0018779678031920974,
+    "kpz_slope": 0.0009100032672486115,
+    "threshold": 0.005
+  },
+  "ks_vs_kpz": {
+    "distances": [
+      0.4588224256445247,
+      0.44508934779489745,
+      0.4483310493022698
+    ],
+    "slope": -0.005245688171127444,
+    "relative_change_percent": -2.286587524033348
+  },
+  "sigma": 1.4748521210469896,
+  "valid_counts": {
+    "ks": {
+      "1": 500,
+      "2": 500,
+      "4": 500
+    },
+    "kpz": {
+      "1": 500,
+      "2": 500,
+      "4": 500
+    }
+  }
+}

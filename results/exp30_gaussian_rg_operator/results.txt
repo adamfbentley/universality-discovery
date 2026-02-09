@@ -1,0 +1,19 @@
+Experiment 30: Gaussian-Smoothing RG Operator
+==============================================================================
+
+Parameters: L=512, T=3000, n_samples=30
+Smoothing scales: [0.0, 1.0, 2.0, 4.0, 8.0, 16.0, 32.0]
+
+sigma	d(BD,KPZ)	d(EW,KPZ)	d(BD,EW)
+0.0	4.364518	1.100991	4.367075
+1.0	2.677672	1.469135	2.705368
+2.0	2.159526	1.824293	2.268406
+4.0	2.335812	2.232123	2.581224
+8.0	2.436846	2.663808	2.585002
+16.0	2.670789	3.147667	3.058259
+32.0	3.755242	3.977644	3.863794
+
+BD→KPZ contraction: 14.0%
+EW↔KPZ drift: 261.3%
+
+Verdict: ✗ FAILURE: No clear differential contraction

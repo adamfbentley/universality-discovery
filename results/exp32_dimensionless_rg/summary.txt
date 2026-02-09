@@ -1,0 +1,20 @@
+Experiment 32: Dimensionless Features RG Test
+============================================================
+
+Parameters: L=512, T=3000, n_samples=30
+Features: 9D dimensionless (skew, kurt, ratios, correlations)
+
+Distance Evolution:
+------------------------------------------------------------
+   b    d(BD,KPZ)    d(EW,KPZ)     d(BD,EW)
+   1       5.2196       2.3311       5.3330
+   2       3.8271       2.6658       3.9677
+   4       4.1816       3.1815       4.2372
+   8       5.2475       3.8686       5.3980
+  16       6.2030       4.6050       6.2529
+  32       7.2114       6.5985       7.1557
+
+BD→KPZ contraction: -38.2%
+EW↔KPZ drift: +183.1%
+
+Verdict: ✗ FAILURE: Dimensionless features also don't show clean RG behavior

@@ -1,0 +1,53 @@
+{
+  "experiment": "52b",
+  "description": "Ising coupling coordinate WITHOUT trivial features",
+  "timestamp": "2026-02-08T20:27:57.261192",
+  "parameters": {
+    "L": 32,
+    "n_temps": 8,
+    "n_samples": 30,
+    "T_range": [
+      1.5884297199491153,
+      2.9499409084769286
+    ],
+    "window": "wide",
+    "features_excluded": [
+      "|m|",
+      "E/N"
+    ],
+    "features_used": [
+      "Var(m_local)",
+      "|m_local|",
+      "|\u2207m|",
+      "Var(|\u2207m|)",
+      "boundary",
+      "corr_1"
+    ]
+  },
+  "results": {
+    "PC1_vs_t": 0.971206371642529,
+    "comparison_with_exp52": {
+      "exp52_r": 0.971,
+      "exp52b_r": 0.971206371642529,
+      "change_percent": 0.021253516223379298
+    },
+    "success": true,
+    "explained_variance": [
+      0.9662201598399534,
+      0.02955985963073864,
+      0.003947279293930842,
+      0.00020259315174498527,
+      6.730654153913334e-05,
+      2.8015420930406384e-06
+    ],
+    "pc1_loadings": {
+      "Var(m_local)": 0.38442471882916696,
+      "|m_local|": -0.41280009853061184,
+      "|\u2207m|": 0.4133804868510038,
+      "Var(|\u2207m|)": 0.4114373266091847,
+      "boundary": 0.4132708849779619,
+      "corr_1": -0.41334826623475684
+    }
+  },
+  "conclusion": "GENUINE"
+}

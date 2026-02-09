@@ -1,0 +1,14 @@
+Experiment 33: Proper Tracy-Widom Test
+==================================================
+
+Final KPZ single-point skewness: -0.0942
+Final EW single-point skewness: 0.0948
+Theory (TW-GUE): -0.29
+
+Skewness evolution:
+  T=500: KPZ=0.3181, EW=-0.1647
+  T=1000: KPZ=0.1223, EW=0.1590
+  T=2000: KPZ=0.2633, EW=-0.1126
+  T=3000: KPZ=0.0331, EW=-0.0374
+  T=4000: KPZ=-0.0312, EW=0.3260
+  T=5000: KPZ=-0.0942, EW=0.0948

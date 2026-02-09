@@ -1,0 +1,50 @@
+{
+  "experiment": "50r",
+  "description": "KPZ exponent-only positive control (alpha-only)",
+  "note": "Truly universal observable: roughness exponent alpha from S2 scaling",
+  "pilot_mode": true,
+  "parameters": {
+    "L": 256,
+    "T": 300,
+    "N": 200,
+    "scales": [
+      1,
+      2,
+      4
+    ],
+    "workers": 4,
+    "KPZ_A": {
+      "nu": 1.0,
+      "lambda": 1.0,
+      "D": 0.1
+    },
+    "KPZ_B": {
+      "nu": 1.0,
+      "lambda": 0.5,
+      "D": 0.05
+    },
+    "KS": {
+      "nu": 1.0
+    }
+  },
+  "alpha_statistics": {
+    "KPZ_A": {
+      "mean": 0.29356545187833727,
+      "std": 0.11060159141457596,
+      "n": 200
+    },
+    "KPZ_B": {
+      "mean": 0.2815090043880319,
+      "std": 0.10725605282987491,
+      "n": 200
+    },
+    "KS": {
+      "mean": 0.8162257404125073,
+      "std": 0.08419532973351745,
+      "n": 200
+    }
+  },
+  "diagnostic_gate": {
+    "all_passed": true,
+    "KPZ_A": {
+      "passed": 

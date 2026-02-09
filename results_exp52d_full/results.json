@@ -1,0 +1,28 @@
+{
+  "experiment": "52d",
+  "description": "Ising finite-size scaling test (gold standard)",
+  "timestamp": "2026-02-08T21:12:44.830146",
+  "parameters": {
+    "L_values": [
+      32,
+      48,
+      64,
+      96
+    ],
+    "n_temps": 15,
+    "n_samples": 30,
+    "T_range": [
+      1.9288075170810688,
+      2.609563111344975
+    ]
+  },
+  "results": {
+    "nu_exact": 1.0,
+    "nu_optimal": 1.0729544284739752,
+    "deviation_percent": 7.295442847397515,
+    "collapse_quality_exact": 0.15119103225748565,
+    "collapse_quality_optimal": 0.13093609678498241,
+    "success": true
+  },
+  "conclusion": "SUCCESS - proper FSS"
+}

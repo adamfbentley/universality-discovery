@@ -1,0 +1,44 @@
+{
+  "experiment": "50o",
+  "description": "Burgers -> KPZ positive control using scale-free structure functions in height space",
+  "note": "Matched noise (D=0.1), gradient noise d_x(eta) in Burgers, h from u via spectral integration, RG rescaling h/b^alpha",
+  "parameters": {
+    "L": 256,
+    "T": 600,
+    "N": 500,
+    "burgers": {
+      "nu": 1.0,
+      "D": 0.1
+    },
+    "kpz": {
+      "nu": 1.0,
+      "lambda": 1.0,
+      "D": 0.1
+    },
+    "scales": [
+      1,
+      2,
+      4,
+      8
+    ]
+  },
+  "diagnostic_gate": {
+    "passed": true,
+    "burgers_invariance_pass": true,
+    "kpz_invariance_pass": true,
+    "burgers_slope": 0.004299971372123325,
+    "kpz_slope": 0.0015539755786500632,
+    "threshold": 0.005
+  },
+  "burgers_vs_kpz": {
+    "distances": [
+      0.05287694088552434,
+      0.053513112953283745,
+      0.055903572877580965,
+      0.05693376316689544
+    ],
+    "slope": 0.0014560926768410524,
+    "relative_change_percent": 7.672195504187541
+  },
+  "sigma": 2.4591932114346564
+}
