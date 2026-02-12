@@ -1,0 +1,19 @@
+{
+  "STATUS": "INVALID — this file documents an apples-to-oranges comparison",
+  "date_original": "2026-02-12",
+  "date_invalidated": "2026-02-12",
+  "reason_invalid": [
+    "The inline Potts analysis compared a DIFFERENT mathematical object to PCA PC1 than Exp 60 Parts A/C.",
+    "Parts A/C compare: mean-tangent direction J*v1 (how mu moves when theta moves along stiffest direction).",
+    "Potts inline compared: whitened direction Sigma^{-1}*d(mu)/dt or PCA of within-covariance.",
+    "These are different objects. When the SAME comparison (J*v1 vs PC1) is applied to Potts, cos ~ 0.999.",
+    "Therefore the 'cos = 0.211 smoking gun' was an artifact of inconsistent comparison, not a real signal."
+  ],
+  "original_claims_retracted": {
+    "cos_fisher_pca_0.211": "RETRACTED — based on wrong comparison object",
+    "diagnostic_gate": "RETRACTED — not supported by consistent cross-system data",
+    "perfectly_separates": "RETRACTED — 2 systems + 1 invalid measurement"
+  },
+  "what_to_do_next": "Re-run Potts using estimate_fisher_matrix from 60_fisher_information.py with J @ eigenvectors[:,0] comparison, matching Parts A/C exactly.",
+  "see_also": "docs/FISHER_RG_THEORY.md (revised), docs/FISHER_RG_THEORY_v1_overclaimed.md (original)"
+}

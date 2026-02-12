@@ -1,0 +1,48 @@
+{
+  "experiment": "Exp 60 Extension: Potts Fisher Information Matrix",
+  "date": "2026-02-12",
+  "method": "Sensitivity-based Fisher: F_ij = (dmu/dtheta_i)^T Sigma^{-1} (dmu/dtheta_j)",
+  "system": "3-state Potts, 2D square lattice",
+  "parameters": {
+    "L": 32,
+    "T_c": 0.9950,
+    "T_grid": "5 points: T_c * [0.96, 0.98, 1.0, 1.02, 1.04]",
+    "h": 0.0,
+    "n_eq": 5000,
+    "n_samples": 20,
+    "features": "6D local: energy, |mag|, C_v, chi, nearest-neighbor correlation, domain_wall_density"
+  },
+  "results": {
+    "fisher_matrix_diagonal": {
+      "F_tt": 3180,
+      "note": "Temperature sensitivity — LARGER than Ising (1512)"
+    },
+    "fisher_pca_alignment": {
+      "cos_fisher_pca": 0.2109,
+      "note": "MISALIGNMENT — compare Ising 0.9985, KPZ 0.824"
+    },
+    "feature_L_dependence": {
+      "L_values": [16, 24, 32, 48],
+      "feature_CVs_percent": {
+        "energy": "1-2%",
+        "mag": "5-8%",
+        "Cv": "8-12%",
+        "chi": "5-10%",
+        "nn_corr": "1-3%",
+        "domain_wall": "1-3%"
+      },
+      "note": "Similar to Ising L-dependence (0.9-10.9%)"
+    }
+  },
+  "interpretation": {
+    "key_finding": "Potts features ARE sensitive to temperature (F_tt=3180 > Ising 1512), BUT PCA's variance-maximizing direction is MISALIGNED with the Fisher-stiff direction",
+    "mechanism": "PCA maximizes total variance (within-group + between-group). For Potts, within-group fluctuations dominate and point AWAY from the between-group (T-sensitive) direction. For Ising, within-group and between-group directions are nearly parallel.",
+    "diagnostic_value": "cos(Fisher_direction, PCA_PC1) is a computable pre-flight check: >0.8 → PCA-FSS works, <0.3 → PCA-FSS fails"
+  },
+  "comparison_table": {
+    "headers": ["System", "Fisher F_tt", "cos(Fisher, PCA)", "PCA-FSS works?"],
+    "KPZ": [1531.7, 0.824, "YES (exact D/nu)"],
+    "Ising": [1512.1, 0.9985, "YES (nu=1.07, 7%)"],
+    "Potts": [3180, 0.2109, "NO"]
+  }
+}

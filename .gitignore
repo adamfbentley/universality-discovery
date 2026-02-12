@@ -33,3 +33,16 @@ data/
 # Logs
 *.log
 runs/
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.toc
+*.out
+*Notes.bib
+
+# Workspace files
+*.code-workspace
