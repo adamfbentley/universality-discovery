@@ -78,3 +78,12 @@ docs/FISHER_RG_THEORY.md
 docs/FISHER_RG_THEORY_v1_overclaimed.md
 results/diagnostic_summary_exp31-35.md
 results/manuscript_figures/FIGURE_REFERENCE.md
+
+# Manuscript / LaTeX source files (local only)
+docs/main.tex
+docs/main.pdf
+docs/revised_manuscript.tex
+docs/revised_manuscript.pdf
+docs/CONJECTURES_MANIFOLD_UNIVERSALITY.tex
+docs/CONJECTURES_MANIFOLD_UNIVERSALITY.pdf
+docs/references.bib
