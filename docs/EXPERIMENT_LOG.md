@@ -60,7 +60,7 @@ Implemented Cotler-Rezchikov style geodesic loss. All pairwise distances collaps
 
 ### Exp 13: Slope-growth coupling
 
-The experiment that changed the direction of the project. Directly regressed local growth against slope-squared to detect the KPZ nonlinearity lambda*(grad h)^2. Continuum KPZ gives b=+0.027, clearly positive (p=0.027). EW gives b~0, RD gives b~0. Discrete models show weaker signal. The nonlinearity IS detectable — we just weren't looking for it correctly with the autoencoders. This explains a lot of the earlier failures.
+The experiment that changed the direction of the project. Directly regressed local growth against slope-squared to detect the KPZ nonlinearity lambda*(grad h)^2. Continuum KPZ gives b=+0.027, clearly positive (p=0.027). EW gives b\~0, RD gives b\~0. Discrete models show weaker signal. The nonlinearity IS detectable — we just weren't looking for it correctly with the autoencoders. This explains a lot of the earlier failures.
 
 ### Exp 14: Coarse-grained slope-growth
 
@@ -72,7 +72,7 @@ Computed Fisher information matrices and Ricci scalar curvature for observable t
 
 ### Exp 16: Validation of info geometry
 
-Tested robustness after concerns about KDE sensitivity. Absolute R values are unstable (CV > 0.6) across bandwidth choices, but the ordering BD >> EDEN >> EW ~ KPZ holds at every bandwidth tested. The qualitative finding from Exp 15 survives, just can't trust the absolute numbers.
+Tested robustness after concerns about KDE sensitivity. Absolute R values are unstable (CV > 0.6) across bandwidth choices, but the ordering BD >> EDEN >> EW \~ KPZ holds at every bandwidth tested. The qualitative finding from Exp 15 survives, just can't trust the absolute numbers.
 
 ### Exp 17-19: Total correlation saga
 
@@ -84,11 +84,11 @@ Tried TC as a cleaner information-theoretic metric (Exp 17). Initial results loo
 
 ### Exp 20: Intrinsic dimension
 
-Measured intrinsic dimension of feature manifolds using PCA, MLE, and TwoNN estimators. All three agree: d~2 for both EW and KPZ in the 6D gradient moment space. BD is higher around d~5. The manifolds really are low-dimensional.
+Measured intrinsic dimension of feature manifolds using PCA, MLE, and TwoNN estimators. All three agree: d\~2 for both EW and KPZ in the 6D gradient moment space. BD is higher around d\~5. The manifolds really are low-dimensional.
 
 ### Exp 21: Coordinates of universality
 
-PCA on the 6D gradient features. PC1 loads on grad_var, lap_var, h_var and correlates with model identity at r=-0.956 — near perfect separation. PC2 loads on skewness/kurtosis. T and L show essentially no correlation with either axis (r~0.05), so the universality info is orthogonal to finite-size effects. Seemed like a huge result at the time, but Exp 27 later showed this is IC-dependent.
+PCA on the 6D gradient features. PC1 loads on grad_var, lap_var, h_var and correlates with model identity at r=-0.956 — near perfect separation. PC2 loads on skewness/kurtosis. T and L show essentially no correlation with either axis (r\~0.05), so the universality info is orthogonal to finite-size effects. Seemed like a huge result at the time, but Exp 27 later showed this is IC-dependent.
 
 ### Exp 22: Robustness tests
 
@@ -100,7 +100,7 @@ Diagnosed the gap: scale-dependent variance features are the culprit. Applied bl
 
 ### Exp 24: Differential contraction
 
-Was supposed to be the "killer plot" — BD->KPZ contracts while EW-KPZ stays constant under RG. Instead: BD->KPZ contracts only ~15%, and EW-KPZ EXPANDS by 45%. Not the clean result at all. Turns out gradient moments are RG-relevant operators — they grow under coarse-graining instead of staying constant. Scientifically interesting (tells you about operator structure) but not the validation I was looking for.
+Was supposed to be the "killer plot" — BD->KPZ contracts while EW-KPZ stays constant under RG. Instead: BD->KPZ contracts only \~15%, and EW-KPZ EXPANDS by 45%. Not the clean result at all. Turns out gradient moments are RG-relevant operators — they grow under coarse-graining instead of staying constant. Scientifically interesting (tells you about operator structure) but not the validation I was looking for.
 
 ### Exp 26: Tracy-Widom validation
 
@@ -116,7 +116,7 @@ This was big. Tested PC1 separation across flat, droplet, and stationary ICs. Dr
 
 ### Exp 28-30: RG operator variants
 
-Time-resolved flat IC confirms PC1 never gets strong (peak r~0.325, Exp 28). Tested various RG operators — baseline spatial gives BD->KPZ ~14% contraction, EW-KPZ ~26% drift (Exp 29). Adding time/height rescaling causes blow-ups. Gaussian smoothing gives +261% EW-KPZ drift (Exp 30). None of these are faithful RG surrogates.
+Time-resolved flat IC confirms PC1 never gets strong (peak r\~0.325, Exp 28). Tested various RG operators — baseline spatial gives BD->KPZ \~14% contraction, EW-KPZ \~26% drift (Exp 29). Adding time/height rescaling causes blow-ups. Gaussian smoothing gives +261% EW-KPZ drift (Exp 30). None of these are faithful RG surrogates.
 
 ### Exp 31-36: Tracy-Widom deep dive
 
@@ -132,7 +132,7 @@ Self-supervised RG-covariance loss collapses to trivial solution (45). Anti-coll
 
 ### Exp 46/46b: KPZ coupling coordinate
 
-PC1 tracks D/nu with r~0.961. Originally reported as D/nu^3 but later corrected via Exp 54 — it's the simpler quantity, explainable from the known 1D stationary slope measure. Strong result but it's an amplitude coordinate, potentially lambda-blind at stationarity.
+PC1 tracks D/nu with r\~0.961. Originally reported as D/nu^3 but later corrected via Exp 54 — it's the simpler quantity, explainable from the known 1D stationary slope measure. Strong result but it's an amplitude coordinate, potentially lambda-blind at stationarity.
 
 ### Exp 47: Info-geometric distances vs scale
 
@@ -140,7 +140,7 @@ KL and Bhattacharyya distances between EW and KPZ increase with coarse-graining.
 
 ### Exp 48: Domain-adversarial IC factorisation
 
-Tried adversarial training to factor out IC while keeping class info. Partially worked (class accuracy ~78%, domain accuracy ~65%). Didn't fully achieve the separation.
+Tried adversarial training to factor out IC while keeping class info. Partially worked (class accuracy \~78%, domain accuracy \~65%). Didn't fully achieve the separation.
 
 ---
 
@@ -152,7 +152,7 @@ Four experiments debugging why the neural net fails on BD. Punchline from 49d: l
 
 ### Exp 50 series: KS generalisation (long campaign)
 
-The biggest campaign in the project, spanning ~20 sub-experiments. Started with "does KS converge to KPZ?" (no), then went through multiple rounds where exciting slopes turned out to be pipeline artifacts — bandwidth drift, feature collapse, ordering problems.
+The biggest campaign in the project, spanning \~20 sub-experiments. Started with "does KS converge to KPZ?" (no), then went through multiple rounds where exciting slopes turned out to be pipeline artifacts — bandwidth drift, feature collapse, ordering problems.
 
 The diagnostic gate concept was forged here: check same-class consistency before trusting any cross-class result. Exp 50k/50l show KS stays separate from KPZ under valid diagnostics (flat distance). Exp 50n supports KS != KPZ with scale-free structure functions. The critical conceptual result came from Exp 50q/50r: scale-invariant observables can still encode non-universal amplitudes (50q), but restricting to exponent-only observables gives correct same-class agreement (50r). This distinction between "scale-invariant" and "universal" was important.
 
@@ -166,15 +166,15 @@ Semigroup property passes but transfer doesn't cleanly discriminate classes. Nee
 
 ### Exp 52 series: Ising
 
-PC1 tracks reduced temperature at r~0.971, even after dropping |m| and E/N (52b). FSS collapse gives nu=1.073, about 7% error (52d). This is the gold standard result — unsupervised features recovering quantitative critical exponents. Two-parameter scan (52e) clearly shows the thermal direction but the magnetic axis is invisible with Z2-even features, which makes sense.
+PC1 tracks reduced temperature at r\~0.971, even after dropping |m| and E/N (52b). FSS collapse gives nu=1.073, about 7% error (52d). This is the gold standard result — unsupervised features recovering quantitative critical exponents. Two-parameter scan (52e) clearly shows the thermal direction but the magnetic axis is invisible with Z2-even features, which makes sense.
 
 ### Exp 53/53b: Vicsek
 
-PC1 tracks noise eta at r~0.958 (0.926 without local phi features). Strong empirically but lacks an FSS-level validation like we got for Ising.
+PC1 tracks noise eta at r\~0.958 (0.926 without local phi features). Strong empirically but lacks an FSS-level validation like we got for Ising.
 
 ### Exp 54: Theoretical validation
 
-Confirmed numerically that Var[dh/dx] ~ D/nu_KPZ and is lambda-independent at stationarity. Explains why PC1 works and its limitations.
+Confirmed numerically that Var[dh/dx] \~ D/nu_KPZ and is lambda-independent at stationarity. Explains why PC1 works and its limitations.
 
 ---
 
@@ -190,15 +190,15 @@ Four experiments probing the failure: symmetric features, scaling dimension test
 
 ### Exp 57 series: Binder controls
 
-Standard Binder cumulant analysis works for Potts — 57c gets nu~0.884 (~6% error from the exact 5/6). Proves the physics is accessible, the failure is specific to PCA-FSS, not to Potts transitions in general.
+Standard Binder cumulant analysis works for Potts — 57c gets nu\~0.884 (\~6% error from the exact 5/6). Proves the physics is accessible, the failure is specific to PCA-FSS, not to Potts transitions in general.
 
 ### Exp 58-59: Symmetry sector attempts
 
-Adding order parameter components didn't rescue the Potts nu identification. Exp 59 gives nu_opt ~ 2.51, clearly wrong. The method needs more fundamental observable/metric surgery for generality beyond Ising.
+Adding order parameter components didn't rescue the Potts nu identification. Exp 59 gives nu_opt \~ 2.51, clearly wrong. The method needs more fundamental observable/metric surgery for generality beyond Ising.
 
 ### Exp 60: Fisher/sensitivity analysis
 
-Gaussian-approximation sensitivity matrix a la Machta's sloppy models. KPZ result is solid: dominant eigenvalue aligns with D/nu at cosine ~0.999. Ising equally strong: mean-tangent aligns with Exp 52b PC1 at cos~0.999. The Potts comparison was invalid — compared different mathematical objects across systems. Core KPZ and Ising results hold, but the cross-system diagnostic wasn't properly established.
+Gaussian-approximation sensitivity matrix a la Machta's sloppy models. KPZ result is solid: dominant eigenvalue aligns with D/nu at cosine \~0.999. Ising equally strong: mean-tangent aligns with Exp 52b PC1 at cos\~0.999. The Potts comparison was invalid — compared different mathematical objects across systems. Core KPZ and Ising results hold, but the cross-system diagnostic wasn't properly established.
 
 ---
 
@@ -214,7 +214,7 @@ Skipped the autoencoder entirely, clustered directly on the 6D gradient features
 
 Pilot (L=128, T=500, 30 samples/system, 180 total): HDBSCAN finds exactly 4 clusters matching the 4 true universality classes. ARI=0.496, kNN 83.9%. Dramatic improvement over Exp 61.
 
-Full run (L=256, T=2000, 80 samples/system, 480 total): HDBSCAN still finds 4 clusters, ARI=0.495, 3-NN=82.1%. Essentially identical to pilot — more data didn't help. The ARI~0.495 is a fundamental ceiling for these features, not a sample size problem. The EW-KPZ centroid distance actually decreased from 1.04 to 0.87 at longer simulation times, which makes sense — diffusion dominates at late times, making the two classes look more similar. 4/5 quantitative predictions passed; the one failure (ARI>0.5) is frustratingly close.
+Full run (L=256, T=2000, 80 samples/system, 480 total): HDBSCAN still finds 4 clusters, ARI=0.495, 3-NN=82.1%. Essentially identical to pilot — more data didn't help. The ARI\~0.495 is a fundamental ceiling for these features, not a sample size problem. The EW-KPZ centroid distance actually decreased from 1.04 to 0.87 at longer simulation times, which makes sense — diffusion dominates at late times, making the two classes look more similar. 4/5 quantitative predictions passed; the one failure (ARI>0.5) is frustratingly close.
 
 Needed some numerical stability work: KPZ requires dt=0.01 with 5x substepping to avoid blowups at random parameters. KS needs T capped at 500 with NaN guards and retry logic.
 
