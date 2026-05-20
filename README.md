@@ -1,65 +1,107 @@
 # Universality Discovery
 
-Exploring whether unsupervised methods can discover universality classes from physics simulation data. Instead of asking "does this data fit KPZ theory?", the question is "what dynamical classes exist in this data?"
+Research notebook exploring whether unsupervised methods can recover
+universality-class structure from simulated physics data.
 
-## Overview
+Instead of asking whether one simulator fits a known theory, this project asks a
+harder question: if the labels are hidden, do physically motivated features make
+systems with the same large-scale behavior organize together?
 
-This project ran 62+ experiments on 1D surface growth models (Edwards-Wilkinson, KPZ, Ballistic Deposition, Eden, Random Deposition, Kuramoto-Sivashinsky) as well as equilibrium criticality (2D Ising, 3-state Potts) and active matter (Vicsek). The central question was whether clustering and dimensionality reduction on physically-motivated features could recover universality class structure without supervision.
+## Current Takeaway
 
-The short answer: yes, but you need the right features. Raw-field autoencoders mostly detect discreteness artifacts. Hand-crafted gradient statistics (variance, skewness, kurtosis of spatial gradients and Laplacians) actually carry strong universality signal, validated across 60 experiments before being used for the final clustering result.
+The answer is mixed and useful.
 
-## Key results
+Local feature representations are often strongly discriminative, but the main
+density-clustering hypothesis does not cleanly hold for the surface-growth
+systems tested here. In the best current surface-growth experiments, k-nearest
+neighbor classification can be high, while HDBSCAN and KMeans still hit an
+Adjusted Rand Index ceiling around 0.5. Later diagnostics suggest this is not
+just an algorithm choice: the KPZ class is geometrically multimodal in the tested
+feature space, especially because ballistic deposition keeps a discrete-model
+signature even when it belongs to the KPZ universality class.
 
-- **Feature-space clustering works** (Exp 62): HDBSCAN on 6 gradient features finds exactly 4 clusters matching the 4 true universality classes (EW, KPZ, KS, trivial). ARI=0.495, kNN accuracy 82%, stable across pilot and full runs.
-- **KPZ coupling coordinate** (Exp 46/54): PC1 of gradient features tracks D/ν with r=0.961, explained by the known stationary slope measure.
-- **Ising PCA-FSS** (Exp 52d): Unsupervised PCA features give ν=1.073 via finite-size scaling collapse, ~7% from the exact value. Works even after removing the order parameter.
-- **Diagnostic gate** (Exp 50 series): Self-consistency protocol that catches pipeline artifacts before you over-interpret cross-class comparisons. Born from painful experience with false positives in the KS campaign.
-- **IC-dependence** (Exp 27): The universality signal depends heavily on initial conditions. Droplet IC gives near-perfect EW/KPZ separation (r=-0.98), flat IC at stationarity gives nothing (r=-0.06). Connects to GOE/GUE/Baik-Rains structure in KPZ fixed point theory.
-- **Potts method boundary** (Exp 55-59): PCA-FSS fails for 3-state Potts despite working for Ising. Standard Binder analysis still works — the failure is method-specific, not physics-specific.
+That negative result is the most important result in the repository. It turns
+the project from "unsupervised discovery works" into a more careful study of
+when feature geometry agrees with physical universality, and when it does not.
 
-## What didn't work
+## What This Project Shows
 
-Autoencoders on raw height fields (Exp 1-8, 61), total correlation of local observables (Exp 17-19), RG-geodesic metric learning (Exp 12), naive coarse-graining as RG (Exp 14, 30), various wavelet decompositions (Exp 9, 11). Each failure taught something, documented in the experiment log.
+- Raw-field autoencoders mostly learned simulator artifacts rather than
+  universality structure.
+- Hand-designed spatial gradient features are much more useful, but they still
+  conflate physical classes with implementation details.
+- Temporal features improve local discrimination between EW and KPZ-style
+  dynamics, but do not automatically create clean density clusters.
+- Same-class controls are essential: some apparently strong cross-class results
+  were later traced to normalization, bandwidth, or numerical-pipeline effects.
+- The Ising finite-size-scaling experiments are the cleanest positive result:
+  unsupervised PCA features recover a correlation-length exponent near the exact
+  value, while the Potts experiments show a method boundary.
 
-## Project structure
+## Representative Results
 
+- **Exp 62: feature-space clustering.** Six spatial gradient features produce
+  stable partial structure across EW, KPZ, ballistic deposition, Eden, random
+  deposition, and Kuramoto-Sivashinsky simulations. HDBSCAN reaches ARI ~= 0.495
+  and 3-NN accuracy ~= 82%.
+- **Exp 63: temporal features.** Adding beta, velocity skew/kurtosis, and
+  slope-growth coupling raises 3-NN accuracy to about 98%, but HDBSCAN remains
+  near the same ARI ceiling on the full run.
+- **Exp 64: multiscale/peel diagnostics.** Coarse-graining and hierarchical
+  peeling show that the KPZ class can be disconnected in feature space. This
+  supports the interpretation that the clustering limit is structural, not just
+  a failed hyperparameter choice.
+- **Exp 52d: Ising PCA-FSS.** PCA features recover nu ~= 1.07 for the 2D Ising
+  model, about 7% from the exact value.
+- **Exp 55-60: Potts controls.** Standard Binder analysis works, but the PCA-FSS
+  approach does not transfer cleanly to 3-state Potts, which helps define the
+  boundary of the method.
+
+## Repository Structure
+
+```text
+experiments/              Numbered experiment scripts, each mostly self-contained
+src/simulation/           Shared simulation utilities
+src/models/               Autoencoder architectures used in early experiments
+src/analysis/             Clustering and analysis helpers
+docs/EXPERIMENT_LOG.md    Chronological research notes and corrections
+docs/literature_review.md Literature notes
+results*/                 Selected result snapshots used to document experiments
+archive/                  Obsolete manuscript drafts and earlier writeups
+tests/                    Lightweight smoke tests for import and core behavior
 ```
-experiments/          # Numbered scripts (01-62), each self-contained
-src/
-  simulation/         # Growth models: EW, KPZ, BD, Eden, RD, KS (Numba JIT)
-  models/             # Autoencoder architectures
-  analysis/           # Clustering, PCA, dimension estimation
-docs/
-  EXPERIMENT_LOG.md   # Chronological notes from all experiments
-  literature_review.md
-  main.tex            # Manuscript draft
-  references.bib
-manuscript/           # Paper drafts (LaTeX)
-results_*/            # Outputs from individual experiments
-figures/              # Generated visualisations
-```
 
-## Dependencies
+## Running
 
-```
-numpy, scipy, matplotlib, scikit-learn
-torch
-hdbscan
-umap-learn
-numba
-```
+Install dependencies:
 
-## Running things
-
-Each experiment is standalone:
 ```bash
-python experiments/62_feature_space_clustering.py          # full run (takes a few minutes)
-python experiments/62_feature_space_clustering.py --pilot   # quick test
-python experiments/52d_ising_finite_size_scaling.py         # Ising FSS
+python -m pip install -r requirements.txt
 ```
 
-Data generation involves physics simulations compiled with Numba — first run is slow (JIT compilation), subsequent runs are much faster. KS in particular can take a while.
+Run smoke tests:
 
-## Related
+```bash
+python -m pytest -q
+```
 
-Builds on [ml-universality-classification](https://github.com/adamfbentley/ml-universality-classification), which used supervised learning for KPZ classification (~95% accuracy). This project asks the harder question: can you do it without labels?
+Run selected experiments:
+
+```bash
+python experiments/62_feature_space_clustering.py --pilot
+python experiments/63_temporal_features.py --pilot
+python experiments/64_multiscale_peel.py --pilot
+python experiments/52d_ising_finite_size_scaling.py
+```
+
+The experiment scripts compile Numba kernels on first run, so the first execution
+is slower than later runs.
+
+## Relationship To Earlier Work
+
+This repository builds on
+[ml-universality-classification](https://github.com/adamfbentley/ml-universality-classification),
+which tested supervised and anomaly-detection approaches for surface-growth
+simulations. This project is broader and more exploratory: it investigates when
+unsupervised geometry aligns with known physics, and documents the cases where
+that assumption breaks.

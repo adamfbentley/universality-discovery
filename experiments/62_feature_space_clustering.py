@@ -4,7 +4,7 @@ Experiment 62: Feature-Space Anomaly Clustering
 
 PURPOSE: The honest synthesis of 61 experiments. Instead of training an
 autoencoder to discover features (which fails — Exp 61), use the features
-that 60 experiments have PROVEN carry universality information:
+that prior experiments suggest carry useful universality-related signal:
 
   grad_var, grad_skew, grad_kurt, lap_var, grad_lap_cov, h_var
 
@@ -13,9 +13,9 @@ features across 6+ systems. This tests the core discovery question:
 
   "Do unknown systems cluster by universality class without labels?"
 
-If supervised classification with these features gets ~95% (ml-universality-
-classification project), then there MUST be unsupervised structure. The question
-is whether HDBSCAN/UMAP can find it without knowing the labels.
+If supervised classification with similar features performs well
+(ml-universality-classification project), there may be unsupervised structure.
+The question is whether HDBSCAN/UMAP can find it without knowing the labels.
 
 SYSTEMS:
   Continuous PDE:    EW (Edwards-Wilkinson), KPZ equation, KS (Kuramoto-Sivashinsky)
@@ -902,9 +902,9 @@ def run_experiment(pilot=False):
     print()
 
     if n_pass >= 4:
-        print("  RESULT: Feature-space clustering SUCCEEDS.")
-        print("  Physics features carry enough information for unsupervised")
-        print("  universality class discovery.")
+        print("  RESULT: Feature-space clustering shows useful structure.")
+        print("  Physics features carry signal, but inspect class-level")
+        print("  errors before interpreting this as discovery.")
     elif n_pass >= 2:
         print("  RESULT: Partial success. Some classes separate, others overlap.")
         print("  Check which specific separations work/fail.")

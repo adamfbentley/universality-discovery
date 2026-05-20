@@ -198,9 +198,10 @@ def characterize_clusters(
         info['mean_width'] = float(np.mean(widths))
         info['final_width'] = float(np.mean(widths[:, -1]))
         
-        # Growth rate (slope of log width vs log time)
-        # Simplified: ratio of final to initial width
-        initial_width = np.mean(widths[:, 10])  # Skip early transient
+        # Simplified growth statistic: compare late width to an early-but-safe
+        # reference frame. Short smoke-test trajectories may not have t=10.
+        initial_idx = min(10, widths.shape[1] - 1)
+        initial_width = np.mean(widths[:, initial_idx])
         final_width = np.mean(widths[:, -1])
         if initial_width > 0:
             info['width_growth_ratio'] = float(final_width / initial_width)

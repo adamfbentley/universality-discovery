@@ -190,7 +190,7 @@ Four experiments probing the failure: symmetric features, scaling dimension test
 
 ### Exp 57 series: Binder controls
 
-Standard Binder cumulant analysis works for Potts — 57c gets nu\~0.884 (\~6% error from the exact 5/6). Proves the physics is accessible, the failure is specific to PCA-FSS, not to Potts transitions in general.
+Standard Binder cumulant analysis works for Potts — 57c gets nu\~0.884 (\~6% error from the exact 5/6). This suggests the physics is accessible, while the failure is specific to PCA-FSS rather than Potts transitions in general.
 
 ### Exp 58-59: Symmetry sector attempts
 
@@ -210,12 +210,113 @@ Full circle — tried the original project vision of AE on known classes, cluste
 
 ### Exp 62: Feature-space clustering
 
-Skipped the autoencoder entirely, clustered directly on the 6D gradient features validated across 60 experiments. This is the honest synthesis — just use what we know works.
+Skipped the autoencoder entirely, clustered directly on the 6D gradient features used throughout the earlier diagnostics. This is the honest synthesis — use the feature family that had survived the most checks.
 
 Pilot (L=128, T=500, 30 samples/system, 180 total): HDBSCAN finds exactly 4 clusters matching the 4 true universality classes. ARI=0.496, kNN 83.9%. Dramatic improvement over Exp 61.
 
-Full run (L=256, T=2000, 80 samples/system, 480 total): HDBSCAN still finds 4 clusters, ARI=0.495, 3-NN=82.1%. Essentially identical to pilot — more data didn't help. The ARI\~0.495 is a fundamental ceiling for these features, not a sample size problem. The EW-KPZ centroid distance actually decreased from 1.04 to 0.87 at longer simulation times, which makes sense — diffusion dominates at late times, making the two classes look more similar. 4/5 quantitative predictions passed; the one failure (ARI>0.5) is frustratingly close.
+Full run (L=256, T=2000, 80 samples/system, 480 total): HDBSCAN still finds 4 clusters, ARI=0.495, 3-NN=82.1%. Essentially identical to pilot — more data didn't help. In these runs, ARI\~0.495 looks like a persistent ceiling for this feature family rather than a sample size problem. The EW-KPZ centroid distance actually decreased from 1.04 to 0.87 at longer simulation times, which makes sense — diffusion dominates at late times, making the two classes look more similar. 4/5 quantitative predictions passed; the one failure (ARI>0.5) is frustratingly close.
 
 Needed some numerical stability work: KPZ requires dt=0.01 with 5x substepping to avoid blowups at random parameters. KS needs T capped at 500 with NaN guards and retry logic.
 
 To push past ARI 0.5 would probably need features targeting the EW-KPZ distinction specifically — spectral slope, structure function exponents, temporal growth rate. Or a hierarchical approach: separate the easy classes first, then tackle the hard EW-KPZ boundary.
+
+### Exp 63: Temporal growth features
+
+**Goal**: Break the ARI~0.5 ceiling from Exp 62 by adding 4 temporal features that target the EW-KPZ degeneracy, which spatial gradient features cannot resolve due to the stationarity theorem (Exp 54: EW and KPZ share identical stationary gradient statistics via D/ν mapping).
+
+**New features** (computed from late-time height trajectories):
+- `beta_eff`: Effective growth exponent from log-log fit of W(t)~t^β
+- `vel_skew`: Skewness of multi-step velocity Δh(stride), where stride = min(10, n_avail//20). Multi-step accumulates nonlinear signal above noise floor.
+- `vel_kurt`: Kurtosis of multi-step velocity
+- `slope_growth`: Pearson correlation r(v, (∇h)²) — the slope-growth coupling. Bounded [-1,1], dimensionless. Directly probes the KPZ nonlinearity λ(∇h)².
+
+**Key design decisions**:
+- v1→v2 fix: Changed slope_growth from raw covariance to Pearson r. Raw covariance had BD=21.4 (~600× larger than KPZ=0.036), destroying StandardScaler normalization.
+- v1→v2 fix: Changed velocity from single-step Δh (noise-dominated) to multi-step with stride~10 (accumulates λ signal above √(D·dt) noise floor). This fixed vel_skew from showing no EW-KPZ separation to a clear gap.
+
+**Pilot (L=128, T=500, N=30/system, 180 total)**:
+- Pilot improvement: HDBSCAN ARI 0.483 → 0.619 (+0.136), kNN 82% → 97.2%
+- slope_growth: EW=+0.004, KPZ=+0.155 — clean separation, consistent with Exp 13
+- vel_skew: EW=−0.003, KPZ=+0.113 — nonlinear drift signature detected
+- EW-KPZ centroid distance: 1.07 → 2.16 (doubled)
+
+**Full run (L=256, T=2000, N=80/system, 480 total)**:
+
+| Metric | 6D spatial | 10D spatial+temporal | Change |
+|--------|-----------|---------------------|--------|
+| HDBSCAN ARI | 0.496 | 0.496 | +0.000 |
+| KMeans ARI | 0.185 | 0.498 | +0.314 |
+| 3-NN accuracy | 82.7% | **97.7%** | **+15.0pp** |
+| EW-KPZ distance | 0.874 | 1.326 | +0.452 |
+
+**Verdict**: Partial success — **temporal features are clearly discriminative** (kNN reaches 97.7%), but HDBSCAN does not exploit them in 10D with 480 samples. This appears to be a density-estimation limitation in this representation, not simply a lack of feature signal. KMeans ARI nearly tripled.
+
+**Why pilot worked but full didn't for HDBSCAN**:
+1. EW-KPZ feature gaps shrink at longer times: slope_growth gap 0.155→0.121, vel_skew gap 0.116→0.081. At T=2000, both systems are deeper into stationarity.
+2. 480 samples in 10D gives ~1.9 effective samples/dimension — HDBSCAN density estimation is extremely noisy.
+3. KS vel_skew exploded to +2.38 at T=2000 (was −0.002 at T=500), distorting standardized feature space.
+
+**Anomalies**:
+- Eden slope_growth = −0.021 (negative), while KPZ=+0.121 and BD=+0.080 (positive). Eden reaches KPZ scaling via a different dynamical path (surface nucleation vs direct λ(∇h)²), producing opposite transient coupling sign.
+- KS vel_skew=+2.38 and slope_growth=+0.068 (both positive, predicted negative). At T=2000, KS instability-saturation cycles produce asymmetric velocity distributions dominated by saturation-phase 4th-order dissipation, not the bare nonlinearity.
+
+**Predictions scorecard**: 3/7 passed (P3 beta ordering, P4 kNN>85%, P7 EW slope_growth~0). Failed: P1 ARI>0.5 (full run), P2 vel_skew gap>0.1 (0.08), P5 EW-KPZ dist>1.5 (1.33), P6 KS slope_growth<0 (+0.068).
+
+**Post-hoc corrections (from independent review)**:
+
+1. **The ARI ceiling is NOT only EW vs KPZ — it's a two-front problem.** HDBSCAN's 4-cluster partition is: {EW+KPZ+Eden}(240), {BD}(80), {KS}(80), {RD}(79+1noise). This means ARI is penalized on BOTH fronts: (a) EW merged with KPZ+Eden, and (b) BD split from its KPZ universality class. ARI decomposition: even with perfect EW separation, ARI would only reach ~0.73 because of the BD split. The BD-vs-continuum-KPZ multimodality is a structural problem for any density-based method — BD's discrete lattice effects create a genuinely different density region in feature space.
+
+2. **KS beta_eff = 2.0 ± 0.0 is clipping saturation, not a measured exponent.** The code clips beta_eff to [-1, 2]. Every single KS sample hit the ceiling. The "true" KS growth exponent is unmeasured — it's just "bigger than 2." This makes beta_eff an uninformative binary flag (KS=2 vs everything else<2) rather than a continuous physical observable for KS.
+
+3. **6D and 10D HDBSCAN partitions are identical** — not just similar ARI, literally the same label assignment (ARI=1.0 between the two). Adding 4 temporal features changed geometry (centroid distances shifted) but created zero new density separations.
+
+4. **High kNN does NOT imply clusters exist.** kNN=97.7% indicates the features are locally discriminative, but this is compatible with a class being split into multiple tight subclusters (BD alone inside KPZ class). kNN handles multimodal classes well; density clustering does not.
+
+5. **Eden slope_growth = −0.021 is statistically significant** (t=26.2, n=80), not estimator noise. However, the physical interpretation (different dynamical path to KPZ scaling) needs independent verification.
+
+6. **Spectral clustering and UMAP→HDBSCAN were independently tested and also failed to beat ARI~0.50** (per external review). The ceiling is structural, not algorithmic.
+
+7. **10D KMeans k=3 gives ARI=0.659**, the highest ARI in the entire experiment. The data naturally prefers 3 clusters: {KPZ-class+EW}(320), {KS}(80), {RD}(80). This confirms the EW-KPZ boundary and BD split are the only remaining obstacles.
+
+**Revised key takeaway**: The ARI~0.5 ceiling has two structural causes: (a) EW-KPZ degeneracy in density space, and (b) BD multimodality within the KPZ class (discrete vs continuum growth). Breaking ARI>0.7 requires solving BOTH. Temporal features solved the discrimination problem (97.7% kNN) but not the density-clustering problem. Next steps should target the BD-continuum gap (coarse-graining features, or hierarchical clustering that handles multimodal classes).
+### Exp 64: Multi-scale coarse-graining + hierarchical peel
+
+**Goal**: Attack both structural barriers to ARI>0.5 — (a) EW-KPZ degeneracy and (b) BD splitting from KPZ class — using block coarse-graining (Exp 23 showed KPZ-BD distance drops 90%) and hierarchical peel (remove trivially-separated RD/KS first).
+
+**Design**: Three sub-experiments, each at 4 CG scales (b=1,2,4,8):
+- 64A: Clustering at each scale + multi-scale concatenation (40D = 10D × 4 scales), all 6 systems
+- 64B: Peel (remove RD+KS), cluster remaining {EW, KPZ, BD, Eden} as 2-class problem
+- 64C: kNN graph connectivity diagnostic — does KPZ class form 1 or 2 connected components?
+
+**Pilot (L=128, T=500, N=30/system, 180 total)**:
+
+Key diagnostic — kNN graph connectivity:
+
+| Scale | KPZ class components | Sizes |
+|-------|---------------------|-------|
+| b=1 | **2** | {60, 30} — BD is disconnected |
+| b=2 | **1** | {90} — BD merges with KPZ+Eden |
+| b=4 | 1 | {90} — still connected |
+| b=8 | **4** | {55,30,4,1} — everything fragments (only 16 sites) |
+
+**Key geometric diagnostic**: at b=1, BD forms a disconnected subcluster in the 5-NN graph. A density-clustering method is unlikely to merge it with KPZ+Eden without additional inductive bias. Block CG at b=2 connects it, but b≥4 destroys feature resolution.
+
+Clustering results — no condition exceeded ARI~0.49:
+
+| Condition | HDBSCAN ARI | KMeans ARI | 3-NN |
+|-----------|-------------|------------|------|
+| All systems, b=1 (10D) | 0.487 | 0.493 | 97.8% |
+| All systems, b=2 | 0.492 | 0.492 | 96.1% |
+| All systems, b=4 | 0.410 | 0.493 | 90.6% |
+| All systems, b=8 | 0.244 | 0.244 | 84.4% |
+| Multi-scale (40D) | 0.413 | 0.493 | 92.8% |
+| Peel, b=1 | −0.070 | −0.067 | 93.3% |
+| Peel, multi-scale | −0.072 | −0.072 | 82.5% |
+
+**P1 FAILED**: BD-KPZ distance INCREASED (4.06→5.47) — opposite of Exp 23. Exp 23 used only 6D spatial features. With 10D features including temporal, BD's discrete dynamics diverge under CG even as spatial features converge. The KPZ-Eden distance DID decrease (2.48→0.99), confirming CG merges continuum members but pushes discrete BD further away.
+
+**Peel results are negative**: All peel conditions gave negative ARI (~−0.07). HDBSCAN finds 2 clusters: {EW+KPZ+Eden} vs {BD} — the same BD split. With only 2 true classes and BD mis-split, ARI goes negative. Meanwhile kNN stays at 93.3%, suggesting local information exists even when global density clustering fails.
+
+Predictions: 2/7 passed (P2 EW-KPZ increases with CG, P5 KPZ merges at b=2).
+
+**Verdict**: Negative result, but highly informative. The unsupervised "universality class = density cluster" hypothesis does not hold cleanly for this feature family. BD's discrete lattice effects create a geometric disconnection that coarse-graining helps spatially (b=2 connects the kNN graph) but hurts temporally (beta_eff and vel_skew diverge). The ARI~0.5 ceiling appears tied to the feature geometry, so more algorithm-swapping is unlikely to be the best next step.

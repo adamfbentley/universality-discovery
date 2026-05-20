@@ -64,6 +64,7 @@ docs/EXP45_FAILURE_ANALYSIS.md
 docs/EXP46_45_STATUS.md
 docs/FRAMEWORK_COMPARISON.md
 docs/FRAMEWORK_STATEMENT.md
+docs/literature_review_old.md
 docs/MANUSCRIPT_DRAFT.md
 docs/MANUSCRIPT_SUMMARY.md
 docs/QUICK_REFERENCE.md
@@ -80,6 +81,7 @@ results/diagnostic_summary_exp31-35.md
 results/manuscript_figures/FIGURE_REFERENCE.md
 
 # Manuscript / LaTeX source files (local only)
+/manuscript/
 docs/main.tex
 docs/main.pdf
 docs/revised_manuscript.tex
