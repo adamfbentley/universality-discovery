@@ -1,5 +1,7 @@
 # Universality Discovery
 
+[![Tests](https://github.com/adamfbentley/universality-discovery/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/adamfbentley/universality-discovery/actions/workflows/tests.yml)
+
 Research notebook exploring whether unsupervised methods can recover
 universality-class structure from simulated physics data.
 
