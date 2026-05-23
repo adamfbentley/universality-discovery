@@ -1,0 +1,106 @@
+{
+  "evaluation_modes": {
+    "refit_subset": "clustering refit after selecting subset; preferred when vectors are stored",
+    "restrict_full_partition": "ARI after selecting rows from an all-system partition; not a full reclustering baseline"
+  },
+  "key_findings": {
+    "all_six": {
+      "exp62_spatial_refit_kmeans_ari": 0.184919,
+      "exponent_equal_minus_raw_multi_L_equal": -0.0004990000000000272,
+      "exponent_equal_refit_kmeans_ari": 0.60446,
+      "exponent_exp69_refit_kmeans_ari": 0.600314,
+      "raw_multi_L_equal_restricted_kmeans_ari": 0.604959
+    },
+    "ew_kpz_only": {
+      "exp62_spatial_refit_kmeans_ari": -0.00191673,
+      "exponent_equal_minus_raw_multi_L_equal": -0.338017,
+      "exponent_equal_refit_kmeans_ari": 0.661983,
+      "exponent_exp69_refit_kmeans_ari": 0.517293,
+      "raw_multi_L_equal_restricted_kmeans_ari": 1.0
+    },
+    "no_ks": {
+      "exp62_spatial_refit_kmeans_ari": 0.348571,
+      "exponent_equal_minus_raw_multi_L_equal": 0.07659600000000005,
+      "exponent_equal_refit_kmeans_ari": 0.576177,
+      "exponent_exp69_refit_kmeans_ari": 0.564451,
+      "raw_multi_L_equal_restricted_kmeans_ari": 0.499581
+    },
+    "no_rd": {
+      "exp62_spatial_refit_kmeans_ari": -0.116418,
+      "exponent_equal_minus_raw_multi_L_equal": 0.14868200000000004,
+      "exponent_equal_refit_kmeans_ari": 0.648263,
+      "exponent_exp69_refit_kmeans_ari": 0.62221,
+      "raw_multi_L_equal_restricted_kmeans_ari": 0.499581
+    },
+    "no_rd_no_ks": {
+      "exp62_spatial_refit_kmeans_ari": -0.0686767,
+      "exponent_equal_minus_raw_multi_L_equal": 0.257169,
+      "exponent_equal_refit_kmeans_ari": 0.503614,
+      "exponent_exp69_refit_kmeans_ari": 0.437755,
+      "raw_multi_L_equal_restricted_kmeans_ari": 0.246445
+    }
+  },
+  "n_rows": 305,
+  "n_summary_rows": 65,
+  "outputs": [
+    "ml_paper\\tables\\subset_ari_audit.csv",
+    "ml_paper\\tables\\subset_ari_summary.csv",
+    "ml_paper\\tables\\subset_ari_summary.md",
+    "ml_paper\\figures\\subset_ari_audit.png",
+    "ml_paper\\results\\mlp02_summary.json"
+  ],
+  "subsets": [
+    {
+      "display": "EW/KPZ/BD/Eden/RD/KS",
+      "name": "all_six",
+      "systems": [
+        "ew",
+        "kpz",
+        "bd",
+        "eden",
+        "rd",
+        "ks"
+      ]
+    },
+    {
+      "display": "EW/KPZ/BD/Eden/RD",
+      "name": "no_ks",
+      "systems": [
+        "ew",
+        "kpz",
+        "bd",
+        "eden",
+        "rd"
+      ]
+    },
+    {
+      "display": "EW/KPZ/BD/Eden/KS",
+      "name": "no_rd",
+      "systems": [
+        "ew",
+        "kpz",
+        "bd",
+        "eden",
+        "ks"
+      ]
+    },
+    {
+      "display": "EW/KPZ/BD/Eden",
+      "name": "no_rd_no_ks",
+      "systems": [
+        "ew",
+        "kpz",
+        "bd",
+        "eden"
+      ]
+    },
+    {
+      "display": "EW/KPZ only",
+      "name": "ew_kpz_only",
+      "systems": [
+        "ew",
+        "kpz"
+      ]
+    }
+  ]
+}

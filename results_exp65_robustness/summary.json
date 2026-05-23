@@ -1,0 +1,332 @@
+{
+  "config": {
+    "seeds": 5,
+    "samples": 30,
+    "L": 128,
+    "T": 500,
+    "seed_start": 65000
+  },
+  "elapsed_seconds": 76.14534831047058,
+  "multi_seed_pilot": {
+    "rows": [
+      {
+        "seed_index": 0,
+        "seed_base": 65000,
+        "representation": "6d_spatial",
+        "n_samples": 180,
+        "hdbscan_clusters": 4,
+        "hdbscan_noise": 2,
+        "hdbscan_all_ari": 0.4831688449832434,
+        "hdbscan_all_nmi": 0.7256963381744511,
+        "hdbscan_non_noise_ari": 0.4914931437277806,
+        "hdbscan_non_noise_nmi": 0.7428026859133436,
+        "kmeans_ari": 0.18459597729343333,
+        "kmeans_nmi": 0.49574079427713597,
+        "knn3_accuracy": 0.8388888888888889,
+        "knn3_std": 0.04444444444444442
+      },
+      {
+        "seed_index": 0,
+        "seed_base": 65000,
+        "representation": "10d_spatial_temporal",
+        "n_samples": 180,
+        "hdbscan_clusters": 4,
+        "hdbscan_noise": 2,
+        "hdbscan_all_ari": 0.4846572136942993,
+        "hdbscan_all_nmi": 0.7256719380532237,
+        "hdbscan_non_noise_ari": 0.492982497548541,
+        "hdbscan_non_noise_nmi": 0.7428205749154773,
+        "kmeans_ari": 0.4943502824858757,
+        "kmeans_nmi": 0.7438478550696798,
+        "knn3_accuracy": 0.9888888888888889,
+        "knn3_std": 0.013608276348795441
+      },
+      {
+        "seed_index": 1,
+        "seed_base": 75000,
+        "representation": "6d_spatial",
+        "n_samples": 180,
+        "hdbscan_clusters": 4,
+        "hdbscan_noise": 2,
+        "hdbscan_all_ari": 0.4846572136942993,
+        "hdbscan_all_nmi": 0.7256719380532237,
+        "hdbscan_non_noise_ari": 0.492982497548541,
+        "hdbscan_non_noise_nmi": 0.7428205749154773,
+        "kmeans_ari": 0.18202933676689642,
+        "kmeans_nmi": 0.4943837742223931,
+        "knn3_accuracy": 0.8555555555555557,
+        "knn3_std": 0.03685138655950442
+      },
+      {
+        "seed_index": 1,
+        "seed_base": 75000,
+        "representation": "10d_spatial_temporal",
+        "n_samples": 180,
+        "hdbscan_clusters": 4,
+        "hdbscan_noise": 2,
+        "hdbscan_all_ari": 0.4846572136942993,
+        "hdbscan_all_nmi": 0.7256719380532237,
+        "hdbscan_non_noise_ari": 0.492982497548541,
+        "hdbscan_non_noise_nmi": 0.7428205749154773,
+        "kmeans_ari": 0.4943502824858757,
+        "kmeans_nmi": 0.7438478550696798,
+        "knn3_accuracy": 0.961111111111111,
+        "knn3_std": 0.028327886186626593
+      },
+      {
+        "seed_index": 2,
+        "seed_base": 85000,
+        "representation": "6d_spatial",
+        "n_samples": 180,
+        "hdbscan_clusters": 4,
+        "hdbscan_noise": 2,
+        "hdbscan_all_ari": 0.4846572136942993,
+        "hdbscan_all_nmi": 0.7256719380532237,
+        "hdbscan_non_noise_ari": 0.492982497548541,
+        "hdbscan_non_noise_nmi": 0.7428205749154773,
+        "kmeans_ari": 0.1812265408920616,
+        "kmeans_nmi": 0.49396808950798254,
+        "knn3_accuracy": 0.8388888888888889,
+        "knn3_std": 0.032394177193584985
+      },
+      {
+        "seed_index": 2,
+        "seed_base": 85000,
+        "representation": "10d_spatial_temporal",
+        "n_samples": 180,
+        "hdbscan_clusters": 4,
+        "hdbscan_noise": 2,
+        "hdbscan_all_ari": 0.4834513435648322,
+        "hdbscan_all_nmi": 0.7317795718138416,
+        "hdbscan_non_noise_ari": 0.4985197211345621,
+        "hdbscan_non_noise_nmi": 0.7459178385905967,
+        "kmeans_ari": 0.49209199857337194,
+        "kmeans_nmi": 0.7440153683026007,
+        "knn3_accuracy": 0.9666666666666666,
+        "knn3_std": 0.020786985482077462
+      },
+      {
+        "seed_index": 3,
+        "seed_base": 95000,
+        "representation": "6d_spatial",
+        "n_samples": 180,
+        "hdbscan_clusters": 4,
+        "hdbscan_noise": 7,
+        "hdbscan_all_ari": 0.46016044393509864,
+        "hdbscan_all_nmi": 0.696323660179197,
+        "hdbscan_non_noise_ari": 0.49175888956722474,
+        "hdbscan_non_noise_nmi": 0.7417218960008146,
+        "kmeans_ari": 0.19355163474365106,
+        "kmeans_nmi": 0.5008679653964233,
+        "knn3_accuracy": 0.8111111111111111,
+        "knn3_std": 0.07328281087929399
+      },
+      {
+        "seed_index": 3,
+        "seed_base": 95000,
+        "representation": "10d_spatial_temporal",
+        "n_samples": 180,
+        "hdbscan_clusters": 5,
+        "hdbscan_noise": 16,
+        "hdbscan_all_ari": 0.41380655053376525,
+        "hdbscan_all_nmi": 0.6710837396965499,
+        "hdbscan_non_noise_ari": 0.5067662085179817,
+        "hdbscan_non_noise_nmi": 0.7478951350543674,
+        "kmeans_ari": 0.4930591020938762,
+        "kmeans_nmi": 0.7438829768924471,
+        "knn3_accuracy": 0.9777777777777779,
+        "knn3_std": 0.03239417719358502
+      },
+      {
+        "seed_index": 4,
+        "seed_base": 105000,
+        "representation": "6d_spatial",
+        "n_samples": 180,
+        "hdbscan_clusters": 4,
+        "hdbscan_noise": 2,
+        "hdbscan_all_ari": 0.4851044545013942,
+        "hdbscan_all_nmi": 0.731825535701158,
+        "hdbscan_non_noise_ari": 0.5001936483346243,
+        "hdbscan_non_noise_nmi": 0.7460016748417706,
+        "kmeans_ari": 0.1863585068623557,
+        "kmeans_nmi": 0.49669895266146813,
+        "knn3_accuracy": 0.8277777777777777,
+        "knn3_std": 0.03239417719358502
+      },
+      {
+        "seed_index": 4,
+        "seed_base": 105000,
+        "representation": "10d_spatial_temporal",
+        "n_samples": 180,
+        "hdbscan_clusters": 4,
+        "hdbscan_noise": 3,
+        "hdbscan_all_ari": 0.48006478972881117,
+        "hdbscan_all_nmi": 0.7195084626041541,
+        "hdbscan_non_noise_ari": 0.4959707774991981,
+        "hdbscan_non_noise_nmi": 0.7439233611385269,
+        "kmeans_ari": 0.4943502824858757,
+        "kmeans_nmi": 0.7438478550696798,
+        "knn3_accuracy": 0.9722222222222221,
+        "knn3_std": 0.024845199749997673
+      }
+    ],
+    "summary": {
+      "10d_spatial_temporal": {
+        "hdbscan_all_ari": {
+          "mean": 0.46932742224320145,
+          "std": 0.03109400433067694,
+          "min": 0.41380655053376525,
+          "max": 0.4846572136942993
+        },
+        "hdbscan_non_noise_ari": {
+          "mean": 0.49744434044976477,
+          "std": 0.005701779104327049,
+          "min": 0.492982497548541,
+          "max": 0.5067662085179817
+        },
+        "kmeans_ari": {
+          "mean": 0.49364038962497503,
+          "std": 0.0010304433104699065,
+          "min": 0.49209199857337194,
+          "max": 0.4943502824858757
+        },
+        "knn3_accuracy": {
+          "mean": 0.9733333333333333,
+          "std": 0.010686324478706368,
+          "min": 0.961111111111111,
+          "max": 0.9888888888888889
+        }
+      },
+      "6d_spatial": {
+        "hdbscan_all_ari": {
+          "mean": 0.4795496341616669,
+          "std": 0.010863587701400102,
+          "min": 0.46016044393509864,
+          "max": 0.4851044545013942
+        },
+        "hdbscan_non_noise_ari": {
+          "mean": 0.49388213534534237,
+          "std": 0.0035940696337097033,
+          "min": 0.4914931437277806,
+          "max": 0.5001936483346243
+        },
+        "kmeans_ari": {
+          "mean": 0.1855523993116796,
+          "std": 0.004916231806917389,
+          "min": 0.1812265408920616,
+          "max": 0.19355163474365106
+        },
+        "knn3_accuracy": {
+          "mean": 0.8344444444444445,
+          "std": 0.016386534670836315,
+          "min": 0.8111111111111111,
+          "max": 0.8555555555555557
+        }
+      }
+    }
+  },
+  "saved_full_run": {
+    "exp62_spatial_saved": {
+      "baseline": {
+        "hdbscan_clusters": 4,
+        "hdbscan_noise": 2,
+        "hdbscan_all_ari": 0.4943238763790265,
+        "hdbscan_all_nmi": 0.7380606261155583,
+        "hdbscan_non_noise_ari": 0.49476343280378143,
+        "hdbscan_non_noise_nmi": 0.7422902350998982,
+        "kmeans_ari": 0.18491941765409903,
+        "kmeans_nmi": 0.49382350433464833,
+        "knn3_accuracy": 0.8375,
+        "knn3_std": 0.02517301244498868
+      },
+      "sensitivity": {
+        "hdbscan_all_ari": {
+          "mean": 0.4890885143950152,
+          "std": 0.016493050253781474,
+          "min": 0.4215907519261107,
+          "max": 0.4979035639412998
+        },
+        "hdbscan_non_noise_ari": {
+          "mean": 0.48975664609627234,
+          "std": 0.018637226423476722,
+          "min": 0.41191811519707744,
+          "max": 0.4979035639412998
+        },
+        "hdbscan_noise": {
+          "mean": 4.0,
+          "std": 6.0524027416694945,
+          "min": 0.0,
+          "max": 28.0
+        }
+      }
+    },
+    "exp63_spatial_saved": {
+      "baseline": {
+        "hdbscan_clusters": 4,
+        "hdbscan_noise": 1,
+        "hdbscan_all_ari": 0.4960916941110373,
+        "hdbscan_all_nmi": 0.7405103730927541,
+        "hdbscan_non_noise_ari": 0.4963351060312195,
+        "hdbscan_non_noise_nmi": 0.7430736897469615,
+        "kmeans_ari": 0.18458358827569296,
+        "kmeans_nmi": 0.4936498411271115,
+        "knn3_accuracy": 0.8479166666666668,
+        "knn3_std": 0.010622957319984964
+      },
+      "sensitivity": {
+        "hdbscan_all_ari": {
+          "mean": 0.48915708374490235,
+          "std": 0.014760567358625477,
+          "min": 0.4370742528948637,
+          "max": 0.4979035639412998
+        },
+        "hdbscan_non_noise_ari": {
+          "mean": 0.4905900454029094,
+          "std": 0.01634628211017427,
+          "min": 0.4306247635982288,
+          "max": 0.4979035639412998
+        },
+        "hdbscan_noise": {
+          "mean": 3.6,
+          "std": 4.892529213531908,
+          "min": 0.0,
+          "max": 21.0
+        }
+      }
+    },
+    "exp63_combined_saved": {
+      "baseline": {
+        "hdbscan_clusters": 4,
+        "hdbscan_noise": 1,
+        "hdbscan_all_ari": 0.4960916941110373,
+        "hdbscan_all_nmi": 0.7405103730927541,
+        "hdbscan_non_noise_ari": 0.4963351060312195,
+        "hdbscan_non_noise_nmi": 0.7430736897469615,
+        "kmeans_ari": 0.49830721169625014,
+        "kmeans_nmi": 0.7402567843327025,
+        "knn3_accuracy": 0.9895833333333334,
+        "knn3_std": 0.006588078458684136
+      },
+      "sensitivity": {
+        "hdbscan_all_ari": {
+          "mean": 0.4852368011658809,
+          "std": 0.022836932371272725,
+          "min": 0.3952058432549225,
+          "max": 0.4979035639412998
+        },
+        "hdbscan_non_noise_ari": {
+          "mean": 0.4897877021849578,
+          "std": 0.018249164996945195,
+          "min": 0.4132650067935976,
+          "max": 0.4979035639412998
+        },
+        "hdbscan_noise": {
+          "mean": 5.2,
+          "std": 7.11262776224164,
+          "min": 0.0,
+          "max": 32.0
+        }
+      }
+    }
+  }
+}

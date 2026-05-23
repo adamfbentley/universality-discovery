@@ -14,6 +14,7 @@ env/
 # IDE
 .vscode/
 .idea/
+.claude/
 *.swp
 
 # Jupyter
@@ -22,6 +23,8 @@ env/
 # Project outputs
 checkpoints/
 figures/
+!ml_paper/figures/
+!ml_paper/figures/**
 *.pt
 *.pth
 

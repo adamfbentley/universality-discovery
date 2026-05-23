@@ -1,0 +1,11 @@
+k,universality_class_purity,microscopic_system_purity,class_random_baseline,system_random_baseline,kpz_class_purity,kpz_same_system_fraction,kpz_cross_system_same_class_fraction,interpretation
+1,0.841667,0.835417,0.331942,0.164927,0.833333,0.820833,0.0125,KPZ cross-system fraction tests whether KPZ/BD/Eden are locally mixed as a quotient.
+3,0.836806,0.826389,0.331942,0.164927,0.827778,0.806944,0.0208333,KPZ cross-system fraction tests whether KPZ/BD/Eden are locally mixed as a quotient.
+5,0.834583,0.81875,0.331942,0.164927,0.821667,0.79,0.0316667,KPZ cross-system fraction tests whether KPZ/BD/Eden are locally mixed as a quotient.
+10,0.833542,0.81,0.331942,0.164927,0.8175,0.770417,0.0470833,KPZ cross-system fraction tests whether KPZ/BD/Eden are locally mixed as a quotient.
+20,0.817813,0.773229,0.331942,0.164927,0.805208,0.716042,0.0891667,KPZ cross-system fraction tests whether KPZ/BD/Eden are locally mixed as a quotient.
+40,0.793385,0.723281,0.331942,0.164927,0.774167,0.633958,0.140208,KPZ cross-system fraction tests whether KPZ/BD/Eden are locally mixed as a quotient.
+80,0.740052,0.619635,0.331942,0.164927,0.769167,0.528333,0.240833,KPZ cross-system fraction tests whether KPZ/BD/Eden are locally mixed as a quotient.
+120,0.636163,0.467448,0.331942,0.164927,0.761493,0.424063,0.337431,KPZ cross-system fraction tests whether KPZ/BD/Eden are locally mixed as a quotient.
+160,0.577383,0.391198,0.331942,0.164927,0.744219,0.371849,0.37237,KPZ cross-system fraction tests whether KPZ/BD/Eden are locally mixed as a quotient.
+240,0.483368,0.300911,0.331942,0.164927,0.666406,0.301493,0.364913,KPZ cross-system fraction tests whether KPZ/BD/Eden are locally mixed as a quotient.

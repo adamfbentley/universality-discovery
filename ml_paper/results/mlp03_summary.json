@@ -1,0 +1,43 @@
+{
+  "n_runs": 10,
+  "protocols": [
+    "equal",
+    "exp69"
+  ],
+  "seed_starts": [
+    69000,
+    70000,
+    71000,
+    72000,
+    73000
+  ],
+  "outputs": [
+    "ml_paper/tables/exponent_cloud_means.csv",
+    "ml_paper/tables/exponent_cloud_pairwise.csv",
+    "ml_paper/tables/exponent_quotient_metrics.csv",
+    "ml_paper/figures/exponent_clouds_alpha_beta_by_seed.png",
+    "ml_paper/figures/exponent_clouds_alpha_z_by_seed.png",
+    "ml_paper/figures/exponent_ari_by_seed.png"
+  ],
+  "quotient_metric_summary": {
+    "equal": {
+      "n": 5,
+      "ratio_mean": 1.6088939884481008,
+      "ratio_min": 0.5746247434703968,
+      "ratio_max": 3.193857928762587,
+      "kmeans_ari_mean": 0.6044596962318989,
+      "kmeans_ari_min": 0.46937836866189436,
+      "kmeans_ari_max": 0.8198403390674631
+    },
+    "exp69": {
+      "n": 5,
+      "ratio_mean": 1.3921443576513333,
+      "ratio_min": 0.6735904454386034,
+      "ratio_max": 2.112056517984838,
+      "kmeans_ari_mean": 0.6003138838607578,
+      "kmeans_ari_min": 0.43873135913170647,
+      "kmeans_ari_max": 0.9017097280215621
+    }
+  },
+  "note": "Distances are standardized within each run after excluding KS; ratio < 1 means KPZ subclasses are closer to each other than to EW/RD."
+}

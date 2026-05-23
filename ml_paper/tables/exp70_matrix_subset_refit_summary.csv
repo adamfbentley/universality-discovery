@@ -1,0 +1,51 @@
+protocol,representation,representation_key,representation_family,subset,systems,n_runs,n_samples_mean,kmeans_ari_mean,kmeans_ari_std,kmeans_ari_min,kmeans_ari_max,hdbscan_core_ari_mean,hdbscan_core_ari_std,hdbscan_core_ari_min,hdbscan_core_ari_max
+equal,PCA-whitened multi-L features,pca_whitened_multi_L_features,feature,all_six,EW/KPZ/BD/Eden/RD/KS,5,240,0.495781,0,0.495781,0.495781,0.483013,0.0925285,0.318493,0.536391
+equal,PCA-whitened multi-L features,pca_whitened_multi_L_features,feature,ew_kpz_only,EW/KPZ only,5,80,1,0,1,1,1,0,1,1
+equal,PCA-whitened multi-L features,pca_whitened_multi_L_features,feature,no_ks,EW/KPZ/BD/Eden/RD,5,200,0.0197044,0,0.0197044,0.0197044,0.377723,0.125135,0.155002,0.44467
+equal,PCA-whitened multi-L features,pca_whitened_multi_L_features,feature,no_rd,EW/KPZ/BD/Eden/KS,5,200,0.331395,0.13968,0.165968,0.508032,0.477443,0.00216374,0.474051,0.480096
+equal,PCA-whitened multi-L features,pca_whitened_multi_L_features,feature,no_rd_no_ks,EW/KPZ/BD/Eden,5,160,0.185552,0.143359,-0.0707071,0.259133,0.329487,0.000834501,0.329114,0.33098
+equal,cross-L engineered features,cross_L_engineered_features,feature,all_six,EW/KPZ/BD/Eden/RD/KS,5,240,0.495781,0,0.495781,0.495781,0.504742,0.0516088,0.443594,0.558565
+equal,cross-L engineered features,cross_L_engineered_features,feature,ew_kpz_only,EW/KPZ only,5,80,1,0,1,1,1,0,1,1
+equal,cross-L engineered features,cross_L_engineered_features,feature,no_ks,EW/KPZ/BD/Eden/RD,5,200,0.340304,0.0137871,0.315641,0.34647,0.394912,0.0542028,0.30746,0.452377
+equal,cross-L engineered features,cross_L_engineered_features,feature,no_rd,EW/KPZ/BD/Eden/KS,5,200,0.34647,0,0.34647,0.34647,0.3939,0.0730833,0.312879,0.466932
+equal,cross-L engineered features,cross_L_engineered_features,feature,no_rd_no_ks,EW/KPZ/BD/Eden,5,160,-0.0707071,0,-0.0707071,-0.0707071,0.186871,0.111568,-0.00108962,0.295087
+equal,matched effective exponent geometry,matched_exponent_geometry,effective_exponent,all_six,EW/KPZ/BD/Eden/RD/KS,5,240,0.604459,0.132405,0.469378,0.81984,0.732625,0.149243,0.557224,0.925742
+equal,matched effective exponent geometry,matched_exponent_geometry,effective_exponent,ew_kpz_only,EW/KPZ only,5,80,0.661983,0.288067,0.29358,1,0.846284,0.246088,0.4354,1
+equal,matched effective exponent geometry,matched_exponent_geometry,effective_exponent,no_ks,EW/KPZ/BD/Eden/RD,5,200,0.574735,0.175103,0.434711,0.784017,0.645712,0.192929,0.537078,0.982743
+equal,matched effective exponent geometry,matched_exponent_geometry,effective_exponent,no_rd,EW/KPZ/BD/Eden/KS,5,200,0.648263,0.256667,0.404031,0.983747,0.630626,0.206486,0.538283,1
+equal,matched effective exponent geometry,matched_exponent_geometry,effective_exponent,no_rd_no_ks,EW/KPZ/BD/Eden,5,160,0.503341,0.358434,0.19872,0.973486,0.425398,0.37853,-0.0920656,0.943644
+equal,raw multi-L features,multi_L_features,feature,all_six,EW/KPZ/BD/Eden/RD/KS,5,240,0.604959,0,0.604959,0.604959,0.566243,0,0.566243,0.566243
+equal,raw multi-L features,multi_L_features,feature,ew_kpz_only,EW/KPZ only,5,80,1,0,1,1,1,0,1,1
+equal,raw multi-L features,multi_L_features,feature,no_ks,EW/KPZ/BD/Eden/RD,5,200,0.499581,6.20634e-17,0.499581,0.499581,0.47769,6.20634e-17,0.47769,0.47769
+equal,raw multi-L features,multi_L_features,feature,no_rd,EW/KPZ/BD/Eden/KS,5,200,0.0197044,0,0.0197044,0.0197044,0.47769,6.20634e-17,0.47769,0.47769
+equal,raw multi-L features,multi_L_features,feature,no_rd_no_ks,EW/KPZ/BD/Eden,5,160,-0.0707071,0,-0.0707071,-0.0707071,0.329487,0.000834501,0.329114,0.33098
+equal,single-L features,single_L_features,feature,all_six,EW/KPZ/BD/Eden/RD/KS,5,240,0.532701,0.161573,0.243671,0.604959,0.566243,0,0.566243,0.566243
+equal,single-L features,single_L_features,feature,ew_kpz_only,EW/KPZ only,5,80,1,0,1,1,1,0,1,1
+equal,single-L features,single_L_features,feature,no_ks,EW/KPZ/BD/Eden/RD,5,200,0.468959,0.0684733,0.34647,0.499581,0.47769,6.20634e-17,0.47769,0.47769
+equal,single-L features,single_L_features,feature,no_rd,EW/KPZ/BD/Eden/KS,5,200,0.0197044,0,0.0197044,0.0197044,0.468305,0.0209846,0.430767,0.47769
+equal,single-L features,single_L_features,feature,no_rd_no_ks,EW/KPZ/BD/Eden,5,160,-0.0707071,0,-0.0707071,-0.0707071,0.329114,0,0.329114,0.329114
+exp69,PCA-whitened multi-L features,pca_whitened_multi_L_features,feature,all_six,EW/KPZ/BD/Eden/RD/KS,5,240,0.445359,0.112747,0.243671,0.495781,0.439861,0.0803748,0.358009,0.541222
+exp69,PCA-whitened multi-L features,pca_whitened_multi_L_features,feature,ew_kpz_only,EW/KPZ only,5,80,1,0,1,1,1,0,1,1
+exp69,PCA-whitened multi-L features,pca_whitened_multi_L_features,feature,no_ks,EW/KPZ/BD/Eden/RD,5,200,0.0197044,0,0.0197044,0.0197044,0.339191,0.127831,0.188733,0.452638
+exp69,PCA-whitened multi-L features,pca_whitened_multi_L_features,feature,no_rd,EW/KPZ/BD/Eden/KS,5,200,0.318945,0.200307,0.0651438,0.509112,0.380902,0.0851189,0.318493,0.47769
+exp69,PCA-whitened multi-L features,pca_whitened_multi_L_features,feature,no_rd_no_ks,EW/KPZ/BD/Eden,5,160,0.169329,0.238385,-0.0707071,0.482481,0.162391,0.14967,0.0521521,0.329114
+exp69,cross-L engineered features,cross_L_engineered_features,feature,all_six,EW/KPZ/BD/Eden/RD/KS,5,240,0.495584,0.0004414,0.494794,0.495781,0.513733,0.0589736,0.427857,0.56367
+exp69,cross-L engineered features,cross_L_engineered_features,feature,ew_kpz_only,EW/KPZ only,5,80,1,0,1,1,1,0,1,1
+exp69,cross-L engineered features,cross_L_engineered_features,feature,no_ks,EW/KPZ/BD/Eden/RD,5,200,0.346358,0.000250887,0.345909,0.34647,0.382653,0.102571,0.240925,0.466847
+exp69,cross-L engineered features,cross_L_engineered_features,feature,no_rd,EW/KPZ/BD/Eden/KS,5,200,0.34647,0,0.34647,0.34647,0.412985,0.0763781,0.31164,0.474101
+exp69,cross-L engineered features,cross_L_engineered_features,feature,no_rd_no_ks,EW/KPZ/BD/Eden,5,160,-0.0707071,0,-0.0707071,-0.0707071,0.151534,0.205742,-0.0741294,0.318676
+exp69,matched effective exponent geometry,matched_exponent_geometry,effective_exponent,all_six,EW/KPZ/BD/Eden/RD/KS,5,240,0.600314,0.182461,0.438731,0.90171,0.674224,0.199287,0.477068,0.959571
+exp69,matched effective exponent geometry,matched_exponent_geometry,effective_exponent,ew_kpz_only,EW/KPZ only,5,80,0.517293,0.44031,-0.0102561,1,0.70124,0.345311,0.194086,1
+exp69,matched effective exponent geometry,matched_exponent_geometry,effective_exponent,no_ks,EW/KPZ/BD/Eden/RD,5,200,0.564451,0.198134,0.374539,0.843234,0.596175,0.134936,0.517089,0.83672
+exp69,matched effective exponent geometry,matched_exponent_geometry,effective_exponent,no_rd,EW/KPZ/BD/Eden/KS,5,200,0.623164,0.239141,0.386448,0.936031,0.526587,0.0261539,0.479801,0.538283
+exp69,matched effective exponent geometry,matched_exponent_geometry,effective_exponent,no_rd_no_ks,EW/KPZ/BD/Eden,5,160,0.437755,0.366265,0.0900332,0.921943,0.333333,0.38735,-0.0910745,0.745472
+exp69,raw multi-L features,multi_L_features,feature,all_six,EW/KPZ/BD/Eden/RD/KS,5,240,0.604959,0,0.604959,0.604959,0.566243,0,0.566243,0.566243
+exp69,raw multi-L features,multi_L_features,feature,ew_kpz_only,EW/KPZ only,5,80,1,0,1,1,1,0,1,1
+exp69,raw multi-L features,multi_L_features,feature,no_ks,EW/KPZ/BD/Eden/RD,5,200,0.499581,6.20634e-17,0.499581,0.499581,0.47769,6.20634e-17,0.47769,0.47769
+exp69,raw multi-L features,multi_L_features,feature,no_rd,EW/KPZ/BD/Eden/KS,5,200,0.0197044,0,0.0197044,0.0197044,0.47769,6.20634e-17,0.47769,0.47769
+exp69,raw multi-L features,multi_L_features,feature,no_rd_no_ks,EW/KPZ/BD/Eden,5,160,-0.0707071,0,-0.0707071,-0.0707071,0.329114,0,0.329114,0.329114
+exp69,single-L features,single_L_features,feature,all_six,EW/KPZ/BD/Eden/RD/KS,5,240,0.532701,0.161573,0.243671,0.604959,0.558609,0.017071,0.528071,0.566243
+exp69,single-L features,single_L_features,feature,ew_kpz_only,EW/KPZ only,5,80,1,0,1,1,1,0,1,1
+exp69,single-L features,single_L_features,feature,no_ks,EW/KPZ/BD/Eden/RD,5,200,0.438337,0.0838623,0.34647,0.499581,0.47769,6.20634e-17,0.47769,0.47769
+exp69,single-L features,single_L_features,feature,no_rd,EW/KPZ/BD/Eden/KS,5,200,0.0197044,0,0.0197044,0.0197044,0.469389,0.0185612,0.436186,0.47769
+exp69,single-L features,single_L_features,feature,no_rd_no_ks,EW/KPZ/BD/Eden,5,160,-0.0707071,0,-0.0707071,-0.0707071,0.329114,0,0.329114,0.329114

@@ -1,0 +1,140 @@
+{
+  "best_fixed_clusterer_universality_ari": {
+    "exp62_features": {
+      "all_six": 0.249591,
+      "ew_kpz_only": 0.0640212,
+      "no_ks": 0.348571,
+      "no_rd": 0.348571,
+      "no_rd_no_ks": -0.0686767
+    },
+    "exponents_equal": {
+      "all_six": 0.673191,
+      "ew_kpz_only": 0.905555,
+      "no_ks": 0.587956,
+      "no_rd": 0.651616,
+      "no_rd_no_ks": 0.503341
+    },
+    "exponents_exp69": {
+      "all_six": 0.652848,
+      "ew_kpz_only": 0.884252,
+      "no_ks": 0.604529,
+      "no_rd": 0.675431,
+      "no_rd_no_ks": 0.461039
+    }
+  },
+  "hierarchy_summary": {
+    "effective_exponent": {
+      "equal": {
+        "all_six": {
+          "clean_hierarchy_fraction": 0.4,
+          "n": 5,
+          "ratio_max": 3.993,
+          "ratio_mean": 2.0910586,
+          "ratio_min": 0.723373
+        },
+        "no_ks": {
+          "clean_hierarchy_fraction": 0.4,
+          "n": 5,
+          "ratio_max": 3.19386,
+          "ratio_mean": 1.6088949999999997,
+          "ratio_min": 0.574625
+        },
+        "no_rd": {
+          "clean_hierarchy_fraction": 0.6,
+          "n": 5,
+          "ratio_max": 4.02261,
+          "ratio_mean": 1.7963864,
+          "ratio_min": 0.562119
+        },
+        "no_rd_no_ks": {
+          "clean_hierarchy_fraction": 0.6,
+          "n": 5,
+          "ratio_max": 3.06909,
+          "ratio_mean": 1.4577452,
+          "ratio_min": 0.593811
+        }
+      },
+      "exp69": {
+        "all_six": {
+          "clean_hierarchy_fraction": 0.4,
+          "n": 5,
+          "ratio_max": 2.27663,
+          "ratio_mean": 1.4923102,
+          "ratio_min": 0.354891
+        },
+        "no_ks": {
+          "clean_hierarchy_fraction": 0.4,
+          "n": 5,
+          "ratio_max": 2.11206,
+          "ratio_mean": 1.3921455999999999,
+          "ratio_min": 0.67359
+        },
+        "no_rd": {
+          "clean_hierarchy_fraction": 0.4,
+          "n": 5,
+          "ratio_max": 2.28437,
+          "ratio_mean": 1.3725648,
+          "ratio_min": 0.275848
+        },
+        "no_rd_no_ks": {
+          "clean_hierarchy_fraction": 0.4,
+          "n": 5,
+          "ratio_max": 2.2062,
+          "ratio_mean": 1.4298591999999999,
+          "ratio_min": 0.647702
+        }
+      }
+    },
+    "feature": {
+      "stored exp62 feature matrix": {
+        "all_six": {
+          "clean_hierarchy_fraction": 0.0,
+          "n": 1,
+          "ratio_max": 24.6898,
+          "ratio_mean": 24.6898,
+          "ratio_min": 24.6898
+        },
+        "no_ks": {
+          "clean_hierarchy_fraction": 0.0,
+          "n": 1,
+          "ratio_max": 29.2559,
+          "ratio_mean": 29.2559,
+          "ratio_min": 29.2559
+        },
+        "no_rd": {
+          "clean_hierarchy_fraction": 0.0,
+          "n": 1,
+          "ratio_max": 34.6285,
+          "ratio_mean": 34.6285,
+          "ratio_min": 34.6285
+        },
+        "no_rd_no_ks": {
+          "clean_hierarchy_fraction": 0.0,
+          "n": 1,
+          "ratio_max": 37.0326,
+          "ratio_mean": 37.0326,
+          "ratio_min": 37.0326
+        }
+      }
+    }
+  },
+  "limitations": [
+    "Exp70 feature matrices were not stored, so true subset refits for those feature baselines still require a tagged rerun.",
+    "These are standard off-the-shelf clusterers; a sufficiently tailored representation learner remains a separate control."
+  ],
+  "n_clusterer_rows": 935,
+  "n_clusterer_summary_rows": 255,
+  "n_datasets": 11,
+  "n_hierarchy_rows": 44,
+  "outputs": [
+    "ml_paper/tables/clusterer_control_rows.csv",
+    "ml_paper/tables/clusterer_control_summary.csv",
+    "ml_paper/tables/hierarchical_merge_audit.csv",
+    "ml_paper/tables/hierarchical_pairwise_distances.csv",
+    "ml_paper/tables/hierarchical_merge_steps.csv",
+    "ml_paper/figures/clusterer_control_best_ari.png",
+    "ml_paper/figures/system_vs_universality_alignment.png",
+    "ml_paper/figures/hierarchical_kpz_merge_audit.png",
+    "ml_paper/results/mlp08_summary.json"
+  ]
+}

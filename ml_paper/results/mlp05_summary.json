@@ -1,0 +1,94 @@
+{
+  "exp62_cluster_summary": {
+    "hdbscan_ari_all": 0.4943238763790265,
+    "hdbscan_ari_core": 0.49476343280378143,
+    "hdbscan_clusters": 4,
+    "hdbscan_noise": 2,
+    "kmeans_ari": 0.18491941765409903,
+    "kmeans_nmi": 0.49382350433464833,
+    "knn3_accuracy_mean": 0.8375,
+    "knn3_accuracy_std": 0.028144283512721434
+  },
+  "exp62_feature_quotient_geometry": {
+    "interpretation": "good_if_below_1; above 1 means KPZ subclasses are farther apart than at least one non-KPZ class.",
+    "kpz_quotient_separation_ratio": 24.689765399110367,
+    "max_within_kpz_centroid_distance": 2.3964850270185885,
+    "min_kpz_to_non_kpz_centroid_distance": 0.09706390434576344
+  },
+  "exp62_neighborhood_key_points": {
+    "1": {
+      "class_random_baseline": "0.331942",
+      "interpretation": "KPZ cross-system fraction tests whether KPZ/BD/Eden are locally mixed as a quotient.",
+      "k": 1,
+      "kpz_class_purity": "0.833333",
+      "kpz_cross_system_same_class_fraction": "0.0125",
+      "kpz_same_system_fraction": "0.820833",
+      "microscopic_system_purity": "0.835417",
+      "system_random_baseline": "0.164927",
+      "universality_class_purity": "0.841667"
+    },
+    "10": {
+      "class_random_baseline": "0.331942",
+      "interpretation": "KPZ cross-system fraction tests whether KPZ/BD/Eden are locally mixed as a quotient.",
+      "k": 10,
+      "kpz_class_purity": "0.8175",
+      "kpz_cross_system_same_class_fraction": "0.0470833",
+      "kpz_same_system_fraction": "0.770417",
+      "microscopic_system_purity": "0.81",
+      "system_random_baseline": "0.164927",
+      "universality_class_purity": "0.833542"
+    },
+    "3": {
+      "class_random_baseline": "0.331942",
+      "interpretation": "KPZ cross-system fraction tests whether KPZ/BD/Eden are locally mixed as a quotient.",
+      "k": 3,
+      "kpz_class_purity": "0.827778",
+      "kpz_cross_system_same_class_fraction": "0.0208333",
+      "kpz_same_system_fraction": "0.806944",
+      "microscopic_system_purity": "0.826389",
+      "system_random_baseline": "0.164927",
+      "universality_class_purity": "0.836806"
+    },
+    "40": {
+      "class_random_baseline": "0.331942",
+      "interpretation": "KPZ cross-system fraction tests whether KPZ/BD/Eden are locally mixed as a quotient.",
+      "k": 40,
+      "kpz_class_purity": "0.774167",
+      "kpz_cross_system_same_class_fraction": "0.140208",
+      "kpz_same_system_fraction": "0.633958",
+      "microscopic_system_purity": "0.723281",
+      "system_random_baseline": "0.164927",
+      "universality_class_purity": "0.793385"
+    },
+    "80": {
+      "class_random_baseline": "0.331942",
+      "interpretation": "KPZ cross-system fraction tests whether KPZ/BD/Eden are locally mixed as a quotient.",
+      "k": 80,
+      "kpz_class_purity": "0.769167",
+      "kpz_cross_system_same_class_fraction": "0.240833",
+      "kpz_same_system_fraction": "0.528333",
+      "microscopic_system_purity": "0.619635",
+      "system_random_baseline": "0.164927",
+      "universality_class_purity": "0.740052"
+    }
+  },
+  "feature_names": [
+    "grad_var",
+    "grad_skew",
+    "grad_kurt",
+    "lap_var",
+    "grad_lap_cov",
+    "h_var"
+  ],
+  "local_minus_hdbscan_max": 0.475889,
+  "local_minus_hdbscan_mean": 0.3885624,
+  "local_minus_hdbscan_min": 0.314461,
+  "n_gap_rows": 10,
+  "outputs": [
+    "ml_paper/tables/local_global_gap.csv",
+    "ml_paper/tables/exp62_neighborhood_purity.csv",
+    "ml_paper/tables/exp62_feature_quotient_geometry.csv",
+    "ml_paper/figures/local_vs_global.png",
+    "ml_paper/results/mlp05_summary.json"
+  ]
+}

@@ -1,0 +1,16 @@
+system_a,system_b,standardized_centroid_distance,same_universality_class
+bd,eden,2.21048,True
+bd,ew,2.40227,False
+bd,kpz,2.39649,True
+bd,ks,3.3724,False
+bd,rd,4.80538,False
+eden,ew,0.194459,False
+eden,kpz,0.200171,True
+eden,ks,1.19634,False
+eden,rd,4.64204,False
+ew,kpz,0.0970639,False
+ew,ks,1.01291,False
+ew,rd,4.67808,False
+kpz,ks,1.02453,False
+kpz,rd,4.67593,False
+ks,rd,4.77005,False

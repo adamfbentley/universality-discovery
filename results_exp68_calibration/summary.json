@@ -1,0 +1,44 @@
+{
+  "note": "Archived calibration for docs/path1_collapse_metric_plan.md",
+  "method": "W = sqrt(<var_x h>_seeds); beta by W-gating (continuum) or intrinsic-width fit (discrete).",
+  "results": {
+    "EW_L128": {
+      "beta": 0.2518173232481156,
+      "n_seeds": 16,
+      "theory_beta": 0.25
+    },
+    "KPZ_lambda_sweep_L128": {
+      "2.0": {
+        "beta": 0.24858164975042019,
+        "n_seeds": 12
+      },
+      "4.0": {
+        "beta": 0.28592673837179544,
+        "n_seeds": 12
+      },
+      "8.0": {
+        "beta": 0.39480462445457815,
+        "n_seeds": 10
+      }
+    },
+    "BD_L96": {
+      "beta_intrinsic": 0.20270207713803662,
+      "intrinsic_width": 0.0,
+      "Wsat": 8.316341318340626,
+      "t_sat_monolayers": 21.625,
+      "n_seeds": 8,
+      "theory_beta": 0.3333333333333333,
+      "note": "effective; far from KPZ 1/3 at accessible L (strong corrections to scaling)"
+    },
+    "Eden_L96": {
+      "beta_intrinsic": 0.19492738205091145,
+      "intrinsic_width": 0.0,
+      "Wsat": 4.561417774763822,
+      "t_sat_monolayers": 1752.75,
+      "n_seeds": 8,
+      "theory_beta": 0.3333333333333333,
+      "note": "effective; far from KPZ 1/3 at accessible L (strong corrections to scaling)"
+    }
+  },
+  "elapsed_seconds": 24.217511653900146
+}

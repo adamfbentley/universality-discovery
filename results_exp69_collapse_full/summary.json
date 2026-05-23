@@ -1,0 +1,523 @@
+{
+  "config": {
+    "L_values": [
+      48,
+      64,
+      96,
+      128
+    ],
+    "n_seed_continuum": 12,
+    "n_seed_discrete": 20,
+    "n_boot": 40,
+    "kpz_lambda": 4.0,
+    "recs_per_ml": 8
+  },
+  "elapsed_seconds": 52.15325164794922,
+  "system_exponents": {
+    "ew": {
+      "alpha": 0.6434996871845098,
+      "beta": 0.24339612557407153,
+      "z": 2.6438370194544314
+    },
+    "kpz": {
+      "alpha": 0.32850420252354556,
+      "beta": 0.3054268585814913,
+      "z": 1.075557677046588
+    },
+    "bd": {
+      "alpha": 0.35015164772881413,
+      "beta": 0.41205336827133787,
+      "z": 0.8497725651358798
+    },
+    "eden": {
+      "alpha": 0.24462273904316462,
+      "beta": 0.2444264486270004,
+      "z": 1.0008030653690172
+    },
+    "rd": {
+      "alpha": -0.025382109025390495,
+      "beta": 0.491893151022213,
+      "z": 0.0
+    },
+    "ks": {
+      "alpha": 7.1259381785022e-06,
+      "beta": 5.637325720108896,
+      "z": 1.2640635883577344e-06
+    }
+  },
+  "theory": {
+    "ew": {
+      "alpha": 0.5,
+      "beta": 0.25,
+      "z": 2.0
+    },
+    "kpz": {
+      "alpha": 0.5,
+      "beta": 0.3333333333333333,
+      "z": 1.5
+    },
+    "bd": {
+      "alpha": 0.5,
+      "beta": 0.3333333333333333,
+      "z": 1.5
+    },
+    "eden": {
+      "alpha": 0.5,
+      "beta": 0.3333333333333333,
+      "z": 1.5
+    },
+    "rd": {
+      "alpha": 0.0,
+      "beta": 0.5,
+      "z": null
+    },
+    "ks": {
+      "alpha": null,
+      "beta": null,
+      "z": null
+    }
+  },
+  "head_to_head_all6_4class": {
+    "feature_geometry": {
+      "n_samples": 150,
+      "kmeans_ari": 0.4899285572534233,
+      "kmeans_nmi": 0.7448927697070025,
+      "kmeans_confusion": {
+        "EW": {
+          "0": 25,
+          "1": 0,
+          "2": 0,
+          "3": 0
+        },
+        "KPZ": {
+          "0": 46,
+          "1": 29,
+          "2": 0,
+          "3": 0
+        },
+        "KS": {
+          "0": 0,
+          "1": 0,
+          "2": 0,
+          "3": 25
+        },
+        "trivial": {
+          "0": 0,
+          "1": 0,
+          "2": 25,
+          "3": 0
+        }
+      },
+      "hdbscan_clusters": 4,
+      "hdbscan_noise": 3,
+      "hdbscan_ari_all": 0.4761295473062012,
+      "hdbscan_ari_core": 0.4952009752579798,
+      "hdbscan_confusion": {
+        "EW": {
+          "0": 0,
+          "1": 0,
+          "2": 0,
+          "3": 25
+        },
+        "KPZ": {
+          "0": 0,
+          "1": 0,
+          "2": 23,
+          "3": 50
+        },
+        "KS": {
+          "0": 0,
+          "1": 25,
+          "2": 0,
+          "3": 0
+        },
+        "trivial": {
+          "0": 24,
+          "1": 0,
+          "2": 0,
+          "3": 0
+        }
+      }
+    },
+    "exponent_geometry": {
+      "n_samples": 240,
+      "kmeans_ari": 0.9017097280215621,
+      "kmeans_nmi": 0.9011562260326667,
+      "kmeans_confusion": {
+        "EW": {
+          "0": 40,
+          "1": 0,
+          "2": 0,
+          "3": 0
+        },
+        "KPZ": {
+          "0": 2,
+          "1": 0,
+          "2": 6,
+          "3": 112
+        },
+        "KS": {
+          "0": 0,
+          "1": 40,
+          "2": 0,
+          "3": 0
+        },
+        "trivial": {
+          "0": 0,
+          "1": 0,
+          "2": 40,
+          "3": 0
+        }
+      },
+      "hdbscan_clusters": 5,
+      "hdbscan_noise": 14,
+      "hdbscan_ari_all": 0.8791931000701265,
+      "hdbscan_ari_core": 0.9595706075201181,
+      "hdbscan_confusion": {
+        "EW": {
+          "0": 0,
+          "1": 0,
+          "2": 0,
+          "3": 1,
+          "4": 36
+        },
+        "KPZ": {
+          "0": 0,
+          "1": 0,
+          "2": 0,
+          "3": 114,
+          "4": 0
+        },
+        "KS": {
+          "0": 0,
+          "1": 16,
+          "2": 19,
+          "3": 0,
+          "4": 0
+        },
+        "trivial": {
+          "0": 40,
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0
+        }
+      }
+    }
+  },
+  "head_to_head_KS_excluded": {
+    "feature_geometry": {
+      "n_samples": 125,
+      "kmeans_ari": 0.34282875124213313,
+      "kmeans_nmi": 0.5997648421791866,
+      "kmeans_confusion": {
+        "EW": {
+          "0": 25,
+          "1": 0,
+          "2": 0
+        },
+        "KPZ": {
+          "0": 48,
+          "1": 0,
+          "2": 27
+        },
+        "trivial": {
+          "0": 0,
+          "1": 25,
+          "2": 0
+        }
+      },
+      "hdbscan_clusters": 3,
+      "hdbscan_noise": 3,
+      "hdbscan_ari_all": 0.32346227928012017,
+      "hdbscan_ari_core": 0.34057775609119817,
+      "hdbscan_confusion": {
+        "EW": {
+          "0": 0,
+          "1": 0,
+          "2": 25
+        },
+        "KPZ": {
+          "0": 0,
+          "1": 23,
+          "2": 50
+        },
+        "trivial": {
+          "0": 24,
+          "1": 0,
+          "2": 0
+        }
+      }
+    },
+    "exponent_geometry": {
+      "n_samples": 200,
+      "kmeans_ari": 0.8432344524866957,
+      "kmeans_nmi": 0.8174505540392378,
+      "kmeans_confusion": {
+        "EW": {
+          "0": 0,
+          "1": 0,
+          "2": 40
+        },
+        "KPZ": {
+          "0": 7,
+          "1": 110,
+          "2": 3
+        },
+        "trivial": {
+          "0": 40,
+          "1": 0,
+          "2": 0
+        }
+      },
+      "hdbscan_clusters": 2,
+      "hdbscan_noise": 1,
+      "hdbscan_ari_all": 0.5452006828665867,
+      "hdbscan_ari_core": 0.5443923612655323,
+      "hdbscan_confusion": {
+        "EW": {
+          "0": 0,
+          "1": 39
+        },
+        "KPZ": {
+          "0": 0,
+          "1": 120
+        },
+        "trivial": {
+          "0": 40,
+          "1": 0
+        }
+      }
+    }
+  },
+  "exponent_continuum_4class": {
+    "n_samples": 160,
+    "kmeans_ari": 0.8891980157254954,
+    "kmeans_nmi": 0.8841299797497022,
+    "kmeans_confusion": {
+      "EW": {
+        "0": 39,
+        "1": 0,
+        "2": 0,
+        "3": 1
+      },
+      "KPZ": {
+        "0": 2,
+        "1": 4,
+        "2": 0,
+        "3": 34
+      },
+      "KS": {
+        "0": 0,
+        "1": 0,
+        "2": 40,
+        "3": 0
+      },
+      "trivial": {
+        "0": 0,
+        "1": 40,
+        "2": 0,
+        "3": 0
+      }
+    },
+    "hdbscan_clusters": 6,
+    "hdbscan_noise": 11,
+    "hdbscan_ari_all": 0.747632626708275,
+    "hdbscan_ari_core": 0.8337840474417517,
+    "hdbscan_confusion": {
+      "EW": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 37,
+        "4": 0,
+        "5": 0
+      },
+      "KPZ": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 23,
+        "5": 14
+      },
+      "KS": {
+        "0": 0,
+        "1": 16,
+        "2": 19,
+        "3": 0,
+        "4": 0,
+        "5": 0
+      },
+      "trivial": {
+        "0": 40,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0
+      }
+    }
+  },
+  "exponent_system6way": {
+    "n_samples": 240,
+    "kmeans_ari": 0.599186232622945,
+    "kmeans_nmi": 0.7146512007884135,
+    "kmeans_confusion": {
+      "bd": {
+        "0": 4,
+        "1": 0,
+        "2": 34,
+        "3": 0,
+        "4": 0,
+        "5": 2
+      },
+      "eden": {
+        "0": 1,
+        "1": 0,
+        "2": 15,
+        "3": 0,
+        "4": 0,
+        "5": 24
+      },
+      "ew": {
+        "0": 10,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 30,
+        "5": 0
+      },
+      "kpz": {
+        "0": 10,
+        "1": 0,
+        "2": 12,
+        "3": 0,
+        "4": 0,
+        "5": 18
+      },
+      "ks": {
+        "0": 0,
+        "1": 40,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0
+      },
+      "rd": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 40,
+        "4": 0,
+        "5": 0
+      }
+    },
+    "hdbscan_clusters": 5,
+    "hdbscan_noise": 14,
+    "hdbscan_ari_all": 0.4810186213621173,
+    "hdbscan_ari_core": 0.5079931744936929,
+    "hdbscan_confusion": {
+      "bd": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 35,
+        "4": 0
+      },
+      "eden": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 40,
+        "4": 0
+      },
+      "ew": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 1,
+        "4": 36
+      },
+      "kpz": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 39,
+        "4": 0
+      },
+      "ks": {
+        "0": 0,
+        "1": 16,
+        "2": 19,
+        "3": 0,
+        "4": 0
+      },
+      "rd": {
+        "0": 40,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0
+      }
+    }
+  },
+  "system_distance_matrix": {
+    "ew": {
+      "ew": 0.0,
+      "kpz": 2.250990859956696,
+      "bd": 2.4055889867978384,
+      "eden": 2.5563205080804634,
+      "rd": 4.198100014429614,
+      "ks": 4.940609356487302
+    },
+    "kpz": {
+      "ew": 2.250990859956696,
+      "kpz": 0.0,
+      "bd": 0.27765224882825773,
+      "eden": 0.38034409643460393,
+      "rd": 1.9790647031729653,
+      "ks": 3.2938327018871947
+    },
+    "bd": {
+      "ew": 2.4055889867978384,
+      "kpz": 0.27765224882825773,
+      "bd": 0.0,
+      "eden": 0.5024714240804451,
+      "rd": 1.9133560219443844,
+      "ks": 3.20801026849143
+    },
+    "eden": {
+      "ew": 2.5563205080804634,
+      "kpz": 0.38034409643460393,
+      "bd": 0.5024714240804451,
+      "eden": 0.0,
+      "rd": 1.6460553630823649,
+      "ks": 3.144123826965402
+    },
+    "rd": {
+      "ew": 4.198100014429614,
+      "kpz": 1.9790647031729653,
+      "bd": 1.9133560219443844,
+      "eden": 1.6460553630823649,
+      "rd": 0.0,
+      "ks": 2.605802705684886
+    },
+    "ks": {
+      "ew": 4.940609356487302,
+      "kpz": 3.2938327018871947,
+      "bd": 3.20801026849143,
+      "eden": 3.144123826965402,
+      "rd": 2.605802705684886,
+      "ks": 0.0
+    }
+  },
+  "caveats": [
+    "Head-to-head is information-ASYMMETRIC: exponent geometry uses multi-L curves (L=48..128) + bootstrap-of-collapse; feature side is single-L. A matched multi-L feature baseline (exp70) is required.",
+    "Clustering is on exponent VECTORS (alpha,beta,z), not a collapse-residual metric. 'Exponent geometry', not a true collapse metric.",
+    "Exponents are EFFECTIVE not asymptotic (EW z~2.6, KPZ z~1.1, BD/Eden alpha~0.25-0.35); KPZ beta is lambda-dependent (crossover).",
+    "KS beta is not meaningfully fit (~5.6); its separation is partly an artifact -- see KS-excluded variant.",
+    "Headline ARIs are single-run (no confidence intervals)."
+  ],
+  "interpretation": "On the identical 6-system set, exponent geometry aligns far better with the class labels than single-L feature vectors. In exponent space BD/Eden land much closer to continuum KPZ (0.28-0.38) than to EW/RD/KS (1.6-3.3), so the KPZ class is largely -- but not cleanly -- recovered (HDBSCAN over-segments). This is not yet an information-matched test nor asymptotic universality recovery."
+}

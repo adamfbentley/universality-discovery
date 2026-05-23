@@ -11,7 +11,8 @@ systems with the same large-scale behavior organize together?
 
 ## Current Takeaway
 
-The answer is mixed and useful.
+The answer is mixed and useful, with the strongest current direction now on the
+machine-learning side.
 
 Local feature representations are often strongly discriminative, but the main
 density-clustering hypothesis does not cleanly hold for the surface-growth
@@ -21,6 +22,15 @@ Adjusted Rand Index ceiling around 0.5. Later diagnostics suggest this is not
 just an algorithm choice: the KPZ class is geometrically multimodal in the tested
 feature space, especially because ballistic deposition keeps a discrete-model
 signature even when it belongs to the KPZ universality class.
+
+The newer ML-paper track reframes this as a quotient-learning problem:
+universality classes are asymptotic physical equivalence classes, while
+off-the-shelf clustering finds finite-data geometry in the chosen representation.
+The latest controls show that binary EW/KPZ separation can be easy, but the
+hard KPZ quotient across continuum KPZ, ballistic deposition, and Eden remains
+poorly recovered by finite-size feature clustering. Effective exponent geometry
+helps on that hard subset, but is protocol-sensitive and no longer supports a
+stable positive "universality recovery" headline.
 
 That negative result is the most important result in the repository. It turns
 the project from "unsupervised discovery works" into a more careful study of
@@ -39,6 +49,9 @@ when feature geometry agrees with physical universality, and when it does not.
 - The Ising finite-size-scaling experiments are the cleanest positive result:
   unsupervised PCA features recover a correlation-length exponent near the exact
   value, while the Potts experiments show a method boundary.
+- The ML-focused controls separate local signal from quotient recovery: nearest
+  neighbors can be mostly class-consistent even when global clusters remain
+  incompatible with the intended universality labels.
 
 ## Representative Results
 
@@ -53,6 +66,14 @@ when feature geometry agrees with physical universality, and when it does not.
   peeling show that the KPZ class can be disconnected in feature space. This
   supports the interpretation that the clustering limit is structural, not just
   a failed hyperparameter choice.
+- **Exp 69-71: effective exponent geometry.** A single exp69 protocol gives a
+  tempting exponent-geometry ARI of 0.902, but matched seed/protocol sweeps reduce
+  its average advantage over raw multi-L features to approximately zero.
+- **MLP 05/08/09: quotient diagnostics.** Local-vs-global, clusterer, hierarchy,
+  and true exp70 matrix-refit controls show the obstruction is not simply the
+  choice of KMeans or HDBSCAN. In the matrix-refit audit, EW/KPZ binary feature
+  ARI reaches 1.0, but EW/KPZ/BD/Eden feature ARI remains about 0.17-0.19; matched
+  effective exponents improve that hard subset only to about 0.44-0.50.
 - **Exp 52d: Ising PCA-FSS.** PCA features recover nu ~= 1.07 for the 2D Ising
   model, about 7% from the exact value.
 - **Exp 55-60: Potts controls.** Standard Binder analysis works, but the PCA-FSS
@@ -66,8 +87,11 @@ experiments/              Numbered experiment scripts, each mostly self-containe
 src/simulation/           Shared simulation utilities
 src/models/               Autoencoder architectures used in early experiments
 src/analysis/             Clustering and analysis helpers
+ml_paper/                 ML-focused paper workspace, claims, derived controls
 docs/EXPERIMENT_LOG.md    Chronological research notes and corrections
 docs/literature_review.md Literature notes
+docs/feature_geometry_universality_paper.md
+                           Current working manuscript draft
 results*/                 Selected result snapshots used to document experiments
 archive/                  Obsolete manuscript drafts and earlier writeups
 tests/                    Lightweight smoke tests for import and core behavior

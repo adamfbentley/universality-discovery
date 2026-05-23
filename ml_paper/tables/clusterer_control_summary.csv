@@ -1,0 +1,256 @@
+dataset_family,representation,protocol,subset,target_label_set,method,n_runs,ari_universality_mean,ari_universality_min,ari_universality_max,ari_system_mean,ari_system_min,ari_system_max,system_minus_universality_ari_mean
+effective_exponent,matched effective exponent geometry,equal,all_six,microscopic_system,agglomerative_average,5,0.544642,0.366348,0.642746,0.55871,0.408139,0.654071,0.0140688
+effective_exponent,matched effective exponent geometry,equal,all_six,microscopic_system,agglomerative_complete,5,0.473357,0.411266,0.62801,0.530268,0.444675,0.587787,0.0569112
+effective_exponent,matched effective exponent geometry,equal,all_six,microscopic_system,agglomerative_ward,5,0.474591,0.390048,0.62801,0.584041,0.505648,0.638659,0.109449
+effective_exponent,matched effective exponent geometry,equal,all_six,microscopic_system,gmm_diag,5,0.49295,0.415155,0.579648,0.608089,0.48043,0.74778,0.115139
+effective_exponent,matched effective exponent geometry,equal,all_six,microscopic_system,gmm_full,5,0.566157,0.518769,0.625315,0.713825,0.6367,0.759278,0.147668
+effective_exponent,matched effective exponent geometry,equal,all_six,microscopic_system,kmeans,5,0.455001,0.381172,0.56005,0.56032,0.464837,0.646889,0.105319
+effective_exponent,matched effective exponent geometry,equal,all_six,microscopic_system,spectral_nearest,5,0.460693,0.397181,0.557946,0.513812,0.396699,0.609406,0.0531188
+effective_exponent,matched effective exponent geometry,equal,all_six,microscopic_system,spectral_rbf,5,0.531936,0.41776,0.654138,0.521552,0.414069,0.567856,-0.0103842
+effective_exponent,matched effective exponent geometry,equal,all_six,universality,agglomerative_average,5,0.618188,0.466276,0.782724,0.530047,0.330149,0.637371,-0.0881404
+effective_exponent,matched effective exponent geometry,equal,all_six,universality,agglomerative_complete,5,0.494404,0.385114,0.604959,0.494122,0.380554,0.620756,-0.000282146
+effective_exponent,matched effective exponent geometry,equal,all_six,universality,agglomerative_ward,5,0.643632,0.451067,0.813889,0.508814,0.405878,0.564956,-0.134818
+effective_exponent,matched effective exponent geometry,equal,all_six,universality,gmm_diag,5,0.665461,0.566783,0.914769,0.55455,0.463183,0.648789,-0.110912
+effective_exponent,matched effective exponent geometry,equal,all_six,universality,gmm_full,5,0.673191,0.535213,0.890303,0.556191,0.516154,0.619964,-0.117
+effective_exponent,matched effective exponent geometry,equal,all_six,universality,kmeans,5,0.604459,0.469378,0.81984,0.534843,0.44063,0.611192,-0.0696163
+effective_exponent,matched effective exponent geometry,equal,all_six,universality,spectral_nearest,5,0.658349,0.471446,0.891201,0.538134,0.476987,0.603406,-0.120214
+effective_exponent,matched effective exponent geometry,equal,all_six,universality,spectral_rbf,5,0.662168,0.552795,0.856778,0.52295,0.420496,0.611221,-0.139218
+effective_exponent,matched effective exponent geometry,equal,all_six,variable_density,hdbscan,5,0.663675,0.40768,0.893401,0.496554,0.328349,0.656193,-0.167121
+effective_exponent,matched effective exponent geometry,equal,ew_kpz_only,microscopic_system,agglomerative_average,5,0.53339,-0.00206638,1,0.53339,-0.00206638,1,0
+effective_exponent,matched effective exponent geometry,equal,ew_kpz_only,microscopic_system,agglomerative_complete,5,0.508421,0.0161486,1,0.508421,0.0161486,1,0
+effective_exponent,matched effective exponent geometry,equal,ew_kpz_only,microscopic_system,agglomerative_ward,5,0.7344,0.352314,1,0.7344,0.352314,1,0
+effective_exponent,matched effective exponent geometry,equal,ew_kpz_only,microscopic_system,gmm_diag,5,0.640595,0.0783629,1,0.640595,0.0783629,1,0
+effective_exponent,matched effective exponent geometry,equal,ew_kpz_only,microscopic_system,gmm_full,5,0.905555,0.676533,1,0.905555,0.676533,1,0
+effective_exponent,matched effective exponent geometry,equal,ew_kpz_only,microscopic_system,kmeans,5,0.661983,0.29358,1,0.661983,0.29358,1,0
+effective_exponent,matched effective exponent geometry,equal,ew_kpz_only,microscopic_system,spectral_nearest,5,0.778924,0.268033,1,0.778924,0.268033,1,0
+effective_exponent,matched effective exponent geometry,equal,ew_kpz_only,microscopic_system,spectral_rbf,5,0.845437,0.519639,1,0.845437,0.519639,1,0
+effective_exponent,matched effective exponent geometry,equal,ew_kpz_only,universality,agglomerative_average,5,0.53339,-0.00206638,1,0.53339,-0.00206638,1,0
+effective_exponent,matched effective exponent geometry,equal,ew_kpz_only,universality,agglomerative_complete,5,0.508421,0.0161486,1,0.508421,0.0161486,1,0
+effective_exponent,matched effective exponent geometry,equal,ew_kpz_only,universality,agglomerative_ward,5,0.7344,0.352314,1,0.7344,0.352314,1,0
+effective_exponent,matched effective exponent geometry,equal,ew_kpz_only,universality,gmm_diag,5,0.640595,0.0783629,1,0.640595,0.0783629,1,0
+effective_exponent,matched effective exponent geometry,equal,ew_kpz_only,universality,gmm_full,5,0.905555,0.676533,1,0.905555,0.676533,1,0
+effective_exponent,matched effective exponent geometry,equal,ew_kpz_only,universality,kmeans,5,0.661983,0.29358,1,0.661983,0.29358,1,0
+effective_exponent,matched effective exponent geometry,equal,ew_kpz_only,universality,spectral_nearest,5,0.778924,0.268033,1,0.778924,0.268033,1,0
+effective_exponent,matched effective exponent geometry,equal,ew_kpz_only,universality,spectral_rbf,5,0.845437,0.519639,1,0.845437,0.519639,1,0
+effective_exponent,matched effective exponent geometry,equal,ew_kpz_only,variable_density,hdbscan,5,0.70177,0.153908,1,0.70177,0.153908,1,0
+effective_exponent,matched effective exponent geometry,equal,no_ks,microscopic_system,agglomerative_average,5,0.547439,0.327167,0.793001,0.45324,0.295974,0.586701,-0.0941994
+effective_exponent,matched effective exponent geometry,equal,no_ks,microscopic_system,agglomerative_complete,5,0.405222,0.276098,0.709386,0.413334,0.294131,0.489325,0.00811252
+effective_exponent,matched effective exponent geometry,equal,no_ks,microscopic_system,agglomerative_ward,5,0.380138,0.29423,0.570141,0.494087,0.363248,0.602842,0.113949
+effective_exponent,matched effective exponent geometry,equal,no_ks,microscopic_system,gmm_diag,5,0.440305,0.303603,0.599111,0.487857,0.35994,0.631541,0.0475514
+effective_exponent,matched effective exponent geometry,equal,no_ks,microscopic_system,gmm_full,5,0.439338,0.384078,0.492605,0.579334,0.526829,0.660669,0.139996
+effective_exponent,matched effective exponent geometry,equal,no_ks,microscopic_system,kmeans,5,0.386011,0.27031,0.529442,0.508634,0.366534,0.603303,0.122623
+effective_exponent,matched effective exponent geometry,equal,no_ks,microscopic_system,spectral_nearest,5,0.360688,0.288446,0.408146,0.537944,0.410329,0.641094,0.177257
+effective_exponent,matched effective exponent geometry,equal,no_ks,microscopic_system,spectral_rbf,5,0.363955,0.291107,0.482652,0.391753,0.280452,0.475051,0.027798
+effective_exponent,matched effective exponent geometry,equal,no_ks,universality,agglomerative_average,5,0.538819,0.358145,0.733711,0.274183,0.207534,0.445561,-0.264637
+effective_exponent,matched effective exponent geometry,equal,no_ks,universality,agglomerative_complete,5,0.426205,0.154502,0.746916,0.305154,0.210054,0.450783,-0.121051
+effective_exponent,matched effective exponent geometry,equal,no_ks,universality,agglomerative_ward,5,0.587956,0.478913,0.748302,0.427523,0.329181,0.476651,-0.160433
+effective_exponent,matched effective exponent geometry,equal,no_ks,universality,gmm_diag,5,0.571593,0.393292,0.890107,0.461404,0.34647,0.573085,-0.110189
+effective_exponent,matched effective exponent geometry,equal,no_ks,universality,gmm_full,5,0.587141,0.424756,0.873873,0.461253,0.408633,0.52883,-0.125888
+effective_exponent,matched effective exponent geometry,equal,no_ks,universality,kmeans,5,0.574735,0.434711,0.784017,0.435992,0.320618,0.53306,-0.138743
+effective_exponent,matched effective exponent geometry,equal,no_ks,universality,spectral_nearest,5,0.582149,0.331592,0.858854,0.436126,0.33477,0.539955,-0.146023
+effective_exponent,matched effective exponent geometry,equal,no_ks,universality,spectral_rbf,5,0.579323,0.329776,0.843777,0.428169,0.315511,0.535819,-0.151154
+effective_exponent,matched effective exponent geometry,equal,no_ks,variable_density,hdbscan,5,0.577733,0.483799,0.840341,0.339461,0.207534,0.600013,-0.238272
+effective_exponent,matched effective exponent geometry,equal,no_rd,microscopic_system,agglomerative_average,5,0.499635,0.380457,0.642222,0.495091,0.284888,0.704245,-0.00454398
+effective_exponent,matched effective exponent geometry,equal,no_rd,microscopic_system,agglomerative_complete,5,0.431087,0.276091,0.54408,0.494048,0.315002,0.685558,0.0629613
+effective_exponent,matched effective exponent geometry,equal,no_rd,microscopic_system,agglomerative_ward,5,0.412154,0.318743,0.54408,0.512506,0.384144,0.69585,0.100352
+effective_exponent,matched effective exponent geometry,equal,no_rd,microscopic_system,gmm_diag,5,0.399373,0.290723,0.488851,0.510647,0.353976,0.696429,0.111274
+effective_exponent,matched effective exponent geometry,equal,no_rd,microscopic_system,gmm_full,5,0.458083,0.404718,0.525196,0.632639,0.517012,0.69982,0.174557
+effective_exponent,matched effective exponent geometry,equal,no_rd,microscopic_system,kmeans,5,0.389638,0.311261,0.484989,0.491209,0.335315,0.678113,0.101572
+effective_exponent,matched effective exponent geometry,equal,no_rd,microscopic_system,spectral_nearest,5,0.388118,0.304218,0.484758,0.460534,0.253979,0.672344,0.0724156
+effective_exponent,matched effective exponent geometry,equal,no_rd,microscopic_system,spectral_rbf,5,0.461919,0.357677,0.618528,0.458972,0.265839,0.606613,-0.0029468
+effective_exponent,matched effective exponent geometry,equal,no_rd,universality,agglomerative_average,5,0.617025,0.350901,0.983747,0.413847,0.20815,0.564476,-0.203178
+effective_exponent,matched effective exponent geometry,equal,no_rd,universality,agglomerative_complete,5,0.500065,0.354419,0.761907,0.438971,0.342631,0.539009,-0.0610938
+effective_exponent,matched effective exponent geometry,equal,no_rd,universality,agglomerative_ward,5,0.636338,0.361459,0.983747,0.436361,0.284286,0.554718,-0.199976
+effective_exponent,matched effective exponent geometry,equal,no_rd,universality,gmm_diag,5,0.65112,0.36426,1,0.454717,0.34647,0.573085,-0.196403
+effective_exponent,matched effective exponent geometry,equal,no_rd,universality,gmm_full,5,0.611875,0.345551,0.967667,0.394564,0.230062,0.538096,-0.217311
+effective_exponent,matched effective exponent geometry,equal,no_rd,universality,kmeans,5,0.648263,0.404031,0.983747,0.448982,0.332881,0.554718,-0.199281
+effective_exponent,matched effective exponent geometry,equal,no_rd,universality,spectral_nearest,5,0.632165,0.393619,0.983747,0.447915,0.332197,0.554718,-0.184251
+effective_exponent,matched effective exponent geometry,equal,no_rd,universality,spectral_rbf,5,0.651616,0.389277,1,0.444342,0.332881,0.554718,-0.207274
+effective_exponent,matched effective exponent geometry,equal,no_rd,variable_density,hdbscan,5,0.628192,0.538283,0.98783,0.261345,0.207171,0.478042,-0.366847
+effective_exponent,matched effective exponent geometry,equal,no_rd_no_ks,microscopic_system,agglomerative_average,5,0.279125,-0.103398,0.863406,0.225964,0.014477,0.382681,-0.0531611
+effective_exponent,matched effective exponent geometry,equal,no_rd_no_ks,microscopic_system,agglomerative_complete,5,0.166109,-0.0786446,0.478807,0.272621,0.0202417,0.595878,0.106513
+effective_exponent,matched effective exponent geometry,equal,no_rd_no_ks,microscopic_system,agglomerative_ward,5,0.211799,0.0522421,0.483777,0.384972,0.25364,0.549757,0.173174
+effective_exponent,matched effective exponent geometry,equal,no_rd_no_ks,microscopic_system,gmm_diag,5,0.216689,-0.00953345,0.475248,0.37924,0.160031,0.561716,0.162551
+effective_exponent,matched effective exponent geometry,equal,no_rd_no_ks,microscopic_system,gmm_full,5,0.297255,0.208083,0.459161,0.481723,0.382784,0.555528,0.184467
+effective_exponent,matched effective exponent geometry,equal,no_rd_no_ks,microscopic_system,kmeans,5,0.220599,0.0837958,0.442572,0.381883,0.183151,0.559369,0.161284
+effective_exponent,matched effective exponent geometry,equal,no_rd_no_ks,microscopic_system,spectral_nearest,5,0.215615,0.0994386,0.390322,0.407138,0.220984,0.524406,0.191523
+effective_exponent,matched effective exponent geometry,equal,no_rd_no_ks,microscopic_system,spectral_rbf,5,0.0170994,-0.109641,0.275382,0.172812,0.00895811,0.345961,0.155712
+effective_exponent,matched effective exponent geometry,equal,no_rd_no_ks,universality,agglomerative_average,5,-0.0152612,-0.0432413,-0.00826617,0.000553888,0,0.00276944,0.0158151
+effective_exponent,matched effective exponent geometry,equal,no_rd_no_ks,universality,agglomerative_complete,5,-0.0484304,-0.0968504,-0.00826617,0.016219,0,0.0581192,0.0646494
+effective_exponent,matched effective exponent geometry,equal,no_rd_no_ks,universality,agglomerative_ward,5,0.427256,0.117798,1,0.297611,0.155609,0.401365,-0.129645
+effective_exponent,matched effective exponent geometry,equal,no_rd_no_ks,universality,gmm_diag,5,0.460468,0,1,0.295267,0.166417,0.446655,-0.165201
+effective_exponent,matched effective exponent geometry,equal,no_rd_no_ks,universality,gmm_full,5,0.167887,-0.0965591,0.823539,0.181841,0.0284903,0.411904,0.0139542
+effective_exponent,matched effective exponent geometry,equal,no_rd_no_ks,universality,kmeans,5,0.503341,0.19872,0.973486,0.302722,0.180678,0.42394,-0.200618
+effective_exponent,matched effective exponent geometry,equal,no_rd_no_ks,universality,spectral_nearest,5,0.44901,-0.085455,0.973486,0.280338,0.163737,0.411274,-0.168671
+effective_exponent,matched effective exponent geometry,equal,no_rd_no_ks,universality,spectral_rbf,5,0.390389,-0.0971664,1,0.206301,0.100846,0.329114,-0.184087
+effective_exponent,matched effective exponent geometry,equal,no_rd_no_ks,variable_density,hdbscan,5,0.272,-0.10697,0.733958,0.318211,0.099279,0.540671,0.0462116
+effective_exponent,matched effective exponent geometry,exp69,all_six,microscopic_system,agglomerative_average,5,0.562478,0.440353,0.795591,0.498235,0.416066,0.55532,-0.0642434
+effective_exponent,matched effective exponent geometry,exp69,all_six,microscopic_system,agglomerative_complete,5,0.517772,0.334744,0.879905,0.481206,0.407753,0.529574,-0.0365661
+effective_exponent,matched effective exponent geometry,exp69,all_six,microscopic_system,agglomerative_ward,5,0.471538,0.382384,0.677192,0.530181,0.444978,0.609183,0.0586428
+effective_exponent,matched effective exponent geometry,exp69,all_six,microscopic_system,gmm_diag,5,0.516165,0.389271,0.6456,0.600796,0.446456,0.729452,0.0846315
+effective_exponent,matched effective exponent geometry,exp69,all_six,microscopic_system,gmm_full,5,0.534173,0.460426,0.717156,0.6431,0.484696,0.818522,0.108928
+effective_exponent,matched effective exponent geometry,exp69,all_six,microscopic_system,kmeans,5,0.453523,0.393238,0.577869,0.528733,0.434857,0.592963,0.0752091
+effective_exponent,matched effective exponent geometry,exp69,all_six,microscopic_system,spectral_nearest,5,0.477265,0.339505,0.65347,0.509747,0.370277,0.636095,0.0324815
+effective_exponent,matched effective exponent geometry,exp69,all_six,microscopic_system,spectral_rbf,5,0.590901,0.460341,0.945789,0.514376,0.39544,0.590599,-0.0765252
+effective_exponent,matched effective exponent geometry,exp69,all_six,universality,agglomerative_average,5,0.638083,0.432003,0.963138,0.391094,0.294449,0.530793,-0.246988
+effective_exponent,matched effective exponent geometry,exp69,all_six,universality,agglomerative_complete,5,0.59356,0.452528,0.763663,0.405024,0.33853,0.468701,-0.188536
+effective_exponent,matched effective exponent geometry,exp69,all_six,universality,agglomerative_ward,5,0.643839,0.423572,0.963138,0.474363,0.348182,0.530793,-0.169476
+effective_exponent,matched effective exponent geometry,exp69,all_six,universality,gmm_diag,5,0.652848,0.444204,1,0.501556,0.383981,0.566243,-0.151292
+effective_exponent,matched effective exponent geometry,exp69,all_six,universality,gmm_full,5,0.609142,0.507578,0.76216,0.539037,0.504484,0.57922,-0.0701044
+effective_exponent,matched effective exponent geometry,exp69,all_six,universality,kmeans,5,0.600314,0.438731,0.90171,0.48409,0.372227,0.551266,-0.116224
+effective_exponent,matched effective exponent geometry,exp69,all_six,universality,spectral_nearest,5,0.607351,0.518983,0.742725,0.468766,0.381443,0.526011,-0.138584
+effective_exponent,matched effective exponent geometry,exp69,all_six,universality,spectral_rbf,5,0.634279,0.48452,0.963138,0.439446,0.353734,0.530793,-0.194833
+effective_exponent,matched effective exponent geometry,exp69,all_six,variable_density,hdbscan,5,0.584734,0.389872,0.879193,0.458601,0.331006,0.575612,-0.126133
+effective_exponent,matched effective exponent geometry,exp69,ew_kpz_only,microscopic_system,agglomerative_average,5,0.464592,0,1,0.464592,0,1,0
+effective_exponent,matched effective exponent geometry,exp69,ew_kpz_only,microscopic_system,agglomerative_complete,5,0.436844,0.0100949,1,0.436844,0.0100949,1,0
+effective_exponent,matched effective exponent geometry,exp69,ew_kpz_only,microscopic_system,agglomerative_ward,5,0.497877,-0.00912409,1,0.497877,-0.00912409,1,0
+effective_exponent,matched effective exponent geometry,exp69,ew_kpz_only,microscopic_system,gmm_diag,5,0.663966,0.170658,1,0.663966,0.170658,1,0
+effective_exponent,matched effective exponent geometry,exp69,ew_kpz_only,microscopic_system,gmm_full,5,0.884252,0.520009,1,0.884252,0.520009,1,0
+effective_exponent,matched effective exponent geometry,exp69,ew_kpz_only,microscopic_system,kmeans,5,0.517293,-0.0102561,1,0.517293,-0.0102561,1,0
+effective_exponent,matched effective exponent geometry,exp69,ew_kpz_only,microscopic_system,spectral_nearest,5,0.769759,0.0412269,1,0.769759,0.0412269,1,0
+effective_exponent,matched effective exponent geometry,exp69,ew_kpz_only,microscopic_system,spectral_rbf,5,0.819833,0.295387,1,0.819833,0.295387,1,0
+effective_exponent,matched effective exponent geometry,exp69,ew_kpz_only,universality,agglomerative_average,5,0.464592,0,1,0.464592,0,1,0
+effective_exponent,matched effective exponent geometry,exp69,ew_kpz_only,universality,agglomerative_complete,5,0.436844,0.0100949,1,0.436844,0.0100949,1,0
+effective_exponent,matched effective exponent geometry,exp69,ew_kpz_only,universality,agglomerative_ward,5,0.497877,-0.00912409,1,0.497877,-0.00912409,1,0
+effective_exponent,matched effective exponent geometry,exp69,ew_kpz_only,universality,gmm_diag,5,0.663966,0.170658,1,0.663966,0.170658,1,0
+effective_exponent,matched effective exponent geometry,exp69,ew_kpz_only,universality,gmm_full,5,0.884252,0.520009,1,0.884252,0.520009,1,0
+effective_exponent,matched effective exponent geometry,exp69,ew_kpz_only,universality,kmeans,5,0.517293,-0.0102561,1,0.517293,-0.0102561,1,0
+effective_exponent,matched effective exponent geometry,exp69,ew_kpz_only,universality,spectral_nearest,5,0.769759,0.0412269,1,0.769759,0.0412269,1,0
+effective_exponent,matched effective exponent geometry,exp69,ew_kpz_only,universality,spectral_rbf,5,0.819833,0.295387,1,0.819833,0.295387,1,0
+effective_exponent,matched effective exponent geometry,exp69,ew_kpz_only,variable_density,hdbscan,5,0.586504,0.14022,0.951862,0.586504,0.14022,0.951862,0
+effective_exponent,matched effective exponent geometry,exp69,no_ks,microscopic_system,agglomerative_average,5,0.539601,0.332826,0.757238,0.4288,0.26606,0.611913,-0.1108
+effective_exponent,matched effective exponent geometry,exp69,no_ks,microscopic_system,agglomerative_complete,5,0.364469,0.276403,0.573106,0.432463,0.236126,0.586302,0.0679939
+effective_exponent,matched effective exponent geometry,exp69,no_ks,microscopic_system,agglomerative_ward,5,0.378384,0.272602,0.471304,0.500187,0.301767,0.677623,0.121803
+effective_exponent,matched effective exponent geometry,exp69,no_ks,microscopic_system,gmm_diag,5,0.42686,0.290382,0.613878,0.514036,0.316868,0.683392,0.0871753
+effective_exponent,matched effective exponent geometry,exp69,no_ks,microscopic_system,gmm_full,5,0.485616,0.35343,0.624597,0.564126,0.433222,0.69826,0.0785105
+effective_exponent,matched effective exponent geometry,exp69,no_ks,microscopic_system,kmeans,5,0.413224,0.282018,0.594141,0.482106,0.29735,0.647042,0.0688824
+effective_exponent,matched effective exponent geometry,exp69,no_ks,microscopic_system,spectral_nearest,5,0.352898,0.29264,0.408505,0.473141,0.354959,0.655925,0.120244
+effective_exponent,matched effective exponent geometry,exp69,no_ks,microscopic_system,spectral_rbf,5,0.442366,0.314576,0.716265,0.428667,0.26218,0.599093,-0.0136989
+effective_exponent,matched effective exponent geometry,exp69,no_ks,universality,agglomerative_average,5,0.559736,0.415,1,0.310399,0.191266,0.47769,-0.249337
+effective_exponent,matched effective exponent geometry,exp69,no_ks,universality,agglomerative_complete,5,0.284991,0.173101,0.502597,0.262039,0.0642947,0.417899,-0.0229525
+effective_exponent,matched effective exponent geometry,exp69,no_ks,universality,agglomerative_ward,5,0.600354,0.335004,0.967667,0.385298,0.227493,0.51288,-0.215056
+effective_exponent,matched effective exponent geometry,exp69,no_ks,universality,gmm_diag,5,0.604529,0.412171,1,0.395896,0.258594,0.47769,-0.208633
+effective_exponent,matched effective exponent geometry,exp69,no_ks,universality,gmm_full,5,0.594971,0.443739,0.770783,0.430751,0.377189,0.466095,-0.16422
+effective_exponent,matched effective exponent geometry,exp69,no_ks,universality,kmeans,5,0.564451,0.374539,0.843234,0.388384,0.247015,0.456439,-0.176067
+effective_exponent,matched effective exponent geometry,exp69,no_ks,universality,spectral_nearest,5,0.577217,0.294073,0.983781,0.393942,0.253299,0.46892,-0.183274
+effective_exponent,matched effective exponent geometry,exp69,no_ks,universality,spectral_rbf,5,0.504523,-0.0221481,0.952057,0.280314,0.000932409,0.478778,-0.224209
+effective_exponent,matched effective exponent geometry,exp69,no_ks,variable_density,hdbscan,5,0.547136,0.472226,0.634769,0.246059,0.207171,0.398088,-0.301077
+effective_exponent,matched effective exponent geometry,exp69,no_rd,microscopic_system,agglomerative_average,5,0.49861,0.386936,0.743782,0.406248,0.228447,0.463036,-0.0923613
+effective_exponent,matched effective exponent geometry,exp69,no_rd,microscopic_system,agglomerative_complete,5,0.525562,0.375826,0.731572,0.408825,0.274794,0.47941,-0.116736
+effective_exponent,matched effective exponent geometry,exp69,no_rd,microscopic_system,agglomerative_ward,5,0.414257,0.294982,0.613574,0.459424,0.324287,0.557865,0.0451668
+effective_exponent,matched effective exponent geometry,exp69,no_rd,microscopic_system,gmm_diag,5,0.420546,0.271794,0.588484,0.494241,0.316305,0.662734,0.0736945
+effective_exponent,matched effective exponent geometry,exp69,no_rd,microscopic_system,gmm_full,5,0.432442,0.335795,0.664019,0.564412,0.356479,0.773851,0.13197
+effective_exponent,matched effective exponent geometry,exp69,no_rd,microscopic_system,kmeans,5,0.384108,0.297707,0.48686,0.459095,0.302549,0.524007,0.0749875
+effective_exponent,matched effective exponent geometry,exp69,no_rd,microscopic_system,spectral_nearest,5,0.415539,0.314535,0.57377,0.433425,0.226171,0.541047,0.0178865
+effective_exponent,matched effective exponent geometry,exp69,no_rd,microscopic_system,spectral_rbf,5,0.524798,0.33475,0.929476,0.40322,0.252833,0.453726,-0.121578
+effective_exponent,matched effective exponent geometry,exp69,no_rd,universality,agglomerative_average,5,0.643994,0.398886,0.952057,0.33314,0.207534,0.448174,-0.310853
+effective_exponent,matched effective exponent geometry,exp69,no_rd,universality,agglomerative_complete,5,0.506411,0.289455,0.848577,0.311052,0.206541,0.441817,-0.195359
+effective_exponent,matched effective exponent geometry,exp69,no_rd,universality,agglomerative_ward,5,0.675431,0.502324,0.952057,0.373436,0.228038,0.453937,-0.301995
+effective_exponent,matched effective exponent geometry,exp69,no_rd,universality,gmm_diag,5,0.62372,0.352552,1,0.405551,0.258594,0.485076,-0.218169
+effective_exponent,matched effective exponent geometry,exp69,no_rd,universality,gmm_full,5,0.501637,0.345002,0.637709,0.38353,0.221309,0.496142,-0.118107
+effective_exponent,matched effective exponent geometry,exp69,no_rd,universality,kmeans,5,0.623164,0.386448,0.936031,0.410803,0.249672,0.468746,-0.212362
+effective_exponent,matched effective exponent geometry,exp69,no_rd,universality,spectral_nearest,5,0.598787,0.35158,0.951855,0.405035,0.249568,0.458429,-0.193752
+effective_exponent,matched effective exponent geometry,exp69,no_rd,universality,spectral_rbf,5,0.672332,0.486088,0.936415,0.343507,0.231333,0.447732,-0.328825
+effective_exponent,matched effective exponent geometry,exp69,no_rd,variable_density,hdbscan,5,0.528477,0.489251,0.538283,0.195156,0.147097,0.207171,-0.33332
+effective_exponent,matched effective exponent geometry,exp69,no_rd_no_ks,microscopic_system,agglomerative_average,5,0.309484,-0.0406708,0.766016,0.262704,0.0037513,0.557788,-0.04678
+effective_exponent,matched effective exponent geometry,exp69,no_rd_no_ks,microscopic_system,agglomerative_complete,5,0.19492,0.022301,0.419989,0.268122,0.0695475,0.578048,0.0732015
+effective_exponent,matched effective exponent geometry,exp69,no_rd_no_ks,microscopic_system,agglomerative_ward,5,0.251457,-0.00740001,0.646098,0.349464,0.0594625,0.584392,0.0980067
+effective_exponent,matched effective exponent geometry,exp69,no_rd_no_ks,microscopic_system,gmm_diag,5,0.230878,0.053956,0.439376,0.339534,0.0975554,0.582029,0.108657
+effective_exponent,matched effective exponent geometry,exp69,no_rd_no_ks,microscopic_system,gmm_full,5,0.319031,0.112624,0.535982,0.460025,0.251146,0.697616,0.140994
+effective_exponent,matched effective exponent geometry,exp69,no_rd_no_ks,microscopic_system,kmeans,5,0.232527,0.0285174,0.500494,0.33828,0.0744011,0.536078,0.105753
+effective_exponent,matched effective exponent geometry,exp69,no_rd_no_ks,microscopic_system,spectral_nearest,5,0.203867,0.0863061,0.333156,0.361645,0.2055,0.576731,0.157779
+effective_exponent,matched effective exponent geometry,exp69,no_rd_no_ks,microscopic_system,spectral_rbf,5,0.1625,-0.108545,0.396788,0.247671,0.0548804,0.508984,0.0851718
+effective_exponent,matched effective exponent geometry,exp69,no_rd_no_ks,universality,agglomerative_average,5,0.230224,-0.0234912,1,0.138011,0,0.359158,-0.0922125
+effective_exponent,matched effective exponent geometry,exp69,no_rd_no_ks,universality,agglomerative_complete,5,0.200301,-0.0370545,0.73943,0.0966125,0.00195141,0.293494,-0.103689
+effective_exponent,matched effective exponent geometry,exp69,no_rd_no_ks,universality,agglomerative_ward,5,0.461039,-0.0147425,1,0.217893,0.00031495,0.359158,-0.243146
+effective_exponent,matched effective exponent geometry,exp69,no_rd_no_ks,universality,gmm_diag,5,0.404434,-0.085455,1,0.233975,0.0416318,0.332689,-0.170458
+effective_exponent,matched effective exponent geometry,exp69,no_rd_no_ks,universality,gmm_full,5,0.0503642,-0.0930849,0.370231,0.149893,0.0130858,0.345702,0.0995286
+effective_exponent,matched effective exponent geometry,exp69,no_rd_no_ks,universality,kmeans,5,0.437755,0.0900332,0.921943,0.248031,0.0456101,0.320537,-0.189725
+effective_exponent,matched effective exponent geometry,exp69,no_rd_no_ks,universality,spectral_nearest,5,0.409207,-0.0575148,1,0.247326,0.0373898,0.329114,-0.161881
+effective_exponent,matched effective exponent geometry,exp69,no_rd_no_ks,universality,spectral_rbf,5,0.259213,-0.0943953,0.973311,0.11177,0.00096758,0.310865,-0.147443
+effective_exponent,matched effective exponent geometry,exp69,no_rd_no_ks,variable_density,hdbscan,5,0.198664,-0.102666,0.520602,0.234379,0.0828753,0.413059,0.0357147
+feature,6D spatial morphology,stored exp62 feature matrix,all_six,microscopic_system,agglomerative_average,1,0.291616,0.291616,0.291616,0.107212,0.107212,0.107212,-0.184404
+feature,6D spatial morphology,stored exp62 feature matrix,all_six,microscopic_system,agglomerative_complete,1,0.276815,0.276815,0.276815,0.0901249,0.0901249,0.0901249,-0.18669
+feature,6D spatial morphology,stored exp62 feature matrix,all_six,microscopic_system,agglomerative_ward,1,0.169387,0.169387,0.169387,0.272036,0.272036,0.272036,0.102649
+feature,6D spatial morphology,stored exp62 feature matrix,all_six,microscopic_system,gmm_diag,1,0.449843,0.449843,0.449843,0.507079,0.507079,0.507079,0.0572361
+feature,6D spatial morphology,stored exp62 feature matrix,all_six,microscopic_system,gmm_full,1,0.449466,0.449466,0.449466,0.506586,0.506586,0.506586,0.0571197
+feature,6D spatial morphology,stored exp62 feature matrix,all_six,microscopic_system,kmeans,1,0.16889,0.16889,0.16889,0.27145,0.27145,0.27145,0.10256
+feature,6D spatial morphology,stored exp62 feature matrix,all_six,microscopic_system,spectral_nearest,1,0.0305587,0.0305587,0.0305587,0.22921,0.22921,0.22921,0.198651
+feature,6D spatial morphology,stored exp62 feature matrix,all_six,microscopic_system,spectral_rbf,1,0.271212,0.271212,0.271212,0.0868705,0.0868705,0.0868705,-0.184342
+feature,6D spatial morphology,stored exp62 feature matrix,all_six,universality,agglomerative_average,1,0.0248026,0.0248026,0.0248026,0.00137193,0.00137193,0.00137193,-0.0234306
+feature,6D spatial morphology,stored exp62 feature matrix,all_six,universality,agglomerative_complete,1,0.162648,0.162648,0.162648,0.0397372,0.0397372,0.0397372,-0.122911
+feature,6D spatial morphology,stored exp62 feature matrix,all_six,universality,agglomerative_ward,1,0.189592,0.189592,0.189592,0.295745,0.295745,0.295745,0.106153
+feature,6D spatial morphology,stored exp62 feature matrix,all_six,universality,gmm_diag,1,0.187783,0.187783,0.187783,0.293632,0.293632,0.293632,0.105849
+feature,6D spatial morphology,stored exp62 feature matrix,all_six,universality,gmm_full,1,0.185367,0.185367,0.185367,0.290808,0.290808,0.290808,0.105441
+feature,6D spatial morphology,stored exp62 feature matrix,all_six,universality,kmeans,1,0.184919,0.184919,0.184919,0.290285,0.290285,0.290285,0.105365
+feature,6D spatial morphology,stored exp62 feature matrix,all_six,universality,spectral_nearest,1,0.249591,0.249591,0.249591,0.415677,0.415677,0.415677,0.166086
+feature,6D spatial morphology,stored exp62 feature matrix,all_six,universality,spectral_rbf,1,0.210269,0.210269,0.210269,0.319744,0.319744,0.319744,0.109475
+feature,6D spatial morphology,stored exp62 feature matrix,all_six,variable_density,hdbscan,1,0.494324,0.494324,0.494324,0.564331,0.564331,0.564331,0.0700072
+feature,6D spatial morphology,stored exp62 feature matrix,ew_kpz_only,microscopic_system,agglomerative_average,1,0.000314563,0.000314563,0.000314563,0.000314563,0.000314563,0.000314563,0
+feature,6D spatial morphology,stored exp62 feature matrix,ew_kpz_only,microscopic_system,agglomerative_complete,1,-0.000204732,-0.000204732,-0.000204732,-0.000204732,-0.000204732,-0.000204732,0
+feature,6D spatial morphology,stored exp62 feature matrix,ew_kpz_only,microscopic_system,agglomerative_ward,1,-0.0016955,-0.0016955,-0.0016955,-0.0016955,-0.0016955,-0.0016955,0
+feature,6D spatial morphology,stored exp62 feature matrix,ew_kpz_only,microscopic_system,gmm_diag,1,-0.00426606,-0.00426606,-0.00426606,-0.00426606,-0.00426606,-0.00426606,0
+feature,6D spatial morphology,stored exp62 feature matrix,ew_kpz_only,microscopic_system,gmm_full,1,0.0640212,0.0640212,0.0640212,0.0640212,0.0640212,0.0640212,0
+feature,6D spatial morphology,stored exp62 feature matrix,ew_kpz_only,microscopic_system,kmeans,1,-0.00191673,-0.00191673,-0.00191673,-0.00191673,-0.00191673,-0.00191673,0
+feature,6D spatial morphology,stored exp62 feature matrix,ew_kpz_only,microscopic_system,spectral_nearest,1,0.00641608,0.00641608,0.00641608,0.00641608,0.00641608,0.00641608,0
+feature,6D spatial morphology,stored exp62 feature matrix,ew_kpz_only,microscopic_system,spectral_rbf,1,0.000314563,0.000314563,0.000314563,0.000314563,0.000314563,0.000314563,0
+feature,6D spatial morphology,stored exp62 feature matrix,ew_kpz_only,universality,agglomerative_average,1,0.000314563,0.000314563,0.000314563,0.000314563,0.000314563,0.000314563,0
+feature,6D spatial morphology,stored exp62 feature matrix,ew_kpz_only,universality,agglomerative_complete,1,-0.000204732,-0.000204732,-0.000204732,-0.000204732,-0.000204732,-0.000204732,0
+feature,6D spatial morphology,stored exp62 feature matrix,ew_kpz_only,universality,agglomerative_ward,1,-0.0016955,-0.0016955,-0.0016955,-0.0016955,-0.0016955,-0.0016955,0
+feature,6D spatial morphology,stored exp62 feature matrix,ew_kpz_only,universality,gmm_diag,1,-0.00426606,-0.00426606,-0.00426606,-0.00426606,-0.00426606,-0.00426606,0
+feature,6D spatial morphology,stored exp62 feature matrix,ew_kpz_only,universality,gmm_full,1,0.0640212,0.0640212,0.0640212,0.0640212,0.0640212,0.0640212,0
+feature,6D spatial morphology,stored exp62 feature matrix,ew_kpz_only,universality,kmeans,1,-0.00191673,-0.00191673,-0.00191673,-0.00191673,-0.00191673,-0.00191673,0
+feature,6D spatial morphology,stored exp62 feature matrix,ew_kpz_only,universality,spectral_nearest,1,0.00641608,0.00641608,0.00641608,0.00641608,0.00641608,0.00641608,0
+feature,6D spatial morphology,stored exp62 feature matrix,ew_kpz_only,universality,spectral_rbf,1,0.000314563,0.000314563,0.000314563,0.000314563,0.000314563,0.000314563,0
+feature,6D spatial morphology,stored exp62 feature matrix,ew_kpz_only,variable_density,hdbscan,1,-0.0016285,-0.0016285,-0.0016285,-0.0016285,-0.0016285,-0.0016285,0
+feature,6D spatial morphology,stored exp62 feature matrix,no_ks,microscopic_system,agglomerative_average,1,0.518922,0.518922,0.518922,0.184471,0.184471,0.184471,-0.334451
+feature,6D spatial morphology,stored exp62 feature matrix,no_ks,microscopic_system,agglomerative_complete,1,0.223706,0.223706,0.223706,0.0348833,0.0348833,0.0348833,-0.188823
+feature,6D spatial morphology,stored exp62 feature matrix,no_ks,microscopic_system,agglomerative_ward,1,0.289781,0.289781,0.289781,0.401938,0.401938,0.401938,0.112156
+feature,6D spatial morphology,stored exp62 feature matrix,no_ks,microscopic_system,gmm_diag,1,0.277984,0.277984,0.277984,0.653285,0.653285,0.653285,0.375301
+feature,6D spatial morphology,stored exp62 feature matrix,no_ks,microscopic_system,gmm_full,1,0.278854,0.278854,0.278854,0.672838,0.672838,0.672838,0.393984
+feature,6D spatial morphology,stored exp62 feature matrix,no_ks,microscopic_system,kmeans,1,0.289587,0.289587,0.289587,0.401671,0.401671,0.401671,0.112084
+feature,6D spatial morphology,stored exp62 feature matrix,no_ks,microscopic_system,spectral_nearest,1,-0.00722115,-0.00722115,-0.00722115,0.223372,0.223372,0.223372,0.230593
+feature,6D spatial morphology,stored exp62 feature matrix,no_ks,microscopic_system,spectral_rbf,1,0.482068,0.482068,0.482068,0.138923,0.138923,0.138923,-0.343145
+feature,6D spatial morphology,stored exp62 feature matrix,no_ks,universality,agglomerative_average,1,0.0311376,0.0311376,0.0311376,0.000926359,0.000926359,0.000926359,-0.0302112
+feature,6D spatial morphology,stored exp62 feature matrix,no_ks,universality,agglomerative_complete,1,0.231217,0.231217,0.231217,0.043418,0.043418,0.043418,-0.187799
+feature,6D spatial morphology,stored exp62 feature matrix,no_ks,universality,agglomerative_ward,1,0.348571,0.348571,0.348571,0.480243,0.480243,0.480243,0.131672
+feature,6D spatial morphology,stored exp62 feature matrix,no_ks,universality,gmm_diag,1,0.348571,0.348571,0.348571,0.480243,0.480243,0.480243,0.131672
+feature,6D spatial morphology,stored exp62 feature matrix,no_ks,universality,gmm_full,1,0.348571,0.348571,0.348571,0.480243,0.480243,0.480243,0.131672
+feature,6D spatial morphology,stored exp62 feature matrix,no_ks,universality,kmeans,1,0.348571,0.348571,0.348571,0.480243,0.480243,0.480243,0.131672
+feature,6D spatial morphology,stored exp62 feature matrix,no_ks,universality,spectral_nearest,1,0.348571,0.348571,0.348571,0.480243,0.480243,0.480243,0.131672
+feature,6D spatial morphology,stored exp62 feature matrix,no_ks,universality,spectral_rbf,1,0.348571,0.348571,0.348571,0.480243,0.480243,0.480243,0.131672
+feature,6D spatial morphology,stored exp62 feature matrix,no_ks,variable_density,hdbscan,1,0.3464,0.3464,0.3464,0.47743,0.47743,0.47743,0.13103
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd,microscopic_system,agglomerative_average,1,-0.112773,-0.112773,-0.112773,0.166514,0.166514,0.166514,0.279287
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd,microscopic_system,agglomerative_complete,1,-0.0666601,-0.0666601,-0.0666601,0.170973,0.170973,0.170973,0.237633
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd,microscopic_system,agglomerative_ward,1,0.247516,0.247516,0.247516,0.42556,0.42556,0.42556,0.178044
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd,microscopic_system,gmm_diag,1,0.280211,0.280211,0.280211,0.644037,0.644037,0.644037,0.363825
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd,microscopic_system,gmm_full,1,0.381899,0.381899,0.381899,0.506447,0.506447,0.506447,0.124547
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd,microscopic_system,kmeans,1,0.234221,0.234221,0.234221,0.423395,0.423395,0.423395,0.189174
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd,microscopic_system,spectral_nearest,1,0.252645,0.252645,0.252645,0.495979,0.495979,0.495979,0.243334
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd,microscopic_system,spectral_rbf,1,-0.128775,-0.128775,-0.128775,0.139017,0.139017,0.139017,0.267792
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd,universality,agglomerative_average,1,-0.107077,-0.107077,-0.107077,0.173051,0.173051,0.173051,0.280129
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd,universality,agglomerative_complete,1,-0.117816,-0.117816,-0.117816,0.160703,0.160703,0.160703,0.278519
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd,universality,agglomerative_ward,1,-0.113786,-0.113786,-0.113786,0.165348,0.165348,0.165348,0.279134
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd,universality,gmm_diag,1,0.348571,0.348571,0.348571,0.480243,0.480243,0.480243,0.131672
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd,universality,gmm_full,1,0.348571,0.348571,0.348571,0.480243,0.480243,0.480243,0.131672
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd,universality,kmeans,1,-0.116939,-0.116939,-0.116939,0.161715,0.161715,0.161715,0.278654
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd,universality,spectral_nearest,1,0.125216,0.125216,0.125216,0.356817,0.356817,0.356817,0.231601
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd,universality,spectral_rbf,1,-0.108199,-0.108199,-0.108199,0.171765,0.171765,0.171765,0.279965
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd,variable_density,hdbscan,1,0.348571,0.348571,0.348571,0.480243,0.480243,0.480243,0.131672
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd_no_ks,microscopic_system,agglomerative_average,1,-0.11259,-0.11259,-0.11259,0.261819,0.261819,0.261819,0.374409
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd_no_ks,microscopic_system,agglomerative_complete,1,-0.123721,-0.123721,-0.123721,0.243296,0.243296,0.243296,0.367017
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd_no_ks,microscopic_system,agglomerative_ward,1,-0.0363578,-0.0363578,-0.0363578,0.244655,0.244655,0.244655,0.281013
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd_no_ks,microscopic_system,gmm_diag,1,0.0334681,0.0334681,0.0334681,0.529826,0.529826,0.529826,0.496358
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd_no_ks,microscopic_system,gmm_full,1,0.14307,0.14307,0.14307,0.351728,0.351728,0.351728,0.208659
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd_no_ks,microscopic_system,kmeans,1,-0.02602,-0.02602,-0.02602,0.236732,0.236732,0.236732,0.262752
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd_no_ks,microscopic_system,spectral_nearest,1,0.0289697,0.0289697,0.0289697,0.333205,0.333205,0.333205,0.304235
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd_no_ks,microscopic_system,spectral_rbf,1,-0.114882,-0.114882,-0.114882,0.258036,0.258036,0.258036,0.372919
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd_no_ks,universality,agglomerative_average,1,-0.0686767,-0.0686767,-0.0686767,0.331237,0.331237,0.331237,0.399914
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd_no_ks,universality,agglomerative_complete,1,-0.0954226,-0.0954226,-0.0954226,0.132669,0.132669,0.132669,0.228092
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd_no_ks,universality,agglomerative_ward,1,-0.0686767,-0.0686767,-0.0686767,0.331237,0.331237,0.331237,0.399914
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd_no_ks,universality,gmm_diag,1,-0.0686767,-0.0686767,-0.0686767,0.331237,0.331237,0.331237,0.399914
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd_no_ks,universality,gmm_full,1,-0.0686767,-0.0686767,-0.0686767,0.331237,0.331237,0.331237,0.399914
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd_no_ks,universality,kmeans,1,-0.0686767,-0.0686767,-0.0686767,0.331237,0.331237,0.331237,0.399914
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd_no_ks,universality,spectral_nearest,1,-0.0686767,-0.0686767,-0.0686767,0.331237,0.331237,0.331237,0.399914
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd_no_ks,universality,spectral_rbf,1,-0.0686767,-0.0686767,-0.0686767,0.331237,0.331237,0.331237,0.399914
+feature,6D spatial morphology,stored exp62 feature matrix,no_rd_no_ks,variable_density,hdbscan,1,-0.0686767,-0.0686767,-0.0686767,0.331237,0.331237,0.331237,0.399914

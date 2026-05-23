@@ -1,0 +1,8 @@
+{
+  "n_rows": 26,
+  "outputs": [
+    "ml_paper\\tables\\representation_performance.csv",
+    "ml_paper\\tables\\representation_performance.md"
+  ],
+  "message": "Consolidated evidence table for quotient-label ML paper."
+}

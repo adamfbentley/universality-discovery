@@ -1,0 +1,90 @@
+{
+  "best_feature_vs_exponent": {
+    "equal": {
+      "all_six": {
+        "best_feature_kmeans_ari_mean": 0.604959,
+        "best_feature_representation": "raw multi-L features",
+        "exponent_minus_best_feature": -0.000500000000000056,
+        "matched_exponent_kmeans_ari_mean": 0.604459
+      },
+      "ew_kpz_only": {
+        "best_feature_kmeans_ari_mean": 1.0,
+        "best_feature_representation": "PCA-whitened multi-L features",
+        "exponent_minus_best_feature": -0.338017,
+        "matched_exponent_kmeans_ari_mean": 0.661983
+      },
+      "no_ks": {
+        "best_feature_kmeans_ari_mean": 0.499581,
+        "best_feature_representation": "raw multi-L features",
+        "exponent_minus_best_feature": 0.075154,
+        "matched_exponent_kmeans_ari_mean": 0.574735
+      },
+      "no_rd": {
+        "best_feature_kmeans_ari_mean": 0.34647,
+        "best_feature_representation": "cross-L engineered features",
+        "exponent_minus_best_feature": 0.30179300000000003,
+        "matched_exponent_kmeans_ari_mean": 0.648263
+      },
+      "no_rd_no_ks": {
+        "best_feature_kmeans_ari_mean": 0.185552,
+        "best_feature_representation": "PCA-whitened multi-L features",
+        "exponent_minus_best_feature": 0.31778900000000004,
+        "matched_exponent_kmeans_ari_mean": 0.503341
+      }
+    },
+    "exp69": {
+      "all_six": {
+        "best_feature_kmeans_ari_mean": 0.604959,
+        "best_feature_representation": "raw multi-L features",
+        "exponent_minus_best_feature": -0.00464500000000001,
+        "matched_exponent_kmeans_ari_mean": 0.600314
+      },
+      "ew_kpz_only": {
+        "best_feature_kmeans_ari_mean": 1.0,
+        "best_feature_representation": "PCA-whitened multi-L features",
+        "exponent_minus_best_feature": -0.482707,
+        "matched_exponent_kmeans_ari_mean": 0.517293
+      },
+      "no_ks": {
+        "best_feature_kmeans_ari_mean": 0.499581,
+        "best_feature_representation": "raw multi-L features",
+        "exponent_minus_best_feature": 0.06487000000000004,
+        "matched_exponent_kmeans_ari_mean": 0.564451
+      },
+      "no_rd": {
+        "best_feature_kmeans_ari_mean": 0.34647,
+        "best_feature_representation": "cross-L engineered features",
+        "exponent_minus_best_feature": 0.27669400000000005,
+        "matched_exponent_kmeans_ari_mean": 0.623164
+      },
+      "no_rd_no_ks": {
+        "best_feature_kmeans_ari_mean": 0.169329,
+        "best_feature_representation": "PCA-whitened multi-L features",
+        "exponent_minus_best_feature": 0.268426,
+        "matched_exponent_kmeans_ari_mean": 0.437755
+      }
+    }
+  },
+  "n_rows": 250,
+  "n_runs": 10,
+  "n_summary_rows": 50,
+  "outputs": [
+    "ml_paper/tables/exp70_matrix_subset_refit_rows.csv",
+    "ml_paper/tables/exp70_matrix_subset_refit_summary.csv",
+    "ml_paper/tables/exp70_matrix_subset_refit_summary.md",
+    "ml_paper/figures/exp70_matrix_subset_refits.png",
+    "ml_paper/results/mlp09_summary.json"
+  ],
+  "run_tags": [
+    "results_exp70_matched_codex_matrix_full_equal_seed69000",
+    "results_exp70_matched_codex_matrix_full_equal_seed70000",
+    "results_exp70_matched_codex_matrix_full_equal_seed71000",
+    "results_exp70_matched_codex_matrix_full_equal_seed72000",
+    "results_exp70_matched_codex_matrix_full_equal_seed73000",
+    "results_exp70_matched_codex_matrix_full_exp69_seed69000",
+    "results_exp70_matched_codex_matrix_full_exp69_seed70000",
+    "results_exp70_matched_codex_matrix_full_exp69_seed71000",
+    "results_exp70_matched_codex_matrix_full_exp69_seed72000",
+    "results_exp70_matched_codex_matrix_full_exp69_seed73000"
+  ]
+}

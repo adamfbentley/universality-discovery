@@ -1,0 +1,149 @@
+{
+  "config": {
+    "L_values": [
+      48,
+      64,
+      96,
+      128
+    ],
+    "n_seed": 16,
+    "n_boot": 40,
+    "T_feat": 1000,
+    "kpz_lambda": 4.0,
+    "Lmax": 128
+  },
+  "elapsed_seconds": 45.31211972236633,
+  "single_L_features": {
+    "n_samples": 240,
+    "n_features": 10,
+    "kmeans_ari": 0.6049586776859505,
+    "kmeans_nmi": 0.7864379259835008,
+    "kmeans_confusion": {
+      "EW": {
+        "0": 0,
+        "1": 0,
+        "2": 40,
+        "3": 0
+      },
+      "KPZ": {
+        "0": 80,
+        "1": 0,
+        "2": 40,
+        "3": 0
+      },
+      "KS": {
+        "0": 0,
+        "1": 40,
+        "2": 0,
+        "3": 0
+      },
+      "trivial": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 40
+      }
+    },
+    "hdbscan_clusters": 6,
+    "hdbscan_noise": 0,
+    "hdbscan_ari_all": 0.5662431941923775,
+    "hdbscan_ari_core": 0.5662431941923775
+  },
+  "multi_L_features": {
+    "n_samples": 240,
+    "n_features": 40,
+    "kmeans_ari": 0.6049586776859505,
+    "kmeans_nmi": 0.7864379259835008,
+    "kmeans_confusion": {
+      "EW": {
+        "0": 0,
+        "1": 0,
+        "2": 40,
+        "3": 0
+      },
+      "KPZ": {
+        "0": 80,
+        "1": 0,
+        "2": 40,
+        "3": 0
+      },
+      "KS": {
+        "0": 0,
+        "1": 40,
+        "2": 0,
+        "3": 0
+      },
+      "trivial": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 40
+      }
+    },
+    "hdbscan_clusters": 6,
+    "hdbscan_noise": 0,
+    "hdbscan_ari_all": 0.5662431941923775,
+    "hdbscan_ari_core": 0.5662431941923775
+  },
+  "single_L_features_KS_excluded": {
+    "n_samples": 200,
+    "n_features": 10,
+    "kmeans_ari": 0.49958088851634536,
+    "kmeans_nmi": 0.6712694853274367,
+    "kmeans_confusion": {
+      "EW": {
+        "0": 0,
+        "1": 0,
+        "2": 40
+      },
+      "KPZ": {
+        "0": 80,
+        "1": 0,
+        "2": 40
+      },
+      "trivial": {
+        "0": 0,
+        "1": 40,
+        "2": 0
+      }
+    },
+    "hdbscan_clusters": 5,
+    "hdbscan_noise": 0,
+    "hdbscan_ari_all": 0.4776902887139108,
+    "hdbscan_ari_core": 0.4776902887139108
+  },
+  "multi_L_features_KS_excluded": {
+    "n_samples": 200,
+    "n_features": 40,
+    "kmeans_ari": 0.49958088851634536,
+    "kmeans_nmi": 0.6712694853274367,
+    "kmeans_confusion": {
+      "EW": {
+        "0": 0,
+        "1": 0,
+        "2": 40
+      },
+      "KPZ": {
+        "0": 80,
+        "1": 0,
+        "2": 40
+      },
+      "trivial": {
+        "0": 0,
+        "1": 40,
+        "2": 0
+      }
+    },
+    "hdbscan_clusters": 5,
+    "hdbscan_noise": 0,
+    "hdbscan_ari_all": 0.4776902887139108,
+    "hdbscan_ari_core": 0.4776902887139108
+  },
+  "exponent_geometry_reference_exp69": {
+    "all6_kmeans": 0.9017097280215621,
+    "all6_hdbscan_core": 0.9595706075201181,
+    "ks_excluded_kmeans": 0.8432344524866957
+  },
+  "verdict_hint": "REPRESENTATIONAL: multi-L features stay well below exponent geometry",
+  "note": "Matched sample construction (same systems/seeds/bootstrap). Single-L vs multi-L features isolates information; comparison to exponent geometry isolates representation."
+}
