@@ -403,3 +403,30 @@ Predictions: 2/7 passed (P2 EW-KPZ increases with CG, P5 KPZ merges at b=2).
 - The outlier ratio uses a 2-member reference group {KPZ, Eden}, so its denominator is noisy (ratio moved 1.85 → 3.17 between the quick and full configs); the robust, config-stable fact is BD's α ≈ 0.34 ± 0.06, well below its class.
 - The collapse master-curve-shape representation is the more encouraging of the two (BD → Eden), but it is also the noisier one (KS is degenerate for this analysis, plus interpolation/normalization choices); treat it as suggestive.
 - RD (β ≈ 0.51, matches the trivial 1/2) and KS (degenerate) behave as expected and are context only.
+
+### Exp 75: Correction-to-scaling extrapolation — can BD's alpha be recovered from L ≤ 256?
+
+**Goal**: Exp 74 left BD's merge blocked by one quantity — its saturated roughness exponent α ≈ 0.34 (vs the KPZ-class 1/2). BD is famous for strong corrections to scaling from its lattice-scale intrinsic width. The decisive question: does fitting `W_sat(L) = A·L^α(1 + B·L^{-ω})` and extrapolating recover α_∞ = 1/2, completing the merge — or is BD's exponent simply not recoverable from accessible-size data?
+
+**Method** (`experiments/75_correction_to_scaling.py`, results in `results_exp75_correction_to_scaling/`): wider L-ladder {32,48,64,96,128,192,256} to saturation, 6 seeds, reusing exp63 simulators. Primary estimator: direct nonlinear fit of `W_sat(L)` at *fixed* ω (1.0 and 0.5; a free 4-param fit is too unstable on finite-L data), seed-bootstrapped. Secondary: effective-exponent intercept. **Sanity gate**: EW and KPZ must extrapolate to ~0.5 for any BD number to be meaningful.
+
+**Result — the extrapolation is unreliable at accessible L (a decisive finite-size negative)**:
+
+| system | naive α (L≤256) | α_∞ direct(ω=1) | α_∞ direct(ω=0.5) | free-fit | theory |
+|--------|-----------------|-----------------|-------------------|----------|--------|
+| EW   | 0.51 | 0.70 ± 0.15 | 0.78 | 0.97 | 0.5 |
+| KPZ  | 0.42 | 0.59 ± 0.16 | 0.69 | 0.88 | 0.5 |
+| BD   | 0.36 | 0.43 ± 0.02 | 0.57 | 0.67 | 0.5 |
+| Eden | 0.50 | 0.54 ± 0.17 | 0.86 | 0.95 | 0.5 |
+
+- **The sanity gate FAILS**: at ω=1 the extrapolation overshoots the *known* continuum values (EW→0.70, KPZ→0.59, not 0.5), and the answer swings strongly with the assumed correction exponent ω. So the extrapolated α_∞ is not trustworthy from L ≤ 256 data — the systematic (correction-form) uncertainty dominates.
+- **BD's α drifts upward but cannot be pinned**: its effective exponent rises gently (α_eff ≈ 0.35 → 0.41 across L̄ = 39 → 221) and the ω=1 fit gives 0.43, but the ω-dependence spans 0.43–0.67. The tight bootstrap error (±0.016) is *statistical only* and misleadingly precise; the real uncertainty is the ±0.2 systematic.
+- **An ironic, sharp observation**: BD is the *cleanest* system to measure here — its large intrinsic width makes W_sat large and seed-stable, so its α_eff drift is smooth, while EW/KPZ/Eden α_eff are noisy (EW swings 0.19→1.07; Eden goes negative) because their widths are small. So BD's α ≈ 0.4-at-L=256 is **not** a noise artifact; it is genuine slow convergence.
+
+**Interpretation — this closes the exp72→75 arc and answers the compute question concretely**: BD's roughness exponent is consistent with eventually reaching the KPZ value (it drifts the right way), but accessible sizes (L ≤ 256) are insufficient to establish it — even the principled correction-to-scaling extrapolation cannot recover the *known* EW/KPZ α=0.5 here. The negative result (finite-size representations do not recover the KPZ quotient) is therefore robust even against the best available extrapolation at these sizes, and the obstruction is specifically a finite-size data limitation. This is the narrow, justified case for larger-L compute: not "more data generally," but "pin BD's α_∞ with L large enough (≈10³–10⁴, BD's textbook regime) that the correction term is small and the extrapolation is gentle."
+
+**Caveats**:
+
+- The continuum α_eff measurements are seed-noisy at 6 seeds; more seeds would smooth them but would not change the BD conclusion (BD is already clean) or the gate failure (the ω-sensitivity is systematic, not statistical).
+- RD α (~0.77) is spurious — RD never saturates, so W_sat is T-dependent and α is undefined; it is a degenerate control only.
+- These remain finite-size statements; nothing here claims BD is *not* asymptotically KPZ — the point is precisely that accessible data cannot decide it.
