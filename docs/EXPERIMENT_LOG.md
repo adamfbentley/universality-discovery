@@ -374,3 +374,32 @@ Predictions: 2/7 passed (P2 EW-KPZ increases with CG, P5 KPZ merges at b=2).
 - `shuf_iw` (wrong per-surface scale) degrades everything (ARI 0.25), confirming the metric is sensitive to a destructive manipulation; BD stays split there too.
 - Controls behave correctly: RD and KS remain strong outliers (ratios 5–13) in all conditions, so the manipulations do not simply collapse all structure.
 - This is a stronger statement for the manuscript's "why" section: the finite-size representation fails to factor through the KPZ quotient because of an anomalous-scaling (multi-scale) obstruction that survives amplitude normalization — which preempts the obvious reviewer suggestion to rescale it away.
+
+### Exp 74: Constructive test — does a multi-L scaling-collapse representation recover BD's KPZ class?
+
+**Goal**: Exp 73 said the obstruction lives in the multi-scale (scaling) structure. The constructive counterpart: build the representation *from* that structure — finite-size-scaling exponents and a Family–Vicsek collapse — across an L-ladder, and ask whether BD finally groups with its KPZ-class partners {KPZ, Eden}. The number to beat is BD's single-L feature outlier ratio of ~9 (exp73).
+
+**Method** (`experiments/74_collapse_representation.py`, results in `results_exp74_collapse_representation/`): L-ladder {32,48,64,96,128} to saturation, 8 seeds, reusing exp63 simulators. Two representations: (1) decoupled FSS exponents — α from the saturated width `W_sat(L)~L^α` and β from the growth regime `W(t)~t^β`, per seed; (2) the amplitude-normalized collapse master-curve shape. Decisive metric = BD's distance to the {KPZ,Eden} centroid over the within-class spread (≫1 = outlier, ~1 = merged).
+
+*Methodological note*: a **joint (α,z) collapse grid-fit is degenerate at accessible L** — it returns EW z≈1.6 / KPZ z≈1.0 instead of 2.0 / 1.5, because the growth regime only constrains β=α/z (you need well-separated saturation plateaus to split α and z). I therefore measure α and β *separately*; that version passes the sanity anchor (recovers EW z≈1.9, β≈0.24; KPZ β≈0.28). An earlier merge metric that mistakenly included BD in its own reference group gave a tempting but spurious "ratio 0.78"; with the target excluded the honest numbers are below. (Both traps are exactly the exp69-style finite-size false positives this project exists to flag.)
+
+**Result — a partial recovery with one specific residual barrier**:
+
+| system | α (W_sat~L^α) | β (growth) | class β |
+|--------|---------------|------------|---------|
+| EW   | 0.46 ± 0.11 | 0.24 ± 0.05 | 0.25 |
+| KPZ  | 0.56 ± 0.07 | 0.28 ± 0.06 | 0.33 |
+| BD   | **0.34 ± 0.06** | **0.31 ± 0.15** | 0.33 |
+| Eden | 0.50 ± 0.10 | 0.31 ± 0.04 | 0.33 |
+
+- BD's outlier ratio drops from **~9 (single-L features) to ~2–3 (FSS-exponent space)**, and in the collapse master-curve *shape* representation BD's nearest neighbour is its true class partner **Eden** (ratio ~0.85). So the scaling representation moves BD substantially toward its class — the multi-scale diagnosis from exp72/73 is correct, and building from scaling structure is the right direction.
+- The recovery is *partial and exponent-specific*: BD's **growth exponent β (0.31) has essentially converged to its KPZ-class value** (KPZ 0.28, Eden 0.31), but its **saturated-roughness exponent α (0.34 ± 0.06) remains robustly anomalous** (class ~0.5). In raw (α,β) space this depressed α even misroutes BD's nearest neighbour to EW.
+
+**Interpretation**: The residual obstruction is now pinned to a single quantity — BD's static roughness exponent α, the *slow corrections-to-scaling* observable (consistent with exp72's α_local ≈ 0.23 and the large intrinsic width). BD's *dynamic* (growth) behaviour is already KPZ-faithful at accessible L; its *static* roughness is not. This is precisely the quantity that converges only at large L, so it is the specific, justified place where bigger simulations or an explicit correction-to-scaling extrapolation (`W = A L^α (1 + B L^{-ω})`) would pay off — closing the loop with the earlier compute discussion: the value of more compute is narrow and identified, not generic.
+
+**Caveats**:
+
+- These are finite-size effective exponents (L ≤ 128); even KPZ's own β (0.28) and z (≈2.0 via α/β) are imperfect here, so the comparison is relative, not a claim of asymptotic values.
+- The outlier ratio uses a 2-member reference group {KPZ, Eden}, so its denominator is noisy (ratio moved 1.85 → 3.17 between the quick and full configs); the robust, config-stable fact is BD's α ≈ 0.34 ± 0.06, well below its class.
+- The collapse master-curve-shape representation is the more encouraging of the two (BD → Eden), but it is also the noisier one (KS is degenerate for this analysis, plus interpolation/normalization choices); treat it as suggestive.
+- RD (β ≈ 0.51, matches the trivial 1/2) and KS (degenerate) behave as expected and are context only.
