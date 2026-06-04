@@ -320,3 +320,57 @@ Clustering results — no condition exceeded ARI~0.49:
 Predictions: 2/7 passed (P2 EW-KPZ increases with CG, P5 KPZ merges at b=2).
 
 **Verdict**: Negative result, but highly informative. The unsupervised "universality class = density cluster" hypothesis does not hold cleanly for this feature family. BD's discrete lattice effects create a geometric disconnection that coarse-graining helps spatially (b=2 connects the kNN graph) but hurts temporally (beta_eff and vel_skew diverge). The ARI~0.5 ceiling appears tied to the feature geometry, so more algorithm-swapping is unlikely to be the best next step.
+
+### Exp 72: Local vs global roughness exponents (anomalous-scaling mechanism)
+
+(Runs after the 65–71 ML-paper series, which is logged in `ml_paper/` rather than here.)
+
+**Goal**: Test a *mechanism* for the recurring BD split, instead of documenting it again. The features the project clusters on are local slope statistics (`grad_var = Var[dh/dx] ~ G(2)/4`). Universality lives in the global roughness exponent α. Standard Family–Vicsek scaling has α_local = α_global; under intrinsic anomalous roughening they differ, and local features then track a non-universal, lattice-scale quantity that need not respect the universality class. Hypothesis: the discrete KPZ-class members carry an anomalous local exponent that the continuum members do not, and that is what local-feature clustering latches onto.
+
+**Method** (`experiments/72_anomalous_scaling.py`, results in `results_exp72_anomalous_scaling/`): per system, an L-ladder {32, 64, 128} run to saturation (late_beta ≈ 0 confirms saturation), 10 seeds. α_global from saturated width W(L) ~ L^α; α_local from the height-difference correlation G(r) = ⟨[h(x+r)−h(x)]²⟩ ~ r^(2α_local), small-r slope. Also reports the lattice-scale intrinsic width √G(2) — the quantity the gradient features actually respond to. Reuses exp63 simulators via importlib; does not touch existing results.
+
+**Result** (pooled α_local; α_global with R²; intrinsic width at L=128):
+
+| system | α_local | α_global (R²) | intrinsic width | exp63/64 clustering |
+|--------|---------|---------------|-----------------|---------------------|
+| EW     | 0.45    | 0.52 (1.00)   | 1.45            | continuum core |
+| KPZ    | 0.46    | 0.44 (0.99)   | 1.40            | continuum core |
+| Eden   | 0.47    | 0.51 (1.00)   | 2.32            | **merges with EW+KPZ** |
+| BD     | **0.23**| 0.36 (1.00)   | **7.07**        | **splits off alone** |
+| RD     | ~0.00   | (degenerate)  | huge, ∝√t       | own cluster (trivial) |
+| KS     | ~0.98   | (degenerate)  | —               | own cluster (crossover) |
+
+**Key finding**: The mechanism is confirmed, and it is BD-specific rather than "discrete = anomalous". EW, KPZ, and Eden all show Family–Vicsek scaling with α_local ≈ α_global ≈ 0.5. **BD alone shows intrinsic anomalous roughening**: α_local ≈ 0.23 (about half its own effective global exponent and far from the universal 0.5), together with a lattice-scale intrinsic width ~5× the continuum value. This is exactly the non-universal local signal the gradient features encode, and it maps precisely onto the clustering: BD is the system that breaks out of the KPZ class, while Eden — which is *not* anomalous — stays merged with the continuum members. This upgrades "BD multimodality" from an observation into a measured physical mechanism.
+
+**Caveats** (these are effective, finite-size exponents, not asymptotic):
+
+- BD is in the KPZ class asymptotically (α → 1/2); the anomalous α_local ≈ 0.23 is a finite-size, intrinsic-width-dominated effective value at L ≤ 128. This is consistent with the project's finite-size scope, but it is *not* a claim that BD is in a different universality class.
+- The L-ladder has only 3 points, so α_global is a coarse effective slope (though R² ≥ 0.99 for the KPZ-class systems). The α_local fits are clean (R² ≈ 0.999). The cleanest statements are about α_local and the intrinsic width, both of which are robust.
+- BD's effective α_global (0.36) is itself depressed by the intrinsic width (corrections to scaling), so the naive gap α_global − α_local understates the anomaly; the absolute α_local and intrinsic-width values are the informative quantities.
+- RD (uncorrelated, never saturates) and KS (4th-order-smooth crossover) are degenerate for this analysis and are reported for context only.
+
+**Why this matters for the paper**: It supplies the physical "why" behind the headline negative result. Finite-size local feature geometry fails to recover the KPZ quotient not because clustering is incompetent, but because at accessible sizes the dominant local signal for BD is a non-universal intrinsic-width / anomalous-local-roughening effect, which is orthogonal to the universality class. It is a finite-size mechanism (more compute at the same observables would not fix it). The natural follow-up — can the split be removed by subtracting that intrinsic width? — is tested in Exp 73, and the answer is no (see below), which sharpens the mechanism further.
+
+### Exp 73: Causal test — does removing the intrinsic width merge BD into the KPZ class?
+
+**Goal**: Turn the Exp 72 correlation (BD anomalous ⟷ BD splits) into a causal test. Since the clustered features include `grad_var = Var[dh/dx] = G(2)/4`, the intrinsic width √G(2) is *exactly* the gradient-amplitude coordinate of the feature space (verified: corr(intrinsic_width, 2·√grad_var) = 1.000). If BD's split is *caused* by that non-universal amplitude, normalizing each surface by its own intrinsic width before extracting features should pull BD into the KPZ class — while a wrong/mismatched scale should not, and the easy classes (RD, KS) should stay separable.
+
+**Method** (`experiments/73_intrinsic_width_causal.py`, results in `results_exp73_intrinsic_width_causal/`): regenerate surfaces (L=128, T=1000, N=80/system), re-extract the 6D spatial features on rescaled surfaces under four conditions, and re-cluster with the exact exp62/63 pipeline. Decisive metric = BD's distance to the {EW,KPZ,Eden} blob centroid divided by the blob's internal spread (≫1 = BD is an outlier; ~1 = merged), plus BD's HDBSCAN co-membership with the continuum-KPZ majority cluster. Anchor: the stored exp62 matrix reproduces the documented ceiling exactly (HDBSCAN ARI 0.495, KMeans 0.185, kNN3 0.821).
+
+| condition | HDBSCAN ARI | KMeans ARI | BD outlier ratio | BD in KPZ cluster |
+|-----------|-------------|------------|------------------|-------------------|
+| baseline (raw)        | 0.499 | 0.185 | 9.2 | 0% |
+| iw_norm (remove intrinsic width) | 0.450 | 0.472 | 8.8 | 0% |
+| gw_norm (remove global width, control) | 0.486 | 0.277 | 9.6 | 0% |
+| shuf_iw (mismatched scale, control) | 0.249 | −0.038 | 8.5 | 0% |
+
+**Result — the simple causal hypothesis is refuted (a useful negative)**: Normalizing out the intrinsic-width amplitude does **not** merge BD into the KPZ class. BD's outlier ratio is essentially unchanged (9.2 → 8.8) and BD is in the continuum-KPZ cluster 0% of the time in every condition. The amplitude is a *symptom*, not the cause: it is exactly grad_var, and removing it (which sets grad_var to a constant) leaves BD's separation intact through the dimensionless multi-scale shape of its local statistics (gradient skew/kurtosis and the cross-scale ratios lap_var/iw², h_var/iw²).
+
+**Interpretation**: This is consistent with — and sharper than — Exp 72. BD's anomaly is fundamentally an anomalous *scaling exponent* (α_local ≈ 0.23), i.e. a property of how roughness is distributed *across scales*, which is dimensionless and cannot be removed by any single-scale amplitude normalization. So the obstruction to recovering BD's universality class is robust to the obvious "just normalize the amplitude" fix; it lives in the multi-scale (RG-trajectory) structure of the finite-size surface. A representation would have to respect that structure — e.g. correction-to-scaling extrapolation or a genuine scaling-collapse residual — rather than reweight a single scale.
+
+**Notes / caveats**:
+
+- A side effect worth recording: `iw_norm` *raises* KMeans ARI (0.185 → 0.472) and kNN3 (0.81 → 0.91) by removing amplitude noise that was hurting the *other* classes — but it does not touch the BD/KPZ obstruction, so the HDBSCAN ceiling is intact. This cleanly separates "amplitude helps the easy separations" from "the hard KPZ quotient is a scaling-shape problem".
+- `shuf_iw` (wrong per-surface scale) degrades everything (ARI 0.25), confirming the metric is sensitive to a destructive manipulation; BD stays split there too.
+- Controls behave correctly: RD and KS remain strong outliers (ratios 5–13) in all conditions, so the manipulations do not simply collapse all structure.
+- This is a stronger statement for the manuscript's "why" section: the finite-size representation fails to factor through the KPZ quotient because of an anomalous-scaling (multi-scale) obstruction that survives amplitude normalization — which preempts the obvious reviewer suggestion to rescale it away.

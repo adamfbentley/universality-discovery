@@ -1,0 +1,106 @@
+{
+  "config": {
+    "L": 128,
+    "T": 1000,
+    "n_per_system": 80,
+    "ks_cap": 1000,
+    "late_frac": 0.3,
+    "quick": false
+  },
+  "anchor_stored_exp62": {
+    "hdbscan_clusters": 4,
+    "hdbscan_ari": 0.49476343280378143,
+    "kmeans_ari": 0.18491941765409903,
+    "knn3_accuracy": 0.8208333333333332,
+    "merge": {
+      "d_bd_to_blob": 2.336032716272666,
+      "blob_internal_spread": 0.16389783521630727,
+      "bd_outlier_ratio": 14.252980908439959,
+      "bd_fraction_in_blob_cluster": 0.0,
+      "blob_hdbscan_cluster": 3,
+      "easy_class_outlier_ratio": {
+        "rd": 28.458815337252602,
+        "ks": 6.569281786646921
+      }
+    }
+  },
+  "iw_vs_gradvar_corr": 1.0,
+  "intrinsic_width_by_system": {
+    "ew": 1.415187479817303,
+    "kpz": 1.3749170412496192,
+    "bd": 7.1182073216703285,
+    "eden": 2.2717132042147554,
+    "rd": 25.2779795367802,
+    "ks": 0.3136568005419305
+  },
+  "conditions": {
+    "baseline": {
+      "hdbscan_clusters": 4,
+      "hdbscan_ari": 0.4989550782465023,
+      "kmeans_ari": 0.18476270468303913,
+      "knn3_accuracy": 0.8145833333333334,
+      "merge": {
+        "d_bd_to_blob": 2.25175193315281,
+        "blob_internal_spread": 0.24479355926266688,
+        "bd_outlier_ratio": 9.19857507662875,
+        "bd_fraction_in_blob_cluster": 0.0,
+        "blob_hdbscan_cluster": 2,
+        "easy_class_outlier_ratio": {
+          "rd": 19.153176673731284,
+          "ks": 5.083733762747658
+        }
+      }
+    },
+    "iw_norm": {
+      "hdbscan_clusters": 4,
+      "hdbscan_ari": 0.45013603959721793,
+      "kmeans_ari": 0.4719550790570056,
+      "knn3_accuracy": 0.9104166666666667,
+      "merge": {
+        "d_bd_to_blob": 3.1154755349257726,
+        "blob_internal_spread": 0.35311842281717715,
+        "bd_outlier_ratio": 8.822749915086625,
+        "bd_fraction_in_blob_cluster": 0.0,
+        "blob_hdbscan_cluster": 3,
+        "easy_class_outlier_ratio": {
+          "rd": 5.927844590910537,
+          "ks": 8.96909771811122
+        }
+      }
+    },
+    "gw_norm": {
+      "hdbscan_clusters": 4,
+      "hdbscan_ari": 0.48622436250215256,
+      "kmeans_ari": 0.2770719508757261,
+      "knn3_accuracy": 0.8354166666666666,
+      "merge": {
+        "d_bd_to_blob": 2.5019731479113165,
+        "blob_internal_spread": 0.26126884599343647,
+        "bd_outlier_ratio": 9.576239901079406,
+        "bd_fraction_in_blob_cluster": 0.0,
+        "blob_hdbscan_cluster": 3,
+        "easy_class_outlier_ratio": {
+          "rd": 14.103109210354194,
+          "ks": 8.973716497163737
+        }
+      }
+    },
+    "shuf_iw_control": {
+      "hdbscan_clusters": 3,
+      "hdbscan_ari": 0.2494126405757904,
+      "kmeans_ari": -0.038052461359676625,
+      "knn3_accuracy": 0.7520833333333334,
+      "merge": {
+        "d_bd_to_blob": 2.095732292678858,
+        "blob_internal_spread": 0.24543273929377143,
+        "bd_outlier_ratio": 8.538927197362879,
+        "bd_fraction_in_blob_cluster": 0.0,
+        "blob_hdbscan_cluster": 1,
+        "easy_class_outlier_ratio": {
+          "rd": 7.51614712649299,
+          "ks": 5.07019149959334
+        }
+      }
+    }
+  }
+}
