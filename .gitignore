@@ -92,3 +92,9 @@ docs/revised_manuscript.pdf
 docs/CONJECTURES_MANIFOLD_UNIVERSALITY.tex
 docs/CONJECTURES_MANIFOLD_UNIVERSALITY.pdf
 docs/references.bib
+
+# large regenerable artifacts (exp76)
+results_exp76_amortized_extrapolation/datasets.npz
+results_exp76_amortized_extrapolation/*.joblib
+results_exp76_amortized_extrapolation/regen.log
+results_exp76_amortized_extrapolation/kpz_satcheck.csv

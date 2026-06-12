@@ -80,54 +80,30 @@ when feature geometry agrees with physical universality, and when it does not.
   approach does not transfer cleanly to 3-state Potts, which helps define the
   boundary of the method.
 
-## Repository Structure
+## Current Direction: Extrapolation Limits (Exp 76-79)
 
-```text
-experiments/              Numbered experiment scripts, each mostly self-contained
-src/simulation/           Shared simulation utilities
-src/models/               Autoencoder architectures used in early experiments
-src/analysis/             Clustering and analysis helpers
-ml_paper/                 ML-focused paper workspace, claims, derived controls
-docs/EXPERIMENT_LOG.md    Chronological research notes and corrections
-docs/literature_review.md Literature notes
-docs/feature_geometry_universality_paper.md
-                           Current working manuscript draft
-results*/                 Selected result snapshots used to document experiments
-archive/                  Obsolete manuscript drafts and earlier writeups
-tests/                    Lightweight smoke tests for import and core behavior
-```
+Exp 72-75 traced the BD split to a physical mechanism (intrinsic anomalous
+roughening at small L) and ended with a negative: correction-to-scaling fits
+cannot recover even the known EW/KPZ alpha = 0.5 from L <= 256 ladders,
+because the result depends on the assumed correction form. The follow-up
+question was whether anything can do better, and if not, why not.
 
-## Running
-
-Install dependencies:
-
-```bash
-python -m pip install -r requirements.txt
-```
-
-Run smoke tests:
-
-```bash
-python -m pytest -q
-```
-
-Run selected experiments:
-
-```bash
-python experiments/62_feature_space_clustering.py --pilot
-python experiments/63_temporal_features.py --pilot
-python experiments/64_multiscale_peel.py --pilot
-python experiments/52d_ising_finite_size_scaling.py
-```
-
-The experiment scripts compile Numba kernels on first run, so the first execution
-is slower than later runs.
-
-## Relationship To Earlier Work
-
-This repository builds on
-[ml-universality-classification](https://github.com/adamfbentley/ml-universality-classification),
-which tested supervised and anomaly-detection approaches for surface-growth
-simulations. This project is broader and more exploratory: it investigates when
-unsupervised geometry aligns with known physics, and documents the cases where
-that assumption breaks.
+- **Exp 76: amortized extrapolation.** Instead of fitting one correction form,
+  train a regressor on synthetic W_sat(L) ladders drawn from several
+  correction families, then ask it for alpha. On synthetic tests it beats the
+  direct fits (RMSE 0.106 vs 0.165 for the best fixed-omega fit). On 24-seed
+  regenerated ladders it gives EW 0.53, Eden 0.49, BD 0.52 — BD lands on its
+  KPZ-class value, which no direct fit manages (they scatter 0.36-0.70 with
+  the choice of ansatz). KPZ misses (0.62); exp78 traces that to the
+  integrator, not the estimator.
+- **Exp 77: a resolution floor.** A Le Cam two-point bound makes the
+  difficulty quantitative: at L <= 256, exponent differences of ~0.1 can be
+  absorbed almost exactly by ordinary correction terms, so resolving them
+  would take on the order of 10^5 seeds at realistic noise. Extra statistics
+  barely help; window length and assumptions about corrections are what buy
+  resolution. This turns the earlier negative results from "our methods
+  failed" into "no method could have succeeded at these sizes".
+- **Exp 78: checks.** A discriminability control (the estimator separates
+  true alpha 0.40 / 0.45 / 0.50 on BD-like ladders, so the BD recovery is not
+  shrinkage toward the prior mean, though a +0.05 conditional bias widens the
+  honest error bar); an exact-measure ch
