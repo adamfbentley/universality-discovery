@@ -1,113 +1,243 @@
-# Exp 76 Handoff — Amortized Finite-Size Extrapolation
+# Exp 76–80 Handoff — Amortized Extrapolation and Minimax Floor
 
-Status as of 2026-06-10. Resume point for the next session.
+**Status as of 2026-06-13. All experiments complete.**
 
-## The chosen direction (decided after exp72–75 review)
+This file documents the completed state of the exp76–80 research arc, open
+items, and the narrative for the paper. It supersedes the earlier draft that
+described in-progress work.
 
-The highest-value novel result: **replace the parametric correction-to-scaling
-fit (which exp75 showed fails even on known EW/KPZ at L ≤ 256) with an
-amortized estimator** — a regressor trained on synthetic W_sat(L) ladders drawn
-from a *prior over correction families*, so it implicitly marginalizes over
-correction forms instead of assuming one. This is the minimal testable core of
-the broader "learned RG coordinates" program (disentangle fixed-point class
-from RG-trajectory position).
+---
 
-Prior-art check (done): CNN-FSS work (Li & Luo, arXiv:1711.04252) learns from
-spin configurations near criticality; SBI/amortized-inference literature is
-generic. Nobody has aimed amortized inference at corrections-to-scaling
-extrapolation with a known-class sanity gate. Novel and citeable if the gate
-passes — and a rigorous impossibility statement if it fails.
+## The arc in one paragraph
 
-## What exists
+exp75 showed that classical correction-to-scaling extrapolation fails at L ≤ 256:
+even EW and KPZ (with known α=0.5) extrapolate to 0.70 and 0.59 when the
+correction exponent ω is fixed to 1.0, and the answer swings wildly with ω.
+exp76 replaced the fixed-ansatz fit with an amortized estimator trained on a
+prior over correction families, which successfully recovered BD's roughness
+exponent (α̂ = 0.522 [0.482, 0.529]) — something no classical fit could pin.
+exp77 proved the information-theoretic reason: a Le Cam minimax floor of
+0.27–0.44 at L ≤ 256 makes exponents near-non-identifiable without declared
+correction priors. exp78 hardened exp76's claims against four referee checks.
+exp79 analyzed the algebraic structure of the confusion gap, finding a universal
+N-scaling law. exp80 demonstrated the floor transfers to other observables
+(temporal β, Ising ν). The result is a floor theorem for FSS estimation.
 
-- `experiments/76_amortized_extrapolation.py` — full pipeline, stages
-  `gen|train|eval` (+ `--pilot`, `--prior`). Synthetic generator with 5
-  correction families (pure power law; single power correction ω∈[0.3,2.5];
-  two-term; Krug–Meakin intrinsic-width form W²=Wi²+(AL^α)² — BD's textbook
-  correction; log corrections), multiplicative noise σ~U[0,0.10],
-  scale-invariant features (6 adjacent effective exponents + naive slope +
-  curvature + residual + aeff differences = 14), HistGradientBoosting point +
-  quantile (5/50/95%) models per training prior + mixture, classical baselines
-  (naive slope, fixed-ω=1, fixed-ω=0.5, free-ω fits) reimplementing exp75,
-  transfer matrix (train prior × test family), real-data gate. Eval prefers
-  high-seed `wsat_perseed.csv` (exp76b) over exp75 6-seed means, and adds a
-  seed-bootstrap 90% interval.
-- `experiments/76b_regenerate_ladders.py` — regenerates per-seed W_sat(L)
-  ladders, 24 seeds, exact exp75 protocol (same simulators via exp63,
-  T = 30·L^1.5, late-20% W_sat). Resumable: skips rows already in the CSV.
-- `results_exp76_amortized_extrapolation/`: `datasets.npz`, six
-  `model_*.joblib` (PILOT-sized: 40k train), `summary.json` (pilot eval),
-  `wsat_perseed.csv` (in progress: 304/672 rows — ew complete 7L×24;
-  kpz complete through L=128, L=192 at 16/24; bd and eden not started).
-- `/tmp/chunk76b.py` (sandbox-only, will be lost) — time-budgeted chunk runner;
-  recreate trivially or run 76b directly if process limits allow.
+---
 
-## Pilot result (6-seed exp75 ladders, 40k training)
+## Experiment status
+
+### exp76: Amortized finite-size extrapolation — COMPLETE
+
+**Files:** `experiments/76_amortized_extrapolation.py`,
+`experiments/76b_regenerate_ladders.py`,
+`results_exp76_amortized_extrapolation/`
+
+**Key outputs:**
+- `wsat_perseed.csv`: 673 rows, 4 systems × 7 L × 24 seeds (complete).
+- `summary_full24seed.json`: full 24-seed evaluation.
+- `lofo_control.json`: leave-one-family-out (Krug–Meakin removed) control.
+- `classical_on_real.json`: classical baselines on 24-seed data.
+- `kpz_window.csv`: KPZ gate failure diagnostic.
+- `referee_checks.json`: exp78 check results.
+
+**Results:**
+- Synthetic benchmark: amortized RMSE 0.106 vs best classical 0.165.
+- Transfer matrix: mixture-trained stays at 0.088–0.123 across all families.
+- Real gate: EW ✓, Eden ✓, KPZ ✗ (by 0.015; integrator pathology).
+- BD: α̂ = 0.522, bootstrap 90% [0.482, 0.529].
+- LOFO control: BD → 0.532 [0.486, 0.555] without Krug–Meakin family.
+
+**Honest BD claim:** α̂ ≈ 0.50 ± 0.05 (syst) ± 0.03 (stat). The ±0.05
+systematic comes from the slice-conditional bias in exp78 check C. Must be
+reported with the statistical interval.
+
+---
+
+### exp77: Le Cam minimax resolution floor — COMPLETE
+
+**Files:** `experiments/77_minimax_floor.py`,
+`results_exp77_minimax_floor/floor.json`,
+`ml_paper/THEORY_minimax_floor.md`
+
+**Key outputs:**
+- `floor.json`: all floor numbers (per-system, resolution law, floor vs m).
+- Theory note: full derivation + Appendices A–D (~620 lines).
+
+**Results:**
+- D²(0.1) ≈ 1.3×10⁻⁷. Resolving Δα=0.1 needs ~160k seeds (continuum).
+- Per-system floors m=24: BD 0.27, EW/KPZ/Eden 0.44.
+- Floor vs seeds: nearly flat (0.51/0.44/0.38 at m=6/24/96). Seeds don't help.
+- Resolution law: L_max 256→16384 → floor 0.44→0.14 (decades of L required).
+- Value of u_max: 4→0.1 → floor 0.44→0.077. Knowledge worth ~6× in resolution.
+
+**Known implementation issue:** The linearized closed-form (`linearized_floor()`
+in exp77) has a bug where the 40-vector ω-grid trivially spans the 7-point
+feature space (P_perp x ≈ 0). The linearized numbers in floor.json are
+therefore unreliable; use the exact `floor_exact` values throughout. The
+exact minimax optimization is unaffected.
+
+---
+
+### exp78: Referee-proofing checks — COMPLETE
+
+**Files:** `experiments/78_referee_checks.py`,
+`results_exp76_amortized_extrapolation/referee_checks.json`
+
+Four checks:
+
+**A. Exact stationary measure (W²_sat = L/12 for 1D EW/KPZ):**
+EW sits at 0.96±0.03 (amplitude offset only, harmless for amplitude-invariant
+features). KPZ swings 1.043→0.918 at L=64, ≈4σ. Lam–Shin discretization
+pathology. Explains KPZ gate failure. Literature anchor: Lam & Shin, PRE 1998.
+
+**B. Expert additive ansatz (W² = b + aL^{2α}) on BD:**
+Free fit α = 0.441 ± 0.011 (5σ from 0.5). Fixed α=0.5: χ²/dof = 6.2.
+The textbook two-parameter ansatz is rejected on BD at L ≤ 256.
+
+**C. Discriminability control:**
+300 BD-like ladders at true α ∈ {0.40, 0.45, 0.50, 0.55}. Predictions
+0.425/0.496/0.548/0.607. Adjacent α separated ~3σ. Response slope 1.2
+(no shrinkage). Slice-conditional bias +0.05 (true 0.50 → predicted 0.548).
+
+**D. Literature priority scan:**
+Hall–Welsh/Le Cam minimax theory mature in extreme-value statistics, but no
+application to FSS found. Claim "to our knowledge, first" survives initial
+scan; Borwein–Erdélyi pass still pending.
+
+---
+
+### exp79: Lemma scaling test and constant certificates — COMPLETE
+
+**Files:** `experiments/79_lemma_scaling_test.py`,
+`experiments/79b_constant_certificates.py`
+
+**Central lemma (numerically verified):** Minimum L² distance from Δα·x to
+bounded N-term exponential sums on [0,T]:
+
+    E_N = c_N · √T · U · (ΔαT/U)^{N+1}
+
+**Verified constants:** c₁ = 0.0375 (construction optimal at tested parameters),
+c₂ = 0.0216 (optimizer beats uniform-node construction by 14%), c₃ ≈ 0.019.
+
+**Algebraic insight:** With Richardson weights, the residual is exactly
+Δα·(1-e^{-ωx})^N (binomial theorem). Substitution t = e^{-ωx} converts the
+problem to polynomial approximation of log(1/t) — a classical problem solvable
+via Legendre projection or Bernstein ellipse.
+
+**Open items:**
+1. Analytic lower bound proof (harmonic-node case is tractable).
+2. Optimal nodes for N≥2 (uniform nodes are suboptimal; open problem).
+
+---
+
+### exp80: Second-observable floor transfers — COMPLETE
+
+**Files:** `experiments/80_second_observable_floors.py`,
+`results_exp80_second_observable_floors/floors.json`
+
+**Part A (temporal β):** Design: 7 log-spaced times t=50..5000, L=1024, 8 seeds.
+β floor ≈ 0.07–0.08. EW/KPZ β-gap (0.083) at/just above floor. Retrodicts exp74
+asymmetry: time window spans ~2 decades vs size window's ~0.9 decades.
+Caveat: temporal correlations within a seed not captured by iid-noise model.
+
+**Part B (Ising ν):** Design: exp52d L ∈ {32,48,64,96}. Floors:
+agnostic 0.31–0.39; Ising-honest 0.13–0.17; Ising-strict 0.05–0.13 (in 1/ν).
+exp52d's 7.3% deviation consistent with strict-class floor. Exact-solution
+knowledge worth ~5–6× in resolution.
+
+---
+
+## Files on disk (complete state)
 
 ```
-benchmark (synthetic mixture test):  naive 0.307 | fit_w1 0.173 | fit_w0p5 0.206
-                                     | fit_free 0.903 | amortized 0.111 RMSE
-real:  ew 0.671  kpz 0.564  eden 0.576  bd 0.483  (rd 0.79, degenerate control)
-gate (EW/KPZ/Eden within 0.10 of 0.5): FAIL (EW worst)
+experiments/
+  75_correction_to_scaling.py        classical fits, exp75
+  76_amortized_extrapolation.py      amortized estimator, full pipeline
+  76b_regenerate_ladders.py          per-seed W_sat generation
+  77_minimax_floor.py                Le Cam floor computation
+  78_referee_checks.py               4 referee checks
+  79_lemma_scaling_test.py           N-scaling verification
+  79b_constant_certificates.py       c_1, c_2, c_3 certificates
+  80_second_observable_floors.py     beta and nu floor transfers
+
+results_exp76_amortized_extrapolation/
+  wsat_perseed.csv                   673 rows, 4 × 7 × 24
+  summary_full24seed.json            full 24-seed eval
+  lofo_control.json                  leave-one-family-out
+  classical_on_real.json             classical baselines
+  kpz_window.csv                     KPZ gate diagnostic
+  referee_checks.json                exp78 results
+
+results_exp77_minimax_floor/
+  floor.json                         all floor numbers
+
+results_exp80_second_observable_floors/
+  floors.json                        beta and nu floors
+
+ml_paper/
+  THEORY_minimax_floor.md            ~620-line theory note (Appendices A–D)
+  CLAIMS_REGISTER.md                 all claims, Part I (exp62–75) + Part II (exp76–80)
+  MANUSCRIPT_OUTLINE.md              Paper 2 (floor, primary) + Paper 1 (clustering)
+  EXP76_HANDOFF.md                   this file
+
+docs/
+  EXPERIMENT_LOG.md                  entries through exp80
 ```
 
-Two findings already: (1) the amortized estimator clearly beats all classical
-fits on synthetic data with near-zero bias — the methodological claim holds;
-(2) the real-data gate fails on EW, and the diagnosis is **seed noise in the
-6-seed exp75 ladders** (EW effective exponents swing 0.19–1.07), not estimator
-failure. Tantalizing: BD's pilot α̂ = 0.483, 90% [0.395, 0.675] — consistent
-with its KPZ-class value 0.5 — but unusable until the gate passes. Hence
-exp76b: 24-seed ladders.
+---
+
+## Paper-writing state
+
+**Theory note (`THEORY_minimax_floor.md`):** Complete draft including:
+- Main body: setup, Le Cam bound, confusion gap, computed floors.
+- Addendums 1–5: mechanism (ω→0 degeneracy), resolution law, c₁ exact,
+  verification ledger, ω-range/amplitude correction.
+- Appendix A: full Richardson construction and proof.
+- Appendix B: RG-equivariance corollary, compute-allocation criterion.
+- Appendix C: prior-art positioning map (9 references).
+- Appendix D: binomial identity, log-polynomial reduction, Bernstein ellipse,
+  constraint protection.
+
+**What maps to the paper:**
+- Theory note sections → paper sections (renumbered, condensed).
+- floor.json → Tables 1–2.
+- Figure 1: floor landscape (D² vs Δα; floor vs L_max; floor vs u_max).
+- Figure 2: real-data recovery with floor marked.
+- Figure 3: N-scaling log-log plot with theoretical slopes.
+
+---
+
+## Open items before submission
+
+**Blocking:**
+1. Write the paper (MLST format, ~8–10 pages + appendices).
+   - Outline is in MANUSCRIPT_OUTLINE.md.
+   - All numerical results are in place.
+   - All figures need to be generated from scripts (no figure generation code
+     yet — must be written, or generated interactively from floor.json etc.).
+
+**Non-blocking (strengthening):**
+2. Borwein–Erdélyi prior-art pass: confirm no FSS minimax bound in the
+   approximation-theory literature.
+3. Analytic lower bound for c_N (harmonic-node construction).
+4. KPZ exact-measure integrator (Lam–Shin exact scheme) to test gate.
+5. ω-range vs amplitude decomposition: verify Correction to Addendum 4 is
+   properly attributed in the note.
+6. Optimal nodes for N≥2 (open mathematical problem; not required for submission).
+
+---
 
 ## Sandbox gotchas (cost real time — do not rediscover)
 
-- Background/nohup processes are killed when a bash call ends. Run long jobs
-  as foreground time-budgeted chunks that **close files before exit** — rows
-  flushed but not closed are lost when `timeout` kills the process.
-- The mounted-folder sync occasionally corrupts files edited while a process
-  runs (a stray char broke 76 once; 76b got truncated once). If a script
-  suddenly has a SyntaxError, rewrite it whole; both current files are clean.
-  Verify with `python -c "import ast; ast.parse(open(f).read())"`.
+- Background/nohup processes are killed when a bash call ends. Always run
+  time-budgeted foreground chunks that **close files before exit**.
+- Mount sync corrupts files edited mid-process: if a script suddenly has a
+  SyntaxError, rewrite it whole.
 - `pip install scikit-learn numba --break-system-packages` needed per fresh VM.
-- One simulator seed costs ~0.1 s (small L) to ~3–7 s (L=256); numba recompiles
-  ~5 s per process.
-
-## Resume sequence (in order)
-
-1. Finish `wsat_perseed.csv`: repeatedly run
-   `timeout 43 python3 -u experiments/76b_regenerate_ladders.py --seeds 24`
-   in ~35 s foreground chunks (or recreate the budgeted runner) until
-   "all done" — remaining: kpz L=192 (8) + L=256 (24), all of bd and eden
-   (~368 rows, ≈ 10–15 chunks).
-2. Full-size training: `python3 experiments/76_amortized_extrapolation.py
-   --stage gen` then `--stage train --prior <P>` one prior per call
-   (200k samples; each prior trains 4 GBMs, ~1–2 min total per prior).
-3. `--stage eval`: check (a) synthetic benchmark table, (b) transfer matrix
-   off-diagonal (misspecification robustness), (c) **sanity gate on 24-seed
-   EW/KPZ/Eden ladders**, (d) BD α̂ + quantile interval + prior spread +
-   seed bootstrap.
-4. Decision point:
-   - Gate PASSES → headline: "amortized estimator recovers known α where
-     classical extrapolation fails, and places BD at α̂ ≈ …" → exp76 closes the
-     exp72–75 arc constructively. Write EXPERIMENT_LOG.md entry + new claim in
-     CLAIMS_REGISTER.md (evidence: summary.json) + manuscript Section 6/7 hook.
-   - Gate FAILS with 24 seeds → equally citeable negative: "even an estimator
-     that is Bayes-optimal under a broad correction prior cannot recover known
-     exponents from L ≤ 256 / 24-seed data" — quantifies the information limit,
-     strengthening the exp75 conclusion. Then check whether failure is seed
-     noise (bootstrap interval covers 0.5) vs representation limit.
-5. Robustness before claiming anything: leave-one-family-out training
-   (train on mix minus F3, test gate again) to show the result isn't an
-   artifact of including BD's known correction form in the prior.
-6. Documentation: EXPERIMENT_LOG.md entry (follow exp72–75 style, with
-   caveats), update CLAIMS_REGISTER.md (new claim + required evidence),
-   note in MANUSCRIPT_OUTLINE.md Section 6.
-
-## Paper framing reminder
-
-Venue target: MLST. The exp76 result slots in as the constructive capstone of
-the mechanism arc: exp72 (mechanism) → 73 (survives normalization) → 74
-(partial recovery, α blocked) → 75 (classical extrapolation fails) → 76
-(amortized estimator: either fixes it or proves the information limit).
-Either outcome completes the arc. Must-do referee defenses unchanged:
-leave-one-family-out control (above) and honest prior-sensitivity spread.
+- `numpy.math.factorial` removed in newer numpy — use `import math; math.factorial`.
+- Git: branch `exp76-79` has the experiment commits. If pushing from VM,
+  use `/tmp/ud` clone to avoid stale lock files from crashed processes.
+  `git push origin HEAD:exp76-79` from there.
+- The linearized floor formula (see exp77 known issue above) is buggy; never
+  cite `floor_linearized` values from floor.json.

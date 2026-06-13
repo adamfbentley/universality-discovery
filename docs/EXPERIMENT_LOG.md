@@ -430,3 +430,143 @@ Predictions: 2/7 passed (P2 EW-KPZ increases with CG, P5 KPZ merges at b=2).
 - The continuum α_eff measurements are seed-noisy at 6 seeds; more seeds would smooth them but would not change the BD conclusion (BD is already clean) or the gate failure (the ω-sensitivity is systematic, not statistical).
 - RD α (~0.77) is spurious — RD never saturates, so W_sat is T-dependent and α is undefined; it is a degenerate control only.
 - These remain finite-size statements; nothing here claims BD is *not* asymptotically KPZ — the point is precisely that accessible data cannot decide it.
+
+### Exp 76: Amortized finite-size extrapolation (replaces the parametric fit of exp75)
+
+**Goal**: exp75 showed direct correction-to-scaling fits cannot recover the known EW/KPZ α = 0.5 from L ≤ 256 because the assumed correction exponent ω dominates the answer. Test: train a regressor on synthetic W_sat(L) ladders drawn from a *prior over correction families* (pure power; single power correction; two-term; Krug–Meakin additive intrinsic width; log corrections) with realistic multiplicative seed noise, using scale-invariant inputs (adjacent effective exponents), so the estimator marginalizes over correction forms instead of assuming one.
+
+**Method** (`experiments/76_amortized_extrapolation.py`, `76b_regenerate_ladders.py`; results in `results_exp76_amortized_extrapolation/`): 200k synthetic training ladders per prior; HistGradientBoosting point + 5/50/95% quantile models, per family and on the mixture; classical baselines (naive slope, fixed-ω, free-ω fits) reimplemented; real test data regenerated at 24 seeds (exp75 protocol exactly) for EW/KPZ/BD/Eden. Pre-registered sanity gate: EW/KPZ/Eden within 0.10 of the known 0.5 before any BD claim.
+
+**Results**:
+
+- Synthetic benchmark (mixture test set): amortized RMSE 0.106, bias +0.001 vs best classical 0.165 (fit_w1); free-ω fit fails to converge on 23% of samples. Transfer matrix: mixture-trained stays at RMSE 0.088–0.123 across all five correction families; single-family-trained estimators degrade to 0.19–0.33 off-diagonal.
+- Real data (24-seed ladders): EW 0.532 ✓, Eden 0.491 ✓, KPZ 0.615 ✗ — gate FAILS by 0.015 over tolerance, on KPZ only. BD: α̂ = 0.522, seed-bootstrap 90% [0.482, 0.529].
+- Leave-one-family-out control: retraining with the Krug–Meakin family removed leaves BD at 0.532 [0.486, 0.555] — the BD recovery does not depend on having BD's textbook correction form in the prior.
+- Classical fits on the *same* 24-seed data: BD spans 0.36–0.70 across ansatz choices (no way to pick); EW/Eden naive slopes are fine (corrections small) but naive fails BD at 0.36.
+
+**KPZ diagnosis (open)**: the KPZ ladder violates the exact 1D stationary result W²_sat = L/12 by up to ~8% (≈3 SEM) at L=64 with no clean trend — consistent with a known discretization pathology of naive KPZ integrators (fluctuation–dissipation violation, cf. Lam–Shin). The estimator (and fit_w1 = 0.62 alike) correctly reads this distorted shape. Action: exact-measure comparison and integrator check, not more seeds.
+
+**Caveats**: training α prior is uniform [0.05, 0.95] with mean 0.5 — a discriminability control (BD-like ladders at true α = 0.40/0.45/0.50) is required before claiming the BD recovery is measurement rather than shrinkage; everything is 1D, single observable, 7-point ladders.
+
+### Exp 77: Le Cam minimax resolution floor — the negative results were forced
+
+**Goal**: convert the project's empirical negatives into an information-theoretic statement. Two parameter configurations with different α but adversarially chosen correction nuisances can induce nearly identical data distributions; Le Cam's two-point method then bounds every estimator's worst-case error. Theory note: `ml_paper/THEORY_minimax_floor.md`; computation: `experiments/77_minimax_floor.py`; results: `results_exp77_minimax_floor/floor.json`.
+
+**Setup**: log W ladders, Gaussian seed noise (σ measured per system from the 24-seed data), adversary = single standard power correction with amplitude |u| ≤ 4 at L=32 and ω ∈ [0.3, 2.5] (conservative: richer families only strengthen the bound). Confusion gap D²(Δα) computed by multistart bounded optimization; floor = largest Δα with KL ≤ 1/2.
+
+**Results**:
+
+- Near-non-identifiability at L ≤ 256: D²(0.1) ≈ 1.3·10⁻⁷ — resolving Δα = 0.1 needs ~160,000 seeds at continuum noise (~2,700 even at BD's tiny noise). Floor vs seeds is nearly flat (0.51/0.44/0.38 at m = 6/24/96): the limit is identifiability, not statistics.
+- Per-system worst-case floors (m=24): BD 0.27, EW/KPZ/Eden 0.44. Every estimator has worst-case error ≥ floor/4 — exp75's failures and the exp62–64 clustering ceiling were inevitable at these sizes.
+- Resolution law: floor at σ=0.15, m=24 falls 0.44 → 0.33 → 0.26 → 0.19 → 0.14 as L_max grows 256 → 512 → 1024 → 4096 → 16384: decades of L, not seeds.
+- Value of structural knowledge: bounding the correction amplitude u_max = 4 → 0.1 shrinks the floor 0.44 → 0.077 (σ=0.15). With BD's honest bound (u ≤ 0.5; actual u ≈ 0.4) the floor implies worst-case error ≥ 0.023 — the exp76 interval (±0.03) sits just above it, i.e. the amortized estimator operates near the information limit, not beyond it.
+
+**Interpretation**: worst-case identifiability of α∞ from L ≤ 256 is essentially nil, so *all* practical finite-size inference rides on prior assumptions about correction structure. Classical fits smuggle that prior in via the ansatz and fail silently when it is wrong (exp75); the amortized estimator declares the prior and marginalizes over it (exp76). The Bayes-vs-minimax gap is the quantified value of that prior. Formal connection: this is the tail-index estimation problem of extreme-value statistics (second-order regular variation; Hall–Welsh minimax bounds) transplanted to FSS — literature priority check still pending.
+
+**Caveats**: numerical optimization lower-bounds the true confusion (more starts can only deepen it — direction is safe); Gaussian/independent noise idealization; linearized closed-form in the note has a known implementation bug (exact results unaffected); floors are worst-case — Bayes risk under a declared prior is legitimately smaller, which is the point.
+
+### Exp 78: Referee-proofing checks (priority, exact measure, expert baseline, discriminability)
+
+(`experiments/78_referee_checks.py`, `results_exp76_amortized_extrapolation/referee_checks.json`)
+
+- **Literature priority (web)**: Hall–Welsh/Le Cam minimax theory is mature in extreme-value statistics (tail-index estimation under second-order regular variation), but no application of minimax lower bounds to finite-size scaling found in the statistical-physics literature; the φ⁴/Ising corrections-to-scaling literature treats the problem heuristically. exp77's claim stands as "to our knowledge, first" pending a deeper scan.
+- **A. Exact stationary measure (W_sat = √(L/12) for 1D EW/KPZ)**: EW sits at a roughly constant ratio 0.96 ± 0.03 across all L — a pure amplitude offset (D/ν normalization), harmless because the exp76 features are amplitude-invariant, consistent with EW passing the gate. KPZ shows an L-dependent swing (1.043 at L=32 → 0.918 at L=64, ≈4σ combined, recovering to ~0.98) — a genuine shape distortion at small L, consistent with known stationary-measure violations of naive KPZ discretizations (Lam–Shin). This is the mechanism of the KPZ gate failure: the estimator (and fit_w1 alike) correctly reads a distortion that is in the data.
+- **B. Expert baseline (additive intrinsic width, W² = b + aL^{2α}) on BD**: the textbook ansatz does NOT rescue classical fitting. Free fit: α = 0.441 ± 0.011 (5σ from 0.5, error bar wildly overconfident); fixed α = 0.5 gives χ²/dof = 6.2 (rejected). BD carries corrections beyond the pure additive form at L ≤ 256. This kills the anticipated referee rebuttal ("just fit W² = aL + b") and is a live demonstration of the thesis: a structurally informed but still-misspecified ansatz produces a confident wrong answer.
+- **C. Discriminability control (BD-like ladders, true α ∈ {0.40, 0.45, 0.50, 0.55}, BD-matched noise)**: predictions 0.425 ± 0.020 / 0.496 ± 0.022 / 0.548 ± 0.017 / 0.607 ± 0.019 — adjacent α separated by ~3σ, response slope ≈ 1.2. The prior-mean-shrinkage objection is refuted (shrinkage would give slope ≪ 1 toward 0.5; observed is mild anti-shrinkage). HOWEVER a conditional bias of +0.03 to +0.06 on this slice was found (true 0.50 → predicted 0.548). De-biasing the real-BD estimate by the slice bias gives ≈ 0.47–0.49; combined honest statement: BD α̂ ≈ 0.50 ± 0.05 (syst) ± 0.03 (stat) — still decisively above the naive 0.36 and consistent with KPZ-class 0.5, but the ±0.03-only interval previously quoted understates the systematic. Must be reported in any claim.
+
+**Net effect on claims**: exp76's BD recovery survives all four checks with one honest widening of its error (slice-conditional bias). The KPZ gate failure is now mechanistically attributed (integrator stationary-measure distortion) with a literature anchor and an amplitude-invariance explanation for why EW passed despite its own offset. The expert two-parameter rebuttal is empirically dead. The exp77 priority claim survives initial scan.
+
+### Exp 79: Central lemma — N-scaling law for the confusion gap
+
+**Goal**: derive and certify the algebraic structure of the confusion gap D²(Δα)
+as a function of the number of correction terms N, the window T = log(L_max/L_min),
+the amplitude bound U, and the exponent separation Δα.
+
+**Method** (`experiments/79_lemma_scaling_test.py`, `experiments/79b_constant_certificates.py`):
+Two scripts. `79_lemma_scaling_test.py` measures E_N — the minimum L² distance from
+Δα·x (linear slope on [0,T]) to bounded N-term exponential sums {Σₖ uₖ e^{-ωₖx} :
+|uₖ| ≤ U} — via `lsq_linear` + Nelder–Mead, and tests N-, U-, Δα-, and T-scaling
+independently. `79b_constant_certificates.py` applies the explicit Richardson
+construction (N basis functions with weights annihilating moments 0..N-1), then
+verifies the constructed solution against the numerical optimizer.
+
+**Central lemma (numerically verified):**
+
+    E_N = c_N · √T · U · (ΔαT/U)^{N+1}
+
+**Verified scaling exponents** (ratios vs theory):
+
+| scaling | empirical ratio | theory ratio |
+|---------|----------------|--------------|
+| N: E₁/E₂ | 0.030 | 0.029 |
+| N: E₂/E₃ | 0.049 | 0.050 |
+| U-scaling | ~4× (N=1→2) | expected ~4× |
+| T-scaling | ~11.3 | matches √T·(T/U)^{N+1} |
+
+**Certified constants:** c₁ = 0.0375 (Richardson construction achieves it and
+the numerical optimizer cannot improve to 3 significant digits at tested
+parameters — correctly stated as "construction optimal to 3 digits," not a
+proof of global optimality). c₂ = 0.0216 (optimizer improves on uniform-node
+Richardson construction by 14% — uniform nodes are suboptimal for N≥2).
+c₃ ≈ 0.019 (numerically certified).
+
+**Key algebraic insight**: with Richardson weights, the residual is exactly
+
+    r(x) = Δα · (1 - e^{-ωx})^N   (binomial theorem)
+
+Substitution t = e^{-ωx} then converts the minimization to the problem of
+polynomial approximation of log(1/t) on [0,1] — a classical problem in
+approximation theory. The scaling exponent (N+1) counts the order of the
+Richardson cancellation; c_N encodes the quality of polynomial approximation
+of log near t=0 (Legendre projection / Bernstein ellipse). This connects the
+floor to the super-resolution / Prony problem: the FSS estimation problem is
+a physical incarnation of approximation-theoretic capacity bounds.
+
+**Open items**: (1) analytic lower bound proof via harmonic-node construction
+(tractable — reduces to known polynomial approximation bounds for log); (2)
+optimal node placement for N≥2 (open problem; uniform nodes are suboptimal).
+
+**Caveats**: scaling laws verified at a finite set of parameter values; constants
+are certified lower bounds (optimizer cannot beat them at tested points). The
+analytic proof of c_N is the main open item before this becomes a theorem.
+
+**Bug note**: `numpy.math.factorial` removed in numpy ≥ 2.0; corrected to
+`import math; math.factorial` in exp79b.
+
+### Exp 80: Does the floor transfer beyond W_sat(L) ladders?
+
+Referee-anticipation item: exp77 was computed for one observable in one
+domain. Two transfers (`experiments/80_second_observable_floors.py`,
+`results_exp80_second_observable_floors/floors.json`), both reusing the
+exp77 machinery with only the design, noise, and declared class changed.
+
+**A. Growth exponent beta (temporal scaling, same systems).** Design: 7
+log-spaced times in t = 50..5000 (2.0 decades) at L = 1024; noise measured
+from fresh EW/KPZ runs (sigma_logW ~ 0.04-0.06). Floors under the agnostic
+class (two corrections, |u| <= 1, omega >= 0.3): beta resolvable to ~0.07-0.08
+at m = 10-24 seeds. The EW/KPZ beta gap (0.083 at face value, naive measured
+betas 0.232 vs 0.265) sits at/just above the floor — beta-based EW/KPZ
+discrimination is marginally feasible at accessible scales. Compare alpha:
+floor 0.21-0.44 on the 0.9-decade L-ladder vs the 0.14 BD question. The
+framework retrodicts the exp74 asymmetry (BD's beta converged while its alpha
+stayed anomalous) as a window-length effect: the time window simply spans
+more decades than the size window.
+
+**B. 2D Ising nu on the exp52d design (L in {32,48,64,96}, 0.48 decades).**
+Floor on 1/nu by declared class:
+agnostic (|u|<=1, omega>=0.3): 0.31-0.39 across sem 0.005-0.02;
+Ising-honest (|u|<=0.3, omega>=1): 0.13-0.17;
+Ising-strict (|u|<=0.1, omega>=1): 0.05-0.13.
+Reading: on a half-decade window, nu to ~1% is impossible without strong
+correction assumptions; the 2D Ising community's precision claims implicitly
+assert exactly such knowledge — justified there by exact results, and worth a
+factor ~5-6 in resolution at fixed design and noise. exp52d's observed 7.3%
+deviation is consistent with (above) the strict-class bound. The floor did
+not contradict known Ising practice; it priced the exact-solution knowledge
+that practice silently uses.
+
+**Caveats**: part A noise from 8 seeds at one L (growth-regime correlations
+across t-points within a seed are ignored by the iid-noise model — the
+floors are therefore approximate for A; per-point independence is better
+justified in B where each L is a separate simulation); the agnostic class is
+deliberately generous, and all numbers are class-conditional by construction.
