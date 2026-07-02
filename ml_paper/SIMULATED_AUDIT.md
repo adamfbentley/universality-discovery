@@ -166,3 +166,56 @@ self-checks were run on the two claims this audit had made from memory.
 **Confirmed exactly:**
 - The mapping is verbatim: A–K's setup (their Eq. 18, "much of which follows
   Donoho (1994)") is Y = Kf + σε, convex F, linear functional Lf; their
+  least-favorable-pair program (their Eq. 2) IS the confusion gap D²
+  minimization, including the free intercept.
+- Their practice conclusions are ours: "explicit a priori specification of
+  the smoothness constant C cannot be avoided" = the declared-prior thesis;
+  their recommended sensitivity-in-C reporting = floor-vs-U curves.
+- Stam direction (I·Var ≥ 1, Gaussian minimizes) verified numerically
+  (t(5): 1.25; t(30): 1.007) and CLT monotonicity of κ toward 1 verified by
+  FFT convolution (Laplace means: 2.00 → 1.19 → 1.06 → 1.02 for m=1,2,4,8).
+  The Gaussianity-mitigation argument (§2) stands on verified ground.
+
+**Fault 1 (the ≈1.25 constant was misapplied).** The ~1.25 affine-vs-minimax
+factor belongs to squared-error ESTIMATION (Donoho, via A–K's citations —
+not independently verified). For CONFIDENCE INTERVALS — the object the paper
+actually needs — no such constant enters: A–K Theorem 3.1/Corollary 3.1 give
+exact finite-sample minimax one-sided CIs with worst-case excess length
+ω(σ(z_{1−α}+z_β)), and their §3.4 gives the shortest fixed-length two-sided
+CI, half-length cv_α(ω(δ)/(2σω'(δ)) − δ/(2σ))·σω'(δ), optimal δ by 1-D
+minimization — all computable from the modulus that exp83's hull code
+already evaluates. Consequence: EXP83_AUDIT's "sharpness bracket within
+1.5–2×" was valid but needlessly weak. The right deliverable is **exact
+optimal CIs for α under declared corrections** (an "FSSHonest", modeled on
+A–K's RDHonest R package) — stronger, cleaner, and software-shaped.
+
+**Fault 2 (centrosymmetry was under-flagged).** A–K's severe non-adaptation
+bounds (Cor 3.2/3.3, the 95%-efficiency numbers) require F convex AND
+centrosymmetric. Our correction class (u ∈ (−0.75, 4), asymmetric; curved
+family) is neither. So: the constructive minimax-CI machinery (convexity
+only, after hull) transfers; the adaptation-IMPOSSIBILITY results do not
+transfer verbatim. Flip side, from their own discussion: nonconvex/
+asymmetric restrictions are precisely where adaptation CAN be possible
+(their citations: Cai–Low–Xia 2013; Giné–Nickl self-similarity). Our N-term
+sparsity structure is such a class — the "effective N(T)" question from
+Addendum 3 is formally an ADAPTATION question, connecting the project to the
+adaptive-CI literature. Open, thesis-chapter-sized.
+
+**Upgrade (from their §4/Supplemental E.3): a data-driven LOWER bound on
+the smoothness constant.** A–K estimate a lower bound on C from the data and
+use it as a specification test on any declared C. The analogue here: a
+data-driven lower bound on the correction amplitude U (and possibly ω_min),
+turning "the floor is class-conditional" from a pure declaration into a
+partially data-grounded statement, and answering the referee question "how
+would I choose U?" with a procedure instead of a shrug.
+
+## 8. Limits of this simulation
+
+This review was produced by the same class of model that produced the theorem
+notes; blind spots may be correlated. The Donoho/Armstrong–Kolesár mapping
+was verified against the published abstracts (fixed design, Gaussian errors,
+linear functional, convex class — the match is structural, not superficial),
+but the exact constants (the ≈1.25 affine-minimax factor) and the nonconvex-
+hull gap need expert or primary-source confirmation. The human audit remains
+gate one; its brief (AUDIT_BRIEF.md) has been updated to ask the expert to
+check precisely this mapping.

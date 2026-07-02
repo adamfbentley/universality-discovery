@@ -68,4 +68,16 @@ do not, since our class is asymmetric.
 3. **J=1 anchor noise defines the table's error bar**: the hull/class ratio
    carries ±2% optimizer/bisection noise (visible as the 0.98 anchor cell);
    state it with the table.
-4. The race-condition 
+4. The race-condition process note (anomaly 2) and the sequencing rule
+   belong in the sandbox gotchas, not just the report.
+
+## Auditor's own correction, for the record
+
+This session's earlier commits (abfeb32, 822dd05) were verified to have
+MISSED their Edit-tool file changes: the mount had not synced when `git add`
+ran, so the commit messages described content the trees did not contain.
+Sonnet's fixup (4369d6e) was correct and history is now accurate. Process
+rule going forward, added to the gotchas: **after any commit through the
+mount, verify the committed blob (`git show HEAD:<file> | grep <marker>`),
+not the working tree.** The auditor is not exempt from the pipeline's
+verification discipline; this is the proof.
