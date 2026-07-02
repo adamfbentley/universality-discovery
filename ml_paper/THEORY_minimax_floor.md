@@ -429,3 +429,224 @@ for BD intrinsic-width corrections), and asserting it lowers the floor:
 knowledge of the irrelevant spectrum, not just amplitudes, buys resolution.
 A decomposition run (linear adversary with omega >= 0.3 vs unbounded) is
 needed to apportion the 8x between the two effects.
+
+## Appendix A (2026-06-13): full derivation of the construction and constant
+
+Goal: approximate da*x on [0,T] by c + sum_{i=1}^N a_i e^{-w_i x} with
+|a_i| <= U; derive the upper bound E_N <= c_N sqrt(T) U (da T/U)^{N+1}.
+
+Step 1 (building blocks). For nu > 0 define f_nu(x) = (1 - e^{-nu x})/nu.
+Taylor: f_nu(x) = x - nu x^2/2! + nu^2 x^3/3! - ... Each f_nu is an
+admissible combination of a constant and one exponential with amplitude
+1/nu (times whatever overall coefficient is applied).
+
+Step 2 (confluent nodes, Richardson weights). Take nu_i = i*w for
+i = 1..N and weights beta_i with sum_i beta_i = 1 and
+sum_i beta_i i^k = 0 for k = 1..N-1. These are the Lagrange
+extrapolation-to-zero weights beta_i = l_i(0) on nodes {1..N}; explicitly
+beta_i = (-1)^{i-1} C(N,i). Proof of the moment identities: for any
+polynomial p of degree <= N-1, interpolation at N nodes is exact, so
+sum beta_i p(i) = p(0); take p = t^k. For k = N: t^N - prod_j(t-j) has
+degree N-1, so sum beta_i i^N = [t^N - prod(t-j)]_{t=0} = -(-1)^N N!
+= (-1)^{N-1} N!. (Verified numerically N = 1..8.)
+
+Step 3 (residual). g(x) = da * sum_i beta_i f_{i w}(x) is admissible and
+
+  da*x - g(x) = da * sum_{k>=N} (-1)^k w^k x^{k+1}/(k+1)! * M_k,
+  M_k = sum_i beta_i i^k,  M_N = (-1)^{N-1} N!,
+
+so the leading residual is -da * w^N x^{N+1}/(N+1) + O(w^{N+1} T^{N+2}).
+
+Step 4 (projection). Re-optimizing all amplitudes and the constant
+projects the residual onto the orthogonal complement of the family's
+tangent space, which contains polynomials of degree <= N (from
+perturbing beta and c). The L2[0,T] distance of x^{N+1} from P_N is the
+norm of the monic shifted Legendre polynomial of degree m = N+1:
+dist = T^{N+1} sqrt(T) * m!^2 / ((2m)! sqrt(2m+1)).
+
+Step 5 (amplitude binding). The construction's amplitudes are
+a_i = da * beta_i/(i w); the largest is |a_1| = N da / w. The bound
+|a_1| <= U forces w >= N da / U; insert w = N da/U into Step 3-4:
+
+  E_N <= [N^N (N+1)! N! / ((2N+2)! sqrt(2N+3))] sqrt(T) U (da T/U)^{N+1}.
+
+Values: c_1 = 0.0373, c_2 = 0.0252, c_3 = 0.0321. Certified against
+direct optimization: exact at N=1 (0.0375 +- grid error); loose by 14%
+(N=2, true 0.0216) and ~40% (N=3, ~0.019) because uniform nodes i*w are
+suboptimal beyond N=1 (optimal node geometry: open).
+
+Step 6 (vacuity, for completeness). If amplitudes are unbounded the
+infimum is 0: the span of {e^{-w x} : w in any interval} is dense in
+C[0,T], because a finite measure annihilating it has a Laplace transform
+analytic in w and vanishing on a set with accumulation points, hence
+identically zero; Hahn-Banach then gives density. So every floor
+statement is conditional on the amplitude bound — that is the content,
+not a technicality.
+
+## Appendix B (2026-06-13): corollaries not yet recorded elsewhere
+
+B1. RG equivariance of the floor. The model class maps to itself under
+L -> bL with alpha fixed and u -> u b^{-omega}; therefore
+floor([bL1, bL2], U) = floor([L1, L2], U b^{-omega}). The window length
+in decades T is invariant; only the effective amplitude flows. The floor
+obeys the same flow as the corrections; verified directly on the law of
+Appendix A (substitute U -> U b^{-omega}).
+
+B2. Compute allocation. Moving the window up one factor of b multiplies
+the confusion gap by ~b^{N omega} (smaller corrections, easier
+discrimination) while per-seed cost grows like b^{d+z}. Comparing Fisher
+information per unit cost: pushing to larger L wins iff 2 N omega > d+z.
+For 1D KPZ-class growth (omega ~ 1, d+z = 2.5, N = 1 dominant
+correction): 2 < 2.5 — marginal; neither brute statistics nor brute size
+dominates, which matches the project's experience. (Heuristic until the
+sharp lower bound is proven; uses the certified upper-bound law.)
+
+B3. Identification with profiled Fisher information. For Gaussian noise,
+KL between nearby models = quadratic form of the Fisher metric, so the
+confusion-gap minimization is exactly the profiled Fisher information of
+alpha (nuisances = correction parameters), and the floor is the global
+(Le Cam) version of the profiled Cramer-Rao bound. The exponential
+ill-conditioning of the model manifold is the "sloppiness" of
+Machta-Transtrum-Sethna parameter-space compression; this work computes
+its consequence for the one stiff parameter physicists fit.
+
+## Appendix C (2026-06-13): positioning map (literature anchors found so far)
+
+Each fragment of this work has a mature home; the composition appears
+unclaimed. To cite and check before submission:
+
+- Declared priors on correction amplitudes: standard in lattice QCD since
+  Lepage et al., "Constrained curve fitting" (hep-lat/0110175): priors on
+  excited-state amplitudes when fitting C(t) = sum A_n e^{-E_n t} — the
+  same structure as our problem. exp76 is this philosophy, amortized,
+  with a prior over correction families, applied to FSS.
+- Fit-form systematics by model averaging: Jay & Neil (arXiv:2008.01069),
+  Neil & Sitison ICs — selects/averages among forms; does not bound all
+  estimators. The floor is complementary, not competing.
+- Partial identification: Manski (set identification; "law of decreasing
+  credibility"); Imbens-Manski intervals. Our zero-noise floor is the
+  diameter of the identified set; the knowledge axes (N, U, omega_min)
+  are an assumption hierarchy in his sense.
+- Conditional stability / regularization on compact classes: Tikhonov;
+  Isakov. Uniform decidability on a bounded class, none absolutely, is
+  the standard structure of ill-posed problems.
+- Analytic continuation bounds: two-constants theorem (harmonic measure);
+  Demanet-Townsend stable extrapolation; Trefethen. Note: physics
+  corrections are generically asymptotic, not analytic at 1/L = 0, so
+  these apply to the fitted model class, not to nature directly.
+- Exponential-sum approximation: Braess-Hackbusch (e^{-cN} rates on
+  finite intervals); Prony ill-conditioning; super-resolution separation
+  conditions (Candes-Fernandez-Granda; Moitra; Batenkov school) — the
+  omega -> 0 closure degeneracy is their merging-frequencies regime.
+- Singular-value decay of structured matrices: Zolotarev numbers
+  (Beckermann-Townsend) — the likely sharp source of the exponential
+  regime; check whether the amplitude-constrained two-regime law is a
+  corollary.
+- Sloppy models: Machta, Chachra, Transtrum, Sethna (Science 2013) —
+  RG-irrelevant directions are sloppy FIM directions; this work is the
+  estimation-theoretic side of that program for exponent recovery.
+- Searched and not found (web-grade, 2026-06): minimax/identifiability
+  floors for corrections-to-scaling or continuum extrapolation in the
+  FSS, kinetic-roughening, or lattice literature. Library-grade pass on
+  Borwein-Erdelyi (restricted-coefficient Muntz results) still owed.
+
+Status note: the derivation chain is now fully recorded in this file
+(setup -> Le Cam -> construction -> constants -> certificates ->
+corollaries -> positioning). Open items unchanged: analytic lower bound,
+optimal nodes N >= 2, decomposition of the omega-range vs amplitude
+effects (Correction to Addendum 4), external audit, library passes.
+
+## Appendix D (2026-06-13): closed form of the construction; reduction to
+## polynomial approximation of the logarithm
+
+D1. The construction in one line. With Richardson weights
+beta_i = (-1)^{i-1} C(N,i) on harmonic nodes w, 2w, ..., Nw, the binomial
+theorem gives sum_i beta_i t^i = 1 - (1-t)^N, so the approximant's slope is
+
+    g'(x) = da * [1 - (1 - e^{-w x})^N],
+
+and the residual slope is exactly
+
+    r'(x) = da * (1 - e^{-w x})^N  <=  da * (w x)^N.
+
+This replaces the Lagrange/moment machinery of Appendix A (kept for the
+record): integrating r' and applying the amplitude binding w = N da / U
+reproduces the law E_N <= c_N sqrt(T) U (da T/U)^{N+1} in a few lines.
+Interpretation: N correction terms conspire optimally (within harmonic
+nodes) as the N-th power of the single-term disguise.
+
+D2. Substitution t = e^{-w x}. Exponential sums on harmonic nodes are
+polynomials of degree N in t; the tilt da*x becomes -(da/w) log t. The
+uniform-node confusion problem is therefore EXACTLY:
+
+    best approximation of log(1/t) on [e^{-w T}, 1]
+    by degree-N polynomials with coefficient bounds.
+
+Consequences:
+- The exponential-regime constant (E_min ~ exp(-c U/(da T)) for free N)
+  becomes computable in closed form from the Bernstein-ellipse rate for
+  polynomial approximation of log on [t0, 1], t0 = e^{-w T}. Previously
+  this constant was heuristic.
+- The analytic lower bound, restricted to harmonic nodes, reduces to
+  classical constrained polynomial approximation of the logarithm, where
+  Chebyshev/Markov-type constants are exactly known. This is now the
+  recommended proof route. The general-node lower bound (and optimal
+  nodes for N >= 2) remains open; general nodes do not reduce to
+  polynomials.
+
+D3. Why the exponent (N+1) in the law is protected. The nonlinear
+family's full tangent space (free exponents) contains x e^{-w_i x}
+directions, which in the confluent limit reach polynomials beyond P_N
+and would naively cancel the leading residual term. They do not, because
+the amplitude constraint binds at the optimum (|a_1| = U) and freezes
+those directions. This is consistent with (and explains) the certified
+result that the optimizer improves the CONSTANT over the construction
+(14% at N=2, ~40% at N=3) but never the EXPONENT, which was verified
+independently in all four variables (Addendum 2).
+
+Verification status: D1 is exact algebra (checked at N=1,2 by hand; the
+binomial identity is elementary). D2 is a change of variables, exact for
+harmonic nodes. D3 is an observation consistent with all certified
+numerics; the KKT characterization of the constrained optimum (which
+constraints bind for general N) is open and is the route to exact c_N.
+
+## Appendix E (2026-06-13): the floor is observable-agnostic (normal form)
+
+Referee item: is the floor specific to W_sat(L) ladders? No. Computation in
+experiments/80_floor_generality.py (results_exp80_floor_generality/).
+
+The reduction is the content. Any observable O ~ X^theta * (1 + sum
+b_k X^{-w_k}) in a control variable X, written on x = log X, becomes a tilt
+theta*x plus bounded decaying exponentials sum a_i e^{-w_i x} — the SAME
+object the floor is computed for. Consequences, stated honestly:
+
+- A (roughness alpha, control L) and B (growth beta, control t) over the same
+  number of decades give an IDENTICAL confusion gap (4.65e-5, ratio 1.00).
+  This is not independent empirical evidence — it is the normal form made
+  visible: in log-control coordinates A and B are the same computation, so no
+  observable-specific factor enters. The floor is a function of (window in
+  decades, correction spectrum, target precision) alone. That A and B coincide
+  exactly is the cleanest possible statement of observable-agnosticism, but it
+  is structural, not a separate confirmation; we present it as such.
+
+- C (lattice-style correlator C(t)=A e^{-E0 t}(1+sum b_k e^{-dE_k t}),
+  resolving the ground-state energy E0 under excited-state corrections) is a
+  genuinely different instance: the signal is linear in t (not log t) and the
+  corrections are exponentials in t directly. It exhibits the same exponential
+  ill-posedness (gap 8.4e-4 for dE0=0.05 on an 11-slice Euclidean window).
+  This is exactly the ground-state vs excited-state extraction tension lattice
+  QCD manages daily with Lepage-style amplitude priors — i.e. a second domain,
+  with a different ansatz, in which the same floor mechanism operates.
+
+Takeaway for the paper: the floor is not a property of surface-growth
+roughness ladders; it is a property of leading-exponent estimation under
+unknown decaying corrections, a normal form shared by roughness exponents,
+growth exponents, correlation-length fits, and lattice energy extraction.
+The amplitude bound (prior) and the window length in decades are the only
+inputs that matter; the physical identity of the exponent does not.
+
+Open: a fully worked second-domain *estimator* demonstration (not just the
+floor) on real correlator data would further strengthen this; here we
+establish the floor's generality analytically and confirm it numerically in
+three settings.
+
