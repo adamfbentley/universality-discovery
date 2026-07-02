@@ -589,3 +589,39 @@ Plan and acceptance gates: ml_paper/EXP81_PLAN.md. Theory definitions:
 THEORY_minimax_floor.md Appendix F. Execution prompt for implementing agent:
 ml_paper/SONNET_EXP81_PROMPT.md. No results yet; nothing from this program
 is citable until gates G-B1..G-B5 / G-A1..G-A3 pass.
+
+### Exp 81 executed + audited (2026-07-02/03) — gates pass; headlines blocked pending 81f
+
+All binding gates passed (G-B1–B5, G-A1–A2; ml_paper/EXP81_REPORT.md). Solid:
+fractional-EW testbed validated to machine precision; summary ladder discards
+~3x of raw-field Fisher information about alpha even with zero corrections;
+H-A1 quadrature confirmed; H-A3 (correlated noise) found to be the dominant
+multivariate lever via common-mode rejection. Audit (EXP81_AUDIT.md) BLOCKED
+both headline ratios: floor_L23 violated nesting monotonicity in U (bisection
+granularity ~0.019 dominates sub-0.05 cells), and the L0-vs-L23 comparison
+used non-nested adversary classes. Fix-pass exp81f (adaptive bisection,
+monotonicity gates G-B6, pushforward-aligned adversary with DPI gate G-B7)
+specified in the audit; in progress.
+
+### Exp 82 (2026-07-03) — null-partition ARI table independently verified
+
+External review's fingerprint claim reproduced exactly: the exp62-67 ARI
+ceiling (~0.498) is the arithmetic signature of {EW+KPZ+Eden},{BD},{KS},{RD}.
+experiments/82_null_partition_ari.py; docs/external_reviews/.
+
+### Exp 83 (2026-07-03) — audit-response computations; ACCEPTED
+
+All five gates pass (EXP83_REPORT.md; audit sign-off EXP83_AUDIT.md).
+Results: D2 monotonicity verified + guard added; convex-hull floors (gap
+1.17-1.62x, saturating at J=4); van Trees bound under F1 prior — unknown
+corrections destroy 98.3% of Fisher information about alpha (59x, design-only);
+Gaussianity diagnostic kappa CIs straddle 1 in all four systems; plug-in-sigma
+floor intervals +-3%. Two estimator bugs caught by invariants (hull warm-start
+nesting; KDE self-inclusion caught by Stam kappa>=1). THEORY NOTE REPOSITIONED
+(Appendix G): the floor is the modulus of continuity of Donoho (1994) /
+Armstrong-Kolesar (2018) linear-functional theory; "first minimax bound for
+FSS" retired; primary-source verification (SIMULATED_AUDIT.md 8a) shows exact
+optimal-CI machinery applies — sharpness program superseded by exact CIs
+("FSSHonest" deliverable); data-driven lower bound on U identified as the
+answer to class-declaration objections. Independent replication of the BD
+floor (0.271 vs 0.27) from formulas alone recorded in Appendix G5.
