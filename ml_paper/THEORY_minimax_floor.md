@@ -650,3 +650,80 @@ floor) on real correlator data would further strengthen this; here we
 establish the floor's generality analytically and confirm it numerically in
 three settings.
 
+## Appendix F (2026-07-02): the observable-information hierarchy — PROPOSED
+## PROGRAM (exp81). Definitions and closed forms only; NO RESULTS YET.
+
+F0. The scope condition, stated precisely. Every floor in this note bounds
+estimators that are measurable functions of a DECLARED observable (the
+log-W_sat ladder, or the exp80 analogues). The bound is in TV distance
+between the data distributions of that observable, so it is estimator-
+agnostic GIVEN the observable, but says nothing about estimators consuming
+richer data. "No architecture can beat the floor" is true per-observable and
+false as an unconditional statement. The hierarchy of observables —
+
+    Level 0: single-summary ladder
+    Level 1: K-channel summary ladders
+    Level 2: full spectrum / two-point statistics
+    Level 3: raw configurations
+
+— therefore carries a hierarchy of floors, and the RATIO of floors between
+levels, as a function of the declared correction class, is a well-posed
+quantity. Exp81 computes it for a family where every level is exactly
+tractable. (Framing note for the paper: this turns the referee objection
+"try a transformer on raw fields" into a computable question, and it is the
+precise content behind the informal trichotomy model-limited /
+optimization-limited / information-limited.)
+
+F1. Multivariate (Level-1) confusion gap. Estimator observes y_{i,s} ∈ R^K,
+
+    y_k(L_i) = c_k + θ_k(α)·x_i + Σ_j u_{k,j} e^{−ω_j x_i} + noise,
+
+noise ~ N(0, Σ) across channels (Σ measured from seeds), independent across
+L and seeds; θ_k(α) known per-channel exponent maps. Define
+
+    D²(Δα) = min_{c, {ω_j} SHARED, |u_{k,j}| ≤ U_k} Σ_i Δμ(L_i)ᵀ Σ⁻¹ Δμ(L_i),
+
+floor as before. The physics question becomes algebra: if each channel has
+its own private corrections, the adversary defeats channels one at a time
+(expected gain ~√K at best); if the correction spectrum {ω_j} is shared
+(same irrelevant operators feeding every observable), consistency across
+channels over-determines the nuisance and the gain can be much larger.
+Whether richer summaries help is decided by correction SHARING and noise
+CORRELATION, not by K. This is exp81 Part A; hypotheses H-A1–H-A3 and gates
+in EXP81_PLAN.md.
+
+F2. Exactly solvable testbed for Levels 2–3: stationary fractional EW.
+1D Gaussian field, independent Fourier modes with spectrum
+
+    S(k) = D / ( ν|k|^z + ν₂|k|^{z+ω̃} ),
+
+so that α = (z−1)/2 (tunable), and W²(L) = A·L^{2α}(1 + b·L^{−ω_eff} + ...)
+with b ∝ ν₂/ν. Mode-sum caveat: ω_eff = ω̃ only for ω̃ < 2α (IR-dominated
+correction integral); for ω̃ > 2α the correction is UV-dominated and ω_eff
+saturates at 2α. The realizable correction range at α ≈ 0.5 is ω_eff ∈ (0, 1],
+and ω_eff must be measured, not assumed. The case ω̃ = 2−z is the
+near-marginal stress case at α ≈ 0.5. Because the
+family is Gaussian: (i) sampling is exact (draw modes, inverse FFT);
+(ii) raw-field KL between two parameter settings is a mode sum,
+KL = Σ_k [S₁/S₂ − 1 + ln(S₂/S₁)] per complex mode (conventions to be
+verified numerically against sampled likelihoods before use); (iii) exact
+Fisher information of α from raw fields is analytic,
+I(α) = Σ_k (∂ ln S/∂α)², ∂ ln S/∂α = −2 ln|k| · ν|k|^z/(ν|k|^z + ν₂|k|^{z+ω̃}).
+Hence the Level-3 floor is an explicit finite-dimensional optimization (Le
+Cam with the adversary inside the family), with no simulation noise in the
+theory, and any trained estimator has a computable ceiling it cannot beat —
+a self-auditing property that catches leakage bugs automatically.
+
+F3. What the hierarchy can and cannot conclude. The testbed is Gaussian, so
+the spectrum is sufficient and Level 2 = Level 3 exactly there; the
+interesting measured gap is Level 0 vs Level 2/3 under adversarial
+corrections. Nothing in F2 bounds estimators on NON-Gaussian raw fields
+(BD, KPZ configurations) — that requires either non-Gaussian likelihood
+bounds or empirical two-sample methods, and is deliberately deferred (exp82+)
+until the methodology is validated where the answer is checkable.
+
+F4. Status. PROPOSED. All numbered claims above are definitions or standard
+identities; the only physics content asserted (α = (z−1)/2, correction form,
+KL/FIM conventions) carries explicit numerical verification gates
+(G-B1–G-B5, EXP81_PLAN.md) that must pass before any number from this
+program is cited.

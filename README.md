@@ -30,6 +30,18 @@ interval ≈ 0.50 ± 0.05 (syst) ± 0.03 (stat) — where classical ansatz-fitti
 gives a scatter of 0.36–0.70. The estimator operates near the information limit
 for the declared correction class.
 
+## Next Phase: The Observable-Information Hierarchy (exp81, planned)
+
+The floor is estimator-agnostic but **observable-conditional**: it bounds
+inference from the declared summary (the W_sat ladder), not from richer data.
+Exp81 turns that scope condition into the next research object: compute floors
+across the observable hierarchy (single summary → multi-channel summaries →
+spectra → raw configurations) on an exactly solvable fractional-EW testbed
+where every level has closed-form information, and determine when richer
+observables buy exponent resolution. Plan: `ml_paper/EXP81_PLAN.md`; theory:
+`ml_paper/THEORY_minimax_floor.md` Appendix F; execution prompt:
+`ml_paper/SONNET_EXP81_PROMPT.md`.
+
 ## Earlier Result: Clustering Negative (exp62–75)
 
 The clustering phase showed that finite-size feature geometry can be locally

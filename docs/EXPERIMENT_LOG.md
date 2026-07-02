@@ -570,3 +570,22 @@ across t-points within a seed are ignored by the iid-noise model — the
 floors are therefore approximate for A; per-point independence is better
 justified in B where each L is a separate simulation); the agnostic class is
 deliberately generous, and all numbers are class-conditional by construction.
+
+### Exp 81: The observable-information hierarchy — PLANNED (2026-07-02)
+
+The exp77 floor is estimator-agnostic but observable-conditional. Exp81 asks
+how much exponent information each level of the observable hierarchy carries
+(summary ladder -> multi-channel summaries -> spectrum -> raw configurations),
+using (Part B) an exactly solvable stationary fractional-EW testbed with
+tunable alpha = (z-1)/2, tunable correction exponent, exact sampling, and
+closed-form KL/Fisher information at the raw-field level; and (Part A) a
+multivariate extension of the exp77 Le Cam optimizer testing whether gains
+from extra channels require a SHARED correction spectrum (triangulation
+hypothesis) vs private per-channel corrections (quadrature-only gains).
+Stretch (Part C): the same floor machinery applied to a neural-scaling-law
+fit design.
+
+Plan and acceptance gates: ml_paper/EXP81_PLAN.md. Theory definitions:
+THEORY_minimax_floor.md Appendix F. Execution prompt for implementing agent:
+ml_paper/SONNET_EXP81_PROMPT.md. No results yet; nothing from this program
+is citable until gates G-B1..G-B5 / G-A1..G-A3 pass.
