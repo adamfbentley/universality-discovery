@@ -1,0 +1,33 @@
+{
+ "design": {
+  "N_min": 1000000.0,
+  "N_max": 100000000.0,
+  "n_points": 7,
+  "window_decades": 2.0
+ },
+ "adversary_class_unchanged_from_exp77": {
+  "omega_bounds": [
+   0.3,
+   2.5
+  ],
+  "u_bounds": [
+   -0.75,
+   4.0
+  ]
+ },
+ "floor_vs_sigma_and_m": {
+  "0.01": {
+   "m6": 0.092578125,
+   "m24": 0.045703125
+  },
+  "0.03": {
+   "m6": 0.16054687499999998,
+   "m24": 0.12304687499999997
+  },
+  "0.1": {
+   "m6": 0.212109375,
+   "m24": 0.181640625
+  }
+ },
+ "note": "Machinery identical to experiments/77_minimax_floor.py; only the design (x=log N replacing x=log L) and the noise grid (sigma_logL, matching typical published compute-scan scatter) changed. Interpretation: this is a floor for the ML community's OWN scaling-law exponent fits, class-conditional exactly like every other floor number in this project -- it is not a claim about any specific published result."
+}
