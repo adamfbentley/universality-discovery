@@ -155,13 +155,14 @@ changes: the paper is *stronger*, because it stands on a thirty-year-old
 foundation instead of beside it, and its genuinely new parts are exactly
 delineated.
 
-## 8. Limits of this simulation
+## 8a. Primary-source verification pass (2026-07-03) — faults found in this
+## audit's own reasoning, and two upgrades
 
-This review was produced by the same class of model that produced the theorem
-notes; blind spots may be correlated. The Donoho/Armstrong–Kolesár mapping
-was verified against the published abstracts (fixed design, Gaussian errors,
-linear functional, convex class — the match is structural, not superficial),
-but the exact constants (the ≈1.25 affine-minimax factor) and the nonconvex-
-hull gap need expert or primary-source confirmation. The human audit remains
-gate one; its brief (AUDIT_BRIEF.md) has been updated to ask the expert to
-check precisely this mapping.
+Armstrong & Kolesár (2018) was read directly (§1–§4.2 + Appendix A.1, ~70% of
+the text; the remainder is proofs/references). Donoho (1994) could not be
+text-extracted; its results are used here only as A–K state them. Numerical
+self-checks were run on the two claims this audit had made from memory.
+
+**Confirmed exactly:**
+- The mapping is verbatim: A–K's setup (their Eq. 18, "much of which follows
+  Donoho (1994)") is Y = Kf + σε, convex F, linear functional Lf; their

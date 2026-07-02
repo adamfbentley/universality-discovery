@@ -28,6 +28,17 @@ estimation vs. testing separation; the ≈1.25 and the exact chain need the
 human auditor's or the primary source's sign-off before the bracket is
 stated with numbers rather than "order unity.")
 
+**Correction (2026-07-03, after primary-source verification — see
+SIMULATED_AUDIT.md §8a):** the ≈1.25 constant in the chain above is an
+MSE-estimation constant and was misapplied to the CI context; for confidence
+intervals the Armstrong–Kolesár machinery is exact with no unknown constant.
+The bracket above remains valid but is superseded as a goal: the correct
+deliverable is exact minimax CIs computed from the (hull) modulus already
+implemented in this experiment's Task 2 — see the exp84 candidate in
+SIMULATED_AUDIT.md §8a. Centrosymmetry caveat also applies: constructive
+results transfer (convexity only); A–K's non-adaptation efficiency numbers
+do not, since our class is asymmetric.
+
 ## Paper-facing numbers this experiment produced
 
 - **Nuisance information destruction: 59×** (info ratio 0.017, design-only,
@@ -57,16 +68,4 @@ stated with numbers rather than "order unity.")
 3. **J=1 anchor noise defines the table's error bar**: the hull/class ratio
    carries ±2% optimizer/bisection noise (visible as the 0.98 anchor cell);
    state it with the table.
-4. The race-condition process note (anomaly 2) and the sequencing rule
-   belong in the sandbox gotchas, not just the report.
-
-## Auditor's own correction, for the record
-
-This session's earlier commits (abfeb32, 822dd05) were verified to have
-MISSED their Edit-tool file changes: the mount had not synced when `git add`
-ran, so the commit messages described content the trees did not contain.
-Sonnet's fixup (4369d6e) was correct and history is now accurate. Process
-rule going forward, added to the gotchas: **after any commit through the
-mount, verify the committed blob (`git show HEAD:<file> | grep <marker>`),
-not the working tree.** The auditor is not exempt from the pipeline's
-verification discipline; this is the proof.
+4. The race-condition 
