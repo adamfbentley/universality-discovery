@@ -83,16 +83,17 @@ corrections-to-scaling in the FSS literature.
    (N, U, ω_min). We report the tuple with every number. Is there a better
    framing (e.g. Manski-style assumption hierarchies) that makes the
    conditionality harder to misuse by practitioners?
-5. **Priority.** Are you aware of prior work bounding estimator resolution
-   under bounded-amplitude exponential-sum nuisances — in statistics,
-   econometrics (long-memory/local-to-unity?), or inverse problems — that we
-   should be citing or deferring to?
+5. **Priority, and a specific mapping to check.** Our own follow-up analysis
+   (ml_paper/SIMULATED_AUDIT.md) suggests this problem is an instance of the
+   Donoho (Ann. Statist. 1994) optimal-recovery/modulus-of-continuity theory
+   for linear functionals over convex classes, in the form applied by
+   Armstrong & Kolesár (Econometrica 2018) to fixed-design regression with a
+   convex nuisance class. Is that mapping exact? If so: (a) does affine
+   near-sharpness (the ≈1.25 factor) transfer once our nonconvex correction
+   class is convexified, and (b) is there prior work applying this machinery
+   to corrections-to-scaling or continuum extrapolation that we must defer
+   to?
 
 ## 5. Known weaknesses, disclosed upfront
 
-The floor numbers depend on the declared adversary class, and comparisons
-across observables require class alignment we initially got wrong ourselves
-(caught by internal audit — nesting/monotonicity in U is now an automated
-check). σ is plug-in, not known. The temporal-observable transfer ignores
-within-replicate correlations. We would rather learn now that any of this is
-fatal than after submission; adversarial reading is explicitly invited.
+The floor numbers depend 
