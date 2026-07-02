@@ -475,3 +475,98 @@ Predictions: 2/7 passed (P2 EW-KPZ increases with CG, P5 KPZ merges at b=2).
 - **C. Discriminability control (BD-like ladders, true α ∈ {0.40, 0.45, 0.50, 0.55}, BD-matched noise)**: predictions 0.425 ± 0.020 / 0.496 ± 0.022 / 0.548 ± 0.017 / 0.607 ± 0.019 — adjacent α separated by ~3σ, response slope ≈ 1.2. The prior-mean-shrinkage objection is refuted (shrinkage would give slope ≪ 1 toward 0.5; observed is mild anti-shrinkage). HOWEVER a conditional bias of +0.03 to +0.06 on this slice was found (true 0.50 → predicted 0.548). De-biasing the real-BD estimate by the slice bias gives ≈ 0.47–0.49; combined honest statement: BD α̂ ≈ 0.50 ± 0.05 (syst) ± 0.03 (stat) — still decisively above the naive 0.36 and consistent with KPZ-class 0.5, but the ±0.03-only interval previously quoted understates the systematic. Must be reported in any claim.
 
 **Net effect on claims**: exp76's BD recovery survives all four checks with one honest widening of its error (slice-conditional bias). The KPZ gate failure is now mechanistically attributed (integrator stationary-measure distortion) with a literature anchor and an amplitude-invariance explanation for why EW passed despite its own offset. The expert two-parameter rebuttal is empirically dead. The exp77 priority claim survives initial scan.
+
+### Exp 79: Central lemma — N-scaling law for the confusion gap
+
+**Goal**: derive and certify the algebraic structure of the confusion gap D²(Δα)
+as a function of the number of correction terms N, the window T = log(L_max/L_min),
+the amplitude bound U, and the exponent separation Δα.
+
+**Method** (`experiments/79_lemma_scaling_test.py`, `experiments/79b_constant_certificates.py`):
+Two scripts. `79_lemma_scaling_test.py` measures E_N — the minimum L² distance from
+Δα·x (linear slope on [0,T]) to bounded N-term exponential sums {Σₖ uₖ e^{-ωₖx} :
+|uₖ| ≤ U} — via `lsq_linear` + Nelder–Mead, and tests N-, U-, Δα-, and T-scaling
+independently. `79b_constant_certificates.py` applies the explicit Richardson
+construction (N basis functions with weights annihilating moments 0..N-1), then
+verifies the constructed solution against the numerical optimizer.
+
+**Central lemma (numerically verified):**
+
+    E_N = c_N · √T · U · (ΔαT/U)^{N+1}
+
+**Verified scaling exponents** (ratios vs theory):
+
+| scaling | empirical ratio | theory ratio |
+|---------|----------------|--------------|
+| N: E₁/E₂ | 0.030 | 0.029 |
+| N: E₂/E₃ | 0.049 | 0.050 |
+| U-scaling | ~4× (N=1→2) | expected ~4× |
+| T-scaling | ~11.3 | matches √T·(T/U)^{N+1} |
+
+**Certified constants:** c₁ = 0.0375 (Richardson construction achieves it and
+the numerical optimizer cannot improve to 3 significant digits at tested
+parameters — correctly stated as "construction optimal to 3 digits," not a
+proof of global optimality). c₂ = 0.0216 (optimizer improves on uniform-node
+Richardson construction by 14% — uniform nodes are suboptimal for N≥2).
+c₃ ≈ 0.019 (numerically certified).
+
+**Key algebraic insight**: with Richardson weights, the residual is exactly
+
+    r(x) = Δα · (1 - e^{-ωx})^N   (binomial theorem)
+
+Substitution t = e^{-ωx} then converts the minimization to the problem of
+polynomial approximation of log(1/t) on [0,1] — a classical problem in
+approximation theory. The scaling exponent (N+1) counts the order of the
+Richardson cancellation; c_N encodes the quality of polynomial approximation
+of log near t=0 (Legendre projection / Bernstein ellipse). This connects the
+floor to the super-resolution / Prony problem: the FSS estimation problem is
+a physical incarnation of approximation-theoretic capacity bounds.
+
+**Open items**: (1) analytic lower bound proof via harmonic-node construction
+(tractable — reduces to known polynomial approximation bounds for log); (2)
+optimal node placement for N≥2 (open problem; uniform nodes are suboptimal).
+
+**Caveats**: scaling laws verified at a finite set of parameter values; constants
+are certified lower bounds (optimizer cannot beat them at tested points). The
+analytic proof of c_N is the main open item before this becomes a theorem.
+
+**Bug note**: `numpy.math.factorial` removed in numpy ≥ 2.0; corrected to
+`import math; math.factorial` in exp79b.
+
+### Exp 80: Does the floor transfer beyond W_sat(L) ladders?
+
+Referee-anticipation item: exp77 was computed for one observable in one
+domain. Two transfers (`experiments/80_second_observable_floors.py`,
+`results_exp80_second_observable_floors/floors.json`), both reusing the
+exp77 machinery with only the design, noise, and declared class changed.
+
+**A. Growth exponent beta (temporal scaling, same systems).** Design: 7
+log-spaced times in t = 50..5000 (2.0 decades) at L = 1024; noise measured
+from fresh EW/KPZ runs (sigma_logW ~ 0.04-0.06). Floors under the agnostic
+class (two corrections, |u| <= 1, omega >= 0.3): beta resolvable to ~0.07-0.08
+at m = 10-24 seeds. The EW/KPZ beta gap (0.083 at face value, naive measured
+betas 0.232 vs 0.265) sits at/just above the floor — beta-based EW/KPZ
+discrimination is marginally feasible at accessible scales. Compare alpha:
+floor 0.21-0.44 on the 0.9-decade L-ladder vs the 0.14 BD question. The
+framework retrodicts the exp74 asymmetry (BD's beta converged while its alpha
+stayed anomalous) as a window-length effect: the time window simply spans
+more decades than the size window.
+
+**B. 2D Ising nu on the exp52d design (L in {32,48,64,96}, 0.48 decades).**
+Floor on 1/nu by declared class:
+agnostic (|u|<=1, omega>=0.3): 0.31-0.39 across sem 0.005-0.02;
+Ising-honest (|u|<=0.3, omega>=1): 0.13-0.17;
+Ising-strict (|u|<=0.1, omega>=1): 0.05-0.13.
+Reading: on a half-decade window, nu to ~1% is impossible without strong
+correction assumptions; the 2D Ising community's precision claims implicitly
+assert exactly such knowledge — justified there by exact results, and worth a
+factor ~5-6 in resolution at fixed design and noise. exp52d's observed 7.3%
+deviation is consistent with (above) the strict-class bound. The floor did
+not contradict known Ising practice; it priced the exact-solution knowledge
+that practice silently uses.
+
+**Caveats**: part A noise from 8 seeds at one L (growth-regime correlations
+across t-points within a seed are ignored by the iid-noise model — the
+floors are therefore approximate for A; per-point independence is better
+justified in B where each L is a separate simulation); the agnostic class is
+deliberately generous, and all numbers are class-conditional by construction.

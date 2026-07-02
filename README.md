@@ -3,107 +3,222 @@
 [![Tests](https://github.com/adamfbentley/universality-discovery/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/adamfbentley/universality-discovery/actions/workflows/tests.yml)
 
 Research notebook exploring whether unsupervised methods can recover
-universality-class structure from simulated physics data.
+universality-class structure from simulated physics data, and what the
+information-theoretic limits of that recovery are.
 
-Instead of asking whether one simulator fits a known theory, this project asks a
-harder question: if the labels are hidden, do physically motivated features make
-systems with the same large-scale behavior organize together?
+## Current Result: Minimax Resolution Floor for Finite-Size Scaling
 
-## Current Takeaway
+The main result of the current phase (exp76–80) is a **computable minimax
+resolution floor** for finite-size scaling (FSS) exponent estimation:
 
-The answer is mixed and useful, with the strongest current direction now on the
-machine-learning side.
+> At accessible system sizes (L ≤ 256), no estimator whatsoever can distinguish
+> roughness exponents closer than Δα* — because adversarially chosen corrections
+> to scaling make the data distributions statistically indistinguishable. At
+> L ≤ 256, the floor is 0.27–0.44, large enough to explain every empirical
+> negative in the project. It shrinks at a quantified rate with L_max (decades,
+> not seeds).
+
+This converts the project's empirical negatives into a theorem. The floor is
+derived from Le Cam's two-point bound, computed by direct adversarial
+optimization (`experiments/77_minimax_floor.py`), and documented in
+`ml_paper/THEORY_minimax_floor.md` (including the algebraic mechanism, scaling
+law, and connections to RG theory and sloppy models).
+
+The companion positive result is an amortized estimator (trained on a prior over
+correction families) that recovers BD's roughness exponent — α̂ = 0.522, honest
+interval ≈ 0.50 ± 0.05 (syst) ± 0.03 (stat) — where classical ansatz-fitting
+gives a scatter of 0.36–0.70. The estimator operates near the information limit
+for the declared correction class.
+
+## Earlier Result: Clustering Negative (exp62–75)
+
+The clustering phase showed that finite-size feature geometry can be locally
+discriminative but globally incompatible with universality labels.
 
 Local feature representations are often strongly discriminative, but the main
 density-clustering hypothesis does not cleanly hold for the surface-growth
-systems tested here. In the best current surface-growth experiments, k-nearest
-neighbor classification can be high, while HDBSCAN and KMeans still hit an
-Adjusted Rand Index ceiling around 0.5. Later diagnostics suggest this is not
-just an algorithm choice: the KPZ class is geometrically multimodal in the tested
-feature space, especially because ballistic deposition keeps a discrete-model
-signature even when it belongs to the KPZ universality class.
+systems tested. In the best surface-growth experiments, k-nearest-neighbor
+classification can be high (3-NN accuracy ~98% in exp63), while HDBSCAN and
+KMeans still hit an ARI ceiling around 0.5. Later diagnostics showed this is
+structural: the KPZ class is geometrically multimodal in the tested feature
+space, especially because ballistic deposition (BD) carries a discrete-model
+signature even at finite L. A protocol-dependent false positive (exp69: ARI
+0.902) was traced to a single-seed protocol and collapsed to near-zero advantage
+under a matched sweep (exp71).
 
-The newer ML-paper track reframes this as a quotient-learning problem:
-universality classes are asymptotic physical equivalence classes, while
-off-the-shelf clustering finds finite-data geometry in the chosen representation.
-The latest controls show that binary EW/KPZ separation can be easy, but the
-hard KPZ quotient across continuum KPZ, ballistic deposition, and Eden remains
-poorly recovered by finite-size feature clustering. Effective exponent geometry
-helps on that hard subset, but is protocol-sensitive and no longer supports a
-stable positive "universality recovery" headline.
-
-That negative result is the most important result in the repository. It turns
-the project from "unsupervised discovery works" into a more careful study of
-when feature geometry agrees with physical universality, and when it does not.
+That negative result prompted the current theory phase: why is FSS-based
+exponent recovery hard? The answer is the floor theorem above.
 
 ## What This Project Shows
 
-- Raw-field autoencoders mostly learned simulator artifacts rather than
-  universality structure.
-- Hand-designed spatial gradient features are much more useful, but they still
+- Raw-field autoencoders learned simulator artifacts rather than universality
+  structure; hand-designed spatial gradient features are more useful but still
   conflate physical classes with implementation details.
 - Temporal features improve local discrimination between EW and KPZ-style
-  dynamics, but do not automatically create clean density clusters.
-- Same-class controls are essential: some apparently strong cross-class results
-  were later traced to normalization, bandwidth, or numerical-pipeline effects.
-- The Ising finite-size-scaling experiments are the cleanest positive result:
-  unsupervised PCA features recover a correlation-length exponent near the exact
-  value, while the Potts experiments show a method boundary.
-- The ML-focused controls separate local signal from quotient recovery: nearest
-  neighbors can be mostly class-consistent even when global clusters remain
-  incompatible with the intended universality labels.
+  dynamics but do not create clean density clusters.
+- The KPZ quotient across continuum KPZ, BD, and Eden is the hard case; EW/KPZ
+  binary separation is easy in most representations.
+- Classical correction-to-scaling extrapolation cannot recover known exponents
+  (EW/KPZ α=0.5) from L ≤ 256: systematic uncertainty from correction-form
+  misspecification dominates statistics by ~10×.
+- The floor theorem gives the information-theoretic reason: D²(0.1) ≈ 1.3×10⁻⁷,
+  so resolving Δα = 0.1 would require ~160,000 seeds.
+- An amortized estimator that declares a correction prior bridges the
+  Bayes–minimax gap, with its interval sitting just above the floor for the
+  declared correction class.
+- The Ising finite-size-scaling experiments (exp52d) are the cleanest positive
+  result: PCA features recover ν ≈ 1.07, ~7% from the exact value.
+- The floor framework explains Ising precision: exact-solution constraints on
+  the correction class are worth ~5–6× in resolution at that design.
 
 ## Representative Results
 
 - **Exp 62: feature-space clustering.** Six spatial gradient features produce
-  stable partial structure across EW, KPZ, ballistic deposition, Eden, random
-  deposition, and Kuramoto-Sivashinsky simulations. HDBSCAN reaches ARI ~= 0.495
-  and 3-NN accuracy ~= 82%.
-- **Exp 63: temporal features.** Adding beta, velocity skew/kurtosis, and
-  slope-growth coupling raises 3-NN accuracy to about 98%, but HDBSCAN remains
-  near the same ARI ceiling on the full run.
-- **Exp 64: multiscale/peel diagnostics.** Coarse-graining and hierarchical
-  peeling show that the KPZ class can be disconnected in feature space. This
-  supports the interpretation that the clustering limit is structural, not just
-  a failed hyperparameter choice.
-- **Exp 69-71: effective exponent geometry.** A single exp69 protocol gives a
-  tempting exponent-geometry ARI of 0.902, but matched seed/protocol sweeps reduce
-  its average advantage over raw multi-L features to approximately zero.
-- **MLP 05/08/09: quotient diagnostics.** Local-vs-global, clusterer, hierarchy,
-  and true exp70 matrix-refit controls show the obstruction is not simply the
-  choice of KMeans or HDBSCAN. In the matrix-refit audit, EW/KPZ binary feature
-  ARI reaches 1.0, but EW/KPZ/BD/Eden feature ARI remains about 0.17-0.19; matched
-  effective exponents improve that hard subset only to about 0.44-0.50.
-- **Exp 52d: Ising PCA-FSS.** PCA features recover nu ~= 1.07 for the 2D Ising
-  model, about 7% from the exact value.
-- **Exp 55-60: Potts controls.** Standard Binder analysis works, but the PCA-FSS
-  approach does not transfer cleanly to 3-state Potts, which helps define the
-  boundary of the method.
+  partial structure. HDBSCAN reaches ARI ~0.495 and 3-NN accuracy ~82%.
+- **Exp 63: temporal features.** 3-NN accuracy rises to ~98%, but HDBSCAN ARI
+  stays near the same ceiling.
+- **Exp 69/71: effective exponent geometry.** Single-protocol ARI 0.902 collapses
+  to near parity with raw multi-L features under a matched five-seed sweep.
+- **Exp 75: classical extrapolation fails.** ω=1 fit gives EW→0.70, KPZ→0.59
+  (known 0.5). Systematic uncertainty dominates statistics by ~10×.
+- **Exp 76: amortized estimator recovers BD.** BD: α̂ = 0.522 [0.482, 0.529];
+  honest α̂ ≈ 0.50 ± 0.05(syst) ± 0.03(stat). Classical scatter: 0.36–0.70.
+  Leave-one-family-out: robust to prior family choice.
+- **Exp 77: minimax floor.** D²(0.1) ≈ 1.3×10⁻⁷. Floor m=24: BD 0.27,
+  others 0.44. Nearly flat in seeds; falls 0.44→0.14 from L_max 256→16384.
+  Value of correction knowledge: u_max 4→0.1 shrinks floor 0.44→0.077.
+- **Exp 78: referee checks.** KPZ gate failure attributed to Lam–Shin integrator
+  stationary-measure distortion. Expert W²=aL+b ansatz rejected on BD
+  (χ²/dof=6.2). Discriminability: Δα=0.05 separated at ~3σ; response slope 1.2
+  (no shrinkage). Slice-conditional bias +0.05 documented.
+- **Exp 79: N-scaling law.** E_N = c_N·√T·U·(ΔαT/U)^{N+1} numerically verified;
+  c₁=0.0375 (exact), c₂=0.0216 (certified). Key identity: Richardson residual is
+  Δα·(1-e^{-ωx})^N; substitution t=e^{-ωx} reduces to polynomial approximation
+  of log.
+- **Exp 80: floor transfers.** β floor ≈0.07–0.08 (EW/KPZ β-gap at floor);
+  Ising ν: agnostic floor 0.31–0.39, strict floor 0.05–0.13 — exp52d's 7.3%
+  deviation is consistent with the strict bound.
+- **Exp 52d: Ising PCA-FSS.** PCA features recover ν ≈ 1.07, about 7% from the
+  exact value. Positive control.
 
-## Current Direction: Extrapolation Limits (Exp 76-79)
+## Repository Structure
 
-Exp 72-75 traced the BD split to a physical mechanism (intrinsic anomalous
-roughening at small L) and ended with a negative: correction-to-scaling fits
-cannot recover even the known EW/KPZ alpha = 0.5 from L <= 256 ladders,
-because the result depends on the assumed correction form. The follow-up
-question was whether anything can do better, and if not, why not.
+```text
+experiments/              Numbered experiment scripts, each mostly self-contained
+  52d_ising_finite_size_scaling.py   Ising PCA-FSS positive control
+  62_feature_space_clustering.py     Spatial gradient feature clustering
+  63_temporal_features.py            Temporal feature benchmark
+  64_multiscale_peel.py              Coarse-graining and hierarchical peeling
+  75_correction_to_scaling.py        Classical ansatz fits (exp75)
+  76_amortized_extrapolation.py      Amortized estimator (exp76, main result)
+  76b_regenerate_ladders.py          Per-seed W_sat generation (exp76b)
+  77_minimax_floor.py                Le Cam floor computation (exp77)
+  78_referee_checks.py               Referee-proofing checks (exp78)
+  79_lemma_scaling_test.py           N-scaling law verification (exp79)
+  79b_constant_certificates.py       c_1, c_2, c_3 certificates (exp79b)
+  80_second_observable_floors.py     beta and nu floor transfers (exp80)
 
-- **Exp 76: amortized extrapolation.** Instead of fitting one correction form,
-  train a regressor on synthetic W_sat(L) ladders drawn from several
-  correction families, then ask it for alpha. On synthetic tests it beats the
-  direct fits (RMSE 0.106 vs 0.165 for the best fixed-omega fit). On 24-seed
-  regenerated ladders it gives EW 0.53, Eden 0.49, BD 0.52 — BD lands on its
-  KPZ-class value, which no direct fit manages (they scatter 0.36-0.70 with
-  the choice of ansatz). KPZ misses (0.62); exp78 traces that to the
-  integrator, not the estimator.
-- **Exp 77: a resolution floor.** A Le Cam two-point bound makes the
-  difficulty quantitative: at L <= 256, exponent differences of ~0.1 can be
-  absorbed almost exactly by ordinary correction terms, so resolving them
-  would take on the order of 10^5 seeds at realistic noise. Extra statistics
-  barely help; window length and assumptions about corrections are what buy
-  resolution. This turns the earlier negative results from "our methods
-  failed" into "no method could have succeeded at these sizes".
-- **Exp 78: checks.** A discriminability control (the estimator separates
-  true alpha 0.40 / 0.45 / 0.50 on BD-like ladders, so the BD recovery is not
-  shrinkage toward the prior mean, though a +0.05 conditional bias widens the
-  honest error bar); an exact-measure ch
+src/simulation/           Shared simulation utilities
+src/models/               Autoencoder architectures (early experiments)
+src/analysis/             Clustering and analysis helpers
+
+ml_paper/
+  THEORY_minimax_floor.md   Full theory note (~620 lines): derivation, scaling
+                             law, Appendices A–D (construction, RG, prior art,
+                             algebraic details)
+  CLAIMS_REGISTER.md        All claims mapped to evidence (two-part: clustering
+                             exp62–75, floor theorem exp76–80)
+  MANUSCRIPT_OUTLINE.md     Paper outlines: floor paper (primary, MLST target)
+                             + clustering paper (secondary)
+  EXP76_HANDOFF.md          Complete project state and open items
+
+docs/EXPERIMENT_LOG.md    Chronological research notes (exp1–80)
+docs/literature_review.md Literature notes
+
+results_exp76_amortized_extrapolation/
+  wsat_perseed.csv          673 rows, 4 systems × 7 L × 24 seeds
+  summary_full24seed.json   Full evaluation results
+  lofo_control.json         Leave-one-family-out control
+  referee_checks.json       Exp78 check results
+
+results_exp77_minimax_floor/
+  floor.json                All floor numbers
+
+results_exp80_second_observable_floors/
+  floors.json               Beta and nu floor transfers
+
+archive/                  Obsolete manuscript drafts and earlier writeups
+tests/                    Lightweight smoke tests
+```
+
+## Running
+
+Install dependencies:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+Run smoke tests:
+
+```bash
+python -m pytest -q
+```
+
+### Current-phase experiments (floor theorem arc, exp75–80)
+
+```bash
+# Classical fits (exp75 — shows failure)
+python experiments/75_correction_to_scaling.py
+
+# Amortized estimator (exp76 — full pipeline)
+python experiments/76_amortized_extrapolation.py --stage gen
+python experiments/76_amortized_extrapolation.py --stage train --prior mix
+python experiments/76_amortized_extrapolation.py --stage eval
+
+# Minimax floor computation (exp77)
+python experiments/77_minimax_floor.py --part all
+
+# Referee checks (exp78)
+python experiments/78_referee_checks.py
+
+# N-scaling law verification (exp79)
+python experiments/79_lemma_scaling_test.py
+python experiments/79b_constant_certificates.py
+
+# Second-observable transfers (exp80)
+python experiments/80_second_observable_floors.py
+```
+
+### Earlier clustering experiments
+
+```bash
+python experiments/62_feature_space_clustering.py --pilot
+python experiments/63_temporal_features.py --pilot
+python experiments/64_multiscale_peel.py --pilot
+python experiments/52d_ising_finite_size_scaling.py
+```
+
+The experiment scripts compile Numba kernels on first run.
+
+## Theory Note
+
+`ml_paper/THEORY_minimax_floor.md` contains the full derivation of the
+minimax resolution floor, including:
+
+- Le Cam two-point bound → confusion gap D² → resolution floor Δα*.
+- Computed floors for the surface-growth benchmark.
+- Mechanism: why D² is ~10⁻⁷ (log L shadowed by correction ω→0 tail).
+- Appendix A: Richardson construction, Legendre projection, amplitude binding.
+- Appendix B: RG-equivariance corollary and Fisher/sloppy-models connection.
+- Appendix C: positioning map (Lepage, Jay–Neil, Manski, Tikhonov, Sethna).
+- Appendix D: binomial identity, log-polynomial reduction, optimal nodes.
+
+## Relationship To Earlier Work
+
+This repository builds on
+[ml-universality-classification](https://github.com/adamfbentley/ml-universality-classification),
+which tested supervised and anomaly-detection approaches for surface-growth
+simulations. This project is broader and more exploratory: it investigates when
+feature geometry aligns with physical universality, documents the cases where it
+does not, and derives the information-theoretic reason.

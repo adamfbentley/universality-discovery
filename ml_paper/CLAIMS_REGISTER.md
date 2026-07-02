@@ -3,7 +3,11 @@
 This file is the guardrail for the ML-focused paper. Every manuscript claim must
 map to an artifact and a robustness check.
 
-## Central Claim
+---
+
+## Part I: Clustering Paper Claims (exp62–75)
+
+### Central Claim
 
 Finite-size feature geometry in this growth benchmark does not robustly factor
 through the RG universality quotient. The failure is not a mere absence of
@@ -41,7 +45,7 @@ Required evidence:
   `0.186` under equal sampling and `0.169` under exp69 sampling, while matched
   effective exponents are `0.503` and `0.438`, respectively.
 
-## Claims Allowed
+### Claims Allowed (exp62–75)
 
 1. **Representation geometry, not clustering alone, is the bottleneck.**
    Evidence: exp62, exp65, exp66, exp67, exp70, exp71.
@@ -95,7 +99,13 @@ Required evidence:
     Matched effective exponents improve that hard subset to `0.503` and `0.438`,
     but remain protocol-sensitive and far from robust recovery.
 
-## Claims Forbidden Unless New Evidence Is Added
+11. **Classical correction-to-scaling extrapolation cannot recover known exponents
+    from L ≤ 256 data.**
+    Evidence: exp75. At ω=1, EW extrapolates to α=0.70±0.15, KPZ to 0.59±0.16 —
+    both known to be 0.5. The ω-sensitivity spans 0.43–0.97 across ansatz choices.
+    The systematic uncertainty dominates the statistical error by ~10×.
+
+### Claims Forbidden Unless New Evidence Is Added (exp62–75)
 
 1. **"Unsupervised ML cannot discover universality."**
    Too broad. The evidence only covers the tested representations and finite-size
@@ -113,37 +123,234 @@ Required evidence:
 5. **"The work discovers new KPZ physics."**
    Overclaim. The contribution is methodological and finite-size diagnostic.
 
-## Claims That Require Additional Experiments
+---
 
-1. **True collapse-residual distances outperform finite-size features.**
-   Requires implementation of a master-curve residual metric and repeated seed
-   sweeps.
+## Part II: Floor Theorem and Amortized Estimator Claims (exp76–80)
 
-2. **Stored legacy exp70 artifacts alone establish true feature subset refits.**
-   Resolved for new matrix-archive runs by MLP-09, but legacy artifacts remain
-   label-only. Manuscript claims should cite the `codex_matrix_full_*` artifacts
-   for true subset refits.
+These claims support a second, separate paper. The central contribution is a
+computable minimax resolution floor for finite-size scaling estimation,
+accompanied by an amortized estimator that approaches the floor.
 
-3. **The exponent instability is driven by specific systems.**
-   Requires per-system exponent-cloud figures and between-cloud distance tables.
+### Central Claim (Floor Paper)
 
-4. **Learned cross-L baselines cannot recover the quotient.**
-   Requires stronger representation-learning baselines; current raw/slope/PCA
-   controls are not exhaustive.
+For saturated-width ladders W_sat(L) observed at a finite ladder of system
+sizes with seed noise, there is a computable threshold Δα*(design, noise,
+correction class) such that **no estimator whatsoever** can reliably distinguish
+asymptotic roughness exponents differing by less than Δα* — because the
+corresponding data distributions are statistically indistinguishable once
+correction-to-scaling nuisances are adversarially chosen. At L ≤ 256, this
+floor is large enough to explain all the empirical negatives. The floor is
+computable in advance from the design and a declared correction assumption
+class, and it shrinks at a quantified rate with L_max and seed count.
 
-5. **No unsupervised method can recover the quotient from these data.**
-   Not supported. MLP-08 tests only standard off-the-shelf clusterers on stored
-   exp62 features and exponent vectors. A tailored representation learner or
-   true collapse-residual distance remains outside the current evidence.
+### Claims Allowed (exp76–80)
 
-## One-Sentence Paper Claim
+**A. Amortized estimator outperforms classical correction-to-scaling fits.**
 
-Unsupervised clustering of finite-size growth observables can find stable local
-and protocol-specific structure without recovering the physical universality
-equivalence relation; robust ML universality discovery requires explicit
-invariance or finite-size-scaling validation.
+Evidence: exp76 (`results_exp76_amortized_extrapolation/summary_full24seed.json`).
+- Synthetic benchmark (mixture test set, 2000 samples per prior): amortized RMSE
+  0.106 vs best classical 0.165 (fit_w1); free-ω fit fails on 23% of samples.
+- Transfer matrix: mixture-trained estimator generalizes across all five
+  correction families (RMSE 0.088–0.123); single-family-trained estimators
+  degrade to 0.19–0.33 off-diagonal.
+- Required caveat: training prior is uniform α ∈ [0.05, 0.95]; the comparison is
+  against classical ansatze, not against all possible Bayesian approaches.
 
-## One-Sentence ML Research Question
+**B. The amortized estimator recovers BD's roughness exponent where classical
+fits scatter.**
 
-When, and how can we test whether, a learned representation factors through the
-physical quotient rather than merely organizing nuisance geometry?
+Evidence: exp76 real-data evaluation on 24-seed ladders.
+- BD: α̂ = 0.522, seed-bootstrap 90% interval [0.482, 0.529].
+- Classical fits on the same data: BD spans 0.36–0.70 across ansatz choices.
+- Leave-one-family-out control (Krug–Meakin family removed): BD → 0.532
+  [0.486, 0.555]. BD recovery does not depend on having BD's textbook correction
+  form in the training prior.
+- EW gate: 0.532 ✓; Eden gate: 0.491 ✓; KPZ gate: 0.615 ✗ (by 0.015 over
+  tolerance — attributed to integrator stationary-measure distortion, see claim D).
+- **Honest combined error budget**: slice-conditional bias from discriminability
+  control (claim E) implies BD α̂ ≈ 0.50 ± 0.05 (syst) ± 0.03 (stat). All claims
+  about BD must report the systematic.
+
+**C. A minimax resolution floor exists and is computable from the observed design.**
+
+Evidence: exp77 (`results_exp77_minimax_floor/floor.json`), theory note
+`ml_paper/THEORY_minimax_floor.md`.
+- Le Cam two-point bound: confusion gap D²(Δα) computed by multistart bounded
+  optimization; floor = largest Δα with KL(P₁‖P₂) ≤ 1/2.
+- Key result: D²(0.1) ≈ 1.3×10⁻⁷ at the real L=[32,256] design. Resolving Δα=0.1
+  would require ~160,000 seeds (EW/KPZ noise) or ~2,700 seeds (BD noise).
+- Per-system worst-case floors, m=24: BD 0.27, EW/KPZ/Eden 0.44.
+- **Floor vs m is nearly flat** (0.51/0.44/0.38 at m=6/24/96): the bottleneck is
+  identifiability, not statistics. More seeds cannot overcome the floor.
+- Resolution law at σ=0.15: L_max 256/512/1024/4096/16384 → floor 0.44/0.33/0.26/0.19/0.14
+  (decades of L required, not seeds).
+- Required caveat: adversary is single power correction with |u| ≤ 4, ω ∈ [0.3, 2.5].
+  Richer families (log, two-term) can only deepen the confusion gap — the bound
+  is conservative. Known implementation bug in the linearized closed-form (exact
+  numerical results unaffected).
+
+**D. The KPZ gate failure is attributed to integrator stationary-measure distortion.**
+
+Evidence: exp78 check A (`results_exp76_amortized_extrapolation/referee_checks.json`).
+- For 1D EW/KPZ in the stationary state, the exact result is W²_sat = L/12.
+- EW: ratio W_sat/√(L/12) constant at 0.96 ± 0.03 — pure amplitude offset,
+  explained by D/ν normalization; amplitude-invariant features make this harmless.
+- KPZ: ratio swings 1.043 (L=32) → 0.918 (L=64), ≈4σ combined, then recovers.
+  A genuine shape distortion at accessible L, consistent with known Lam–Shin
+  discretization pathology (fluctuation–dissipation violation).
+- The estimator correctly reads the distortion in the data; this is not estimator
+  failure. Remedy: exact-stationary-measure integrator (not more seeds).
+
+**E. The expert additive-width ansatz (W² = b + aL^{2α}) is rejected on BD.**
+
+Evidence: exp78 check B.
+- Free fit: α = 0.441 ± 0.011 (5σ from 0.5).
+- Fixed α = 0.5: χ²/dof = 6.2 (decisively rejected).
+- BD carries corrections beyond the pure additive form at L ≤ 256. This kills
+  the anticipated referee rebuttal ("just use the textbook ansatz") and
+  empirically demonstrates the thesis: a structurally informed but still-misspecified
+  ansatz produces a confident wrong answer.
+
+**F. The amortized estimator discriminates Δα = 0.05 at ~3σ (not prior-mean shrinkage).**
+
+Evidence: exp78 check C (discriminability control, 300 BD-like ladders per α).
+- True α ∈ {0.40, 0.45, 0.50, 0.55} → predicted means 0.425/0.496/0.548/0.607.
+- Adjacent α separated by ~3σ; response slope ≈ 1.2 (not ≪ 1 as shrinkage would give).
+- **Slice-conditional bias: +0.03 to +0.06** on this prior slice (true 0.50 →
+  predicted 0.548). This is the systematic in claim B's honest error budget.
+  Must be reported.
+
+**G. The value of declared structural knowledge is quantified.**
+
+Evidence: exp77 floor vs u_max sensitivity.
+- Bounding correction amplitude: u_max = 4 → 0.1 shrinks floor from 0.44 → 0.077
+  (σ=0.15, m=24, L≤256).
+- BD's honest amplitude bound (|u| ≤ 0.5): floor → 0.023 at real design. The
+  exp76 interval (±0.03 stat) sits just above it — the amortized estimator operates
+  near the information limit, not beyond it.
+- Interpretation: the Bayes-vs-minimax gap (declared vs smuggled prior) is the
+  quantified value of structural knowledge. Classical fits smuggle the prior via
+  the ansatz and fail silently when it is wrong; amortized inference declares it
+  and marginalizes.
+
+**H. The floor transfers to temporal scaling (growth exponent β).**
+
+Evidence: exp80 part A (`results_exp80_second_observable_floors/floors.json`).
+- Design: W(t) at 7 log-spaced times t=50..5000, L=1024, 8 seeds.
+- Agnostic floor: β resolvable to ~0.07–0.08 at m=10–24.
+- EW/KPZ β-gap (0.083 at face value) sits at/just above the β floor — β-based
+  discrimination is marginally feasible at accessible scales.
+- Retrodicts the exp74 asymmetry: the time window spans ~2 decades vs the size
+  window's ~0.9 decades; β converged while α stayed anomalous because the β window
+  is wider.
+- Caveat: growth-regime t-points within a seed have temporal correlations not
+  captured by the iid-noise model; floors are approximate for part A.
+
+**I. The floor transfers to 2D Ising ν, and prices the value of exact-solution knowledge.**
+
+Evidence: exp80 part B.
+- Design: exp52d Ising (L ∈ {32,48,64,96}, 0.48 decades), noise σ~0.005–0.02.
+- Agnostic floor (|u|≤1, ω≥0.3): 0.31–0.39 in 1/ν.
+- Ising-honest floor (|u|≤0.3, ω≥1): 0.13–0.17.
+- Ising-strict floor (|u|≤0.1, ω≥1): 0.05–0.13.
+- exp52d's 7.3% deviation from ν=1 is consistent with (above) the strict-class
+  floor — the observed precision is explained by, not in contradiction with, the
+  floor.
+- The Ising community's precision claims implicitly use exact-solution constraints
+  that tighten the floor by ~5–6× at fixed design and noise. The floor framework
+  prices that knowledge explicitly.
+
+**J. The floor theorem has no known prior art in the FSS literature.**
+
+Evidence: exp78 web search; discussion in `ml_paper/THEORY_minimax_floor.md`
+Appendix C.
+- Hall–Welsh/Le Cam minimax theory is mature in extreme-value statistics (tail-index
+  estimation under second-order regular variation), but no application to finite-size
+  scaling was found.
+- Closest related work: Lepage constrained curve fitting (hep-lat/0110175, 2001) for
+  lattice QCD, which established the declared-prior philosophy; Jay–Neil Bayesian
+  model averaging (different question); Braess–Hackbusch conditional stability theory
+  (compactness argument, different framing). None compute a computable threshold for FSS.
+- Claim: "to our knowledge, first minimax lower bound on FSS exponent estimation."
+  Must survive a Borwein–Erdélyi prior-art pass before final submission.
+
+**K. N-scaling law for the confusion gap: E_N ~ c_N · √T · U · (ΔαT/U)^{N+1}.**
+
+Evidence: exp79 (`experiments/79_lemma_scaling_test.py`,
+`experiments/79b_constant_certificates.py`).
+- Numerical verification: N=1 ratio 0.030/0.029 (vs theory), N=2 ratio
+  0.049/0.050; U-scaling ratio ~4 (N=1 → N=2), T-scaling ratio ~11.3 (matches
+  √T·(T/U)^{N+1} prediction).
+- Constants: c₁ = 0.0375 (exact; Richardson construction achieves it and optimizer
+  cannot improve to 3 digits at tested parameters), c₂ = 0.0216 (optimizer beats
+  Richardson construction by 14%), c₃ ≈ 0.019.
+- **Central lemma**: minimum L² distance from Δα·x (slope on [0,T]) to the class of
+  bounded N-term exponential sums is E_N = c_N·√T·U·(ΔαT/U)^{N+1}.
+- **Key algebraic identity**: with Richardson weights, residual is
+  Δα·(1-e^{-ωx})^N; substitution t=e^{-ωx} reduces the problem to polynomial
+  approximation of log(1/t) on [0,1] (Legendre projection / Bernstein ellipse route).
+- Caveat: c₁ exact claim means "construction matches optimizer to 3 digits at tested
+  parameters" — not a proof of global optimality. c₂, c₃ are numerically certified
+  lower bounds. Analytic lower bound proof (harmonic-node case) is the main open item.
+
+### Claims Forbidden Unless New Evidence Is Added (exp76–80)
+
+1. **"The amortized estimator gives the correct BD α to within ±0.03."**
+   The ±0.03 is statistical only. The honest interval includes ±0.05 systematic
+   from the slice-conditional bias (claim F). Must quote combined.
+
+2. **"The floor is an absolute lower bound for all correction classes."**
+   The floor depends on the declared class. With unbounded amplitudes the floor is
+   zero (dense corrections; vacuous). The claim is: for declared class C_N with
+   bounded amplitudes, the floor is E_N(Δα, design).
+
+3. **"Classical extrapolation is useless."**
+   Too strong. Classical fits work well when the correction form is correctly
+   specified and L is large enough. The claim is: at L ≤ 256 and with the standard
+   correction families, systematic uncertainty from correction-form misspecification
+   exceeds the statistical precision.
+
+4. **"The floor explains BD's clustering failure."**
+   The exp62–74 clustering failures were diagnosed by exp77 as having a floor
+   ≥ 0.27 (BD) or ≥ 0.44 (others), consistent with explaining them. But the
+   clustering pipeline used effective exponents, not α directly; the connection
+   is interpretive, not a deductive proof.
+
+5. **"The N-scaling law is proven analytically."**
+   The scaling form and constants are numerically verified and supported by the
+   algebraic analysis of the Richardson residual. The analytic lower bound proof
+   is an open item. Current status: numerically certified.
+
+### Open Evidence Required Before Submission
+
+1. **Borwein–Erdélyi prior-art pass**: Confirm no FSS minimax bound appears in the
+   approximation theory or extreme-value statistics literature. Assign ~1 day.
+
+2. **Analytic lower bound certificate for the N-scaling constant**: prove
+   c_N = c_N^* (or give a tight analytic lower bound) via harmonic-node construction
+   or Bernstein ellipse. Currently verified numerically.
+
+3. **Optimal nodes for N≥2**: uniform nodes are suboptimal beyond N=1. Finding the
+   optimal exponent placement is an open problem; not required for submission but
+   strengthens the appendix.
+
+4. **ω-range vs amplitude decomposition**: the 8× gap between log-family and linear
+   adversary in exp77 is partly from different ω lower bounds (logged as Correction
+   to Addendum 4 in the theory note). Verify the decomposition is properly attributed.
+
+5. **KPZ integrator fix**: test whether an exact-stationary-measure discretization
+   (Lam–Shin exact scheme) passes the gate. Not required for submission but would
+   close the one open gate failure.
+
+### One-Sentence Paper Claim (Floor Paper)
+
+At accessible system sizes (L ≤ 256), finite-size scaling estimation of roughness
+exponents is near-non-identifiable: no estimator can resolve exponents closer than
+a computable floor set by correction-to-scaling degeneracy, and an amortized
+estimator that declares a correction prior operates near this limit.
+
+### One-Sentence ML Research Question (Floor Paper)
+
+What is the minimum structural assumption about corrections to scaling needed to
+make a finite-size scaling exponent identifiable, and how does that assumption
+value compare to the practical cost of obtaining more data?
