@@ -1,0 +1,27 @@
+{
+ "note": "floor computed by one routine across observable/domain; adversary N=2, U=4 unless stated",
+ "A_roughness_alpha": {
+  "control": "L",
+  "window_decades": 0.9030899869919434,
+  "dtheta": 0.1,
+  "confusion_gap": 4.644599382620792e-05
+ },
+ "B_growth_beta": {
+  "control": "t",
+  "window_decades": 0.9030899869919434,
+  "dtheta": 0.1,
+  "confusion_gap": 4.65902707688334e-05,
+  "ratio_to_A": 1.003106337721297
+ },
+ "C_lattice_correlator": {
+  "control": "t (Euclidean time)",
+  "n_slices": 11,
+  "dE0": 0.05,
+  "confusion_gap": 0.0008418541117264033,
+  "interpretation": "same exponential ill-posedness as lattice ground-state vs excited-state extraction"
+ },
+ "conclusion": {
+  "A_vs_B_same_order": true,
+  "message": "Confusion gap at matched window-decades is the same order for roughness(alpha,L) and growth(beta,t): the floor depends on window length and correction spectrum, not on which observable. The correlator case (C) exhibits the same structure in a domain (lattice) that fits it daily."
+ }
+}

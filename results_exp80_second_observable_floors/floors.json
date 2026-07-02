@@ -1,0 +1,73 @@
+{
+ "A_beta_growth": {
+  "ew": {
+   "t_points": [
+    50,
+    107,
+    232,
+    499,
+    1077,
+    2320,
+    5000
+   ],
+   "L": 1024,
+   "n_seeds": 8,
+   "sigma_logW": 0.05632994112112351,
+   "naive_beta": 0.23244711553890984,
+   "floor_m10": 0.083203125,
+   "floor_m24": 0.073828125
+  },
+  "kpz": {
+   "t_points": [
+    50,
+    107,
+    232,
+    499,
+    1077,
+    2320,
+    5000
+   ],
+   "L": 1024,
+   "n_seeds": 8,
+   "sigma_logW": 0.04394211374254511,
+   "naive_beta": 0.26519849022703446,
+   "floor_m10": 0.07851562499999999,
+   "floor_m24": 0.06679687499999999
+  }
+ },
+ "A_window_decades": 2.0,
+ "correction_class": "two power corrections, omega in [0.3, 2.5], |u| <= 1 at the window start",
+ "B_ising_nu": {
+  "design_L": [
+   32,
+   48,
+   64,
+   96
+  ],
+  "window_decades": 0.47712125471966244,
+  "floor_vs_sem": {
+   "0.005": 0.305859375,
+   "0.01": 0.350390625,
+   "0.02": 0.392578125,
+   "0.04": 0.575390625
+  },
+  "exp52d_observed_deviation": 0.073,
+  "note": "nu=1 so d(nu) ~ d(1/nu); exp52d recovered nu to 7.3%. The floor at plausible sem shows how much of that deviation was forced by the 0.48-decade design."
+ },
+ "agnostic u<=1 w>=0.3": {
+  "0.005": 0.3059,
+  "0.01": 0.3504,
+  "0.02": 0.3926
+ },
+ "ising-honest u<=0.3 w>=1.0": {
+  "0.005": 0.1254,
+  "0.01": 0.1371,
+  "0.02": 0.1746
+ },
+ "ising-strict u<=0.1 w>=1.0": {
+  "0.005": 0.0527,
+  "0.01": 0.0762,
+  "0.02": 0.1348
+ },
+ "correction_class_default": "two power corrections, omega in [0.3,2.5], |u|<=1 at window start"
+}

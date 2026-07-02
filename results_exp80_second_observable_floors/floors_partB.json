@@ -1,0 +1,20 @@
+{
+ "correction_class": "two power corrections, omega in [0.3, 2.5], |u| <= 1 at the window start",
+ "B_ising_nu": {
+  "design_L": [
+   32,
+   48,
+   64,
+   96
+  ],
+  "window_decades": 0.47712125471966244,
+  "floor_vs_sem": {
+   "0.005": 0.305859375,
+   "0.01": 0.350390625,
+   "0.02": 0.392578125,
+   "0.04": 0.575390625
+  },
+  "exp52d_observed_deviation": 0.073,
+  "note": "nu=1 so d(nu) ~ d(1/nu); exp52d recovered nu to 7.3%. The floor at plausible sem shows how much of that deviation was forced by the 0.48-decade design."
+ }
+}
