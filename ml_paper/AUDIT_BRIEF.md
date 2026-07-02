@@ -96,4 +96,9 @@ corrections-to-scaling in the FSS literature.
 
 ## 5. Known weaknesses, disclosed upfront
 
-The floor numbers depend 
+The floor numbers depend on the declared adversary class, and comparisons
+across observables require class alignment we initially got wrong ourselves
+(caught by internal audit — nesting/monotonicity in U is now an automated
+check). σ is plug-in, not known. The temporal-observable transfer ignores
+within-replicate correlations. We would rather learn now that any of this is
+fatal than after submission; adversarial reading is explicitly invited.

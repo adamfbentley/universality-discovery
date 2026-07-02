@@ -727,3 +727,69 @@ identities; the only physics content asserted (α = (z−1)/2, correction form,
 KL/FIM conventions) carries explicit numerical verification gates
 (G-B1–G-B5, EXP81_PLAN.md) that must pass before any number from this
 program is cited.
+
+## Appendix G (2026-07-03): the Donoho mapping — this floor is a modulus of
+## continuity, and what follows from that
+
+Source: adversarial statistical review (SIMULATED_AUDIT.md); mapping to be
+confirmed by the human audit (AUDIT_BRIEF.md Q5), but the structural match is
+exact and is recorded here.
+
+G1. The mapping. Let M = {μ(c,α,η) = c·1 + α·x + g(·;η) : η ∈ class,
+c ∈ R, α ∈ A} ⊂ R⁷ be the set of achievable mean vectors, and T the target
+"functional" α. Define
+
+    D(Δα) = inf { ‖μ₁ − μ₂‖₂ : μᵢ ∈ M, α₂ − α₁ = Δα }        (this note)
+    ω(ε)  = sup { α₂ − α₁ : μᵢ ∈ M, ‖μ₁ − μ₂‖₂ ≤ ε }          (Donoho 1994)
+
+These are inverse to each other, and the resolution floor is exactly
+Δα* = ω(σ/√m). For CONVEX M under Gaussian noise, Donoho ("Statistical
+Estimation and Optimal Recovery", Ann. Statist. 22, 1994, building on
+Ibragimov–Khasminskii) characterizes the minimax risk of estimating a linear
+functional by this modulus, with minimax AFFINE estimators within a small
+explicit factor (≈1.25 — constant to be confirmed at the primary source) of
+fully minimax. Armstrong & Kolesár (Econometrica 86, 2018) give the applied
+form — fixed-design regression, Gaussian errors, linear functional, convex
+nuisance class, honest confidence intervals — in active econometric use.
+
+G2. The identifiability nuance (why T needs care). T is a function of the
+parameters, not automatically of μ: if two parameter settings produced the
+same μ with different α, T would be ill-defined on M and ω(0) > 0. The ω→0
+correction degeneracy (Addendum 1) is precisely the near-violation of this:
+ω(0) = 0 holds on the bounded class (no exact mimicry), but ω(ε) is large at
+small ε. In Donoho's language the entire project result reads: *for FSS
+designs at L ≤ 256, the modulus of the exponent functional over the
+bounded-correction class is enormous at the noise scale.* The exp79 lemma is
+the closed form of this modulus for exponential-sum classes.
+
+G3. Convexity status. Our correction manifold {g(·;u,ω)} is nonconvex (a
+2-parameter curved family), so Donoho sharpness does not apply verbatim.
+Over the convex hull: floors can only increase (larger adversary ⇒
+conservative impossibility, same direction as all our approximations), and
+sharpness holds relative to the hull. The computable question — how much
+larger is the hull floor? — is exp83 task 2.
+
+G4. Consequences for claims (binding for the paper):
+- The phrase "first minimax bound for FSS" is retired. Correct statement:
+  first application of the linear-functional minimax/optimal-recovery
+  machinery to corrections-to-scaling, with (i) a physically motivated
+  adversary class and computed floors for real designs, (ii) a closed-form
+  modulus for bounded exponential-sum classes (exp79) with an RG dictionary,
+  (iii) a declared-prior amortized estimator as the constructive counterpart.
+- Cite: Donoho 1994; Donoho–Liu; Ibragimov–Khasminskii; Cai–Low; Armstrong–
+  Kolesár 2018 (+ software); alongside the existing Hall–Welsh/Drees and
+  approximation-theory anchors.
+- The sharpness program (analytic lower bound on E_N) is demoted from
+  blocking to enrichment: pursue hull-sharpness via G1 first; keep the
+  annihilator/Newman route as the mathematically interesting appendix.
+
+G5. Independent verification (2026-07-03, this session). Two checks performed
+from this note's formulas alone, without reference to exp77's code:
+(i) D²(Δα) monotone increasing over Δα ∈ [0.02, 0.6] on the real design
+(11-point scan, multistart L-BFGS-B) — the floor definition's implicit
+assumption holds; a running-max guard should still be added to the code
+(exp83 task 1). (ii) Independent reimplementation reproduces the BD m=24
+floor: 0.271 vs the published 0.27, and D²(0.1) = 1.66e-7 vs the note's
+1.3e-7 (both are upper bounds by construction; the discrepancy direction is
+consistent). This is the first fully independent replication of the
+project's headline number.
