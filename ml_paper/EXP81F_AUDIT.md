@@ -64,3 +64,34 @@ post-Donoho framing, folding in: exact-CI deliverable (SIMULATED_AUDIT 8a),
 59× nuisance destruction (exp83), the hierarchy result above, and the
 aligned-adversary methodology as a worked example of class-alignment
 discipline.
+
+## Countersignature (second auditor, 2026-07-03)
+
+Independent verification performed against fixpass.json: both re-statements
+confirmed by direct recomputation (private K=2 = K=1/2 exactly; increments
++7.3% triangulation, +37% correlated noise; U=4 DPI margin 3.4% < 5%
+tolerance; U=4 floors exceed the alpha-prior width). Both gates G-B6/B7 and
+all three G-A4 curves re-checked from the JSON directly. Verdict ACCEPTED is
+countersigned; the exp81 arc is closed.
+
+Two additions to the record:
+
+1. **Provenance of the wrong quadrature null.** Re-statement 2 corrects an
+   error that originated in EXP81_PLAN.md's H-A1 hypothesis (written by the
+   planning/audit session, not the executor): under gap growth
+   D ~ (Δα)^{N+1}, K equal channels give floor gains ~K^{1/(2(N+1))}
+   (K=5, N=1: ~1.50×), not √K (2.24×). The plan's null was wrong; exp81's
+   original "at quadrature" finding was numerically right for the wrong
+   reason (the measured 2.0× is max-|θ| rescaling, not K-aggregation).
+   Auditors are in the error ledger too; this is the second entry
+   (see EXP83_AUDIT.md, commit-verification failure).
+
+2. **Unexplained wrinkle, non-blocking, for the paper to address:** between
+   U=0.5 and U=1.0, floor_L23 is identical (b-saturation collapses the two
+   classes for the spectral observable) but floor_L0_aligned is NOT
+   (0.1523 vs 0.1922 at m=24). Same physical family, same nominal
+   saturation — so the summary-pushforward must bind the amplitude
+   constraint differently (plausibly via the asymmetric b ∈ (−1, ∞) range
+   acting differently on the two KLs). Monotonicity holds at both levels, so
+   no gate is violated, but the paper should either explain the mechanism
+   or collapse U=0.5/1.0 into a single declared class for this family.
