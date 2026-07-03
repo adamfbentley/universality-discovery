@@ -1,0 +1,133 @@
+{
+ "hierarchy_fixed": {
+  "escalation_used": {},
+  "n_starts_final": 8,
+  "floor_L23": {
+   "6": {
+    "0.5": {
+     "floor": 0.0380859375,
+     "gap_at_floor": 0.506211205873559,
+     "saturated": false
+    },
+    "1.0": {
+     "floor": 0.0380859375,
+     "gap_at_floor": 0.5057880537577899,
+     "saturated": false
+    },
+    "4.0": {
+     "floor": 1.10625,
+     "gap_at_floor": 0.1572810556999627,
+     "saturated": false
+    }
+   },
+   "24": {
+    "0.5": {
+     "floor": 0.019628906249999998,
+     "gap_at_floor": 0.4127017086418915,
+     "saturated": false
+    },
+    "1.0": {
+     "floor": 0.019628906249999998,
+     "gap_at_floor": 0.41254730945786455,
+     "saturated": false
+    },
+    "4.0": {
+     "floor": 1.10625,
+     "gap_at_floor": 0.6291242227998508,
+     "saturated": false
+    }
+   }
+  },
+  "floor_L0_aligned": {
+   "6": {
+    "0.5": {
+     "floor": 0.2296875,
+     "gap_at_floor": 0.11102698744643294,
+     "saturated": false
+    },
+    "1.0": {
+     "floor": 0.2953125,
+     "gap_at_floor": 0.022166160068307544,
+     "saturated": false
+    },
+    "4.0": {
+     "floor": 1.18125,
+     "gap_at_floor": 0.09335643995118836,
+     "saturated": false
+    }
+   },
+   "24": {
+    "0.5": {
+     "floor": 0.15234375,
+     "gap_at_floor": 0.023454006955406725,
+     "saturated": false
+    },
+    "1.0": {
+     "floor": 0.1921875,
+     "gap_at_floor": 0.023269892035354657,
+     "saturated": false
+    },
+    "4.0": {
+     "floor": 1.14375,
+     "gap_at_floor": 0.028194434823233642,
+     "saturated": false
+    }
+   }
+  },
+  "gate_B6_monotone_in_U_L23": true,
+  "gate_B6_monotone_in_U_L0_aligned": true,
+  "gate_B7_data_processing_L23_le_L0_aligned": true,
+  "pass": true,
+  "sigma": 0.60045006751377,
+  "U_grid": [
+   0.5,
+   1.0,
+   4.0
+  ],
+  "five_tuple_note": "(observable level, class N=1/U/omega_min=0.3, design={32,48,64,96,128,192,256}, noise=sigma_measured_at_alpha0.5, m); floor_L0_aligned uses the SAME physical (z,D,nu,nu2,omega_tilde) adversary as floor_L23, observed only through the summary -- this is the citable hierarchy pair (G-B7 validated). The ORIGINAL floor_L0 (exp77's abstract log-ladder adversary, results_exp81_hierarchy/floors_hierarchy.json) is a DIFFERENT, non-nested adversary class and is not comparable to floor_L23 by data-processing; kept only as a secondary reference, not re-litigated here."
+ },
+ "multivariate_fixed": {
+  "sigma": 0.15,
+  "U": 1.0,
+  "m": 24,
+  "Ks": [
+   1,
+   2,
+   3,
+   4,
+   5
+  ],
+  "curves": {
+   "shared": {
+    "1": 0.2765625,
+    "2": 0.12890624999999997,
+    "3": 0.12890624999999997,
+    "4": 0.12890624999999997,
+    "5": 0.12890624999999997
+   },
+   "private": {
+    "1": 0.2765625,
+    "2": 0.13828125,
+    "3": 0.13828125,
+    "4": 0.13828125,
+    "5": 0.13828125
+   },
+   "shared_correlated": {
+    "1": 0.2765625,
+    "2": 0.11015624999999998,
+    "3": 0.10546875,
+    "4": 0.10546875,
+    "5": 0.10078124999999999
+   }
+  },
+  "n_starts_final": 8,
+  "gate_A4_private_nonincreasing": true,
+  "gate_A4_shared_nonincreasing": true,
+  "gate_A4_shared_correlated_nonincreasing": true,
+  "H_A1_private_gain_K1_to_K5": 2.0,
+  "H_A2_shared_gain_K1_to_K5": 2.145454545454546,
+  "H_A3_shared_correlated_gain_K1_to_K5": 2.744186046511628,
+  "convergence_statement": "K-monotonicity (G-A4) satisfied at n_starts=8 for all three curves (private: exact decomposition, provably monotonic; shared/shared_correlated: K-chained warm start + multi-start, empirically monotonic after this budget).",
+  "pass": true
+ }
+}

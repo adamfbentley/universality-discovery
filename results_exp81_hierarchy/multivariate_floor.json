@@ -1,0 +1,55 @@
+{
+ "gate_a1": {
+  "sigma_bd": 0.018977287037495478,
+  "K": 1,
+  "m": 24,
+  "U": 4.0,
+  "floor_K1_shared_param": 0.26718749999999997,
+  "floor_K1_private_param": 0.26718749999999997,
+  "anchor_exp77_bd_m24": 0.27,
+  "abs_diff": 0.002812500000000051,
+  "tolerance_achieved": 0.002812500000000051,
+  "pass": true
+ },
+ "gate_a2": {
+  "curves": {
+   "sigma": 0.15,
+   "U": 1.0,
+   "channel_b": [
+    1.0,
+    -2.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "m24": {
+    "shared": {
+     "1": 0.2765625,
+     "2": 0.1359375,
+     "3": 0.1359375,
+     "4": 0.11718749999999999,
+     "5": 0.11718749999999999
+    },
+    "private": {
+     "1": 0.2765625,
+     "2": 0.1359375,
+     "3": 0.1359375,
+     "4": 0.1359375,
+     "5": 0.1359375
+    },
+    "shared_correlated": {
+     "1": 0.2765625,
+     "2": 0.10781249999999999,
+     "3": 0.0890625,
+     "4": 0.0796875,
+     "5": 0.0234375
+    }
+   }
+  },
+  "H_A2_shared_gain_K1_to_K5": 2.3600000000000003,
+  "H_A1_private_gain_K1_to_K5": 2.03448275862069,
+  "quadrature_prediction_K5": 0.1236825100054571,
+  "pass": true
+ },
+ "note_g_a3": "Measured-Sigma pilot (adapting 76b_regenerate_ladders.py, EW+KPZ) NOT run -- optional per plan; synthetic-channel gates above are the primary deliverable. See EXP81_REPORT.md 'what we did not do'."
+}

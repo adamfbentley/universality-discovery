@@ -1,0 +1,286 @@
+{
+ "level0_sigma": 0.60045006751377,
+ "level0_floors": {
+  "0.5": {
+   "m6": 0.6175781249999999,
+   "m6_saturated": false,
+   "m24": 0.418359375,
+   "m24_saturated": false
+  },
+  "1.0": {
+   "m6": 0.692578125,
+   "m6_saturated": false,
+   "m24": 0.47226562499999997,
+   "m24_saturated": false
+  },
+  "4.0": {
+   "m6": 0.936328125,
+   "m6_saturated": false,
+   "m24": 0.680859375,
+   "m24_saturated": false
+  }
+ },
+ "gate_b4": {
+  "this_family_sigma": 0.60045006751377,
+  "pass": true,
+  "ours_floor_m24_vs_U": {
+   "0.5": 0.418359375,
+   "1.0": 0.47226562499999997,
+   "4.0": 0.680859375
+  },
+  "exp77_ref_sigma0.15": {
+   "4.0": 0.4429687499999999,
+   "2.0": 0.31171874999999993,
+   "1.0": 0.21328124999999998,
+   "0.5": 0.18046875,
+   "0.1": 0.07734374999999999
+  },
+  "monotonic_in_U_ours": true,
+  "monotonic_in_U_ref": true,
+  "same_order_of_magnitude": true
+ },
+ "omega_eff_measurements": {
+  "omtilde0.3_u0.5": {
+   "omega_tilde": 0.3,
+   "u_declared": 0.5,
+   "omega_eff_measured": 0.3295571967788687,
+   "b_fit": 1.4026252555778582,
+   "alpha_check": 0.5
+  },
+  "omtilde0.3_u1.0": {
+   "omega_tilde": 0.3,
+   "u_declared": 1.0,
+   "omega_eff_measured": 0.43662448730748527,
+   "b_fit": 3.9364927274485315,
+   "alpha_check": 0.5
+  },
+  "omtilde0.3_u4.0": {
+   "omega_tilde": 0.3,
+   "u_declared": 4.0,
+   "omega_eff_measured": 0.4796748054910892,
+   "b_fit": 6.897800604581712,
+   "alpha_check": 0.5
+  },
+  "omtilde0.5_u0.5": {
+   "omega_tilde": 0.5,
+   "u_declared": 0.5,
+   "omega_eff_measured": 0.5389528832440793,
+   "b_fit": 2.8464900487085334,
+   "alpha_check": 0.5
+  },
+  "omtilde0.5_u1.0": {
+   "omega_tilde": 0.5,
+   "u_declared": 1.0,
+   "omega_eff_measured": 0.5954053854921514,
+   "b_fit": 5.624498548721016,
+   "alpha_check": 0.5
+  },
+  "omtilde0.5_u4.0": {
+   "omega_tilde": 0.5,
+   "u_declared": 4.0,
+   "omega_eff_measured": 0.5954053854921514,
+   "b_fit": 5.624498548721016,
+   "alpha_check": 0.5
+  },
+  "omtilde1.0_u0.5": {
+   "omega_tilde": 1.0,
+   "u_declared": 0.5,
+   "omega_eff_measured": 0.6716356729314708,
+   "b_fit": 2.2270052793203265,
+   "alpha_check": 0.5
+  },
+  "omtilde1.0_u1.0": {
+   "omega_tilde": 1.0,
+   "u_declared": 1.0,
+   "omega_eff_measured": 0.6716356729314708,
+   "b_fit": 2.2270052793203265,
+   "alpha_check": 0.5
+  },
+  "omtilde1.0_u4.0": {
+   "omega_tilde": 1.0,
+   "u_declared": 4.0,
+   "omega_eff_measured": 0.6716356729314708,
+   "b_fit": 2.2270052793203265,
+   "alpha_check": 0.5
+  },
+  "omtilde1.5_u0.5": {
+   "omega_tilde": 1.5,
+   "u_declared": 0.5,
+   "omega_eff_measured": 0.6306494674527711,
+   "b_fit": 0.7631536925047364,
+   "alpha_check": 0.5
+  },
+  "omtilde1.5_u1.0": {
+   "omega_tilde": 1.5,
+   "u_declared": 1.0,
+   "omega_eff_measured": 0.6306494674527711,
+   "b_fit": 0.7631536925047364,
+   "alpha_check": 0.5
+  },
+  "omtilde1.5_u4.0": {
+   "omega_tilde": 1.5,
+   "u_declared": 4.0,
+   "omega_eff_measured": 0.6306494674527711,
+   "b_fit": 0.7631536925047364,
+   "alpha_check": 0.5
+  },
+  "omtilde2.0_u0.5": {
+   "omega_tilde": 2.0,
+   "u_declared": 0.5,
+   "omega_eff_measured": 0.6700040140324439,
+   "b_fit": 0.3047546491936976,
+   "alpha_check": 0.5
+  },
+  "omtilde2.0_u1.0": {
+   "omega_tilde": 2.0,
+   "u_declared": 1.0,
+   "omega_eff_measured": 0.6700040140324439,
+   "b_fit": 0.3047546491936976,
+   "alpha_check": 0.5
+  },
+  "omtilde2.0_u4.0": {
+   "omega_tilde": 2.0,
+   "u_declared": 4.0,
+   "omega_eff_measured": 0.6700040140324439,
+   "b_fit": 0.3047546491936976,
+   "alpha_check": 0.5
+  }
+ },
+ "level23_floors": {
+  "0.5": {
+   "m6": {
+    "floor_L23": 0.0515625,
+    "gap_at_floor_m_scaled": 0.197180163836603,
+    "saturated": false
+   },
+   "m24": {
+    "floor_L23": 0.0421875,
+    "gap_at_floor_m_scaled": 0.2525741196428676,
+    "saturated": false
+   }
+  },
+  "1.0": {
+   "m6": {
+    "floor_L23": 0.0515625,
+    "gap_at_floor_m_scaled": 0.5060021881304859,
+    "saturated": false
+   },
+   "m24": {
+    "floor_L23": 0.0234375,
+    "gap_at_floor_m_scaled": 0.7505433983889688,
+    "saturated": false
+   }
+  },
+  "4.0": {
+   "m6": {
+    "floor_L23": 1.1109375,
+    "gap_at_floor_m_scaled": 0.4709339000859276,
+    "saturated": false
+   },
+   "m24": {
+    "floor_L23": 1.1015625,
+    "gap_at_floor_m_scaled": 0.04554486648696299,
+    "saturated": false
+   }
+  }
+ },
+ "five_tuple_note": "(observable level, class N=1/U/omega_min=0.3, design={32,48,64,96,128,192,256}, noise=sigma_measured_at_alpha0.5, m); floor_L0/floor_L23 are omega_tilde-independent (om is a free adversary nuisance in [0.3,2.5] for both), tabulated per omega_tilde only to sit alongside the omega_tilde-dependent FIM column",
+ "hierarchy": {
+  "omtilde1.0_U0.5": {
+   "omega_tilde": 1.0,
+   "U": 0.5,
+   "nu2_representative": -0.32049544697696986,
+   "fisher_info_alpha_design": 5851258.658396171,
+   "m6": {
+    "floor_L0": 0.6175781249999999,
+    "floor_L23": 0.0515625,
+    "dalpha_FIM": 0.00016877173942488885
+   },
+   "m24": {
+    "floor_L0": 0.418359375,
+    "floor_L23": 0.0421875,
+    "dalpha_FIM": 8.438586971244442e-05
+   }
+  },
+  "omtilde1.0_U1.0": {
+   "omega_tilde": 1.0,
+   "U": 1.0,
+   "nu2_representative": -0.32049544697696986,
+   "fisher_info_alpha_design": 5851258.658396171,
+   "m6": {
+    "floor_L0": 0.692578125,
+    "floor_L23": 0.0515625,
+    "dalpha_FIM": 0.00016877173942488885
+   },
+   "m24": {
+    "floor_L0": 0.47226562499999997,
+    "floor_L23": 0.0234375,
+    "dalpha_FIM": 8.438586971244442e-05
+   }
+  },
+  "omtilde1.0_U4.0": {
+   "omega_tilde": 1.0,
+   "U": 4.0,
+   "nu2_representative": -0.32049544697696986,
+   "fisher_info_alpha_design": 5851258.658396171,
+   "m6": {
+    "floor_L0": 0.936328125,
+    "floor_L23": 1.1109375,
+    "dalpha_FIM": 0.00016877173942488885
+   },
+   "m24": {
+    "floor_L0": 0.680859375,
+    "floor_L23": 1.1015625,
+    "dalpha_FIM": 8.438586971244442e-05
+   }
+  },
+  "omtilde0.3_U0.5": {
+   "omega_tilde": 0.3,
+   "U": 0.5,
+   "nu2_representative": -0.45032882493539167,
+   "fisher_info_alpha_design": 5023.1455072761755,
+   "m6": {
+    "floor_L0": 0.6175781249999999,
+    "floor_L23": 0.0515625,
+    "dalpha_FIM": 0.005760185843029267
+   },
+   "m24": {
+    "floor_L0": 0.418359375,
+    "floor_L23": 0.0421875,
+    "dalpha_FIM": 0.0028800929215146336
+   }
+  },
+  "omtilde0.3_U1.0": {
+   "omega_tilde": 0.3,
+   "U": 1.0,
+   "nu2_representative": -0.6418902538008258,
+   "fisher_info_alpha_design": 32537.250213699983,
+   "m6": {
+    "floor_L0": 0.692578125,
+    "floor_L23": 0.0515625,
+    "dalpha_FIM": 0.002263257411692391
+   },
+   "m24": {
+    "floor_L0": 0.47226562499999997,
+    "floor_L23": 0.0234375,
+    "dalpha_FIM": 0.0011316287058461955
+   }
+  },
+  "omtilde0.3_U4.0": {
+   "omega_tilde": 0.3,
+   "U": 4.0,
+   "nu2_representative": -0.7103009589964395,
+   "fisher_info_alpha_design": 9097348.896833517,
+   "m6": {
+    "floor_L0": 0.936328125,
+    "floor_L23": 1.1109375,
+    "dalpha_FIM": 0.00013535270807983832
+   },
+   "m24": {
+    "floor_L0": 0.680859375,
+    "floor_L23": 1.1015625,
+    "dalpha_FIM": 6.767635403991916e-05
+   }
+  }
+ }
+}

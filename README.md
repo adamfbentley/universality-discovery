@@ -30,11 +30,11 @@ interval ≈ 0.50 ± 0.05 (syst) ± 0.03 (stat) — where classical ansatz-fitti
 gives a scatter of 0.36–0.70. The estimator operates near the information limit
 for the declared correction class.
 
-## Next Phase: The Observable-Information Hierarchy (exp81, planned)
+## Current Phase: The Observable-Information Hierarchy (exp81-83, in progress)
 
 The floor is estimator-agnostic but **observable-conditional**: it bounds
 inference from the declared summary (the W_sat ladder), not from richer data.
-Exp81 turns that scope condition into the next research object: compute floors
+Exp81-83 turn that scope condition into the current research object: floors
 across the observable hierarchy (single summary → multi-channel summaries →
 spectra → raw configurations) on an exactly solvable fractional-EW testbed
 where every level has closed-form information, and determine when richer

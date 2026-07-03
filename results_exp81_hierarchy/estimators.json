@@ -1,0 +1,74 @@
+{
+ "training_config": {
+  "n_steps": 4000,
+  "batch_size": 256,
+  "n_test": 4000,
+  "prior": "alpha~U[0.35,0.65] indep of log D,log nu~U(decade), u:=b(L_min)~U[-U,U], omega_tilde~U[0.3,2.5]"
+ },
+ "gate_b5": {
+  "raw_fim_dalpha_m1": 0.02726733265985759,
+  "summary_fim_dalpha_m1": 0.04774441370065153,
+  "summary_mlp_rmse": 0.0715268058894816,
+  "summary_mlp_ratio_to_summary_ceiling": 1.498118844603291,
+  "summary_mlp_ratio_to_raw_fim": 2.6231684184783464,
+  "note": "summary_ceiling accounts for the 7-point log-W_sat summary being lossy relative to the raw field even at nu2=0; the MLP is compared against IT (its own reachable ceiling), while the CNN is compared against the raw FIM",
+  "cnn_rmse": 0.03141268455849517,
+  "cnn_ratio_to_raw_fim": 1.1520263074627861,
+  "pass": true
+ },
+ "task2_floors_m1_reference": {
+  "0.5": {
+   "floor_L0_m1": 0.912890625,
+   "floor_L23_m1": 0.12656249999999997
+  },
+  "1.0": {
+   "floor_L0_m1": 1.0089843749999998,
+   "floor_L23_m1": 0.22031249999999997
+  },
+  "4.0": {
+   "floor_L0_m1": 1.2,
+   "floor_L23_m1": 1.1296875
+  }
+ },
+ "hard_regimes": {
+  "0.5": {
+   "summary_mlp_rmse": 0.07246478587741811,
+   "dalpha_raw_FIM_m1": 0.0004134046445929405,
+   "dalpha_summary_FIM_m1": 0.047877694505940656,
+   "floor_L0_m1": 0.912890625,
+   "summary_mlp_beats_raw_fim": false,
+   "summary_mlp_beats_own_summary_ceiling": false,
+   "summary_mlp_beats_floor_L0": true,
+   "cnn_rmse": 0.059119944218401055,
+   "floor_L23_m1": 0.12656249999999997,
+   "cnn_beats_raw_fim": false,
+   "cnn_beats_floor_L23": true
+  },
+  "1.0": {
+   "summary_mlp_rmse": 0.07426015305341838,
+   "dalpha_raw_FIM_m1": 0.0004134046445929405,
+   "dalpha_summary_FIM_m1": 0.047877694505940656,
+   "floor_L0_m1": 1.0089843749999998,
+   "summary_mlp_beats_raw_fim": false,
+   "summary_mlp_beats_own_summary_ceiling": false,
+   "summary_mlp_beats_floor_L0": true,
+   "cnn_rmse": 0.06405504009069861,
+   "floor_L23_m1": 0.22031249999999997,
+   "cnn_beats_raw_fim": false,
+   "cnn_beats_floor_L23": true
+  },
+  "4.0": {
+   "summary_mlp_rmse": 0.07798178457155581,
+   "dalpha_raw_FIM_m1": 0.0004134046445929405,
+   "dalpha_summary_FIM_m1": 0.047877694505940656,
+   "floor_L0_m1": 1.2,
+   "summary_mlp_beats_raw_fim": false,
+   "summary_mlp_beats_own_summary_ceiling": false,
+   "summary_mlp_beats_floor_L0": true,
+   "cnn_rmse": 0.06944023998436444,
+   "floor_L23_m1": 1.1296875,
+   "cnn_beats_raw_fim": false,
+   "cnn_beats_floor_L23": true
+  }
+ }
+}

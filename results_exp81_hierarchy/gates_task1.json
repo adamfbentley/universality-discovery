@@ -1,0 +1,243 @@
+{
+ "gate_b1": {
+  "params": {
+   "z": 2.0,
+   "D": 1.0,
+   "nu": 1.0,
+   "nu2": 0.6,
+   "omega_tilde": 1.0
+  },
+  "n_seeds": 4000,
+  "Ls": [
+   32,
+   64,
+   128,
+   256
+  ],
+  "band_checks": {
+   "32": [
+    {
+     "n_range": [
+      1,
+      3
+     ],
+     "empirical_mean_Sigma": 120.0949184963523,
+     "theory_Sigma": 118.0391087693942,
+     "rel_err": 0.017416344026914166,
+     "mc_sem_rel": 0.011180339887498949
+    },
+    {
+     "n_range": [
+      3,
+      7
+     ],
+     "empirical_mean_Sigma": 19.60378093545914,
+     "theory_Sigma": 19.73635281260947,
+     "rel_err": -0.006717141632451518,
+     "mc_sem_rel": 0.007905694150420948
+    },
+    {
+     "n_range": [
+      7,
+      15
+     ],
+     "empirical_mean_Sigma": 3.2063530488602083,
+     "theory_Sigma": 3.213566046093423,
+     "rel_err": -0.0022445461302975644,
+     "mc_sem_rel": 0.005590169943749474
+    }
+   ],
+   "64": [
+    {
+     "n_range": [
+      1,
+      2
+     ],
+     "empirical_mean_Sigma": 1465.7513349970038,
+     "theory_Sigma": 1485.0884156731809,
+     "rel_err": -0.013020827899604681,
+     "mc_sem_rel": 0.015811388300841896
+    },
+    {
+     "n_range": [
+      2,
+      5
+     ],
+     "empirical_mean_Sigma": 389.09683169340224,
+     "theory_Sigma": 389.34981722258385,
+     "rel_err": -0.0006497640887217493,
+     "mc_sem_rel": 0.009128709291752768
+    },
+    {
+     "n_range": [
+      5,
+      13
+     ],
+     "empirical_mean_Sigma": 59.917030211238156,
+     "theory_Sigma": 60.08556515634844,
+     "rel_err": -0.002804915700996391,
+     "mc_sem_rel": 0.005590169943749474
+    },
+    {
+     "n_range": [
+      13,
+      31
+     ],
+     "empirical_mean_Sigma": 7.313268592399191,
+     "theory_Sigma": 7.280379479525278,
+     "rel_err": 0.004517499804290059,
+     "mc_sem_rel": 0.00372677996249965
+    }
+   ],
+   "128": [
+    {
+     "n_range": [
+      1,
+      2
+     ],
+     "empirical_mean_Sigma": 13092.699509506943,
+     "theory_Sigma": 12541.608463379393,
+     "rel_err": 0.043941018230372775,
+     "mc_sem_rel": 0.015811388300841896
+    },
+    {
+     "n_range": [
+      2,
+      7
+     ],
+     "empirical_mean_Sigma": 2472.9163402511304,
+     "theory_Sigma": 2479.6602560653346,
+     "rel_err": -0.0027196934732121036,
+     "mc_sem_rel": 0.007071067811865475
+    },
+    {
+     "n_range": [
+      7,
+      22
+     ],
+     "empirical_mean_Sigma": 231.44885774354356,
+     "theory_Sigma": 231.81645749575742,
+     "rel_err": -0.0015857362164227728,
+     "mc_sem_rel": 0.00408248290463863
+    },
+    {
+     "n_range": [
+      22,
+      63
+     ],
+     "empirical_mean_Sigma": 18.446678661786052,
+     "theory_Sigma": 18.41573836637611,
+     "rel_err": 0.0016801007265845325,
+     "mc_sem_rel": 0.0024693239916239737
+    }
+   ],
+   "256": [
+    {
+     "n_range": [
+      1,
+      3
+     ],
+     "empirical_mean_Sigma": 73220.04503538049,
+     "theory_Sigma": 74212.32517257042,
+     "rel_err": -0.01337082667713907,
+     "mc_sem_rel": 0.011180339887498949
+    },
+    {
+     "n_range": [
+      3,
+      11
+     ],
+     "empirical_mean_Sigma": 9633.114756070148,
+     "theory_Sigma": 9615.602173357744,
+     "rel_err": 0.0018212673940407598,
+     "mc_sem_rel": 0.005590169943749474
+    },
+    {
+     "n_range": [
+      11,
+      37
+     ],
+     "empirical_mean_Sigma": 764.761476195618,
+     "theory_Sigma": 768.3127373488413,
+     "rel_err": -0.00462215577146019,
+     "mc_sem_rel": 0.0031008683647302114
+    },
+    {
+     "n_range": [
+      37,
+      127
+     ],
+     "empirical_mean_Sigma": 46.76701108518237,
+     "theory_Sigma": 46.70281664660565,
+     "rel_err": 0.001374530342837188,
+     "mc_sem_rel": 0.0016666666666666668
+    }
+   ]
+  },
+  "figure": "C:\\Users\\adamf\\Desktop\\pp\\universality-discovery\\experiments\\..\\results_exp81_hierarchy\\figs\\gate_b1_spectrum_overlay.png",
+  "max_rel_err": 0.043941018230372775,
+  "max_mc_sem_rel": 0.015811388300841896,
+  "pass": true
+ },
+ "gate_b2": {
+  "per_z": {
+   "1.7": {
+    "target_alpha": 0.35,
+    "alpha_exact_design": 0.3695487671897296,
+    "alpha_asymptotic": 0.3500217512143978,
+    "alpha_mc_logmean_design": 0.37485021943065167,
+    "alpha_mc_logmean_sem": 0.002773494430381966,
+    "alpha_mc_meanlog_naive": 0.37950367455326317,
+    "intrinsic_finite_window_bias": 0.019548767189729643,
+    "jensen_bias_meanlog_minus_logmean": 0.00995490736353355
+   },
+   "2.0": {
+    "target_alpha": 0.5,
+    "alpha_exact_design": 0.5080300360882689,
+    "alpha_asymptotic": 0.5000006799427581,
+    "alpha_mc_logmean_design": 0.5064273924671358,
+    "alpha_mc_logmean_sem": 0.003177932255932717,
+    "alpha_mc_meanlog_naive": 0.5098820311396831,
+    "intrinsic_finite_window_bias": 0.00803003608826891,
+    "jensen_bias_meanlog_minus_logmean": 0.0018519950514142014
+   },
+   "2.3": {
+    "target_alpha": 0.6499999999999999,
+    "alpha_exact_design": 0.6531930705099015,
+    "alpha_asymptotic": 0.650000021751966,
+    "alpha_mc_logmean_design": 0.6529429341284586,
+    "alpha_mc_logmean_sem": 0.0035805407496877885,
+    "alpha_mc_meanlog_naive": 0.6585004650808534,
+    "intrinsic_finite_window_bias": 0.0031930705099015855,
+    "jensen_bias_meanlog_minus_logmean": 0.005307394570951862
+   }
+  },
+  "asymptotic_matches_target": true,
+  "mc_logmean_matches_exact_design": true,
+  "pass": true
+ },
+ "gate_b3": {
+  "p1": [
+   2.0,
+   1.0,
+   1.0,
+   0.6,
+   1.0
+  ],
+  "p2": [
+   2.1,
+   1.2,
+   0.9,
+   0.3,
+   1.4
+  ],
+  "L": 64,
+  "n_seeds": 6000,
+  "kl_analytic": 2.369527186674323,
+  "kl_empirical_mean": 2.3621519952353562,
+  "kl_empirical_sem": 0.024565964461239733,
+  "rel_err": 0.0031125160666832493,
+  "fim_finite_diff_rel_err": 1.712540678198171e-10,
+  "pass": true
+ }
+}
