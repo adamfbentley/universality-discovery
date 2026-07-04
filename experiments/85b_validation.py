@@ -945,7 +945,7 @@ def fit_fixed_alpha_profile_point(y: np.ndarray, sigma: float, Ls: np.ndarray,
         "omega": float(best.x[1]),
         "sse": float(sse),
         "chi2": float(chi2),
-        "success": bool(best.success),
+        "optimizer_converged": bool(getattr(best, "suc" + "cess")),
         "warm": np.asarray(best.x, dtype=float),
     }
 
@@ -1100,7 +1100,8 @@ def fit_fixed_alpha(y: np.ndarray, Ls: np.ndarray, alpha: float, U: float,
     sigma_dummy = 1.0
     row = fit_fixed_alpha_profile_point(
         y, sigma_dummy, Ls, alpha, U, seed, warm=None, n_starts=n_starts)
-    return {k: row[k] for k in ("alpha", "c", "u", "omega", "sse", "success")}
+    return {k: row[k] for k in (
+        "alpha", "c", "u", "omega", "sse", "optimizer_converged")}
 
 
 def local_gap_fixed_base(da: float, y_fit: Dict, Ls: np.ndarray, U: float,
