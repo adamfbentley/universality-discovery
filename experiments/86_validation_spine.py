@@ -96,6 +96,15 @@ def current_head() -> str:
         ["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
 
 
+def latest_commit_for_path(relpath: str) -> str:
+    out = subprocess.check_output(
+        ["git", "log", "-n", "1", "--format=%H", "--", relpath],
+        cwd=ROOT,
+        text=True,
+    ).strip()
+    return out if out else "pending"
+
+
 def git_blob_exists(relpath: str) -> bool:
     try:
         subprocess.run(
@@ -910,9 +919,9 @@ def write_report() -> None:
     score2 = read_json(task2_score_path) if os.path.exists(task2_score_path) else None
 
     phase1_commit = score1["phase1_commit_head"] if score1 else "pending"
-    phase2_commit = current_head() if score1 else "pending"
+    phase2_commit = latest_commit_for_path("results_exp86_task1/task1_score.json") if score1 else "pending"
     task2_phase1_commit = score2["phase1_commit_head"] if score2 else "pending"
-    task2_phase2_commit = current_head() if score2 else "pending"
+    task2_phase2_commit = latest_commit_for_path("results_exp86_task2/task2_score.json") if score2 else "pending"
 
     lines = []
     lines.append("# Exp 86 Report -- Validation Spine")
