@@ -16,6 +16,7 @@ import json
 import math
 import os
 import subprocess
+import time
 from dataclasses import dataclass
 from typing import Dict, List, Optional, Sequence, Tuple
 
@@ -32,6 +33,7 @@ E85C_PATH = os.path.join(HERE, "85c_confirmatory.py")
 EXP85B_RESULTS = os.path.join(ROOT, "results_exp85b_validation")
 EXP85C_RESULTS = os.path.join(ROOT, "results_exp85c_confirmatory")
 EXP86_TASK1 = os.path.join(ROOT, "results_exp86_task1")
+EXP86_TASK2 = os.path.join(ROOT, "results_exp86_task2")
 
 SUMMARY76 = os.path.join(
     ROOT, "results_exp76_amortized_extrapolation", "summary_full24seed.json")
@@ -42,6 +44,12 @@ M_REAL = 24
 MASTER_SEED_85C = 85300
 TARGET_ALPHA = 0.5
 OMEGA_BOUNDS_DEFAULT = (0.3, 2.5)
+ISING_OMEGA_BOUNDS = (1.0, 2.5)
+ISING_HALF_DESIGN = np.array([32., 48.])
+ISING_HELDOUT_DESIGN = np.array([64., 96.])
+ISING_FULL_DESIGN = np.array([32., 48., 64., 96.])
+ISING_U_STRICT = 0.3
+ISING_U_LOOSE = 1.0
 BIAS_BOUND_CACHE: Dict[Tuple, Dict] = {}
 
 
@@ -114,6 +122,18 @@ def require_task1_phase1_committed() -> None:
             f"{missing}")
 
 
+def require_task2_phase1_committed() -> None:
+    rels = [
+        os.path.join("results_exp86_task2", "phase1_predictions.json"),
+        os.path.join("results_exp86_task2", "phase1_predictions.sha256"),
+    ]
+    missing = [p for p in rels if not git_blob_exists(p)]
+    if missing:
+        raise SystemExit(
+            "Refusing to score Task 2: phase-1 artifacts are not committed in HEAD: "
+            f"{missing}")
+
+
 def fmt(x, nd=4):
     if x is None:
         return "NA"
@@ -162,6 +182,7 @@ def correction_bias_bound(
     Ls: np.ndarray,
     U: float,
     omega_bounds: Tuple[float, float] = OMEGA_BOUNDS_DEFAULT,
+    u_bounds: Optional[Tuple[float, float]] = None,
     seed: int = 0,
     starts: int = 12,
 ) -> Dict:
@@ -173,7 +194,7 @@ def correction_bias_bound(
     mod = e85b()
     Ls = np.asarray(Ls, dtype=float)
     w = np.asarray(weights, dtype=float)
-    ub = u_bounds_for_class(U, mod)
+    ub = tuple(float(v) for v in (u_bounds if u_bounds is not None else u_bounds_for_class(U, mod)))
     bounds = [ub, omega_bounds]
     rng = np.random.default_rng(seed)
 
@@ -260,6 +281,7 @@ def fixed_estimator_for_curve(
     U: float,
     Ls: Optional[np.ndarray] = None,
     omega_bounds: Tuple[float, float] = OMEGA_BOUNDS_DEFAULT,
+    u_bounds: Optional[Tuple[float, float]] = None,
     seed: int = 0,
 ) -> Dict:
     mod = e85b()
@@ -274,11 +296,13 @@ def fixed_estimator_for_curve(
         tuple(np.round(fixed_w, 12).tolist()),
         tuple(np.round(np.asarray(Ls, dtype=float), 12).tolist()),
         float(U),
+        tuple(float(v) for v in (u_bounds if u_bounds is not None else u_bounds_for_class(U, mod))),
         tuple(float(v) for v in omega_bounds),
     )
     if bias_key not in BIAS_BOUND_CACHE:
         BIAS_BOUND_CACHE[bias_key] = correction_bias_bound(
             fixed_w, Ls, U, omega_bounds=omega_bounds,
+            u_bounds=u_bounds,
             seed=seed + int(1000 * U) + len(Ls))
     bias = dict(BIAS_BOUND_CACHE[bias_key])
     bias["cache_key_weights_rounded_12"] = list(bias_key[0])
@@ -313,10 +337,12 @@ def fixed_ci_for_y(
     U: float,
     seed: int,
     omega_bounds: Tuple[float, float] = OMEGA_BOUNDS_DEFAULT,
+    u_bounds: Optional[Tuple[float, float]] = None,
 ) -> Dict:
     Ls = np.asarray(curve.design, dtype=float)
     est = fixed_estimator_for_curve(
-        curve, sigma, m, U, Ls=Ls, omega_bounds=omega_bounds, seed=seed)
+        curve, sigma, m, U, Ls=Ls, omega_bounds=omega_bounds,
+        u_bounds=u_bounds, seed=seed)
     weights = np.asarray(est["weights"], dtype=float)
     center = float(np.dot(weights, y))
     half = float(est["half_length"])
@@ -555,14 +581,338 @@ def task1_phase2() -> Dict:
     return out
 
 
+def exp52d_protocol() -> Dict:
+    helper = e85c()
+    e52d_mod = helper.import_ising52d()
+    temperatures = np.linspace(0.85 * e52d_mod.T_C, 1.15 * e52d_mod.T_C, 15)
+    return {
+        "source": "experiments/52d_ising_finite_size_scaling.py full-mode protocol",
+        "observable": (
+            "PC1 curves from the exp52d six-feature Ising representation; "
+            "1/nu is extracted by minimizing compute_collapse_quality over nu."),
+        "n_temps": 15,
+        "n_equilibrate": 3000,
+        "n_measure": 500,
+        "n_measurements": 5,
+        "temperatures": temperatures.tolist(),
+    }
+
+
+def regenerate_exp52d_records(
+    L_values: Sequence[int],
+    m: int,
+    seed0: int,
+    protocol: Dict,
+) -> List[Dict]:
+    helper = e85c()
+    return helper.regenerate_ising_records(L_values, m, seed0, protocol)
+
+
+def exp52d_collapse_summary(records: List[Dict], L_values: Sequence[int],
+                            label: str) -> Dict:
+    from sklearn.decomposition import PCA
+    from sklearn.preprocessing import StandardScaler
+
+    helper = e85c()
+    e52d_mod = helper.import_ising52d()
+    L_set = {int(L) for L in L_values}
+    recs = sorted(
+        [r for r in records if int(r["L"]) in L_set],
+        key=lambda r: (int(r["L"]), int(r["seed"])),
+    )
+    all_features = np.vstack([np.asarray(r["features"], dtype=float) for r in recs])
+    scaler = StandardScaler()
+    scaled = scaler.fit_transform(all_features)
+    pca = PCA(n_components=min(6, all_features.shape[1]))
+    coords = pca.fit_transform(scaled)
+
+    pc1_by_L = {int(L): [] for L in L_values}
+    t_by_L = {int(L): [] for L in L_values}
+    slopes_by_L = {str(int(L)): [] for L in L_values}
+    idx = 0
+    for r in recs:
+        L = int(r["L"])
+        t = np.asarray(r["t"], dtype=float)
+        n = len(t)
+        pc1 = coords[idx:idx + n, 0]
+        idx += n
+        pc1_by_L[L].extend(pc1.tolist())
+        t_by_L[L].extend(t.tolist())
+        keep = np.abs(t) <= 0.08
+        if int(np.sum(keep)) < 4:
+            keep = np.ones_like(t, dtype=bool)
+        slope, intercept = np.polyfit(t[keep], pc1[keep], 1)
+        slopes_by_L[str(L)].append({
+            "seed": int(r["seed"]),
+            "slope_pc1_vs_reduced_t": float(slope),
+            "intercept": float(intercept),
+            "n_temperature_points_used": int(np.sum(keep)),
+        })
+
+    pc1_np = {int(L): np.asarray(pc1_by_L[int(L)], dtype=float) for L in L_values}
+    t_np = {int(L): np.asarray(t_by_L[int(L)], dtype=float) for L in L_values}
+    quality_exact = e52d_mod.compute_collapse_quality(pc1_np, t_np, list(map(int, L_values)), 1.0)
+    nu_opt, quality_opt = e52d_mod.find_optimal_nu(pc1_np, t_np, list(map(int, L_values)))
+    nu_grid = [0.5, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.5, 2.0]
+    quality_grid = {
+        f"{nu:.1f}": float(e52d_mod.compute_collapse_quality(
+            pc1_np, t_np, list(map(int, L_values)), float(nu)))
+        for nu in nu_grid
+    }
+
+    log_by_L = {}
+    for L in L_values:
+        vals = np.array([
+            abs(row["slope_pc1_vs_reduced_t"])
+            for row in slopes_by_L[str(int(L))]
+        ], dtype=float)
+        log_by_L[str(int(L))] = np.log(np.clip(vals, 1e-12, None)).tolist()
+    mat = np.asarray([log_by_L[str(int(L))] for L in L_values], dtype=float).T
+    y = mat.mean(axis=0)
+    per_l = mat.std(axis=0, ddof=1) if mat.shape[0] > 1 else np.zeros(mat.shape[1])
+    sigma = float(np.median(per_l))
+    leading_slope_ols = None
+    if len(L_values) >= 2:
+        leading_slope_ols = float(np.polyfit(np.log(np.asarray(L_values, dtype=float)), y, 1)[0])
+
+    return {
+        "label": label,
+        "L_values": [int(L) for L in L_values],
+        "m": int(mat.shape[0]),
+        "exp52d_actual_observable": "argmin_nu compute_collapse_quality(PC1, t * L^(1/nu))",
+        "nu_optimal": float(nu_opt),
+        "one_over_nu_optimal": float(1.0 / nu_opt),
+        "collapse_quality_at_nu_1": float(quality_exact),
+        "collapse_quality_optimal": float(quality_opt),
+        "collapse_quality_grid": quality_grid,
+        "pca_explained_variance_ratio": pca.explained_variance_ratio_.tolist(),
+        "pc1_point_count_by_L": {str(int(L)): int(len(pc1_by_L[int(L)])) for L in L_values},
+        "leading_slope_ladder": {
+            "observable_note": (
+                "Auxiliary derivative ladder from the exp52d PC1 curves; "
+                "not the exp52d collapse-argmin estimator."),
+            "L_values": [int(L) for L in L_values],
+            "m": int(mat.shape[0]),
+            "y_mean_log_abs_pc1_slope": y.tolist(),
+            "sigma_median_seed_sd": sigma,
+            "per_L_seed_sd": per_l.tolist(),
+            "seed_log_abs_slope_matrix": mat.tolist(),
+            "leading_slope_ols_vs_logL": leading_slope_ols,
+            "slopes_by_L": slopes_by_L,
+        },
+    }
+
+
+def compute_custom_modulus_curve_exp86(
+    U: float,
+    Ls: np.ndarray,
+    tag: str,
+    u_bounds: Tuple[float, float],
+    omega_bounds: Tuple[float, float],
+    da_hi: float = 1.4,
+    n_grid: int = 37,
+    n_starts: int = 5,
+    J: int = 4,
+):
+    ensure_dir(EXP86_TASK2)
+    path = os.path.join(EXP86_TASK2, f"modulus_{tag}.json")
+    mod = e85b()
+    if os.path.exists(path):
+        return mod.ModulusCurve.from_json(read_json(path))
+    helper = e85c()
+    da_grid = np.linspace(0.0, da_hi, n_grid)
+    deltas = np.zeros_like(da_grid)
+    mixes = [None]
+    warm = None
+    for j, da in enumerate(da_grid[1:], start=1):
+        gap, mix = helper.custom_bounds_hull_confusion_gap(
+            mod, float(da), Ls, J, u_bounds, omega_bounds, n_starts,
+            seed=864000 + int(1000 * U) + j, warm_mixture=warm)
+        deltas[j] = math.sqrt(max(gap, 0.0))
+        mixes.append(mix)
+        warm = mix
+        print(f"[task2 modulus] {tag} da={da:.4f} delta={deltas[j]:.6g}")
+    running = np.maximum.accumulate(deltas)
+    keep = np.r_[True, np.diff(running) > 1e-10]
+    prime = np.zeros_like(da_grid)
+    if np.sum(keep) >= 3:
+        prime_keep = np.gradient(da_grid[keep], running[keep], edge_order=1)
+        prime[keep] = prime_keep
+        prime = np.interp(np.arange(len(prime)), np.where(keep)[0], prime[keep])
+    else:
+        prime[:] = 1.0
+    prime = np.clip(prime, 1e-6, 1e6)
+    curve = mod.ModulusCurve(float(U), Ls.tolist(), da_grid, deltas, running,
+                             prime, mixes, J)
+    write_json(path, curve.to_json())
+    return curve
+
+
+def task2_phase1(args) -> Dict:
+    ensure_dir(EXP86_TASK2)
+    protocol = exp52d_protocol()
+    helper = e85c()
+    e52d_mod = helper.import_ising52d()
+    t0 = time.time()
+    _features, _t = helper.run_one_ising_seed(
+        e52d_mod, 32, MASTER_SEED_85C + 860200, protocol)
+    pilot_seconds = time.time() - t0
+    projected_full = pilot_seconds * len(ISING_FULL_DESIGN) * M_REAL
+    m_used = M_REAL
+    if projected_full > args.ising_max_seconds:
+        m_used = max(2, M_REAL // 2)
+    reduction_note = (
+        f"Pilot one (L,seed) took {pilot_seconds:.2f}s; projected 4L x 24 seeds "
+        f"{projected_full:.1f}s against guard {args.ising_max_seconds:.1f}s; "
+        f"m_used={m_used}.")
+    print("[task2 phase1]", reduction_note)
+
+    seed0_half = MASTER_SEED_85C + 860300
+    records = regenerate_exp52d_records([32, 48], m_used, seed0_half, protocol)
+    collapse = exp52d_collapse_summary(records, [32, 48], "half_window_L32_48")
+
+    y = np.asarray(collapse["leading_slope_ladder"]["y_mean_log_abs_pc1_slope"], dtype=float)
+    sigma = float(collapse["leading_slope_ladder"]["sigma_median_seed_sd"])
+    classes = {}
+    for name, U in (("strict_abs_u_le_0.3_omega_ge_1", ISING_U_STRICT),
+                    ("loose_abs_u_le_1_omega_ge_1", ISING_U_LOOSE)):
+        ub = (-float(U), float(U))
+        curve = compute_custom_modulus_curve_exp86(
+            U, ISING_HALF_DESIGN, tag=f"task2_half_{name}",
+            u_bounds=ub, omega_bounds=ISING_OMEGA_BOUNDS,
+            n_grid=args.ising_curve_grid, n_starts=args.ising_curve_starts)
+        ci = fixed_ci_for_y(
+            y, sigma, int(collapse["leading_slope_ladder"]["m"]),
+            curve, U, seed=865000 + int(1000 * U),
+            omega_bounds=ISING_OMEGA_BOUNDS, u_bounds=ub)
+        ci["five_tuple"] = (
+            f"Level-0 exp52d PC1 leading-slope auxiliary log-ladder, "
+            f"class N=1/|u|<={U:g}/omega_min=1, design={{32,48}}, "
+            "noise source=seed sd(log abs PC1 slope), "
+            f"m={collapse['leading_slope_ladder']['m']}")
+        ci["interpretation_note"] = (
+            "This fixed affine CI is on the derivative ladder. The exp52d actual "
+            "1/nu observable is the collapse-quality argmin, which is reported "
+            "separately and is not an affine per-L scalar.")
+        classes[name] = ci
+
+    fixed_invariants = bool(all(
+        abs(ci["fixed_estimator"]["sum_weights"]) < 1e-9
+        and abs(ci["fixed_estimator"]["logL_response"] - 1.0) < 1e-9
+        and ci["amplitude_invariance_test"]["abs_difference"] < 1e-9
+        for ci in classes.values()))
+    out = {
+        "experiment": "86_validation_spine",
+        "task": "G-86-2 phase1 Ising actual exp52d observable",
+        "phase": "phase1_blind_predictions",
+        "protocol": protocol,
+        "pilot_seconds_one_L_seed": pilot_seconds,
+        "projected_full_seconds_from_pilot": projected_full,
+        "m_requested": M_REAL,
+        "m_used": m_used,
+        "reduction_note": reduction_note,
+        "seed0_half_window": seed0_half,
+        "half_window_records": records,
+        "actual_collapse_half_window": collapse,
+        "fixed_estimator_auxiliary_slope_CIs": classes,
+        "fixed_estimator_invariants_hold_on_design": fixed_invariants,
+        "truth_fields_present": False,
+        "heldout_fields_present": False,
+        "observable_anomaly": (
+            "Exp52d extracts 1/nu by global PC1 collapse-quality minimization. "
+            "It does not define a native affine per-L ladder; the Task-1 fixed "
+            "estimator can only be applied to an auxiliary leading-slope ladder."),
+        "phase1_head_when_written": current_head(),
+    }
+    path = os.path.join(EXP86_TASK2, "phase1_predictions.json")
+    write_json(path, out)
+    digest = sha256_file(path)
+    with open(os.path.join(EXP86_TASK2, "phase1_predictions.sha256"), "w", encoding="utf-8") as fh:
+        fh.write(f"{digest}  phase1_predictions.json\n")
+    print(f"[task2 phase1] wrote phase1_predictions.json sha256={digest}")
+    return out
+
+
+def task2_phase2() -> Dict:
+    require_task2_phase1_committed()
+    phase1_path = os.path.join(EXP86_TASK2, "phase1_predictions.json")
+    phase1 = read_json(phase1_path)
+    digest = sha256_file(phase1_path)
+    recorded = open(os.path.join(EXP86_TASK2, "phase1_predictions.sha256"), encoding="utf-8").read().split()[0]
+    if digest != recorded:
+        raise SystemExit("Refusing to score Task 2: phase1 sha256 mismatch")
+
+    protocol = phase1["protocol"]
+    m_used = int(phase1["m_used"])
+    seed0_heldout = MASTER_SEED_85C + 860400
+    heldout_records = regenerate_exp52d_records([64, 96], m_used, seed0_heldout, protocol)
+    half_records = list(phase1["half_window_records"])
+    heldout = exp52d_collapse_summary(heldout_records, [64, 96], "heldout_L64_96")
+    full = exp52d_collapse_summary(
+        half_records + heldout_records, [32, 48, 64, 96], "full_L32_96")
+
+    exact_one_over_nu = 1.0
+    classes = {}
+    for key, ci in phase1["fixed_estimator_auxiliary_slope_CIs"].items():
+        lo = float(ci["lo"])
+        hi = float(ci["hi"])
+        classes[key] = {
+            "five_tuple": ci["five_tuple"],
+            "blind_lo": lo,
+            "blind_hi": hi,
+            "blind_center": float(ci["center"]),
+            "blind_half_length": float(ci["half_length"]),
+            "covers_exact_1_over_nu": bool(lo <= exact_one_over_nu <= hi),
+            "covers_heldout_actual_collapse_1_over_nu": bool(
+                lo <= heldout["one_over_nu_optimal"] <= hi),
+            "covers_full_actual_collapse_1_over_nu": bool(
+                lo <= full["one_over_nu_optimal"] <= hi),
+            "covers_heldout_auxiliary_slope_ols": bool(
+                lo <= heldout["leading_slope_ladder"]["leading_slope_ols_vs_logL"] <= hi),
+            "covers_full_auxiliary_slope_ols": bool(
+                lo <= full["leading_slope_ladder"]["leading_slope_ols_vs_logL"] <= hi),
+        }
+
+    fixed_invariants = bool(phase1["fixed_estimator_invariants_hold_on_design"])
+    out = {
+        "experiment": "86_validation_spine",
+        "task": "G-86-2 phase2 Ising unblind",
+        "phase1_commit_head": current_head(),
+        "phase1_predictions_sha256": digest,
+        "exact_1_over_nu": exact_one_over_nu,
+        "seed0_heldout": seed0_heldout,
+        "heldout_records": heldout_records,
+        "actual_collapse_half_window": phase1["actual_collapse_half_window"],
+        "actual_collapse_heldout_L64_96": heldout,
+        "actual_collapse_full_L32_96": full,
+        "fixed_estimator_auxiliary_slope_unblind": classes,
+        "gates": {
+            "phase1_predictions_committed_before_heldout_generation": True,
+            "phase1_sha256_verified": True,
+            "fixed_estimator_invariants_hold_on_design": fixed_invariants,
+            "G_86_2_procedural_met": bool(fixed_invariants),
+        },
+        "coverage_reported_not_gated_n_equals_1": True,
+        "observable_anomaly": phase1["observable_anomaly"],
+    }
+    write_json(os.path.join(EXP86_TASK2, "task2_score.json"), out)
+    return out
+
+
 def write_report() -> None:
     task1_phase1_path = os.path.join(EXP86_TASK1, "phase1_predictions.json")
     task1_score_path = os.path.join(EXP86_TASK1, "task1_score.json")
+    task2_phase1_path = os.path.join(EXP86_TASK2, "phase1_predictions.json")
+    task2_score_path = os.path.join(EXP86_TASK2, "task2_score.json")
     phase1 = read_json(task1_phase1_path) if os.path.exists(task1_phase1_path) else None
     score1 = read_json(task1_score_path) if os.path.exists(task1_score_path) else None
+    phase1_task2 = read_json(task2_phase1_path) if os.path.exists(task2_phase1_path) else None
+    score2 = read_json(task2_score_path) if os.path.exists(task2_score_path) else None
 
     phase1_commit = score1["phase1_commit_head"] if score1 else "pending"
     phase2_commit = current_head() if score1 else "pending"
+    task2_phase1_commit = score2["phase1_commit_head"] if score2 else "pending"
+    task2_phase2_commit = current_head() if score2 else "pending"
 
     lines = []
     lines.append("# Exp 86 Report -- Validation Spine")
@@ -585,7 +935,16 @@ def write_report() -> None:
         lines.append("| G-86-1 | fixed constraints, amplitude invariance, 7-point no-regression | pending | phase 2 not run |")
     else:
         lines.append("| G-86-1 | fixed constraints, amplitude invariance, 7-point no-regression | pending | task not run |")
-    lines.append("| G-86-2 | real Ising external anchor | pending | not run yet |")
+    if score2:
+        g2 = score2["gates"]
+        lines.append(
+            f"| G-86-2 | real Ising external anchor procedural gate | "
+            f"{'met' if g2['G_86_2_procedural_met'] else 'not met'} | "
+            f"phase-1 commit `{task2_phase1_commit}`; phase-2 score commit `{task2_phase2_commit}` |")
+    elif phase1_task2:
+        lines.append("| G-86-2 | real Ising external anchor procedural gate | pending | phase 2 not run |")
+    else:
+        lines.append("| G-86-2 | real Ising external anchor | pending | not run yet |")
     lines.append("| G-86-3 | exact honest CIs, smooth-prior van Trees, data-driven U | pending | not run yet |")
     lines.append("| G-86-4 | modulus prior-art pass | pending | not run yet |")
     lines.append("")
@@ -628,16 +987,55 @@ def write_report() -> None:
             lines.append("Task 1 phase 2 was not run.")
         lines.append("")
 
+    if phase1_task2:
+        lines.append("## Task 2")
+        lines.append("")
+        half = phase1_task2["actual_collapse_half_window"]
+        lines.append("| Quantity | Value |")
+        lines.append("|---|---:|")
+        lines.append(f"| half-window actual collapse nu_opt | {fmt(half['nu_optimal'],4)} |")
+        lines.append(f"| half-window actual collapse 1/nu_opt | {fmt(half['one_over_nu_optimal'],4)} |")
+        lines.append(f"| half-window auxiliary slope vs logL | {fmt(half['leading_slope_ladder']['leading_slope_ols_vs_logL'],4)} |")
+        if score2:
+            held = score2["actual_collapse_heldout_L64_96"]
+            full = score2["actual_collapse_full_L32_96"]
+            lines.append(f"| heldout actual collapse 1/nu_opt | {fmt(held['one_over_nu_optimal'],4)} |")
+            lines.append(f"| full actual collapse 1/nu_opt | {fmt(full['one_over_nu_optimal'],4)} |")
+            lines.append(f"| exact 1/nu | {fmt(score2['exact_1_over_nu'],4)} |")
+        lines.append("")
+        lines.append("| Class | auxiliary fixed CI | center | covers exact 1/nu | covers heldout actual 1/nu | covers full actual 1/nu |")
+        lines.append("|---|---|---:|---|---|---|")
+        source_classes = (
+            score2["fixed_estimator_auxiliary_slope_unblind"]
+            if score2 else phase1_task2["fixed_estimator_auxiliary_slope_CIs"])
+        for key, row in source_classes.items():
+            lo = row.get("blind_lo", row.get("lo"))
+            hi = row.get("blind_hi", row.get("hi"))
+            center = row.get("blind_center", row.get("center"))
+            lines.append(
+                f"| {key} | [{fmt(lo)}, {fmt(hi)}] | {fmt(center)} | "
+                f"{fmt(row.get('covers_exact_1_over_nu'))} | "
+                f"{fmt(row.get('covers_heldout_actual_collapse_1_over_nu'))} | "
+                f"{fmt(row.get('covers_full_actual_collapse_1_over_nu'))} |")
+        lines.append("")
+        lines.append(f"Observable note: {phase1_task2['observable_anomaly']}")
+        lines.append("")
+
     lines.append("## Post-hoc Notes")
     lines.append("")
     lines.append("- Single-session blinding is a discipline device, not information isolation.")
     lines.append("- Task 1 uses the already-committed exp85c blind ladders for the 7-point no-regression check; fixed predictions were written and committed before truth configs were loaded for exp86 scoring.")
+    if score2:
+        lines.append("- Task 2 uses the actual exp52d collapse-quality minimizer for the Ising anchor; the fixed affine CI is reported on the auxiliary leading-slope ladder because the source estimator is global, not a native per-L affine observable.")
     lines.append("")
 
     lines.append("## What We Did Not Do")
     lines.append("")
     lines.append("- No entry was added to `CLAIMS_REGISTER.md`.")
-    lines.append("- Tasks 2, 3, and 4 are pending in this partial report." if not score1 else "- Tasks 2, 3, and 4 are pending.")
+    if score2:
+        lines.append("- Tasks 3 and 4 are pending.")
+    else:
+        lines.append("- Tasks 2, 3, and 4 are pending in this partial report." if not score1 else "- Tasks 2, 3, and 4 are pending.")
     lines.append("")
 
     lines.append("## Anomalies And Bugs")
@@ -645,9 +1043,13 @@ def write_report() -> None:
     anomalies = []
     if score1 and not score1["gates"]["G_86_1_all_met"]:
         anomalies.append("G-86-1 did not meet all required subgates.")
+    if score2 and not score2["gates"]["G_86_2_procedural_met"]:
+        anomalies.append("G-86-2 procedural gate did not meet all required subgates.")
+    if phase1_task2:
+        anomalies.append(phase1_task2["observable_anomaly"])
     if not score1:
         anomalies.append("Task 1 scoring is pending.")
-    anomalies.append("Tasks 2-4 are not yet run in this report snapshot.")
+    anomalies.append("Tasks 3-4 are not yet run in this report snapshot." if score2 else "Tasks 2-4 are not yet run in this report snapshot.")
     for a in anomalies:
         lines.append(f"- {a}")
 
@@ -659,13 +1061,21 @@ def write_report() -> None:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--stage", choices=["task1_phase1", "task1_phase2", "report"],
+    ap.add_argument("--stage", choices=["task1_phase1", "task1_phase2",
+                                        "task2_phase1", "task2_phase2", "report"],
                     required=True)
+    ap.add_argument("--ising-max-seconds", type=float, default=1800.0)
+    ap.add_argument("--ising-curve-grid", type=int, default=37)
+    ap.add_argument("--ising-curve-starts", type=int, default=5)
     args = ap.parse_args()
     if args.stage == "task1_phase1":
         task1_phase1()
     elif args.stage == "task1_phase2":
         task1_phase2()
+    elif args.stage == "task2_phase1":
+        task2_phase1(args)
+    elif args.stage == "task2_phase2":
+        task2_phase2()
     elif args.stage == "report":
         write_report()
 
