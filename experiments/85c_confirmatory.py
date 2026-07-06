@@ -1435,6 +1435,12 @@ def write_report() -> None:
     lines.append(
         f"| Synthetic centers | observed {fmt(syn['observed_center'])}; mean {fmt(syn['center_mean'])}; "
         f"95% spread [{fmt(q['q2p5'])}, {fmt(q['q97p5'])}] |")
+    if task2.get("bug_bisect_if_reproduction_failed"):
+        bug = task2["bug_bisect_if_reproduction_failed"]
+        lines.append(
+            f"| Bug bisection | weight sum {fmt(bug['affine_weight_sum_constant_response'],4)}; "
+            f"deterministic c=0 center {fmt(bug['deterministic_center_at_c0'])}; "
+            f"required c {fmt(bug['c_required_to_match_observed_center'])} moves center to observed |")
     lines.append(
         f"| Half-window dof | {task2['structural_powerlessness']['dof']} |")
     u4 = task2["U4_informativeness"]
@@ -1536,7 +1542,10 @@ def write_report() -> None:
     if not task1["all_gates_met"]:
         anomalies.append("G-85c-1a found exp85b observed coverage outside the analytic prediction band for at least one class.")
     if task2["synthetic_reproduction"]["gate_mechanism_confirmed_else_bug"] != "mechanism":
-        anomalies.append("BD synthetic reproduction did not contain the observed center in the central 95% spread; pipeline bisection is required.")
+        bug = task2.get("bug_bisect_if_reproduction_failed", {})
+        anomalies.append(
+            "BD synthetic reproduction did not contain the observed center; "
+            + bug.get("located_cause", "pipeline bisection is recorded in task2 JSON."))
     if not task3["profile_threshold_width_gate_all_met"]:
         anomalies.append("At least one calibrated profile width is outside 25% of the Wilks width.")
     if score:
