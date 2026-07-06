@@ -904,6 +904,39 @@ def task2_bd_diagnosis(args) -> Dict:
     centers = np.array([r["center"] for r in synthetic], dtype=float)
     q025, q975 = np.percentile(centers, [2.5, 97.5])
     observed_center = float(bd_u05["center"])
+    weights05 = np.asarray(bd_u05["center_details"]["affine_weights"], dtype=float)
+    intercept05 = float(bd_u05["center_details"]["affine_intercept"])
+    deterministic_center_c0 = intercept05 + float(np.dot(weights05, mu))
+    c_mean_residual = float(np.mean(ybd - mu))
+    deterministic_center_mean_residual_c = (
+        intercept05 + float(np.dot(weights05, mu + c_mean_residual)))
+    sum_weights05 = float(np.sum(weights05))
+    c_required = float(
+        (observed_center - deterministic_center_c0)
+        / (sum_weights05 if abs(sum_weights05) > 1e-30 else 1e-30))
+    deterministic_center_required_c = (
+        intercept05 + float(np.dot(weights05, mu + c_required)))
+
+    synthetic_required_c = []
+    synthetic_mean_residual_c = []
+    for i in range(200):
+        z = rng.standard_normal((M_REAL, len(BD_HALF_DESIGN)))
+        for label, cval, store in (
+            ("required_c", c_required, synthetic_required_c),
+            ("mean_residual_c", c_mean_residual, synthetic_mean_residual_c),
+        ):
+            logW = (mu + cval)[None, :] + sigma_bd * z
+            W = np.exp(logW)
+            y, _sigma_meas, _per_l = mod.y_sigma_from_wseeds(W)
+            ci = mod.ci_bundle_for_y(y, sigma_bd, M_REAL, curve05)
+            store.append(ci["center"])
+
+    fixed_fit_u05 = mod.fit_fixed_alpha_profile_point(
+        ybd, sigma_bd, BD_HALF_DESIGN, 0.5, 0.5,
+        seed=MASTER_SEED_85C + 2310, n_starts=20)
+    fixed_fit_u4 = mod.fit_fixed_alpha_profile_point(
+        ybd, sigma_bd, BD_HALF_DESIGN, 0.5, 4.0,
+        seed=MASTER_SEED_85C + 2320, n_starts=20)
 
     alpha_prior_profile = [0.2, 0.9]
     alpha_prior_blind = [0.3, 0.7]
@@ -945,6 +978,46 @@ def task2_bd_diagnosis(args) -> Dict:
             "observed_within_95pct_synthetic_spread": bool(q025 <= observed_center <= q975),
             "gate_mechanism_confirmed_else_bug": "mechanism" if q025 <= observed_center <= q975 else "bug",
             "synthetic_rows": synthetic,
+        },
+        "bug_bisect_if_reproduction_failed": {
+            "real_y_mean_logW": ybd.tolist(),
+            "model_mu_c0_alpha0p5_u3p32_omega0p48": mu.tolist(),
+            "real_minus_model_mu_c0": (ybd - mu).tolist(),
+            "affine_intercept": intercept05,
+            "affine_weight_sum_constant_response": sum_weights05,
+            "reported_constant_response": bd_u05["center_details"]["constant_response"],
+            "reported_logL_response": bd_u05["center_details"]["logL_response"],
+            "deterministic_center_at_c0": float(deterministic_center_c0),
+            "c_mean_residual_to_real_ladder": c_mean_residual,
+            "deterministic_center_at_mean_residual_c": float(deterministic_center_mean_residual_c),
+            "c_required_to_match_observed_center": c_required,
+            "deterministic_center_at_required_c": float(deterministic_center_required_c),
+            "required_c_synthetic_center_quantiles": {
+                "q2p5": float(np.percentile(synthetic_required_c, 2.5)),
+                "q50": float(np.percentile(synthetic_required_c, 50)),
+                "q97p5": float(np.percentile(synthetic_required_c, 97.5)),
+            },
+            "mean_residual_c_synthetic_center_quantiles": {
+                "q2p5": float(np.percentile(synthetic_mean_residual_c, 2.5)),
+                "q50": float(np.percentile(synthetic_mean_residual_c, 50)),
+                "q97p5": float(np.percentile(synthetic_mean_residual_c, 97.5)),
+            },
+            "fixed_alpha_0p5_fit_on_real_BD_U0p5": {
+                k: fixed_fit_u05[k] for k in ("alpha", "c", "u", "omega", "sse", "chi2")
+            },
+            "fixed_alpha_0p5_fit_on_real_BD_U4": {
+                k: fixed_fit_u4[k] for k in ("alpha", "c", "u", "omega", "sse", "chi2")
+            },
+            "located_cause": (
+                "The failed synthetic reproduction occurs before sampling noise: "
+                "the exp85b BD U=0.5 four-point affine center has weight sum "
+                "near -1 rather than 0, so the alpha center is sensitive to the "
+                "additive log-amplitude c. The c=0 synthetic mean centers near "
+                "the synthetic distribution, while changing only c moves the "
+                "center toward the observed value. The blind half-window center "
+                "is therefore dominated by an amplitude-invariance failure in "
+                "the 85b affine-center pipeline on the four-point design, not "
+                "by the declared correction mechanism alone."),
         },
         "structural_powerlessness": {
             "n_points": 4,
@@ -1488,7 +1561,7 @@ def write_report() -> None:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--stage", choices=[
-        "task1a", "phase1", "task23", "phase2", "report", "all_after_phase1"],
+        "task1a", "phase1", "task2", "task23", "phase2", "report", "all_after_phase1"],
         required=True)
     ap.add_argument("--bootstrap-n", type=int, default=500)
     ap.add_argument("--bootstrap-starts", type=int, default=3)
@@ -1504,6 +1577,8 @@ def main():
         task1a_analytic_prediction()
     elif args.stage == "phase1":
         run_phase1(args)
+    elif args.stage == "task2":
+        task2_bd_diagnosis(args)
     elif args.stage == "task23":
         run_task23(args)
     elif args.stage == "phase2":
