@@ -29,13 +29,13 @@ human auditor's or the primary source's sign-off before the bracket is
 stated with numbers rather than "order unity.")
 
 **Correction (2026-07-03, after primary-source verification — see
-SIMULATED_AUDIT.md §8a):** the ≈1.25 constant in the chain above is an
+archive/ai_execution/SIMULATED_AUDIT.md §8a):** the ≈1.25 constant in the chain above is an
 MSE-estimation constant and was misapplied to the CI context; for confidence
 intervals the Armstrong–Kolesár machinery is exact with no unknown constant.
 The bracket above remains valid but is superseded as a goal: the correct
 deliverable is exact minimax CIs computed from the (hull) modulus already
 implemented in this experiment's Task 2 — see the exp84 candidate in
-SIMULATED_AUDIT.md §8a. Centrosymmetry caveat also applies: constructive
+archive/ai_execution/SIMULATED_AUDIT.md §8a. Centrosymmetry caveat also applies: constructive
 results transfer (convexity only); A–K's non-adaptation efficiency numbers
 do not, since our class is asymmetric.
 

@@ -2,7 +2,7 @@
 
 Paste everything below the line into a fresh Sonnet session with repo access.
 Four small tasks close the manuscript's remaining numerical gaps (see
-MANUSCRIPT_OUTLINE.md "Pre-submission blockers" and EXP83_AUDIT.md "Required
+MANUSCRIPT_OUTLINE.md "Pre-submission blockers" and archive/ai_execution/EXP83_AUDIT.md "Required
 fixes"). PROCESS RULE (new, binding): you are the executor. Report findings;
 run gates; NEVER write an audit verdict, "ACCEPTED", or "arc closed" — that
 is the reviewer's role, in a separate session. Your report ends at the gate
@@ -11,10 +11,10 @@ ledger and anomaly log.
 ---
 
 You are implementing exp84 in `universality-discovery`, branch `exp81`.
-Read first: `ml_paper/EXP83_AUDIT.md` (required fixes), `ml_paper/
-SIMULATED_AUDIT.md` §8a (the A–K CI formulas and U-lower-bound idea),
+Read first: `archive/ai_execution/EXP83_AUDIT.md` (required fixes), `ml_paper/
+archive/ai_execution/SIMULATED_AUDIT.md` §8a (the A–K CI formulas and U-lower-bound idea),
 `experiments/83_audit_response.py` (reuse its hull-modulus machinery via
-importlib, unmodified), EXP76_HANDOFF.md sandbox gotchas (all apply; also:
+importlib, unmodified), archive/ai_execution/EXP76_HANDOFF.md sandbox gotchas (all apply; also:
 verify committed blobs after committing; if git index corrupts, use
 GIT_INDEX_FILE=/tmp/gidx). Output: `experiments/84_presubmission.py`,
 `results_exp84_presubmission/*.json`, `ml_paper/EXP84_REPORT.md` (gate-ledger

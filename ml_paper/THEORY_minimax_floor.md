@@ -65,11 +65,13 @@ configurations. Define the **resolution floor**
 
     Dalpha*(design, sigma, m) = max { Dalpha : D^2(Dalpha) <= sigma^2 / m }.
 
-Exponent differences below Dalpha* are undecidable from this design. Note the
-logical direction: the adversary is restricted to ONE correction family, so
-richer correction classes can only enlarge the confusion and raise the floor.
-Dalpha* is therefore a conservative (valid for all estimators, loose if
-anything) impossibility threshold.
+For each admissible pair satisfying this condition, the construction gives the
+stated lower bound on worst-case expected absolute error over that pair. This is
+not an absolute claim that every exponent difference below Dalpha* is
+undistinguishable. The result is conditional on the Gaussian observation model,
+the finite design, the `W_sat` summary, and the bounded correction class. The
+adversary is restricted to one correction family; enlarging that nuisance class
+cannot weaken this particular lower-bound construction.
 
 ## Linearized closed form (the "resolution law")
 
@@ -130,9 +132,10 @@ noise-limited.
 
 **2. Per-system floors (real design, measured noise).** m=24:
 BD 0.27, Eden 0.44, EW 0.44, KPZ 0.44. Every estimator has worst-case error
->= floor/4. This proves the exp75 fit failures and the exp62-64 clustering
-ceiling were information-theoretically forced at these sizes, given only
-power-law-correction structure is assumed.
+>= floor/4 for the admissible two-point constructions in the specified model.
+This does not prove that the particular exp75 fits had to fail, and it does not
+establish that the exp62-64 clustering ceiling was inevitable: those clustering
+experiments used richer observables than the `W_sat` ladder bounded here.
 
 **3. Resolution law vs window (sigma=0.15, m=24, u<=4).**
 L_max = 256: 0.44; 512: 0.33; 1024: 0.26; 4096: 0.19; 16384: 0.14.
@@ -149,13 +152,13 @@ worst-case error >= 0.023, and the exp76 amortized interval (+-0.03) sits just
 above it — the estimator operates near the information limit rather than
 beyond it (no overconfidence detected).
 
-**Interpretation.** Worst-case identifiability of alpha_inf from L <= 256 is
-essentially nil; ALL practical inference at accessible sizes therefore rides
-on prior assumptions about correction structure. Classical fits smuggle that
-prior in silently via the ansatz (and fail when it is wrong, exp75); the
-amortized estimator declares it and marginalizes over it (exp76). The
-Bayes-vs-minimax gap *is* the value of the prior, and both sides are now
-quantified.
+**Interpretation.** Within this model, observable, design, and nuisance class,
+worst-case identification of alpha_inf from L <= 256 is weak, so practical
+inference depends strongly on assumptions about correction structure.
+Classical fits encode those assumptions through an ansatz; the amortized
+estimator declares and marginalizes over a prior (exp76). The computed
+Bayes-versus-minimax gap quantifies the value of that prior only within the
+declared setup.
 
 **Known issue.** The linearized closed form in the previous section is
 implemented incorrectly in exp77 (a 40-vector omega-grid basis trivially spans
@@ -731,8 +734,8 @@ program is cited.
 ## Appendix G (2026-07-03): the Donoho mapping — this floor is a modulus of
 ## continuity, and what follows from that
 
-Source: adversarial statistical review (SIMULATED_AUDIT.md); mapping to be
-confirmed by the human audit (AUDIT_BRIEF.md Q5), but the structural match is
+Source: adversarial statistical review (archive/ai_execution/SIMULATED_AUDIT.md); mapping to be
+confirmed by the human audit (archive/ai_execution/AUDIT_BRIEF.md Q5), but the structural match is
 exact and is recorded here.
 
 G1. The mapping. Let M = {μ(c,α,η) = c·1 + α·x + g(·;η) : η ∈ class,

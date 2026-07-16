@@ -22,7 +22,7 @@ gates, and report. Do not reframe claims, do not touch `CLAIMS_REGISTER.md`,
    the linearized floor; only exact optimization).
 3. `experiments/77_minimax_floor.py` — the exact confusion-gap optimizer you
    will extend. Reuse its multi-start bounded-optimization pattern.
-4. `ml_paper/EXP76_HANDOFF.md` — section "Sandbox gotchas". All of them still
+4. `archive/ai_execution/EXP76_HANDOFF.md` — section "Sandbox gotchas". All of them still
    apply. In particular: no background processes; time-budgeted foreground
    chunks that close files before exit; `pip install ... --break-system-packages`;
    rewrite (don't patch) any script that develops a mid-file SyntaxError.

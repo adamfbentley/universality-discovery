@@ -1,7 +1,7 @@
-# Exp 81f Report — Fix-Pass Responding to EXP81_AUDIT.md
+# Exp 81f Report — Fix-Pass Responding to archive/ai_execution/EXP81_AUDIT.md
 
 **Status: complete, 2026-07-03.**
-**Audit: `ml_paper/EXP81_AUDIT.md`. Original results: `ml_paper/EXP81_REPORT.md`,
+**Audit: `archive/ai_execution/EXP81_AUDIT.md`. Original results: `ml_paper/EXP81_REPORT.md`,
 `results_exp81_hierarchy/*.json`.**
 **Findings only — no claims language. Nothing here enters `CLAIMS_REGISTER.md`
 or `MANUSCRIPT_OUTLINE.md`.**
