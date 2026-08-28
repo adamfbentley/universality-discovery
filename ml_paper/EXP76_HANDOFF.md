@@ -241,3 +241,9 @@ docs/
   `git push origin HEAD:exp76-79` from there.
 - The linearized floor formula (see exp77 known issue above) is buggy; never
   cite `floor_linearized` values from floor.json.
+- **Commit through the mount can silently miss Edit-tool changes** (mount not
+  synced when `git add` ran → commit message describes content the tree does
+  not contain). Happened on abfeb32/822dd05 (exp83 arc). Rule: after any
+  commit through the mount, verify the committed *blob*, not the working
+  tree: `git show HEAD:<file> | grep <marker>`. (Ref: EXP83_AUDIT.md,
+  auditor's own correction.)

@@ -159,6 +159,26 @@ Evidence: exp76 (`results_exp76_amortized_extrapolation/summary_full24seed.json`
 **B. The amortized estimator recovers BD's roughness exponent where classical
 fits scatter.**
 
+> **RECONCILED 2026-07-04 (authority: DIRECTION_2026-07-04.md "Retired" + "Adversarial status ledger"; new evidence: EXP85B_REPORT.md real-data half-window).**
+> The **strong form is RETIRED**: "amortized estimator recovers BD α" is prior
+> selection on a ridge the data cannot adjudicate. Defensible form only:
+> *correct propagation of declared knowledge*. New contradicting evidence:
+> exp85b's blind BD half-window CI at the honest class (U=0.5) does **not**
+> cover α=0.5 or the exp76 full-window value (only U=4 does). BD is bug-vs-
+> mechanism **pending exp85c Task 2** — make no BD headline claim until it
+> lands. Numbers below stand as the exp76 record but are no longer citable as
+> "recovery."
+>
+> **UPDATE 2026-07-06 (exp85c Task 2 = BUG).** The exp85b half-window
+> contradiction is diagnosed as an **estimator bug**, not a mechanism: the
+> 4-point affine center is not amplitude-invariant (weights sum −0.9986 ≠ 0;
+> log-L response −2.85 ≠ 1; reviewer-confirmed). So exp85b's "half-window fails
+> to cover α=0.5" does **not** count against BD, and the exp76 **full-window**
+> result is not impugned. Standing rule unchanged: the **strong "recovery" form
+> stays retired** on the independent ridge argument (DIRECTION); and **no
+> half-window BD claim** until the affine weights are constrained (Σw=0,
+> Σw·x=1) and the pipeline re-run. See AUDIT_2026-07-04_recent10.md §6 (F2, N1).
+
 Evidence: exp76 real-data evaluation on 24-seed ladders.
 - BD: α̂ = 0.522, seed-bootstrap 90% interval [0.482, 0.529].
 - Classical fits on the same data: BD spans 0.36–0.70 across ansatz choices.
@@ -262,7 +282,18 @@ Evidence: exp80 part B.
 
 **J. The floor theorem has no known prior art in the FSS literature.**
 
-Evidence: exp78 web search; discussion in `ml_paper/THEORY_minimax_floor.md`
+> **RECONCILED 2026-07-04 (authority: DIRECTION_2026-07-04.md "Retired"; SIMULATED_AUDIT.md §1; LITERATURE_AUDIT.md Items 2, 9).**
+> The priority claim below is **RETIRED**. The floor is an instance of the
+> Donoho (1994) / Armstrong–Kolesár (2018) minimax-linear-functional theory;
+> the machinery is imported, not new. Do **not** write "first minimax bound /
+> lower bound for FSS" anywhere. Defensible novelty (state exactly this): (i)
+> the *application* of the machinery to corrections-to-scaling; (ii) the
+> physically-motivated adversary class + computed floors at real designs;
+> (iii) the closed-form exponential-sum modulus (exp79) with its RG reading;
+> (iv) the amortized declared-prior pairing. The original text is kept below
+> for the ledger, struck.
+
+~~Evidence: exp78 web search; discussion in~~ `ml_paper/THEORY_minimax_floor.md`
 Appendix C.
 - Hall–Welsh/Le Cam minimax theory is mature in extreme-value statistics (tail-index
   estimation under second-order regular variation), but no application to finite-size
@@ -271,8 +302,12 @@ Appendix C.
   lattice QCD, which established the declared-prior philosophy; Jay–Neil Bayesian
   model averaging (different question); Braess–Hackbusch conditional stability theory
   (compactness argument, different framing). None compute a computable threshold for FSS.
-- Claim: "to our knowledge, first minimax lower bound on FSS exponent estimation."
-  Must survive a Borwein–Erdélyi prior-art pass before final submission.
+- ~~Claim: "to our knowledge, first minimax lower bound on FSS exponent estimation."~~
+  **RETIRED — see the RECONCILED note under the J heading.** The prior-art
+  pass already ran (LITERATURE_AUDIT Items 2/9): the machinery IS prior art
+  (Donoho / Armstrong–Kolesár). The remaining library-grade pass concerns only
+  the *closed-form exponential-sum modulus* (exp79, Borwein–Erdélyi / Müntz–Szász),
+  not the floor's priority.
 
 **K. N-scaling law for the confusion gap: E_N ~ c_N · √T · U · (ΔαT/U)^{N+1}.**
 
