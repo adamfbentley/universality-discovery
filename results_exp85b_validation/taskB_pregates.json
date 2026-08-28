@@ -1,0 +1,116 @@
+{
+ "all_gates_met": true,
+ "pure_rows_n": 200,
+ "pure_sigma_reference_median": 0.2945812493306975,
+ "task": "G-85b-B corrected calibration pregates",
+ "tightness_at_least_favorable_pair": {
+  "U0.5": {
+   "ak_info": {
+    "bias_over_sd_arg": 2.652603827826421,
+    "cv": 4.297457454795576,
+    "delta_star": 0.21409848939910817,
+    "grid_index": 14,
+    "half_length": 0.22620578200246907,
+    "minimizer_interior": true,
+    "omega_delta_star": 0.4666666666666667,
+    "omega_prime_delta_star": 0.8753719717770982,
+    "pair_bias_bound": 0.1396254249234356,
+    "sigma_m": 0.06013114572098313
+   },
+   "by_side": {
+    "high": {
+     "coverage": 0.96,
+     "median_center": 0.5968024530333951,
+     "median_half_length": 0.22628480368496545,
+     "misses": 8,
+     "n": 200,
+     "truth_alpha": 0.7333333333333334
+    },
+    "low": {
+     "coverage": 0.965,
+     "median_center": 0.40681988532937674,
+     "median_half_length": 0.22628480368496545,
+     "misses": 7,
+     "n": 200,
+     "truth_alpha": 0.26666666666666666
+    }
+   },
+   "five_tuple": "Level-0 Gaussian seed-mean ladders at extremal pair, class N=1 hull J=4/U=0.5/omega_min=0.3, design={32,48,64,96,128,192,256}, sigma=pure fractional median 0.294581, m=24",
+   "gate_met": true,
+   "pair_targets": {
+    "delta_alpha": 0.4666666666666667,
+    "high": 0.7333333333333334,
+    "low": 0.26666666666666666
+   },
+   "pooled": {
+    "coverage": 0.9625,
+    "misses": 15,
+    "n": 400
+   },
+   "sigma_reference": 0.2945812493306975
+  },
+  "U1": {
+   "ak_info": {
+    "bias_over_sd_arg": 2.746180758750568,
+    "cv": 4.3910343857066545,
+    "delta_star": 0.23022970274362609,
+    "grid_index": 19,
+    "half_length": 0.31590250236344897,
+    "minimizer_interior": true,
+    "omega_delta_star": 0.6705882352941176,
+    "omega_prime_delta_star": 1.1964284985221934,
+    "pair_bias_bound": 0.19756742886267506,
+    "sigma_m": 0.06013114572098313
+   },
+   "by_side": {
+    "high": {
+     "coverage": 0.945,
+     "median_center": 0.633210596601835,
+     "median_half_length": 0.31590250236344897,
+     "misses": 11,
+     "n": 200,
+     "truth_alpha": 0.8352941176470587
+    },
+    "low": {
+     "coverage": 0.96,
+     "median_center": 0.36696593919418535,
+     "median_half_length": 0.31590250236344897,
+     "misses": 8,
+     "n": 200,
+     "truth_alpha": 0.1647058823529412
+    }
+   },
+   "five_tuple": "Level-0 Gaussian seed-mean ladders at extremal pair, class N=1 hull J=4/U=1/omega_min=0.3, design={32,48,64,96,128,192,256}, sigma=pure fractional median 0.294581, m=24",
+   "gate_met": true,
+   "pair_targets": {
+    "delta_alpha": 0.6705882352941176,
+    "high": 0.8352941176470587,
+    "low": 0.1647058823529412
+   },
+   "pooled": {
+    "coverage": 0.9525,
+    "misses": 19,
+    "n": 400
+   },
+   "sigma_reference": 0.2945812493306975
+  }
+ },
+ "validity_at_pure_point": {
+  "U0.5": {
+   "coverage": 1.0,
+   "five_tuple": "Level-0 fractional-EW pure nu2=0, class N=1 hull J=4/U=0.5/omega_min=0.3, design={32,48,64,96,128,192,256}, sigma=per-ladder measured median sd(log W), m=24",
+   "gate_met": true,
+   "median_half_length": 0.22628480368496562,
+   "n": 200,
+   "one_sided_binomial_2sigma_lower": 0.919177929985155
+  },
+  "U1": {
+   "coverage": 1.0,
+   "five_tuple": "Level-0 fractional-EW pure nu2=0, class N=1 hull J=4/U=1/omega_min=0.3, design={32,48,64,96,128,192,256}, sigma=per-ladder measured median sd(log W), m=24",
+   "gate_met": true,
+   "median_half_length": 0.3208284647761896,
+   "n": 200,
+   "one_sided_binomial_2sigma_lower": 0.919177929985155
+  }
+ }
+}

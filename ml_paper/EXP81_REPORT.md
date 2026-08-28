@@ -1,5 +1,20 @@
 # Exp 81 Report — The Observable-Information Hierarchy
 
+> **⚠ SUPERSEDED NUMBERS — read with EXP81F_AUDIT.md (2026-07-03, arc CLOSED).**
+> Several headline figures in this first-pass report were demoted by the
+> audited fix-pass and must **not** be cited from here:
+> • §4 multivariate "11.8× gain" and "at quadrature" → **superseded**. Honest
+>   H-A3 is ~1.4× on top of the best single channel; gains are mostly max|θ|
+>   rescaling (triangulation +7%, correlated-noise common-mode +37%). "√K
+>   quadrature" is the wrong null.
+> • U=4 hierarchy "ratios" (1.03–1.07×) → **not a measurement**; U=4 is the
+>   no-identifiability regime (≈1× within precision; both floors exceed the
+>   α-prior width).
+> Citable hierarchy result (aligned adversary, G-B7): full spectrum resolves
+> α **6–10× finer** than the 7-point summary at tight U (0.5–1.0); **no
+> advantage** at loose U. Cite EXP81F_AUDIT.md for all hierarchy/multivariate
+> numbers.
+
 **Status: complete (Parts B, A, and the C stretch), 2026-07-02.**
 **Plan: `EXP81_PLAN.md`. Theory: `THEORY_minimax_floor.md` Appendix F.**
 **Findings only — no claims language. Nothing here enters `CLAIMS_REGISTER.md`
@@ -155,7 +170,11 @@ shared floor at every K (private nests shared) — this is a hard
 mathematical requirement, not an empirical finding, and was violated before
 a warm-start fix (§5 anomaly 1).
 
-**H-A3 (correlated noise):** the largest effect by far — 11.8× gain at K=5
+**H-A3 (correlated noise):** [⚠ SUPERSEDED by EXP81F_AUDIT.md — the standalone
+multivariate effect is ~1.4× over the best single channel (+37% common-mode
+rejection on the max|θ| baseline), NOT 11.8×; the 11.8× conflated max|θ|
+rescaling with the noise-correlation effect. Text below is the first-pass
+reasoning, retained for the ledger.] the largest effect by far — 11.8× gain at K=5
 under ρ=0.8, dwarfing both H-A1 and H-A2. This is the *opposite* direction
 from the plan's framing ("correlated noise can cancel most of the nominal
 gain"): here it amplifies the gain enormously. Mechanism (not a bug):

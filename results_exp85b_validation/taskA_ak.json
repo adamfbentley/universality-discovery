@@ -1,0 +1,201 @@
+{
+ "all_gates_met": true,
+ "comparison": "exp85 GLS-normalized center retained as baseline",
+ "rows": [
+  {
+   "ak_constant_response": 1.6676212740707186e-06,
+   "ak_half_length": 0.2279251776468909,
+   "ak_info": {
+    "bias_over_sd_arg": 2.6515018401117567,
+    "cv": 4.296355467081192,
+    "delta_star": 0.21409848939910817,
+    "grid_index": 14,
+    "half_length": 0.2279251776468909,
+    "minimizer_interior": true,
+    "omega_delta_star": 0.4666666666666667,
+    "omega_prime_delta_star": 0.8656669043257129,
+    "omega_prime_delta_star_raw": 0.8753719717770982,
+    "pair_bias_bound": 0.1406643450638647,
+    "sigma_m": 0.06128317839285193,
+    "slope_response_cap_applied": true,
+    "slope_response_cap_target": 0.995
+   },
+   "ak_logL_response": 0.9950000000000019,
+   "class_key": "U0.5",
+   "five_tuple": "Level-0, class N=1 convex hull J=4/U=0.5/omega_min=0.3, design={32,48,64,96,128,192,256}, sigma=fractional_reference:0.300225, m=24",
+   "gates": {
+    "ak_half_length_le_gls_center_half_length": true,
+    "ak_logL_response_le_1_and_lt_gls": true,
+    "ak_worst_grid_risk_le_gls": true,
+    "all_met": true
+   },
+   "gls_center_half_length": 0.22837566508829607,
+   "gls_logL_response": 1.0,
+   "pair_high_bias": -0.1406643450638646,
+   "pair_low_bias": 0.14066434506386466,
+   "risk_grid": {
+    "ak_info_effective": {
+     "bias_over_sd_arg": 2.6515018401117567,
+     "cv": 4.296355467081192,
+     "delta_star": 0.21409848939910817,
+     "half_length": 0.2279251776468909,
+     "minimizer_interior": true,
+     "omega_delta_star": 0.4666666666666667,
+     "omega_prime_delta_star": 0.8656669043257129,
+     "omega_prime_delta_star_raw": 0.8753719717770982,
+     "pair_bias_bound": 0.1406643450638647,
+     "sigma_m": 0.06128317839285193,
+     "slope_response_cap_applied": true,
+     "slope_response_cap_target": 0.995
+    },
+    "ak_le_gls": true,
+    "ak_worst": {
+     "alpha": 0.3,
+     "bias": 0.13833854724486083,
+     "omega": 0.6666666666666667,
+     "risk": 0.1481618813495566,
+     "sd": 0.05305081932658055,
+     "u": -0.5
+    },
+    "gls_worst": {
+     "alpha": 0.7,
+     "bias": 0.16551763779754247,
+     "omega": 0.6666666666666667,
+     "risk": 0.1738436480409338,
+     "sd": 0.05315567271798562,
+     "u": -0.5
+    },
+    "grid": {
+     "alpha": [
+      0.3,
+      0.35,
+      0.39999999999999997,
+      0.44999999999999996,
+      0.5,
+      0.5499999999999999,
+      0.6,
+      0.6499999999999999,
+      0.7
+     ],
+     "c": 0.0,
+     "omega": [
+      0.3,
+      0.6666666666666667,
+      1.0333333333333334,
+      1.4000000000000001,
+      1.7666666666666668,
+      2.1333333333333333,
+      2.5
+     ],
+     "u": [
+      -0.5,
+      -0.33333333333333337,
+      -0.16666666666666669,
+      0.0,
+      0.16666666666666663,
+      0.33333333333333326,
+      0.5
+     ]
+    }
+   },
+   "sigma": 0.300225033756885,
+   "sigma_name": "fractional_reference"
+  },
+  {
+   "ak_constant_response": -0.0008522858830191105,
+   "ak_half_length": 0.318117673532799,
+   "ak_info": {
+    "bias_over_sd_arg": 3.3851022687266803,
+    "cv": 5.029955895678152,
+    "delta_star": 0.13229264132089072,
+    "grid_index": 16,
+    "half_length": 0.318117673532799,
+    "minimizer_interior": true,
+    "omega_delta_star": 0.5647058823529412,
+    "omega_prime_delta_star": 1.0320062778795975,
+    "pair_bias_bound": 0.21408952299625406,
+    "sigma_m": 0.06128317839285193,
+    "slope_response_cap_applied": false
+   },
+   "ak_logL_response": 0.3873862313503178,
+   "class_key": "U1",
+   "five_tuple": "Level-0, class N=1 convex hull J=4/U=1/omega_min=0.3, design={32,48,64,96,128,192,256}, sigma=fractional_reference:0.300225, m=24",
+   "gates": {
+    "ak_half_length_le_gls_center_half_length": true,
+    "ak_logL_response_le_1_and_lt_gls": true,
+    "ak_worst_grid_risk_le_gls": true,
+    "all_met": true
+   },
+   "gls_center_half_length": 0.3536730884663612,
+   "gls_logL_response": 0.9999999999999964,
+   "pair_high_bias": -0.24603290433726543,
+   "pair_low_bias": 0.21408952299625406,
+   "risk_grid": {
+    "ak_info_effective": {
+     "bias_over_sd_arg": 3.3851022687266803,
+     "cv": 5.029955895678152,
+     "delta_star": 0.13229264132089072,
+     "half_length": 0.318117673532799,
+     "minimizer_interior": true,
+     "omega_delta_star": 0.5647058823529412,
+     "omega_prime_delta_star": 1.0320062778795975,
+     "pair_bias_bound": 0.21408952299625406,
+     "sigma_m": 0.06128317839285193,
+     "slope_response_cap_applied": false
+    },
+    "ak_le_gls": true,
+    "ak_worst": {
+     "alpha": 0.7,
+     "bias": -0.19859506125739013,
+     "omega": 2.1333333333333333,
+     "risk": 0.20842236186574023,
+     "sd": 0.0632446248298385,
+     "u": -0.95
+    },
+    "gls_worst": {
+     "alpha": 0.3,
+     "bias": 0.6726330077506881,
+     "omega": 0.6666666666666667,
+     "risk": 0.6762981083788444,
+     "sd": 0.07031335777123707,
+     "u": -0.95
+    },
+    "grid": {
+     "alpha": [
+      0.3,
+      0.35,
+      0.39999999999999997,
+      0.44999999999999996,
+      0.5,
+      0.5499999999999999,
+      0.6,
+      0.6499999999999999,
+      0.7
+     ],
+     "c": 0.0,
+     "omega": [
+      0.3,
+      0.6666666666666667,
+      1.0333333333333334,
+      1.4000000000000001,
+      1.7666666666666668,
+      2.1333333333333333,
+      2.5
+     ],
+     "u": [
+      -0.95,
+      -0.625,
+      -0.29999999999999993,
+      0.025000000000000133,
+      0.3500000000000001,
+      0.675,
+      1.0
+     ]
+    }
+   },
+   "sigma": 0.300225033756885,
+   "sigma_name": "fractional_reference"
+  }
+ ],
+ "task": "G-85b-A true A-K affine center"
+}

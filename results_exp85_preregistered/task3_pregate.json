@@ -1,0 +1,25 @@
+{
+ "classes": {
+  "U0.5": {
+   "binomial_2sigma_window_around_0p95": [
+    0.919177929985155,
+    0.9808220700148449
+   ],
+   "coverage": 1.0,
+   "median_half_length": 0.2873526460245007,
+   "n": 200,
+   "within_binomial_2sigma": false
+  },
+  "U1": {
+   "binomial_2sigma_window_around_0p95": [
+    0.919177929985155,
+    0.9808220700148449
+   ],
+   "coverage": 1.0,
+   "median_half_length": 0.325883460527018,
+   "n": 200,
+   "within_binomial_2sigma": false
+  }
+ },
+ "gate_precalibration": false
+}
