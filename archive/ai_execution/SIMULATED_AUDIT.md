@@ -1,7 +1,7 @@
 # Simulated expert audit of the floor theorem (adversarial statistical review)
 
 **Status: AI-simulated review, 2026-07-03 — preparation for, not a substitute
-for, the human audit requested in AUDIT_BRIEF.md. Written from the standpoint
+for, the human audit requested in archive/ai_execution/AUDIT_BRIEF.md. Written from the standpoint
 of a hostile referee in the nonparametric-minimax tradition. Literature
 anchors verified via web search where noted; the human expert should still
 check the mapping in §1.**
@@ -217,5 +217,5 @@ was verified against the published abstracts (fixed design, Gaussian errors,
 linear functional, convex class — the match is structural, not superficial),
 but the exact constants (the ≈1.25 affine-minimax factor) and the nonconvex-
 hull gap need expert or primary-source confirmation. The human audit remains
-gate one; its brief (AUDIT_BRIEF.md) has been updated to ask the expert to
+gate one; its brief (archive/ai_execution/AUDIT_BRIEF.md) has been updated to ask the expert to
 check precisely this mapping.

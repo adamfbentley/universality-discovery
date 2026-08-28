@@ -26,13 +26,13 @@ scaling window is a linear-functional inference problem of the
 Donoho (1994) / Armstrong–Kolesár (2018) type: the exponent is a linear
 functional of the mean vector, and corrections to scaling are a bounded
 nuisance class. This identification makes every question computable for
-real designs: the exact resolution floor (no estimator can do better), the
-exact honest confidence interval (an estimator that achieves it), the value
-of every kind of prior knowledge (amplitude bounds, spectral bounds,
-sparsity), and the value of richer observables (a complementarity law).
-Computed for the standard surface-growth benchmark, the answers explain a
-decade of failed exponent recovery quantitatively and replace it with the
-best achievable inference.
+real designs: a model-conditional two-point lower bound on worst-case risk,
+honest confidence intervals under declared assumptions, the value of selected
+forms of prior knowledge (amplitude bounds, spectral bounds, sparsity), and the
+value of richer observables. Computed for the standard surface-growth
+benchmark, these quantities diagnose one source of difficult exponent recovery;
+they do not establish a universal optimum outside the specified model,
+observable, design, and nuisance class.
 
 ### Contributions (state in §1, exactly these, exactly this delineation)
 
@@ -114,7 +114,7 @@ ledger index (pointer to repo audit trail); reproducibility statement.
 ### Pre-submission blockers (all small)
 
 - exp84: smooth-prior van Trees; σ-resolved bound-vs-RMSE; exact optimal
-  CIs from the hull modulus; data-driven U lower bound. [SONNET_EXP84_PROMPT.md]
+  CIs from the hull modulus; data-driven U lower bound. [archive/ai_execution/SONNET_EXP84_PROMPT.md]
 - Human audit reply folded in (Donoho-mapping confirmation, constants
   conventions).
 - Borwein–Erdélyi / Müntz–Szász-preprints priority pass (library-grade).

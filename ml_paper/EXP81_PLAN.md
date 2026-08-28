@@ -2,7 +2,7 @@
 
 **Status: PLANNED, 2026-07-02. No results yet.**
 **Companion theory: `THEORY_minimax_floor.md`, Appendix F.**
-**Execution prompt for the implementing agent: `SONNET_EXP81_PROMPT.md`.**
+**Execution prompt for the implementing agent: `archive/ai_execution/SONNET_EXP81_PROMPT.md`.**
 
 ---
 

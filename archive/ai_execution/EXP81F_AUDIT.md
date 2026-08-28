@@ -84,7 +84,7 @@ Two additions to the record:
    original "at quadrature" finding was numerically right for the wrong
    reason (the measured 2.0× is max-|θ| rescaling, not K-aggregation).
    Auditors are in the error ledger too; this is the second entry
-   (see EXP83_AUDIT.md, commit-verification failure).
+   (see archive/ai_execution/EXP83_AUDIT.md, commit-verification failure).
 
 2. **Unexplained wrinkle, non-blocking, for the paper to address:** between
    U=0.5 and U=1.0, floor_L23 is identical (b-saturation collapses the two

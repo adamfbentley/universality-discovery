@@ -1,5 +1,12 @@
 # Extensive Review — "Feature Geometry Is Not Universality Geometry" and the universality-discovery repository
 
+> Historical review retained verbatim. Its descriptions of the minimax result
+> predate the repository's scope correction. Current claims are governed by
+> `ml_paper/CLAIMS_REGISTER.md`: the Le Cam result is conditional on the stated
+> Gaussian model, `W_sat` observable, finite-size design, and bounded correction
+> class, and it does not prove the richer-feature clustering failures were
+> inevitable.
+
 **Scope of this review.** The paper draft (dated 21 May 2026, covering experiments 62–67), the public repository at `github.com/adamfbentley/universality-discovery` as of the current main branch (experiments through 80, plus theory notes), the documentation (`docs/EXPERIMENT_LOG.md`, `ml_paper/CLAIMS_REGISTER.md`, `ml_paper/THEORY_minimax_floor.md`), and the source code for the simulators and pipelines. All headline numbers in the paper were cross-checked against the stored result files; the simulation and evaluation code was read directly; and an independent null analysis of the ARI ceiling was computed for this review.
 
 ---

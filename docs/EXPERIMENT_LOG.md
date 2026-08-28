@@ -448,22 +448,44 @@ Predictions: 2/7 passed (P2 EW-KPZ increases with CG, P5 KPZ merges at b=2).
 
 **Caveats**: training α prior is uniform [0.05, 0.95] with mean 0.5 — a discriminability control (BD-like ladders at true α = 0.40/0.45/0.50) is required before claiming the BD recovery is measurement rather than shrinkage; everything is 1D, single observable, 7-point ladders.
 
-### Exp 77: Le Cam minimax resolution floor — the negative results were forced
+### Exp 77: model-conditional Le Cam risk lower bound
 
-**Goal**: convert the project's empirical negatives into an information-theoretic statement. Two parameter configurations with different α but adversarially chosen correction nuisances can induce nearly identical data distributions; Le Cam's two-point method then bounds every estimator's worst-case error. Theory note: `ml_paper/THEORY_minimax_floor.md`; computation: `experiments/77_minimax_floor.py`; results: `results_exp77_minimax_floor/floor.json`.
+**Goal**: quantify a model-conditional limitation for exponent estimation from
+the `W_sat` ladder. Under the specified Gaussian observation model, finite-size
+design, and bounded correction class, two admissible configurations with
+different α can induce nearby data distributions; Le Cam's two-point method
+then lower-bounds worst-case expected absolute error over that pair. Theory
+note: `ml_paper/THEORY_minimax_floor.md`; computation:
+`experiments/77_minimax_floor.py`; results:
+`results_exp77_minimax_floor/floor.json`.
 
 **Setup**: log W ladders, Gaussian seed noise (σ measured per system from the 24-seed data), adversary = single standard power correction with amplitude |u| ≤ 4 at L=32 and ω ∈ [0.3, 2.5] (conservative: richer families only strengthen the bound). Confusion gap D²(Δα) computed by multistart bounded optimization; floor = largest Δα with KL ≤ 1/2.
 
 **Results**:
 
 - Near-non-identifiability at L ≤ 256: D²(0.1) ≈ 1.3·10⁻⁷ — resolving Δα = 0.1 needs ~160,000 seeds at continuum noise (~2,700 even at BD's tiny noise). Floor vs seeds is nearly flat (0.51/0.44/0.38 at m = 6/24/96): the limit is identifiability, not statistics.
-- Per-system worst-case floors (m=24): BD 0.27, EW/KPZ/Eden 0.44. Every estimator has worst-case error ≥ floor/4 — exp75's failures and the exp62–64 clustering ceiling were inevitable at these sizes.
+- Per-system thresholds (m=24): BD 0.27, EW/KPZ/Eden 0.44. For the selected
+  admissible pairs, every estimator has worst-case expected absolute error at
+  least threshold/4. This does not establish that the particular exp75 fits or
+  the richer-feature exp62–64 clustering experiments had to fail.
 - Resolution law: floor at σ=0.15, m=24 falls 0.44 → 0.33 → 0.26 → 0.19 → 0.14 as L_max grows 256 → 512 → 1024 → 4096 → 16384: decades of L, not seeds.
 - Value of structural knowledge: bounding the correction amplitude u_max = 4 → 0.1 shrinks the floor 0.44 → 0.077 (σ=0.15). With BD's honest bound (u ≤ 0.5; actual u ≈ 0.4) the floor implies worst-case error ≥ 0.023 — the exp76 interval (±0.03) sits just above it, i.e. the amortized estimator operates near the information limit, not beyond it.
 
-**Interpretation**: worst-case identifiability of α∞ from L ≤ 256 is essentially nil, so *all* practical finite-size inference rides on prior assumptions about correction structure. Classical fits smuggle that prior in via the ansatz and fail silently when it is wrong (exp75); the amortized estimator declares the prior and marginalizes over it (exp76). The Bayes-vs-minimax gap is the quantified value of that prior. Formal connection: this is the tail-index estimation problem of extreme-value statistics (second-order regular variation; Hall–Welsh minimax bounds) transplanted to FSS — literature priority check still pending.
+**Interpretation**: within the declared model, observable, design, and nuisance
+class, worst-case identification of α∞ from L ≤ 256 is weak and depends
+strongly on assumptions about correction structure. Classical fits encode
+those assumptions through an ansatz; the amortized estimator declares and
+marginalizes over a prior (exp76). The computed Bayes-versus-minimax gap
+quantifies the value of that prior only within this setup. The connection to
+tail-index estimation under second-order regular variation remains a
+literature-positioning hypothesis pending a deeper priority check.
 
-**Caveats**: numerical optimization lower-bounds the true confusion (more starts can only deepen it — direction is safe); Gaussian/independent noise idealization; linearized closed-form in the note has a known implementation bug (exact results unaffected); floors are worst-case — Bayes risk under a declared prior is legitimately smaller, which is the point.
+**Caveats**: numerical optimization lower-bounds the optimized confusion;
+Gaussian/independent noise is an idealization; the linearized closed-form in
+the note has a known implementation bug (the direct numerical results use a
+different path); and the result is worst-case, observable-conditional, and
+specific to the bounded correction class. It is not a theorem about the richer
+feature spaces used in the clustering experiments.
 
 ### Exp 78: Referee-proofing checks (priority, exact measure, expert baseline, discriminability)
 
@@ -586,9 +608,9 @@ Stretch (Part C): the same floor machinery applied to a neural-scaling-law
 fit design.
 
 Plan and acceptance gates: ml_paper/EXP81_PLAN.md. Theory definitions:
-THEORY_minimax_floor.md Appendix F. Execution prompt for implementing agent:
-ml_paper/SONNET_EXP81_PROMPT.md. No results yet; nothing from this program
-is citable until gates G-B1..G-B5 / G-A1..G-A3 pass.
+THEORY_minimax_floor.md Appendix F. Historical AI execution records are in
+`archive/ai_execution/`; see `PROVENANCE.md`. No result from this program is
+citable until gates G-B1..G-B5 / G-A1..G-A3 pass.
 
 ### Exp 81 executed + audited (2026-07-02/03) — gates pass; headlines blocked pending 81f
 
@@ -596,7 +618,7 @@ All binding gates passed (G-B1–B5, G-A1–A2; ml_paper/EXP81_REPORT.md). Solid
 fractional-EW testbed validated to machine precision; summary ladder discards
 ~3x of raw-field Fisher information about alpha even with zero corrections;
 H-A1 quadrature confirmed; H-A3 (correlated noise) found to be the dominant
-multivariate lever via common-mode rejection. Audit (EXP81_AUDIT.md) BLOCKED
+multivariate lever via common-mode rejection. Audit (archive/ai_execution/EXP81_AUDIT.md) BLOCKED
 both headline ratios: floor_L23 violated nesting monotonicity in U (bisection
 granularity ~0.019 dominates sub-0.05 cells), and the L0-vs-L23 comparison
 used non-nested adversary classes. Fix-pass exp81f (adaptive bisection,
@@ -611,7 +633,7 @@ experiments/82_null_partition_ari.py; docs/external_reviews/.
 
 ### Exp 83 (2026-07-03) — audit-response computations; ACCEPTED
 
-All five gates pass (EXP83_REPORT.md; audit sign-off EXP83_AUDIT.md).
+All five gates pass (EXP83_REPORT.md; audit sign-off archive/ai_execution/EXP83_AUDIT.md).
 Results: D2 monotonicity verified + guard added; convex-hull floors (gap
 1.17-1.62x, saturating at J=4); van Trees bound under F1 prior — unknown
 corrections destroy 98.3% of Fisher information about alpha (59x, design-only);
@@ -620,7 +642,7 @@ floor intervals +-3%. Two estimator bugs caught by invariants (hull warm-start
 nesting; KDE self-inclusion caught by Stam kappa>=1). THEORY NOTE REPOSITIONED
 (Appendix G): the floor is the modulus of continuity of Donoho (1994) /
 Armstrong-Kolesar (2018) linear-functional theory; "first minimax bound for
-FSS" retired; primary-source verification (SIMULATED_AUDIT.md 8a) shows exact
+FSS" retired; primary-source verification (archive/ai_execution/SIMULATED_AUDIT.md 8a) shows exact
 optimal-CI machinery applies — sharpness program superseded by exact CIs
 ("FSSHonest" deliverable); data-driven lower bound on U identified as the
 answer to class-declaration objections. Independent replication of the BD

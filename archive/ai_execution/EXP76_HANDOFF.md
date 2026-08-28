@@ -16,12 +16,17 @@ correction exponent ω is fixed to 1.0, and the answer swings wildly with ω.
 exp76 replaced the fixed-ansatz fit with an amortized estimator trained on a
 prior over correction families, which successfully recovered BD's roughness
 exponent (α̂ = 0.522 [0.482, 0.529]) — something no classical fit could pin.
-exp77 proved the information-theoretic reason: a Le Cam minimax floor of
-0.27–0.44 at L ≤ 256 makes exponents near-non-identifiable without declared
-correction priors. exp78 hardened exp76's claims against four referee checks.
+exp77 supplied a model-conditional Le Cam two-point risk bound for the declared
+Gaussian model, `W_sat` ladder, finite-size design, and bounded correction
+class. The reported 0.27–0.44 thresholds imply expected worst-case error of at
+least one quarter of the selected pair separation; they are not universal
+indistinguishability thresholds. exp78 hardened exp76's claims against four
+referee checks.
 exp79 analyzed the algebraic structure of the confusion gap, finding a universal
 N-scaling law. exp80 demonstrated the floor transfers to other observables
-(temporal β, Ising ν). The result is a floor theorem for FSS estimation.
+(temporal β, Ising ν). These are conditional risk bounds for the stated
+models and observables, not a theorem explaining the richer clustering
+experiments.
 
 ---
 
@@ -179,7 +184,7 @@ ml_paper/
   THEORY_minimax_floor.md            ~620-line theory note (Appendices A–D)
   CLAIMS_REGISTER.md                 all claims, Part I (exp62–75) + Part II (exp76–80)
   MANUSCRIPT_OUTLINE.md              Paper 2 (floor, primary) + Paper 1 (clustering)
-  EXP76_HANDOFF.md                   this file
+  archive/ai_execution/EXP76_HANDOFF.md                   this file
 
 docs/
   EXPERIMENT_LOG.md                  entries through exp80

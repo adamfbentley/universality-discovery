@@ -1,7 +1,7 @@
 # Execution prompt: exp83 — audit-response computations
 
 Paste everything below the line into a fresh Sonnet session with repo access.
-Context: an adversarial statistical audit (ml_paper/SIMULATED_AUDIT.md) and
+Context: an adversarial statistical audit (archive/ai_execution/SIMULATED_AUDIT.md) and
 the theory note's new Appendix G identified five computations that harden the
 floor paper. Each is small; all five are gated. The reviewer (Fable) audits
 the output; report failed gates honestly.
@@ -9,9 +9,9 @@ the output; report failed gates honestly.
 ---
 
 You are implementing exp83 in `universality-discovery`. Read first:
-`ml_paper/SIMULATED_AUDIT.md`, `ml_paper/THEORY_minimax_floor.md` Appendix G
+`archive/ai_execution/SIMULATED_AUDIT.md`, `ml_paper/THEORY_minimax_floor.md` Appendix G
 (and the main Le Cam section), `experiments/77_minimax_floor.py`, and the
-"Sandbox gotchas" in `ml_paper/EXP76_HANDOFF.md` (all still apply; also note:
+"Sandbox gotchas" in `archive/ai_execution/EXP76_HANDOFF.md` (all still apply; also note:
 if `git` reports a corrupt index, use `GIT_INDEX_FILE=/tmp/gidx git ...` and
 rebuild `.git/index` after). Work on branch `exp81`. Do not touch
 CLAIMS_REGISTER.md or MANUSCRIPT_OUTLINE.md. Output:

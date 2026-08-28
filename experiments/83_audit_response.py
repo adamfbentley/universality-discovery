@@ -1,6 +1,6 @@
 """Exp 83: audit-response computations.
 
-Companion: ml_paper/SIMULATED_AUDIT.md, ml_paper/THEORY_minimax_floor.md
+Companion: archive/ai_execution/SIMULATED_AUDIT.md, ml_paper/THEORY_minimax_floor.md
 Appendix G, ml_paper/EXP83_REPORT.md. Five small, gated computations that
 harden the floor paper against the adversarial statistical audit:
 

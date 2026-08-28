@@ -51,15 +51,18 @@ logarithm. The resulting identifiability hierarchy (power-law floor at fixed
 sparsity; exponential floor at free sparsity; vacuity without amplitude
 bounds) says that exponent measurement is possible exactly insofar as the
 irrelevant spectrum visible in the window is sparse and bounded. **Third**,
-computed floors for the standard 1+1-dimensional surface-growth benchmark at
-real designs and measured noise: at L ≤ 256, no estimator can resolve
-exponent differences of 0.27–0.44 against adversarial standard corrections;
-the floor is nearly flat in replicate count; and a van Trees computation
+computed two-point lower bounds for the standard 1+1-dimensional
+surface-growth benchmark under a specified Gaussian model, `W_sat` summary,
+finite-size design, and bounded correction class. The reported 0.27–0.44 pair
+separations imply worst-case expected absolute error of at least one quarter
+of the separation over the selected pairs; they do not make every smaller
+exponent difference unresolvable. The threshold is nearly flat in replicate
+count; and a van Trees computation
 shows that marginalizing unknown corrections destroys 98.3% of the Fisher
 information about the exponent — a factor of 59, set by the design alone.
-These numbers explain, quantitatively and retroactively, a large empirical
-literature of failed and scattered exponent recovery, including our own
-[Paper 1 ref]. **Fourth**, an observable-hierarchy law, computed on an
+These numbers diagnose one model-conditional source of difficult exponent
+recovery; they do not retroactively prove that richer-observable failures were
+forced. **Fourth**, an observable-hierarchy law, computed on an
 exactly solvable Gaussian testbed where every level of observation has
 closed-form information and the data-processing inequality serves as a
 validation gate: observing the full spectrum rather than a scalar summary

@@ -125,7 +125,7 @@ Required evidence:
 
 ---
 
-## Part II: Floor Theorem and Amortized Estimator Claims (exp76–80)
+## Part II: Model-Conditional Risk Bound and Amortized Estimator Claims (exp76–80)
 
 These claims support a second, separate paper. The central contribution is a
 computable minimax resolution floor for finite-size scaling estimation,
@@ -133,15 +133,15 @@ accompanied by an amortized estimator that approaches the floor.
 
 ### Central Claim (Floor Paper)
 
-For saturated-width ladders W_sat(L) observed at a finite ladder of system
-sizes with seed noise, there is a computable threshold Δα*(design, noise,
-correction class) such that **no estimator whatsoever** can reliably distinguish
-asymptotic roughness exponents differing by less than Δα* — because the
-corresponding data distributions are statistically indistinguishable once
-correction-to-scaling nuisances are adversarially chosen. At L ≤ 256, this
-floor is large enough to explain all the empirical negatives. The floor is
-computable in advance from the design and a declared correction assumption
-class, and it shrinks at a quantified rate with L_max and seed count.
+For saturated-width ladders W_sat(L) under the declared Gaussian observation
+model, finite-size design, and bounded correction class, a Le Cam two-point
+construction gives a computable lower bound on worst-case expected absolute
+exponent-estimation error. For an admissible pair separated by Δα with
+D²(Δα) ≤ σ²/m, the bound is at least Δα/4 over that pair. The
+reported threshold is conditional on the model, observable, design, and
+nuisance bounds. It does not imply that every sub-threshold exponent pair is
+indistinguishable, nor does it prove that richer-feature clustering failures
+were inevitable.
 
 ### Claims Allowed (exp76–80)
 
@@ -178,6 +178,10 @@ fits scatter.**
 > stays retired** on the independent ridge argument (DIRECTION); and **no
 > half-window BD claim** until the affine weights are constrained (Σw=0,
 > Σw·x=1) and the pipeline re-run. See AUDIT_2026-07-04_recent10.md §6 (F2, N1).
+>
+> **UPDATE 2026-08-28 (exp86 Task 1).** Affine weights were constrained and BD
+> was re-run. U=0.5 half-window CI [-0.6313, 1.4353] covers α=0.5. The interval
+> is wide; this is not a recovery claim. Strong form stays retired.
 
 Evidence: exp76 real-data evaluation on 24-seed ladders.
 - BD: α̂ = 0.522, seed-bootstrap 90% interval [0.482, 0.529].
@@ -280,7 +284,8 @@ Evidence: exp80 part B.
   that tighten the floor by ~5–6× at fixed design and noise. The floor framework
   prices that knowledge explicitly.
 
-**J. The floor theorem has no known prior art in the FSS literature.**
+**J. The application of a Le Cam minimax lower bound to FSS may be novel; the
+priority claim is provisional.**
 
 > **RECONCILED 2026-07-04 (authority: DIRECTION_2026-07-04.md "Retired"; SIMULATED_AUDIT.md §1; LITERATURE_AUDIT.md Items 2, 9).**
 > The priority claim below is **RETIRED**. The floor is an instance of the
@@ -303,11 +308,12 @@ Appendix C.
   model averaging (different question); Braess–Hackbusch conditional stability theory
   (compactness argument, different framing). None compute a computable threshold for FSS.
 - ~~Claim: "to our knowledge, first minimax lower bound on FSS exponent estimation."~~
-  **RETIRED — see the RECONCILED note under the J heading.** The prior-art
-  pass already ran (LITERATURE_AUDIT Items 2/9): the machinery IS prior art
-  (Donoho / Armstrong–Kolesár). The remaining library-grade pass concerns only
-  the *closed-form exponential-sum modulus* (exp79, Borwein–Erdélyi / Müntz–Szász),
-  not the floor's priority.
+  **RETIRED — see the RECONCILED note under the J heading.** origin/main (2026-07-16)
+  had already narrowed this to a provisional "first application" pending a
+  library pass. The working-tree register goes further: the machinery IS prior
+  art (Donoho / Armstrong–Kolesár; LITERATURE_AUDIT Items 2/9). The remaining
+  library-grade pass concerns only the *closed-form exponential-sum modulus*
+  (exp79, Borwein–Erdélyi / Müntz–Szász), not the floor's priority.
 
 **K. N-scaling law for the confusion gap: E_N ~ c_N · √T · U · (ΔαT/U)^{N+1}.**
 
@@ -379,10 +385,10 @@ Evidence: exp79 (`experiments/79_lemma_scaling_test.py`,
 
 ### One-Sentence Paper Claim (Floor Paper)
 
-At accessible system sizes (L ≤ 256), finite-size scaling estimation of roughness
-exponents is near-non-identifiable: no estimator can resolve exponents closer than
-a computable floor set by correction-to-scaling degeneracy, and an amortized
-estimator that declares a correction prior operates near this limit.
+Under a specified Gaussian model, bounded correction class, `W_sat` summary,
+and L ≤ 256 design, a Le Cam two-point construction gives a computable lower
+bound on worst-case roughness-exponent estimation risk; an amortized estimator
+with a declared correction prior is evaluated against that conditional bound.
 
 ### One-Sentence ML Research Question (Floor Paper)
 

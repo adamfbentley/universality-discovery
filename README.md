@@ -6,23 +6,32 @@ Research notebook exploring whether unsupervised methods can recover
 universality-class structure from simulated physics data, and what the
 information-theoretic limits of that recovery are.
 
-## Current Result: Minimax Resolution Floor for Finite-Size Scaling
+This is self-directed, AI-assisted research. See [PROVENANCE.md](PROVENANCE.md)
+for the division of labour, validation procedures, and the status of
+independent checks.
 
-The main result of the current phase (exp76–80) is a **computable minimax
-resolution floor** for finite-size scaling (FSS) exponent estimation:
+## Current Result: Model-Conditional Minimax Risk Bound
 
-> At accessible system sizes (L ≤ 256), no estimator whatsoever can distinguish
-> roughness exponents closer than Δα* — because adversarially chosen corrections
-> to scaling make the data distributions statistically indistinguishable. At
-> L ≤ 256, the floor is 0.27–0.44, large enough to explain every empirical
-> negative in the project. It shrinks at a quantified rate with L_max (decades,
-> not seeds).
+The main result of the current phase (exp76–80) is a computable lower bound
+for finite-size-scaling (FSS) exponent estimation:
 
-This converts the project's empirical negatives into a theorem. The floor is
-derived from Le Cam's two-point bound, computed by direct adversarial
-optimization (`experiments/77_minimax_floor.py`), and documented in
-`ml_paper/THEORY_minimax_floor.md` (including the algebraic mechanism, scaling
-law, and connections to RG theory and sloppy models).
+> Under the specified bounded correction class, Gaussian observation model,
+> `W_sat` summary ladder, and finite-size design, a Le Cam two-point
+> construction gives a computable lower bound on worst-case
+> exponent-estimation risk.
+
+For two admissible parameter configurations separated by `Δα`, the condition
+`D²(Δα) ≤ σ²/m` implies worst-case expected absolute error of at least
+`Δα/4` over that pair. The reported `0.27–0.44` values are therefore
+model-, observable-, and design-conditional thresholds; they are not an
+absolute inability to distinguish every exponent difference below the
+threshold. The calculation is implemented in
+`experiments/77_minimax_floor.py` and documented in
+`ml_paper/THEORY_minimax_floor.md`.
+
+The bound does not prove that the earlier clustering failures were inevitable:
+those experiments used richer feature sets than the `W_sat` ladder covered by
+the construction.
 
 The companion positive result is an amortized estimator (trained on a prior over
 correction families) that recovers BD's roughness exponent — α̂ = 0.522, honest
@@ -39,8 +48,9 @@ across the observable hierarchy (single summary → multi-channel summaries →
 spectra → raw configurations) on an exactly solvable fractional-EW testbed
 where every level has closed-form information, and determine when richer
 observables buy exponent resolution. Plan: `ml_paper/EXP81_PLAN.md`; theory:
-`ml_paper/THEORY_minimax_floor.md` Appendix F; execution prompt:
-`ml_paper/SONNET_EXP81_PROMPT.md`.
+`ml_paper/THEORY_minimax_floor.md` Appendix F. AI execution records are kept in
+the clearly labelled `archive/ai_execution/` directory and are not scientific
+evidence; see `PROVENANCE.md`.
 
 ## Earlier Result: Clustering Negative (exp62–75)
 
@@ -59,7 +69,9 @@ signature even at finite L. A protocol-dependent false positive (exp69: ARI
 under a matched sweep (exp71).
 
 That negative result prompted the current theory phase: why is FSS-based
-exponent recovery hard? The answer is the floor theorem above.
+exponent recovery hard under a declared observation model? The risk bound above
+quantifies one such limitation for the `W_sat` ladder, but it does not explain
+the full richer-feature clustering result.
 
 ## What This Project Shows
 
@@ -73,8 +85,10 @@ exponent recovery hard? The answer is the floor theorem above.
 - Classical correction-to-scaling extrapolation cannot recover known exponents
   (EW/KPZ α=0.5) from L ≤ 256: systematic uncertainty from correction-form
   misspecification dominates statistics by ~10×.
-- The floor theorem gives the information-theoretic reason: D²(0.1) ≈ 1.3×10⁻⁷,
-  so resolving Δα = 0.1 would require ~160,000 seeds.
+- Under the declared Gaussian model and correction class, the two-point
+  construction gives D²(0.1) ≈ 1.3×10⁻⁷; the corresponding calculation
+  requires ~160,000 seeds to make that selected pair separable at the stated
+  threshold.
 - An amortized estimator that declares a correction prior bridges the
   Bayes–minimax gap, with its interval sitting just above the floor for the
   declared correction class.
@@ -139,10 +153,11 @@ ml_paper/
                              law, Appendices A–D (construction, RG, prior art,
                              algebraic details)
   CLAIMS_REGISTER.md        All claims mapped to evidence (two-part: clustering
-                             exp62–75, floor theorem exp76–80)
+                             exp62–75, conditional risk bounds exp76–80)
   MANUSCRIPT_OUTLINE.md     Paper outlines: floor paper (primary, MLST target)
                              + clustering paper (secondary)
-  EXP76_HANDOFF.md          Complete project state and open items
+
+archive/ai_execution/       Historical AI prompts, handoffs, and simulated audits
 
 docs/EXPERIMENT_LOG.md    Chronological research notes (exp1–80)
 docs/literature_review.md Literature notes
@@ -177,7 +192,7 @@ Run smoke tests:
 python -m pytest -q
 ```
 
-### Current-phase experiments (floor theorem arc, exp75–80)
+### Current-phase experiments (model-conditional risk-bound arc, exp75–80)
 
 ```bash
 # Classical fits (exp75 — shows failure)
@@ -233,4 +248,5 @@ This repository builds on
 which tested supervised and anomaly-detection approaches for surface-growth
 simulations. This project is broader and more exploratory: it investigates when
 feature geometry aligns with physical universality, documents the cases where it
-does not, and derives the information-theoretic reason.
+does not, and quantifies a model-conditional identifiability limit for one
+summary observable.

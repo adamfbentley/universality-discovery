@@ -84,7 +84,7 @@ corrections-to-scaling in the FSS literature.
    framing (e.g. Manski-style assumption hierarchies) that makes the
    conditionality harder to misuse by practitioners?
 5. **Priority, and a specific mapping to check.** Our own follow-up analysis
-   (ml_paper/SIMULATED_AUDIT.md) suggests this problem is an instance of the
+   (archive/ai_execution/SIMULATED_AUDIT.md) suggests this problem is an instance of the
    Donoho (Ann. Statist. 1994) optimal-recovery/modulus-of-continuity theory
    for linear functionals over convex classes, in the form applied by
    Armstrong & Kolesár (Econometrica 2018) to fixed-design regression with a

@@ -1,7 +1,7 @@
 # Exp 83 Report — Audit-Response Computations
 
 **Status: complete, 2026-07-03.**
-**Plan: `SONNET_EXP83_PROMPT.md`. Context: `ml_paper/SIMULATED_AUDIT.md`,
+**Plan: `archive/ai_execution/SONNET_EXP83_PROMPT.md`. Context: `archive/ai_execution/SIMULATED_AUDIT.md`,
 `ml_paper/THEORY_minimax_floor.md` Appendix G.**
 **Findings only — no claims language. Nothing here enters `CLAIMS_REGISTER.md`
 or `MANUSCRIPT_OUTLINE.md`.**
